@@ -11,8 +11,7 @@ import SwiftUI
 struct MusicIntervalQuizMasterApp: App {
   var body: some Scene {
     WindowGroup {
-      // ContentView()
-      ExampleViewControllerRepresentable()
+      ContentView()
     }
   }
 }

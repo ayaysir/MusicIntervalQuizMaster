@@ -7,27 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		447B23972CB6A72E001C1F17 /* CustomKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447B23962CB6A72E001C1F17 /* CustomKeyboardView.swift */; };
-		447B23992CB6A9AA001C1F17 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447B23982CB6A9AA001C1F17 /* ExampleViewController.swift */; };
 		44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */; };
 		44C4CEF52C8C47A80092C452 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* ContentView.swift */; };
 		44C4CEF72C8C47A90092C452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C4CEF62C8C47A90092C452 /* Assets.xcassets */; };
 		44C4CEFA2C8C47A90092C452 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C4CEF92C8C47A90092C452 /* Preview Assets.xcassets */; };
-		44C4CF032C8C5C1A0092C452 /* GameCenterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CF022C8C5C1A0092C452 /* GameCenterViewModel.swift */; };
-		44C4CF072C8C61900092C452 /* GameCenterDashboardRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CF062C8C61900092C452 /* GameCenterDashboardRepresentedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		447B23962CB6A72E001C1F17 /* CustomKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyboardView.swift; sourceTree = "<group>"; };
-		447B23982CB6A9AA001C1F17 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 		44C4CEEF2C8C47A80092C452 /* MusicIntervalQuizMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicIntervalQuizMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicIntervalQuizMasterApp.swift; sourceTree = "<group>"; };
 		44C4CEF42C8C47A80092C452 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		44C4CEF62C8C47A90092C452 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44C4CEF92C8C47A90092C452 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		44C4CF002C8C5BFD0092C452 /* MusicIntervalQuizMaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicIntervalQuizMaster.entitlements; sourceTree = "<group>"; };
-		44C4CF022C8C5C1A0092C452 /* GameCenterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterViewModel.swift; sourceTree = "<group>"; };
-		44C4CF062C8C61900092C452 /* GameCenterDashboardRepresentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterDashboardRepresentedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,15 +33,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		447B23952CB6A6DD001C1F17 /* UIView */ = {
-			isa = PBXGroup;
-			children = (
-				447B23962CB6A72E001C1F17 /* CustomKeyboardView.swift */,
-				447B23982CB6A9AA001C1F17 /* ExampleViewController.swift */,
-			);
-			path = UIView;
-			sourceTree = "<group>";
-		};
 		44C4CEE62C8C47A80092C452 = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +52,6 @@
 		44C4CEF12C8C47A80092C452 /* MusicIntervalQuizMaster */ = {
 			isa = PBXGroup;
 			children = (
-				447B23952CB6A6DD001C1F17 /* UIView */,
 				44C4CF042C8C616B0092C452 /* View */,
 				44C4CF012C8C5C0A0092C452 /* ViewModel */,
 				44C4CF002C8C5BFD0092C452 /* MusicIntervalQuizMaster.entitlements */,
@@ -91,7 +73,6 @@
 		44C4CF012C8C5C0A0092C452 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				44C4CF022C8C5C1A0092C452 /* GameCenterViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -109,7 +90,6 @@
 		44C4CF052C8C617C0092C452 /* Representable */ = {
 			isa = PBXGroup;
 			children = (
-				44C4CF062C8C61900092C452 /* GameCenterDashboardRepresentedView.swift */,
 			);
 			path = Representable;
 			sourceTree = "<group>";
@@ -186,10 +166,6 @@
 			files = (
 				44C4CEF52C8C47A80092C452 /* ContentView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
-				44C4CF072C8C61900092C452 /* GameCenterDashboardRepresentedView.swift in Sources */,
-				44C4CF032C8C5C1A0092C452 /* GameCenterViewModel.swift in Sources */,
-				447B23972CB6A72E001C1F17 /* CustomKeyboardView.swift in Sources */,
-				447B23992CB6A9AA001C1F17 /* ExampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
