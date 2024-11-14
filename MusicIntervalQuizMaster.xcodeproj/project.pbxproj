@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		440BE63A2CE6229D00B01C1B /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 440BE6392CE6229D00B01C1B /* Tonic */; };
 		44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */; };
 		44C4CEF52C8C47A80092C452 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* ContentView.swift */; };
 		44C4CEF72C8C47A90092C452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C4CEF62C8C47A90092C452 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				440BE63A2CE6229D00B01C1B /* Tonic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +112,9 @@
 			dependencies = (
 			);
 			name = MusicIntervalQuizMaster;
+			packageProductDependencies = (
+				440BE6392CE6229D00B01C1B /* Tonic */,
+			);
 			productName = MusicIntervalQuizMaster;
 			productReference = 44C4CEEF2C8C47A80092C452 /* MusicIntervalQuizMaster.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +143,9 @@
 				Base,
 			);
 			mainGroup = 44C4CEE62C8C47A80092C452;
+			packageReferences = (
+				440BE6382CE6229D00B01C1B /* XCRemoteSwiftPackageReference "Tonic" */,
+			);
 			productRefGroup = 44C4CEF02C8C47A80092C452 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -379,6 +387,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		440BE6382CE6229D00B01C1B /* XCRemoteSwiftPackageReference "Tonic" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/Tonic.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		440BE6392CE6229D00B01C1B /* Tonic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 440BE6382CE6229D00B01C1B /* XCRemoteSwiftPackageReference "Tonic" */;
+			productName = Tonic;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 44C4CEE72C8C47A80092C452 /* Project object */;
 }
