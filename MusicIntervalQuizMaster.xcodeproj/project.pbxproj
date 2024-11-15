@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		440BE63A2CE6229D00B01C1B /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 440BE6392CE6229D00B01C1B /* Tonic */; };
+		440BE63D2CE7994000B01C1B /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE63C2CE7994000B01C1B /* ContentViewModel.swift */; };
+		440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */; };
+		440BE6422CE799B500B01C1B /* IntervalPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6412CE799B500B01C1B /* IntervalPair.swift */; };
+		440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */; };
+		440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6462CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift */; };
 		44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */; };
 		44C4CEF52C8C47A80092C452 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* ContentView.swift */; };
 		44C4CEF72C8C47A90092C452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C4CEF62C8C47A90092C452 /* Assets.xcassets */; };
@@ -15,6 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		440BE63C2CE7994000B01C1B /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTouchKeyboardView.swift; sourceTree = "<group>"; };
+		440BE6412CE799B500B01C1B /* IntervalPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPair.swift; sourceTree = "<group>"; };
+		440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTouchKeyboardViewModel.swift; sourceTree = "<group>"; };
+		440BE6462CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyTextFieldRPView.swift; sourceTree = "<group>"; };
 		44C4CEEF2C8C47A80092C452 /* MusicIntervalQuizMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicIntervalQuizMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicIntervalQuizMasterApp.swift; sourceTree = "<group>"; };
 		44C4CEF42C8C47A80092C452 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		440BE6402CE799A900B01C1B /* ValueObject */ = {
+			isa = PBXGroup;
+			children = (
+				440BE6412CE799B500B01C1B /* IntervalPair.swift */,
+			);
+			path = ValueObject;
+			sourceTree = "<group>";
+		};
 		44C4CEE62C8C47A80092C452 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +72,7 @@
 		44C4CEF12C8C47A80092C452 /* MusicIntervalQuizMaster */ = {
 			isa = PBXGroup;
 			children = (
+				440BE6402CE799A900B01C1B /* ValueObject */,
 				44C4CF042C8C616B0092C452 /* View */,
 				44C4CF012C8C5C0A0092C452 /* ViewModel */,
 				44C4CF002C8C5BFD0092C452 /* MusicIntervalQuizMaster.entitlements */,
@@ -75,6 +94,8 @@
 		44C4CF012C8C5C0A0092C452 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				440BE63C2CE7994000B01C1B /* ContentViewModel.swift */,
+				440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -84,6 +105,7 @@
 			children = (
 				44C4CF052C8C617C0092C452 /* Representable */,
 				44C4CEF42C8C47A80092C452 /* ContentView.swift */,
+				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
 			);
 			name = View;
 			path = "퍋ㅈ";
@@ -92,6 +114,7 @@
 		44C4CF052C8C617C0092C452 /* Representable */ = {
 			isa = PBXGroup;
 			children = (
+				440BE6462CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift */,
 			);
 			path = Representable;
 			sourceTree = "<group>";
@@ -173,7 +196,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				44C4CEF52C8C47A80092C452 /* ContentView.swift in Sources */,
+				440BE6422CE799B500B01C1B /* IntervalPair.swift in Sources */,
+				440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
+				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
+				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
+				440BE63D2CE7994000B01C1B /* ContentViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +346,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -351,7 +379,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
