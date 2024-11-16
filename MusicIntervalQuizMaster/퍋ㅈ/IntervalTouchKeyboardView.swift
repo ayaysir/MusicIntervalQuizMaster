@@ -7,27 +7,92 @@
 
 import SwiftUI
 
+struct EmbossedButtonStyle: ButtonStyle {
+  var pressedBorderColor: Color = .red
+  
+  func makeBody(configuration: Configuration) -> some View {
+    configuration.label
+      .padding(.vertical, 5)
+      // .padding(.horizontal, 0)
+      .background(
+        ZStack {
+          // 아래 그림자 (눌렀을 때 변화 강조)
+          RoundedRectangle(cornerRadius: 10)
+            .fill(Color.white)
+            .shadow(
+              color: configuration.isPressed ? .gray.opacity(0.3) : .gray.opacity(0.5),
+              radius: configuration.isPressed ? 2 : 5,
+              x: configuration.isPressed ? 1 : 3,
+              y: configuration.isPressed ? 1 : 3
+            )
+          
+          // 위 그림자 (눌렀을 때 변화 강조)
+          RoundedRectangle(cornerRadius: 10)
+            .fill(Color.white)
+            .shadow(
+              color: configuration.isPressed ? .white.opacity(0.5) : .white.opacity(0.8),
+              radius: configuration.isPressed ? 1 : 5,
+              x: configuration.isPressed ? -1 : -3,
+              y: configuration.isPressed ? -1 : -3
+            )
+          
+          // 버튼 배경
+          RoundedRectangle(cornerRadius: 10)
+            .fill(LinearGradient(
+              gradient: Gradient(colors: [
+                configuration.isPressed ? .intervalButtonBackground.opacity(0.9) : .intervalButtonBackground.opacity(0.7),
+                configuration.isPressed ? .intervalButtonBackground.opacity(0.6) : .intervalButtonBackground
+              ]),
+              startPoint: .topLeading,
+              endPoint: .bottomTrailing
+            ))
+        }
+      )
+      .overlay(
+        // 테두리
+        RoundedRectangle(cornerRadius: 10)
+          .stroke(configuration.isPressed ? pressedBorderColor : .intervalButtonBorder, lineWidth: configuration.isPressed ? 2 : 1)
+      )
+      .scaleEffect(configuration.isPressed ? 0.98 : 1.0) // 클릭 시 축소 효과 강조
+      // .animation(.spring(response: 0, dampingFraction: 0.5), value: configuration.isPressed)
+    
+  }
+}
+
 struct IntervalTouchKeyboardView: View {
   @EnvironmentObject var keyboardViewModel: IntervalTouchKeyboardViewModel
   
-  private func internalButtonText(_ title: String) -> some View {
+  private func internalButtonText(_ title: String, color: Color = .intervalButtonBackground) -> some View {
     Text(title)
-      .foregroundStyle(.white)
-      .padding()
       .frame(height: 50)
       .frame(maxWidth: .infinity)
-      .background(Color.blue)
-      .clipShape(RoundedRectangle(cornerRadius: 10))
   }
   
   private func internalButton(_ title: String, action: @escaping (() -> Void)) -> some View {
     Button(action: action) {
       internalButtonText(title)
     }
+    .buttonStyle(EmbossedButtonStyle())
+  }
+  
+  private func numberButton(_ title: String, action: @escaping (() -> Void)) -> some View {
+    Button(action: action) {
+      internalButtonText(title, color: .red)
+    }
+    .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .blue))
+  }
+  
+  private func enterButton(action: @escaping (() -> Void)) -> some View {
+    Button(action: action) {
+      Image(systemName: "return")
+        .frame(height: 50)
+        .frame(maxWidth: .infinity)
+    }
+    .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .orange))
   }
   
   var body: some View {
-    HStack {
+    HStack(spacing: 16) {
       VStack {
         HStack {
           internalButton("완전음정") {
@@ -64,46 +129,43 @@ struct IntervalTouchKeyboardView: View {
       }
       VStack {
         HStack {
-          internalButton("7") {
+          numberButton("7") {
             keyboardViewModel.appendText("7")
           }
-          internalButton("8") {
+          numberButton("8") {
             keyboardViewModel.appendText("8")
           }
-          internalButton("9") {
+          numberButton("9") {
             keyboardViewModel.appendText("9")
           }
         }
         HStack {
-          internalButton("4") {
+          numberButton("4") {
             keyboardViewModel.appendText("4")
           }
-          internalButton("5") {
+          numberButton("5") {
             keyboardViewModel.appendText("5")
           }
-          internalButton("6") {
+          numberButton("6") {
             keyboardViewModel.appendText("6")
           }
         }
         HStack {
-          internalButton("1") {
+          numberButton("1") {
             keyboardViewModel.appendText("1")
           }
-          internalButton("2") {
+          numberButton("2") {
             keyboardViewModel.appendText("2")
           }
-          internalButton("3") {
+          numberButton("3") {
             keyboardViewModel.appendText("3")
           }
         }
         HStack {
-          internalButton("0") {
+          numberButton("0/CLR") {
             keyboardViewModel.appendText("0")
           }
-          internalButton("<") {
-            keyboardViewModel.backspace()
-          }
-          internalButton("+") {
+          enterButton {
             
           }
         }
