@@ -68,16 +68,21 @@ struct IntervalTouchKeyboardView: View {
       .frame(maxWidth: .infinity)
   }
   
-  private func internalButton(_ title: String, action: @escaping (() -> Void)) -> some View {
-    Button(action: action) {
+  private func internalButton(_ title: String, intervalModifier: IntervalModifier) -> some View {
+    Button(action: {
+      keyboardViewModel.intervalModifier = intervalModifier
+    }) {
       internalButtonText(title)
     }
     .buttonStyle(EmbossedButtonStyle())
   }
   
-  private func numberButton(_ title: String, action: @escaping (() -> Void)) -> some View {
-    Button(action: action) {
-      internalButtonText(title, color: .red)
+  private func numberButton(_ inputNumber: Int) -> some View {
+    Button(action: {
+      keyboardViewModel.setIntervalNumber(inputNumber)
+    }) {
+      let buttonText = inputNumber == 0 ? "0 / CLR" : "\(inputNumber)"
+      internalButtonText(buttonText, color: .red)
     }
     .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .blue))
   }
@@ -95,76 +100,43 @@ struct IntervalTouchKeyboardView: View {
     HStack(spacing: 16) {
       VStack {
         HStack {
-          internalButton("완전음정") {
-            keyboardViewModel.appendText("P")
-          }
+          internalButton("완전음정", intervalModifier: .perfect)
         }
         
         HStack {
-          internalButton("단음정") {
-            keyboardViewModel.appendText("m")
-          }
-          internalButton("장음정") {
-            keyboardViewModel.appendText("M")
-          }
+          internalButton("단음정", intervalModifier: .minor)
+          internalButton("장음정", intervalModifier: .major)
         }
         
         HStack {
-          internalButton("감음정") {
-            keyboardViewModel.appendText("d")
-          }
-          internalButton("증음정") {
-            keyboardViewModel.appendText("a")
-          }
+          internalButton("감음정", intervalModifier: .diminished)
+          internalButton("증음정", intervalModifier: .augmented)
         }
         
         HStack {
-          internalButton("겹감음정") {
-            keyboardViewModel.appendText("dd")
-          }
-          internalButton("겹증음정") {
-            keyboardViewModel.appendText("aa")
-          }
+          internalButton("겹감음정", intervalModifier: .doublyDiminished)
+          internalButton("겹증음정", intervalModifier: .doublyAugmented)
         }
       }
       VStack {
         HStack {
-          numberButton("7") {
-            keyboardViewModel.appendText("7")
-          }
-          numberButton("8") {
-            keyboardViewModel.appendText("8")
-          }
-          numberButton("9") {
-            keyboardViewModel.appendText("9")
-          }
+          numberButton(7)
+          numberButton(8)
+          numberButton(9)
         }
         HStack {
-          numberButton("4") {
-            keyboardViewModel.appendText("4")
-          }
-          numberButton("5") {
-            keyboardViewModel.appendText("5")
-          }
-          numberButton("6") {
-            keyboardViewModel.appendText("6")
-          }
+          numberButton(4)
+          numberButton(5)
+          numberButton(6)
+          
         }
         HStack {
-          numberButton("1") {
-            keyboardViewModel.appendText("1")
-          }
-          numberButton("2") {
-            keyboardViewModel.appendText("2")
-          }
-          numberButton("3") {
-            keyboardViewModel.appendText("3")
-          }
+          numberButton(1)
+          numberButton(2)
+          numberButton(3)
         }
         HStack {
-          numberButton("0/CLR") {
-            keyboardViewModel.appendText("0")
-          }
+          numberButton(0)
           enterButton {
             
           }

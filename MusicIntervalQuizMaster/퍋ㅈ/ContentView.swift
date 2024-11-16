@@ -11,6 +11,15 @@ struct ContentView: View {
   @StateObject var viewModel = ContentViewModel()
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
+  private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
+    Text(text == "0" ? "-" : text)
+      .padding()
+      .font(.system(size: 30).bold())
+      .frame(width: 100, height: 50, alignment: isLeading ? .leading : .trailing)
+      .background(backgroundColor)
+      .clipShape(RoundedRectangle(cornerRadius: 5))
+  }
+  
   var body: some View {
     VStack {
       Text("Count: \(viewModel.currentPairCount)")
@@ -28,11 +37,17 @@ struct ContentView: View {
         }
       }
       
-      // TextField("Input", text: $keyboardViewModel.intervalText)
-      ReadOnlyTextFieldRPView(text: $keyboardViewModel.intervalText)
-        .frame(height: 30)
-        .padding()
-        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
+      HStack {
+        intervalTextField(
+          "\(keyboardViewModel.intervalModifier)",
+          backgroundColor: .red.opacity(0.5),
+          isLeading: false
+        )
+        intervalTextField(
+          "\(keyboardViewModel.intervalNumber)",
+          backgroundColor: .cyan.opacity(0.5)
+        )
+      }
       
       IntervalTouchKeyboardView()
         .environmentObject(keyboardViewModel)

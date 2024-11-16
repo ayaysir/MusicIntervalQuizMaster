@@ -6,17 +6,45 @@
 //
 
 import Foundation
+import Tonic
 
-final class IntervalTouchKeyboardViewModel: ObservableObject {
-  @Published var intervalText: String = ""
-  
-  func appendText(_ text: String) {
-    intervalText += text
+enum IntervalModifier: CustomStringConvertible {
+  var description: String {
+    switch self {
+    case .major:
+      "M"
+    case .minor:
+      "m"
+    case .perfect:
+      "P"
+    case .diminished:
+      "d"
+    case .doublyDiminished:
+      "dd"
+    case .augmented:
+      "A"
+    case .doublyAugmented:
+      "AA"
+    }
   }
   
-  func backspace() {
-    if !intervalText.isEmpty {
-      intervalText.removeLast()
+  case major, minor, perfect, diminished, doublyDiminished, augmented, doublyAugmented
+}
+
+final class IntervalTouchKeyboardViewModel: ObservableObject {
+  @Published var intervalModifier: IntervalModifier = .major
+  @Published var intervalNumber: Int = 0
+  
+  func setIntervalNumber(_ input: Int) {
+    intervalNumber = switch intervalNumber {
+    case 1:
+      if 0...3 ~= input {
+        10 + input
+      } else {
+        input
+      }
+    default:
+      input
     }
   }
 }
