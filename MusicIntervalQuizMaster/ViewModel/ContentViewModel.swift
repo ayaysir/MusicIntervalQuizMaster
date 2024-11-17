@@ -54,7 +54,9 @@ final class ContentViewModel: ObservableObject {
     
     let pair = IntervalPair(
       startNote: .init(startLetter, accidental: startAccidental, octave: startOctave),
-      endNote: .init(endLetter, accidental: endAccidental, octave: endOctave)
+      endNote: .init(endLetter, accidental: endAccidental, octave: endOctave), 
+      category: .ascending, 
+      clef: .treble
     )
     
     return pair

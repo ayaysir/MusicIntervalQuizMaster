@@ -22,6 +22,7 @@ struct ContentView: View {
   
   var body: some View {
     VStack {
+      MusiqwikView(pair: viewModel.currentPair)
       Text("Count: \(viewModel.currentPairCount)")
       Text(viewModel.currentPair.description)
       HStack {

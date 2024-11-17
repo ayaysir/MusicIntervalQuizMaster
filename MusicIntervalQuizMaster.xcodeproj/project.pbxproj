@@ -13,6 +13,14 @@
 		440BE6422CE799B500B01C1B /* IntervalPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6412CE799B500B01C1B /* IntervalPair.swift */; };
 		440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */; };
 		440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6462CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift */; };
+		440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6482CEA282F00B01C1B /* FontManager.swift */; };
+		440BE64C2CEA285600B01C1B /* Musiqwik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 440BE64B2CEA285600B01C1B /* Musiqwik.ttf */; };
+		440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */; };
+		4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CB2CEA298100CC506C /* IntervalModifier.swift */; };
+		4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CD2CEA2D0D00CC506C /* Clef.swift */; };
+		4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */; };
+		4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D22CEA327200CC506C /* IntervalPairCategory.swift */; };
+		4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D52CEA374800CC506C /* Tonic.Note+.swift */; };
 		44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */; };
 		44C4CEF52C8C47A80092C452 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* ContentView.swift */; };
 		44C4CEF72C8C47A90092C452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C4CEF62C8C47A90092C452 /* Assets.xcassets */; };
@@ -25,6 +33,14 @@
 		440BE6412CE799B500B01C1B /* IntervalPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPair.swift; sourceTree = "<group>"; };
 		440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTouchKeyboardViewModel.swift; sourceTree = "<group>"; };
 		440BE6462CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadOnlyTextFieldRPView.swift; sourceTree = "<group>"; };
+		440BE6482CEA282F00B01C1B /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		440BE64B2CEA285600B01C1B /* Musiqwik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Musiqwik.ttf; sourceTree = "<group>"; };
+		440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusiqwikView.swift; sourceTree = "<group>"; };
+		4469E8CB2CEA298100CC506C /* IntervalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalModifier.swift; sourceTree = "<group>"; };
+		4469E8CD2CEA2D0D00CC506C /* Clef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clef.swift; sourceTree = "<group>"; };
+		4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMusiqwikText.swift; sourceTree = "<group>"; };
+		4469E8D22CEA327200CC506C /* IntervalPairCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPairCategory.swift; sourceTree = "<group>"; };
+		4469E8D52CEA374800CC506C /* Tonic.Note+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Note+.swift"; sourceTree = "<group>"; };
 		44C4CEEF2C8C47A80092C452 /* MusicIntervalQuizMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicIntervalQuizMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicIntervalQuizMasterApp.swift; sourceTree = "<group>"; };
 		44C4CEF42C8C47A80092C452 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +69,51 @@
 			path = ValueObject;
 			sourceTree = "<group>";
 		};
+		440BE64A2CEA284700B01C1B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				440BE64B2CEA285600B01C1B /* Musiqwik.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		440BE64F2CEA28F800B01C1B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				44C4CEF42C8C47A80092C452 /* ContentView.swift */,
+				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
+				440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */,
+				44C4CF052C8C617C0092C452 /* Representable */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4469E8CA2CEA296D00CC506C /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				4469E8CB2CEA298100CC506C /* IntervalModifier.swift */,
+				4469E8CD2CEA2D0D00CC506C /* Clef.swift */,
+				4469E8D22CEA327200CC506C /* IntervalPairCategory.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		4469E8CF2CEA304800CC506C /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		4469E8D42CEA373F00CC506C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4469E8D52CEA374800CC506C /* Tonic.Note+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		44C4CEE62C8C47A80092C452 = {
 			isa = PBXGroup;
 			children = (
@@ -72,11 +133,16 @@
 		44C4CEF12C8C47A80092C452 /* MusicIntervalQuizMaster */ = {
 			isa = PBXGroup;
 			children = (
-				440BE6402CE799A900B01C1B /* ValueObject */,
-				44C4CF042C8C616B0092C452 /* View */,
+				4469E8D42CEA373F00CC506C /* Extension */,
+				4469E8CF2CEA304800CC506C /* Protocol */,
+				4469E8CA2CEA296D00CC506C /* Enum */,
+				440BE64A2CEA284700B01C1B /* Resources */,
 				44C4CF012C8C5C0A0092C452 /* ViewModel */,
+				440BE64F2CEA28F800B01C1B /* View */,
+				440BE6402CE799A900B01C1B /* ValueObject */,
 				44C4CF002C8C5BFD0092C452 /* MusicIntervalQuizMaster.entitlements */,
 				44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */,
+				440BE6482CEA282F00B01C1B /* FontManager.swift */,
 				44C4CEF62C8C47A90092C452 /* Assets.xcassets */,
 				44C4CEF82C8C47A90092C452 /* Preview Content */,
 			);
@@ -98,17 +164,6 @@
 				440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		44C4CF042C8C616B0092C452 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				44C4CF052C8C617C0092C452 /* Representable */,
-				44C4CEF42C8C47A80092C452 /* ContentView.swift */,
-				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
-			);
-			name = View;
-			path = "퍋ㅈ";
 			sourceTree = "<group>";
 		};
 		44C4CF052C8C617C0092C452 /* Representable */ = {
@@ -183,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				440BE64C2CEA285600B01C1B /* Musiqwik.ttf in Resources */,
 				44C4CEFA2C8C47A90092C452 /* Preview Assets.xcassets in Resources */,
 				44C4CEF72C8C47A90092C452 /* Assets.xcassets in Resources */,
 			);
@@ -196,12 +252,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				44C4CEF52C8C47A80092C452 /* ContentView.swift in Sources */,
+				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
 				440BE6422CE799B500B01C1B /* IntervalPair.swift in Sources */,
+				4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */,
 				440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
+				4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */,
+				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,
+				440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */,
+				4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */,
 				440BE63D2CE7994000B01C1B /* ContentViewModel.swift in Sources */,
+				4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,8 @@ import Tonic
 struct IntervalPair: CustomStringConvertible {
   let startNote: Note
   let endNote: Note
+  let category: IntervalPairCategory
+  let clef: Clef
   
   var interval: Interval? {
     Interval.betweenNotes(startNote, endNote)
@@ -23,3 +25,4 @@ struct IntervalPair: CustomStringConvertible {
     """
   }
 }
+

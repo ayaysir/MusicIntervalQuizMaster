@@ -9,6 +9,10 @@ import SwiftUI
 
 @main
 struct MusicIntervalQuizMasterApp: App {
+  init() {
+    FontManager.registerFonts()
+  }
+  
   var body: some Scene {
     WindowGroup {
       ContentView()
