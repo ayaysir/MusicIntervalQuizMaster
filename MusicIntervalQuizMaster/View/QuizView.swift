@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct QuizView: View {
   @StateObject var viewModel = ContentViewModel()
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
@@ -57,5 +57,5 @@ struct ContentView: View {
 }
 
 #Preview {
-  ContentView()
+  QuizView()
 }

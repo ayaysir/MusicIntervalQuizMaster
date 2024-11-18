@@ -15,7 +15,7 @@ struct MusicIntervalQuizMasterApp: App {
   
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      QuizView()
     }
   }
 }
