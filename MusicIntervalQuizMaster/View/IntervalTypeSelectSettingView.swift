@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct IntervalTypeSelectSettingView: View {
-  @StateObject var viewModel = IntervalTypeSelectSettingViewModel()
+  @EnvironmentObject var viewModel: SettingViewModel
   
   var body: some View {
     Form {
       ForEach(1...13, id: \.self) { currentDegree in
         Section {
           ForEach(IntervalModifier.availableModifierList(of: currentDegree), id: \.self) { modifier in
-            Toggle(isOn: viewModel.binding(for: "\(modifier)_\(currentDegree)")) {
+            Toggle(isOn: viewModel.binding(for: "\(modifier.abbrDescription)_\(currentDegree)")) {
               HStack {
+                // Text("\(modifier.abbrDescription)_\(currentDegree)")
                 Text("\(modifier.localizedDescription) \(currentDegree)도")
                 Text("\(modifier.localizedAbbrDescription)\(currentDegree)")
                   .font(.system(size: 15))
@@ -37,5 +38,6 @@ struct IntervalTypeSelectSettingView: View {
 #Preview {
   NavigationStack {
     IntervalTypeSelectSettingView()
+      .environmentObject(SettingViewModel())
   }
 }

@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SettingView: View {
+  @AppStorage(wrappedValue: true, .cfgNotesAscending) var cfgNotesAscending
+  @AppStorage(wrappedValue: true, .cfgNotesDescending) var cfgNotesDescending
+  @AppStorage(wrappedValue: true, .cfgNotesSimultaneously) var cfgNotesSimultaneously
   
+  @StateObject var viewModel = SettingViewModel()
   /*
    buttonStyle
    .default - 파란색 버튼
@@ -30,9 +34,9 @@ struct SettingView: View {
     NavigationStack {
       Form {
         Section {
-          Toggle("동시", isOn: .constant(false))
-          Toggle("상행", isOn: .constant(false))
-          Toggle("하행", isOn: .constant(false))
+          Toggle("동시", isOn: $cfgNotesAscending)
+          Toggle("상행", isOn: $cfgNotesDescending)
+          Toggle("하행", isOn: $cfgNotesSimultaneously)
         } header: {
           Text("음표 제시 방법")
         }
@@ -40,8 +44,9 @@ struct SettingView: View {
         Section {
           NavigationLink {
             IntervalTypeSelectSettingView()
+              .environmentObject(viewModel)
           } label: {
-            Text("선택하기 (30/100)")
+            Text("선택하기 (\(viewModel.intervalStatesTurnOnCount)/\(viewModel.totalIntervalStatesCount))")
           }
         } header: {
           Text("출제 대상 음정 종류 선택")
@@ -54,6 +59,8 @@ struct SettingView: View {
         } header: {
           Text("햅틱")
         }
+        
+        // Text("\(viewModel.boolStates.count)")
       }
       .navigationTitle("Settings")
       .navigationBarTitleDisplayMode(.inline)
