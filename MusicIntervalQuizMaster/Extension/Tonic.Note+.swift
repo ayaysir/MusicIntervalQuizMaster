@@ -10,6 +10,7 @@ import Tonic
 extension Note {
   // TODO: - 1. 동시 표시에서 임시표가 겹치는 경우 위치 조절
   // TODO: - 2. 동시 표시에서 음이 같은 경우 음표 및 임시표 위치 표시 방법
+  // TODO: - 3. 동시 표시에서 B3 - C4 같이 위치한 경우 겹치는 문제
   func musiqwikText(clef: Clef, isNaturalNeeded: Bool = false) -> String {
     let startScalar = clef.musiqwikBaseScalar + (octave * 7)
     let unicodeNumber = startScalar + letter.rawValue

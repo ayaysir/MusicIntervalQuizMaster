@@ -9,8 +9,6 @@ import SwiftUI
 
 @main
 struct MusicIntervalQuizMasterApp: App {
-  let store = UserDefaults.standard
-  
   init() {
     FontManager.registerFonts()
     
@@ -49,7 +47,7 @@ struct MusicIntervalQuizMasterApp: App {
 
 func checkAppFirstrunOrUpdateStatus(firstrun: () -> (), updated: () -> (), nothingChanged: () -> ()) {
   let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
-  let versionOfLastRun = UserDefaults.standard.object(forKey: "VersionOfLastRun") as? String
+  let versionOfLastRun = store.object(forKey: "VersionOfLastRun") as? String
   // print(#function, currentVersion ?? "", versionOfLastRun ?? "")
   
   if versionOfLastRun == nil {
@@ -65,6 +63,6 @@ func checkAppFirstrunOrUpdateStatus(firstrun: () -> (), updated: () -> (), nothi
     nothingChanged()
   }
   
-  UserDefaults.standard.set(currentVersion, forKey: "VersionOfLastRun")
-  UserDefaults.standard.synchronize()
+  store.set(currentVersion, forKey: "VersionOfLastRun")
+  store.synchronize()
 }

@@ -7,6 +7,14 @@
 
 import Foundation
 
+// MARK: - Global Variables
+
+let store = UserDefaults.standard
+
+// MARK: - Typealiases
+
+typealias StringBoolDict = [String : Bool]
+
 // MARK: - Config Keys
 
 extension String {
@@ -24,10 +32,6 @@ extension String {
   static let cfgHapticAnswer = "Config_Haptic_Answer"
   static let cfgHapticWrong = "Config_Haptic_Wrong"
 }
-
-// MARK: - Typealiases
-
-typealias StringBoolDict = [String : Bool]
 
 // MARK: - Initial config values
 

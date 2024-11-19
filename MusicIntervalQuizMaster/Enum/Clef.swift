@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Tonic
 
 enum Clef: HasMusiqwikText, CaseIterable {
   case treble, bass, alto
@@ -45,6 +46,34 @@ enum Clef: HasMusiqwikText, CaseIterable {
       98
     case .alto:
       92
+    }
+  }
+  
+  func randomAvailableOctave(_ letter: Letter) -> Int {
+    switch self {
+    case .treble:
+      // A3 ~ A5: A3 B3 C4 ...A4 B4 C5 ... A5
+      if letter == .A {
+        Int.random(in: 3...5)
+      } else if letter == .B {
+        Int.random(in: 3...4)
+      } else {
+        Int.random(in: 4...5)
+      }
+    case .bass:
+      // C2 ~ C4: C2 D2 E2 ...A2 B2 C3 D3 E3... A3 B3 C4
+      if letter == .C {
+        Int.random(in: 2...4)
+      } else {
+        Int.random(in: 2...3)
+      }
+    case .alto:
+      // B2 ~ B4: B2 C3 D3 ... A3 B3 C4 D4 ... A4 B4
+      if letter == .B {
+        Int.random(in: 2...4)
+      } else {
+        Int.random(in: 3...4)
+      }
     }
   }
 }

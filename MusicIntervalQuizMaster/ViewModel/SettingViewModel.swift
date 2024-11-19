@@ -12,7 +12,7 @@ final class SettingViewModel: ObservableObject {
   
   init() {
     do {
-      boolStates = try UserDefaults.standard.getObject(forKey: .cfgIntervalTypeStates, castTo: StringBoolDict.self)
+      boolStates = try store.getObject(forKey: .cfgIntervalTypeStates, castTo: StringBoolDict.self)
       
       // boolStates = INTERVAL_TYPE_STATE_FIRST; saveBoolStates()
     } catch {
@@ -43,7 +43,7 @@ final class SettingViewModel: ObservableObject {
   
   private func saveBoolStates() {
     do {
-      try UserDefaults.standard.setObject(boolStates, forKey: .cfgIntervalTypeStates)
+      try store.setObject(boolStates, forKey: .cfgIntervalTypeStates)
     } catch {
       print("IntervalType BoolStates failed to save:", error)
     }

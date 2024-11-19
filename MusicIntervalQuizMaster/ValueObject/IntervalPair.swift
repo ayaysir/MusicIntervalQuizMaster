@@ -19,8 +19,9 @@ struct IntervalPair: CustomStringConvertible {
   
   var description: String {
     """
-    startNote: \(startNote.description)
-    endNote: \(endNote.description)
+    category: \(category)
+    startNote: \(startNote.description) (\(startNote.noteNumber))
+    endNote: \(endNote.description) (\(endNote.noteNumber))
     interval: \(interval?.description ?? "error")
     """
   }
