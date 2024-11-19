@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		440BE63D2CE7994000B01C1B /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE63C2CE7994000B01C1B /* ContentViewModel.swift */; };
+		440BE63D2CE7994000B01C1B /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE63C2CE7994000B01C1B /* QuizViewModel.swift */; };
 		440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */; };
 		440BE6422CE799B500B01C1B /* IntervalPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6412CE799B500B01C1B /* IntervalPair.swift */; };
 		440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */; };
@@ -34,7 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		440BE63C2CE7994000B01C1B /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		440BE63C2CE7994000B01C1B /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTouchKeyboardView.swift; sourceTree = "<group>"; };
 		440BE6412CE799B500B01C1B /* IntervalPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPair.swift; sourceTree = "<group>"; };
 		440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTouchKeyboardViewModel.swift; sourceTree = "<group>"; };
@@ -177,7 +177,7 @@
 		44C4CF012C8C5C0A0092C452 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				440BE63C2CE7994000B01C1B /* ContentViewModel.swift */,
+				440BE63C2CE7994000B01C1B /* QuizViewModel.swift */,
 				440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */,
 				44D6F1ED2CECB34D00B91BBA /* SettingViewModel.swift */,
 			);
@@ -287,7 +287,7 @@
 				4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */,
 				440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */,
 				4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */,
-				440BE63D2CE7994000B01C1B /* ContentViewModel.swift in Sources */,
+				440BE63D2CE7994000B01C1B /* QuizViewModel.swift in Sources */,
 				4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

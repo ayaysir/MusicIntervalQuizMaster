@@ -16,6 +16,10 @@ extension String {
   static let cfgNotesDescending = "Config_Notes_Descending"
   static let cfgNotesSimultaneously = "Config_Notes_Simultaneously"
   
+  static let cfgClefTreble = "Config_Clef_Treble"
+  static let cfgClefBass = "Config_Clef_Bass"
+  static let cfgClefAlto = "Config_Clef_Alto"
+
   static let cfgHapticPressedIntervalKeyboard = "Config_Haptic_PressedIntervalKeyboard"
   static let cfgHapticAnswer = "Config_Haptic_Answer"
   static let cfgHapticWrong = "Config_Haptic_Wrong"

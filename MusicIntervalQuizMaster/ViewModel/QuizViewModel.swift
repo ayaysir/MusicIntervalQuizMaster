@@ -8,7 +8,7 @@
 import Foundation
 import Tonic
 
-final class ContentViewModel: ObservableObject {
+final class QuizViewModel: ObservableObject {
   private(set) var pairs: [IntervalPair] = []
   @Published private(set) var currentPairCount = 0
   

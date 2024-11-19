@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Clef: HasMusiqwikText {
+enum Clef: HasMusiqwikText, CaseIterable {
   case treble, bass, alto
   
   var musiqwikText: String {
@@ -18,6 +18,17 @@ enum Clef: HasMusiqwikText {
       "¯"
     case .alto:
       "ÿ"
+    }
+  }
+  
+  var localizedDescription: String {
+    switch self {
+    case .treble:
+      "Treble Clef (G Clef)"
+    case .bass:
+      "Bass Clef (F Clef)"
+    case .alto:
+      "Alto Clef (C Clef)"
     }
   }
   

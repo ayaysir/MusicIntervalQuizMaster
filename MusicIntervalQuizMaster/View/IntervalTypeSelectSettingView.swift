@@ -26,7 +26,7 @@ struct IntervalTypeSelectSettingView: View {
             }
           }
         } header: {
-          Text("\(currentDegree)도")
+          Text("\(currentDegree)도 \(currentDegree <= 8 ? "" : "(복합음정)")")
         }
       }
     }
