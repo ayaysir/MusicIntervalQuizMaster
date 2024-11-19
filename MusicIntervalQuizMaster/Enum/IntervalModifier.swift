@@ -29,6 +29,25 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
     }
   }
   
+  var abbrDescription: String {
+    switch self {
+    case .major:
+      "M"
+    case .minor:
+      "m"
+    case .perfect:
+      "P"
+    case .diminished:
+      "d"
+    case .augmented:
+      "A"
+    case .doublyDiminished:
+      "dd"
+    case .doublyAugmented:
+      "AA"
+    }
+  }
+  
   var localizedDescription: String {
     switch self {
     case .major:

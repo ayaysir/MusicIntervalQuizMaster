@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct IntervalTypeSelectSettingView: View {
+  @StateObject var viewModel = IntervalTypeSelectSettingViewModel()
+  
   var body: some View {
     Form {
-      ForEach(1...13, id: \.self) { index in
+      ForEach(1...13, id: \.self) { currentDegree in
         Section {
-          ForEach(IntervalModifier.availableModifierList(of: index), id: \.self) { modifier in
-            Toggle(isOn: .constant(true)) {
+          ForEach(IntervalModifier.availableModifierList(of: currentDegree), id: \.self) { modifier in
+            Toggle(isOn: viewModel.binding(for: "\(modifier)_\(currentDegree)")) {
               HStack {
-                Text("\(modifier.localizedDescription) 1도")
-                Text("\(modifier.localizedAbbrDescription)1")
+                Text("\(modifier.localizedDescription) \(currentDegree)도")
+                Text("\(modifier.localizedAbbrDescription)\(currentDegree)")
                   .font(.system(size: 15))
                   .foregroundStyle(.gray)
               }
             }
           }
         } header: {
-          Text("\(index)도")
+          Text("\(currentDegree)도")
         }
-
       }
-      
     }
     .navigationTitle("Select Interval Type")
     .searchable(text: .constant("M1"), prompt: "입력")
