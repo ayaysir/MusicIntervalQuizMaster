@@ -8,10 +8,15 @@
 import Tonic
 
 extension Note {
-  // TODO: - 1. 동시 표시에서 임시표가 겹치는 경우 위치 조절
-  // TODO: - 2. 동시 표시에서 음이 같은 경우 음표 및 임시표 위치 표시 방법
-  // TODO: - 3. 동시 표시에서 B3 - C4 같이 위치한 경우 겹치는 문제
-  func musiqwikText(clef: Clef, isNaturalNeeded: Bool = false) -> String {
+  func musiqwikText(clef: Clef,
+                    leftAccidental: Accidental,
+                    rightAccidental: Accidental,
+                    isForSimultaneousNotes: Bool = false,
+                    isRightNote: Bool = false,
+                    isSameNotePosition: Bool = false,
+                    isNeedSeparateNotes: Bool = false,
+                    isNeedSeparateAccidentals: Bool = false
+  ) -> String {
     let startScalar = clef.musiqwikBaseScalar + (octave * 7)
     let unicodeNumber = startScalar + letter.rawValue
     let noteText = "\(String(UnicodeScalar(unicodeNumber)!))"
@@ -24,22 +29,64 @@ extension Note {
     let F = String(UnicodeScalar(112 + unicodeNumber)!)
     let N = String(UnicodeScalar(128 + unicodeNumber)!)
     
+    // left note인 경우 natural 이 존재할 수 없음
     let accidentalText = switch accidental {
     case .flat:
-      "=\(F)"
+      F
     case .sharp:
-      "=\(S)"
+      S
     case .natural:
       // if need show natural sign
-      isNaturalNeeded ? "=\(N)" : "=="
+      if leftAccidental != .natural && rightAccidental == .natural && isSameNotePosition {
+        N
+      } else {
+        ""
+      }
     case .doubleFlat:
       "\(F)\(F)"
     case .doubleSharp:
       "\(S)\(S)"
     }
     
-    return "\(accidentalText)\(noteText)"
+    // let rightText: String = if isForSimultaneousNotes && isRightNote {
+    //   "=\(noteText)"
+    // } else if isWideRightSpace {
+    //   "\(noteText)="
+    // } else {
+    //   noteText
+    // }
+    
+    let baseText = if isNeedSeparateNotes && isNeedSeparateAccidentals {
+      isRightNote ? "=\(accidentalText)=\(noteText)" : "\(accidentalText)=\(noteText)="
+    } else if isNeedSeparateNotes {
+      isRightNote ? "\(accidentalText)=\(noteText)" : "\(accidentalText)\(noteText)="
+    } else if isNeedSeparateAccidentals {
+      isRightNote ? "=\(accidentalText)\(noteText)" : "\(accidentalText)=\(noteText)"
+    } else {
+      "\(accidentalText)\(noteText)"
+    }
+    
+    let maxCount = if isNeedSeparateNotes && isNeedSeparateAccidentals {
+      5
+    } else if isNeedSeparateNotes {
+      4
+    } else if isNeedSeparateAccidentals {
+      4
+    } else {
+      3
+    }
+    
+    // 2도인 경우 임시표, 음표 겹침, 3도인 경우 임시표만 겹침
+    // 2도이면서 임시표가 둘 다 없거나 한 개 노트에만 있는 경우 음표만 분리
+    // 2도이면서 임시표가 둘 다 있다면 음표 및 임시표 분리
+    // 3도라면 임시표만 분리
+    if isForSimultaneousNotes {
+      let paddingCount = max(0, maxCount - baseText.count)
+      let padding = String(repeating: "=", count: paddingCount)
+      
+      return padding + baseText
+    }
+    
+    return baseText
   }
-  
-  
 }

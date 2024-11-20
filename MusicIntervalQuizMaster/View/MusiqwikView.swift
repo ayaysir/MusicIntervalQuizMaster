@@ -10,27 +10,56 @@ import SwiftUI
 extension IntervalPair {
   var musiqwikSheetArea: some View {
     ZStack {
-      let isNaturalNeeded = {
-        let cond1 = startNote.octave == endNote.octave
-        let cond2 = startNote.letter == endNote.letter
-        let cond3 = startNote.accidental != .natural && endNote.accidental == .natural
-        
-        return cond1 && cond2 && cond3
-      }()
+      let isSameNotePosition = startNote.octave == endNote.octave && startNote.letter == endNote.letter
+      let isSameAndSimultaneous = isSameNotePosition && category == .simultaneously
       
-      let startNoteText = startNote.musiqwikText(clef: clef)
-      let endNoteText = endNote.musiqwikText(clef: clef, isNaturalNeeded: isNaturalNeeded)
-      
-      if category == .simultaneously {
+      if category != .simultaneously || isSameAndSimultaneous {
+        let startNoteText = startNote.musiqwikText(
+          clef: clef,
+          leftAccidental: startNote.accidental,
+          rightAccidental: endNote.accidental
+        )
+        let endNoteText = endNote.musiqwikText(
+          clef: clef,
+          leftAccidental: startNote.accidental,
+          rightAccidental: endNote.accidental,
+          isSameNotePosition: isSameNotePosition
+        )
+
+        Text("'\(clef.musiqwikText)===\(startNoteText)\(isSameAndSimultaneous ? "" : "===")\(endNoteText)===\"")
+          .font(.custom("Musiqwik", size: 50))
+      } else {
         let left = "'\(clef.musiqwikText)====="
         let right = "=====\""
         
+        let degree = abs((endNote.octave * 12 + endNote.letter.rawValue) - (startNote.octave * 12 + startNote.letter.rawValue))
+        
+        let isNeedSeparateNotes = degree <= 1
+        let isNeedSeparateAccidentals = degree <= 2
+        
+        let startNoteText = startNote.musiqwikText(
+          clef: clef,
+          leftAccidental: startNote.accidental,
+          rightAccidental: endNote.accidental,
+          isForSimultaneousNotes: true,
+          isNeedSeparateNotes: isNeedSeparateNotes,
+          isNeedSeparateAccidentals: isNeedSeparateAccidentals
+        )
+        let endNoteText = endNote.musiqwikText(
+          clef: clef,
+          leftAccidental: startNote.accidental,
+          rightAccidental: endNote.accidental,
+          isForSimultaneousNotes: true, 
+          isRightNote: true,
+          isSameNotePosition: isSameNotePosition,
+          isNeedSeparateNotes: isNeedSeparateNotes,
+          isNeedSeparateAccidentals: isNeedSeparateAccidentals
+        )
+        Text("\(degree)")
+          .offset(x: 100, y: -35)
         Text("\(left)\(startNoteText)\(right)")
           .font(.custom("Musiqwik", size: 50))
         Text("\(left)\(endNoteText)\(right)")
-          .font(.custom("Musiqwik", size: 50))
-      } else {
-        Text("'\(clef.musiqwikText)===\(startNoteText)===\(endNoteText)===\"")
           .font(.custom("Musiqwik", size: 50))
       }
     }
@@ -56,16 +85,52 @@ struct MusiqwikView: View {
     )
     MusiqwikView(
       pair: .init(
-        startNote: .init(.C, accidental: .doubleFlat, octave: 4),
+        startNote: .init(.F, accidental: .sharp, octave: 4),
+        endNote: .init(.E, accidental: .natural, octave: 4),
+        category: .descending,
+        clef: .treble)
+    )
+    MusiqwikView(
+      pair: .init(
+        startNote: .init(.G, accidental: .sharp, octave: 4),
+        endNote: .init(.G, accidental: .natural, octave: 4),
+        category: .descending,
+        clef: .treble)
+    )
+    // TODO: - A, B 음정 계산이 잘못되는 문제
+    MusiqwikView(
+      pair: .init(
+        startNote: .init(.B, accidental: .flat, octave: 3),
+        endNote: .init(.C, accidental: .flat, octave: 4),
+        category: .simultaneously,
+        clef: .treble)
+    )
+    MusiqwikView(
+      pair: .init(
+        startNote: .init(.F, accidental: .sharp, octave: 4),
+        endNote: .init(.G, accidental: .flat, octave: 4),
+        category: .simultaneously,
+        clef: .treble)
+    )
+    MusiqwikView(
+      pair: .init(
+        startNote: .init(.C, accidental: .flat, octave: 4),
         endNote: .init(.E, accidental: .sharp, octave: 4),
         category: .simultaneously,
         clef: .alto)
     )
     MusiqwikView(
       pair: .init(
-        startNote: .init(.E, accidental: .sharp, octave: 4),
-        endNote: .init(.E, accidental: .natural, octave: 4),
-        category: .descending,
+        startNote: .init(.G, accidental: .sharp, octave: 4),
+        endNote: .init(.C, accidental: .doubleFlat, octave: 5),
+        category: .simultaneously,
+        clef: .treble)
+    )
+    MusiqwikView(
+      pair: .init(
+        startNote: .init(.G, accidental: .doubleFlat, octave: 4),
+        endNote: .init(.C, accidental: .doubleFlat, octave: 5),
+        category: .simultaneously,
         clef: .treble)
     )
   }
