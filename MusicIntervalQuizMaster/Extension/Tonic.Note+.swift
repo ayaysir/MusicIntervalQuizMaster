@@ -18,11 +18,11 @@ extension Note {
     
     // sharp: 112 -> 208 => 112(pitch) + 96(constant)
     // flat: 112 -> 224 => 112(pitch) + 112(constant)
-    // natural: 112 -> 242 => 112(pitch) + 130(constant)
+    // natural: 112 -> 240 => 112(pitch) + 128(constant)
     
     let S = String(UnicodeScalar(96 + unicodeNumber)!)
     let F = String(UnicodeScalar(112 + unicodeNumber)!)
-    let N = String(UnicodeScalar(130 + unicodeNumber)!)
+    let N = String(UnicodeScalar(128 + unicodeNumber)!)
     
     let accidentalText = switch accidental {
     case .flat:

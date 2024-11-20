@@ -10,8 +10,16 @@ import SwiftUI
 extension IntervalPair {
   var musiqwikSheetArea: some View {
     ZStack {
+      let isNaturalNeeded = {
+        let cond1 = startNote.octave == endNote.octave
+        let cond2 = startNote.letter == endNote.letter
+        let cond3 = startNote.accidental != .natural && endNote.accidental == .natural
+        
+        return cond1 && cond2 && cond3
+      }()
+      
       let startNoteText = startNote.musiqwikText(clef: clef)
-      let endNoteText = endNote.musiqwikText(clef: clef)
+      let endNoteText = endNote.musiqwikText(clef: clef, isNaturalNeeded: isNaturalNeeded)
       
       if category == .simultaneously {
         let left = "'\(clef.musiqwikText)====="
@@ -52,6 +60,13 @@ struct MusiqwikView: View {
         endNote: .init(.E, accidental: .sharp, octave: 4),
         category: .simultaneously,
         clef: .alto)
+    )
+    MusiqwikView(
+      pair: .init(
+        startNote: .init(.E, accidental: .sharp, octave: 4),
+        endNote: .init(.E, accidental: .natural, octave: 4),
+        category: .descending,
+        clef: .treble)
     )
   }
 }
