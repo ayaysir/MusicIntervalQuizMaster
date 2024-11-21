@@ -48,14 +48,6 @@ extension Note {
       "\(S)\(S)"
     }
     
-    // let rightText: String = if isForSimultaneousNotes && isRightNote {
-    //   "=\(noteText)"
-    // } else if isWideRightSpace {
-    //   "\(noteText)="
-    // } else {
-    //   noteText
-    // }
-    
     let baseText = if isNeedSeparateNotes && isNeedSeparateAccidentals {
       isRightNote ? "=\(accidentalText)=\(noteText)" : "\(accidentalText)=\(noteText)="
     } else if isNeedSeparateNotes {
@@ -88,5 +80,9 @@ extension Note {
     }
     
     return baseText
+  }
+  
+  var orthodoxPitch: Int {
+    12 + letter.basePitch + Int(accidental.rawValue) + octave * 12
   }
 }

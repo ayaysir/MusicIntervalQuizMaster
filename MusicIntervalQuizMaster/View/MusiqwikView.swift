@@ -32,7 +32,7 @@ extension IntervalPair {
         let left = "'\(clef.musiqwikText)====="
         let right = "=====\""
         
-        let degree = abs((endNote.octave * 12 + endNote.letter.rawValue) - (startNote.octave * 12 + startNote.letter.rawValue))
+        let degree = abs(endNote.orthodoxPitch - startNote.orthodoxPitch)
         
         let isNeedSeparateNotes = degree <= 1
         let isNeedSeparateAccidentals = degree <= 2
@@ -97,7 +97,7 @@ struct MusiqwikView: View {
         category: .descending,
         clef: .treble)
     )
-    // TODO: - A, B 음정 계산이 잘못되는 문제
+    
     MusiqwikView(
       pair: .init(
         startNote: .init(.B, accidental: .flat, octave: 3),

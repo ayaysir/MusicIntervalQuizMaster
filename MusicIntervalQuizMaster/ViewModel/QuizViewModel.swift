@@ -63,7 +63,9 @@ final class QuizViewModel: ObservableObject {
     let notes: [Note] = [
       .init(startLetter, accidental: startAccidental, octave: startOctave),
       .init(endLetter, accidental: endAccidental, octave: endOctave),
-    ].sorted(by: sortNotes)
+    ].sorted {
+      $0.orthodoxPitch < $1.orthodoxPitch
+    }
     
     let pair = IntervalPair(
       startNote: category != .descending ? notes[0] : notes[1],
@@ -73,18 +75,6 @@ final class QuizViewModel: ObservableObject {
     )
     
     return pair
-  }
-  
-  func sortNotes(_ lhs: Note, _ rhs: Note) -> Bool {
-    let ascResult = if lhs.octave != rhs.octave {
-      lhs.octave < rhs.octave
-    } else if lhs.letter.rawValue != rhs.letter.rawValue {
-      lhs.letter.rawValue < rhs.letter.rawValue
-    } else {
-      lhs.accidental.rawValue < rhs.accidental.rawValue
-    }
-    
-    return ascResult
   }
   
   var determinedCategory: IntervalPairCategory? {
