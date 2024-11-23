@@ -101,7 +101,7 @@ struct QuizView: View {
     case .ascending, .descending:
       viewModel.currentPair.startNote.playSound()
       if let workItem {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: workItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1200), execute: workItem)
       }
     case .simultaneously:
       viewModel.currentPair.startNote.playSound()
