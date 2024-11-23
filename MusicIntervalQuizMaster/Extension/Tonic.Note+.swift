@@ -85,4 +85,8 @@ extension Note {
   var orthodoxPitch: Int {
     12 + letter.basePitch + Int(accidental.rawValue) + octave * 12
   }
+  
+  func playSound() {
+    SoundManager.shared.playSound(named: "Piano_BPM60_\(orthodoxPitch)")
+  }
 }
