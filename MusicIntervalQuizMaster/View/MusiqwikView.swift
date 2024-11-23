@@ -55,8 +55,8 @@ extension IntervalPair {
           isNeedSeparateNotes: isNeedSeparateNotes,
           isNeedSeparateAccidentals: isNeedSeparateAccidentals
         )
-        Text("\(degree)")
-          .offset(x: 100, y: -35)
+        // Text("\(degree)")
+        //   .offset(x: 100, y: -35)
         Text("\(left)\(startNoteText)\(right)")
           .font(.custom("Musiqwik", size: 50))
         Text("\(left)\(endNoteText)\(right)")

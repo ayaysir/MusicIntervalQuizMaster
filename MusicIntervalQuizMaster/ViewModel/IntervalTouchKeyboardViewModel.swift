@@ -11,6 +11,10 @@ final class IntervalTouchKeyboardViewModel: ObservableObject {
   @Published var intervalModifier: IntervalModifier = .major
   @Published var intervalNumber: Int = 0
   
+  var intervalAbbrDescription: String {
+    "\(intervalModifier.abbrDescription)\(intervalNumber)"
+  }
+  
   func setIntervalNumber(_ input: Int) {
     intervalNumber = switch intervalNumber {
     case 1:

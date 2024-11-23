@@ -84,6 +84,7 @@
 		44D6F2632CF231CE00B91BBA /* Piano_BPM60_82.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44D6F2302CF231CD00B91BBA /* Piano_BPM60_82.mp3 */; };
 		44D6F2642CF231CE00B91BBA /* Piano_BPM60_83.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44D6F2312CF231CD00B91BBA /* Piano_BPM60_83.mp3 */; };
 		44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2662CF2324F00B91BBA /* SoundManager.swift */; };
+		44D6F26A2CF2392900B91BBA /* EmbossedButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2692CF2392900B91BBA /* EmbossedButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		44D6F2302CF231CD00B91BBA /* Piano_BPM60_82.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_BPM60_82.mp3; sourceTree = "<group>"; };
 		44D6F2312CF231CD00B91BBA /* Piano_BPM60_83.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_BPM60_83.mp3; sourceTree = "<group>"; };
 		44D6F2662CF2324F00B91BBA /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		44D6F2692CF2392900B91BBA /* EmbossedButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbossedButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +219,7 @@
 		440BE64F2CEA28F800B01C1B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				44D6F2682CF2390F00B91BBA /* Style */,
 				44C4CF052C8C617C0092C452 /* Representable */,
 				4469E8D72CEB920600CC506C /* MainTabBarView.swift */,
 				44C4CEF42C8C47A80092C452 /* QuizView.swift */,
@@ -392,6 +395,14 @@
 				44D6F2662CF2324F00B91BBA /* SoundManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		44D6F2682CF2390F00B91BBA /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				44D6F2692CF2392900B91BBA /* EmbossedButtonStyle.swift */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -572,6 +583,7 @@
 				440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */,
 				4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */,
 				440BE63D2CE7994000B01C1B /* QuizViewModel.swift in Sources */,
+				44D6F26A2CF2392900B91BBA /* EmbossedButtonStyle.swift in Sources */,
 				4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

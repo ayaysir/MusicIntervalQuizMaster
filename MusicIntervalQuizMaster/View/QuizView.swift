@@ -12,6 +12,7 @@ struct QuizView: View {
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
   @State private var workItem: DispatchWorkItem?
+  @State private var answerMessage: String = ""
   
   private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
     Text(text == "0" ? "-" : text)
@@ -28,16 +29,21 @@ struct QuizView: View {
       Spacer()
       MusiqwikView(pair: viewModel.currentPair)
         .onAppear {
-          playSounds()
+          initDataAndPlaySounds()
         }
         .onChange(of: viewModel.currentPair) { _ in
-          playSounds()
+          initDataAndPlaySounds()
         }
         .onTapGesture {
-          playSounds()
+          initDataAndPlaySounds()
         }
       Text("Count: \(viewModel.currentPairCount)")
       Text(viewModel.currentPair.description)
+      Text(answerMessage)
+        .frame(height: 30)
+        .frame(maxWidth: .infinity)
+        .background(.gray.opacity(0.3))
+      
       HStack {
         Button {
           viewModel.prev()
@@ -63,12 +69,24 @@ struct QuizView: View {
         )
       }
       
-      IntervalTouchKeyboardView()
+      IntervalTouchKeyboardView {
+        if let currentPairDescrition = viewModel.currentPair.interval?.description
+           {
+          if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
+            answerMessage = "✅ 맞았습니다. (\(keyboardViewModel.intervalAbbrDescription))"
+          } else {
+            answerMessage = "❌ 틀렸습니다. (\(keyboardViewModel.intervalAbbrDescription))"
+          }
+          
+        }
+      }
         .environmentObject(keyboardViewModel)
     }
   }
   
-  private func playSounds() {
+  private func initDataAndPlaySounds() {
+    answerMessage = ""
+    
     SoundManager.shared.stopAllSounds()
     SoundManager.shared.cleanupFinishedPlayers()
     if let workItem {
