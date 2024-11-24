@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct QuizView: View {
+  @AppStorage(.cfgQuizSoundAutoplay) var cfgQuizSoundAutoplay = true
+  
   @StateObject var viewModel = QuizViewModel()
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
   @State private var workItem: DispatchWorkItem?
   @State private var answerMessage: String = ""
+  @State private var isMusiqwikViewPressed = false
   
   private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
     Text(text == "0" ? "-" : text)
@@ -27,18 +30,43 @@ struct QuizView: View {
   var body: some View {
     VStack {
       Spacer()
+      
+      HStack {
+        Spacer()
+        Button {
+          cfgQuizSoundAutoplay.toggle()
+        } label: {
+          Label("Auto Play \(cfgQuizSoundAutoplay ? "ON" : "OFF")", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
+            .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
+        }
+      }
+      .padding()
+      
       MusiqwikView(pair: viewModel.currentPair)
+        .frame(maxWidth: .infinity)
+        .scaleEffect(isMusiqwikViewPressed ? 0.965 : 1.0) // 눌렀을 때 살짝 작아짐
+        .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
         .onAppear {
-          initDataAndPlaySounds()
+          if cfgQuizSoundAutoplay {
+            initDataAndPlaySounds()
+          }
         }
         .onChange(of: viewModel.currentPair) { _ in
-          initDataAndPlaySounds()
+          if cfgQuizSoundAutoplay {
+            initDataAndPlaySounds()
+          }
         }
         .onTapGesture {
+          isMusiqwikViewPressed = true
+          DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.2) {
+            isMusiqwikViewPressed = false
+          }
+          
           initDataAndPlaySounds()
         }
       Text("Count: \(viewModel.currentPairCount)")
       Text(viewModel.currentPair.description)
+        .font(.footnote)
       Text(answerMessage)
         .frame(height: 30)
         .frame(maxWidth: .infinity)

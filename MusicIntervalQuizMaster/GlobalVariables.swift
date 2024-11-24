@@ -31,6 +31,8 @@ extension String {
   static let cfgHapticPressedIntervalKeyboard = "Config_Haptic_PressedIntervalKeyboard"
   static let cfgHapticAnswer = "Config_Haptic_Answer"
   static let cfgHapticWrong = "Config_Haptic_Wrong"
+  
+  static let cfgQuizSoundAutoplay = "Config_Quiz_SoundAutoplay"
 }
 
 // MARK: - Initial config values
