@@ -40,8 +40,11 @@ final class QuizViewModel: ObservableObject {
   
   private func generateRandomIntervalPair() -> IntervalPair? {
     guard let category = determinedCategory,
-          let clef = determinedClef else {
-      print("category, clef는 반드시 만들어져야 하는데")
+          let clef = determinedClef,
+          let accidental1 = determinedAccidental,
+          let accidental2 = determinedAccidental
+    else {
+      print("category, clef, accidental는 반드시 만들어져야 하는데")
       return nil
     }
     
@@ -61,8 +64,8 @@ final class QuizViewModel: ObservableObject {
     let endOctave = clef.randomAvailableOctave(endLetter)
     
     let notes: [Note] = [
-      .init(startLetter, accidental: startAccidental, octave: startOctave),
-      .init(endLetter, accidental: endAccidental, octave: endOctave),
+      .init(startLetter, accidental: accidental1, octave: startOctave),
+      .init(endLetter, accidental: accidental2, octave: endOctave),
     ].sorted {
       $0.orthodoxPitch < $1.orthodoxPitch
     }
@@ -90,6 +93,16 @@ final class QuizViewModel: ObservableObject {
       store.bool(forKey: .cfgClefTreble) ? Clef.treble : nil,
       store.bool(forKey: .cfgClefBass) ? Clef.bass : nil,
       store.bool(forKey: .cfgClefAlto) ? Clef.alto : nil,
+    ].compactMap { $0 }.randomElement()
+  }
+  
+  var determinedAccidental: Accidental? {
+    [
+      Accidental.natural, Accidental.natural, Accidental.natural, 
+      store.bool(forKey: .cfgAccidentalSharp) ? Accidental.sharp : nil,
+      store.bool(forKey: .cfgAccidentalFlat) ? Accidental.flat : nil,
+      store.bool(forKey: .cfgAccidentalDoubleSharp) ? Accidental.doubleSharp : nil,
+      store.bool(forKey: .cfgAccidentalDoubleFlat) ? Accidental.doubleFlat : nil,
     ].compactMap { $0 }.randomElement()
   }
 }

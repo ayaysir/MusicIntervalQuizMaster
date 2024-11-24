@@ -42,6 +42,11 @@ struct MusicIntervalQuizMasterApp: App {
     store.set(true, forKey: .cfgHapticPressedIntervalKeyboard)
     store.set(true, forKey: .cfgHapticAnswer)
     store.set(true, forKey: .cfgHapticWrong)
+    
+    store.set(true, forKey: .cfgAccidentalSharp)
+    store.set(true, forKey: .cfgAccidentalFlat)
+    store.set(false, forKey: .cfgAccidentalDoubleSharp)
+    store.set(false, forKey: .cfgAccidentalDoubleFlat)
   }
 }
 
