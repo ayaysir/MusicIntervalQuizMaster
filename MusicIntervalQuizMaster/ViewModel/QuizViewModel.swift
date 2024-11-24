@@ -51,12 +51,9 @@ final class QuizViewModel: ObservableObject {
     // TODO: - 더블 샵, 더블 플랫이 포함되거나, 복합음정이라도 음정이 표시되도록 Interval 업그레이드 (현재 기능이 부실함)
     
     let startLetter = Letter(rawValue: .random(in: 0...6))
-    let startAccidental = Accidental(rawValue: .random(in: -1...1))
-    
     let endLetter = Letter(rawValue: .random(in: 0...6))
-    let endAccidental = Accidental(rawValue: .random(in: -1...1))
     
-    guard let startLetter, let startAccidental, let endLetter, let endAccidental else {
+    guard let startLetter, let endLetter else {
       return nil
     }
     
@@ -67,7 +64,11 @@ final class QuizViewModel: ObservableObject {
       .init(startLetter, accidental: accidental1, octave: startOctave),
       .init(endLetter, accidental: accidental2, octave: endOctave),
     ].sorted {
-      $0.orthodoxPitch < $1.orthodoxPitch
+      if $0.relativeNotePosition != $1.relativeNotePosition {
+        $0.relativeNotePosition < $1.relativeNotePosition
+      } else {
+        $0.accidental.rawValue < $1.accidental.rawValue
+      }
     }
     
     let pair = IntervalPair(

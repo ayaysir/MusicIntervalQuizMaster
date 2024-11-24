@@ -32,7 +32,7 @@ extension IntervalPair {
         let left = "'\(clef.musiqwikText)====="
         let right = "=====\""
         
-        let degree = abs(endNote.orthodoxPitch - startNote.orthodoxPitch)
+        let degree = abs(endNote.relativeNotePosition - startNote.relativeNotePosition)
         
         let isNeedSeparateNotes = degree <= 1
         let isNeedSeparateAccidentals = degree <= 2
@@ -55,8 +55,7 @@ extension IntervalPair {
           isNeedSeparateNotes: isNeedSeparateNotes,
           isNeedSeparateAccidentals: isNeedSeparateAccidentals
         )
-        // Text("\(degree)")
-        //   .offset(x: 100, y: -35)
+        // Text("\(degree)").offset(x: 100, y: -35)
         Text("\(left)\(startNoteText)\(right)")
           .font(.custom("Musiqwik", size: 50))
         Text("\(left)\(endNoteText)\(right)")
@@ -75,63 +74,80 @@ struct MusiqwikView: View {
 }
 
 #Preview {
-  VStack {
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.C, accidental: .flat, octave: 3),
-        endNote: .init(.C, accidental: .doubleSharp, octave: 4),
-        category: .ascending,
-        clef: .bass)
-    )
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.F, accidental: .sharp, octave: 4),
-        endNote: .init(.E, accidental: .natural, octave: 4),
-        category: .descending,
-        clef: .treble)
-    )
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.G, accidental: .sharp, octave: 4),
-        endNote: .init(.G, accidental: .natural, octave: 4),
-        category: .descending,
-        clef: .treble)
-    )
-    
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.B, accidental: .flat, octave: 3),
-        endNote: .init(.C, accidental: .flat, octave: 4),
-        category: .simultaneously,
-        clef: .treble)
-    )
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.F, accidental: .sharp, octave: 4),
-        endNote: .init(.G, accidental: .flat, octave: 4),
-        category: .simultaneously,
-        clef: .treble)
-    )
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.C, accidental: .flat, octave: 4),
-        endNote: .init(.E, accidental: .sharp, octave: 4),
-        category: .simultaneously,
-        clef: .alto)
-    )
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.G, accidental: .sharp, octave: 4),
-        endNote: .init(.C, accidental: .doubleFlat, octave: 5),
-        category: .simultaneously,
-        clef: .treble)
-    )
-    MusiqwikView(
-      pair: .init(
-        startNote: .init(.G, accidental: .doubleFlat, octave: 4),
-        endNote: .init(.C, accidental: .doubleFlat, octave: 5),
-        category: .simultaneously,
-        clef: .treble)
-    )
+  ScrollView {
+    VStack {
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.B, accidental: .doubleFlat, octave: 3),
+          endNote: .init(.D, accidental: .doubleSharp, octave: 4),
+          category: .simultaneously,
+          clef: .treble)
+      )
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.F, accidental: .flat, octave: 5),
+          endNote: .init(.G, accidental: .doubleSharp, octave: 5),
+          category: .simultaneously,
+          clef: .treble)
+      )
+      Divider()
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.C, accidental: .flat, octave: 3),
+          endNote: .init(.C, accidental: .doubleSharp, octave: 4),
+          category: .ascending,
+          clef: .bass)
+      )
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.F, accidental: .sharp, octave: 4),
+          endNote: .init(.E, accidental: .natural, octave: 4),
+          category: .descending,
+          clef: .treble)
+      )
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.G, accidental: .sharp, octave: 4),
+          endNote: .init(.G, accidental: .natural, octave: 4),
+          category: .descending,
+          clef: .treble)
+      )
+      
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.B, accidental: .flat, octave: 3),
+          endNote: .init(.C, accidental: .flat, octave: 4),
+          category: .simultaneously,
+          clef: .treble)
+      )
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.F, accidental: .sharp, octave: 4),
+          endNote: .init(.G, accidental: .flat, octave: 4),
+          category: .simultaneously,
+          clef: .treble)
+      )
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.C, accidental: .flat, octave: 4),
+          endNote: .init(.E, accidental: .sharp, octave: 4),
+          category: .simultaneously,
+          clef: .alto)
+      )
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.G, accidental: .sharp, octave: 4),
+          endNote: .init(.C, accidental: .doubleFlat, octave: 5),
+          category: .simultaneously,
+          clef: .treble)
+      )
+      MusiqwikView(
+        pair: .init(
+          startNote: .init(.G, accidental: .doubleFlat, octave: 4),
+          endNote: .init(.C, accidental: .doubleFlat, octave: 5),
+          category: .simultaneously,
+          clef: .treble)
+      )
+    }
   }
 }

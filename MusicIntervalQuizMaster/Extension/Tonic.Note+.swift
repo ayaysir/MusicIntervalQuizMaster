@@ -48,22 +48,33 @@ extension Note {
       "\(S)\(S)"
     }
     
+    var spaceRelateOnRightAccidental: String {
+      switch rightAccidental {
+      case .doubleSharp, .doubleFlat:
+        "=="
+      case .sharp, .flat:
+        "="
+      case .natural:
+        ""
+      }
+    }
+    
     let baseText = if isNeedSeparateNotes && isNeedSeparateAccidentals {
-      isRightNote ? "=\(accidentalText)=\(noteText)" : "\(accidentalText)=\(noteText)="
+      isRightNote ? "\(spaceRelateOnRightAccidental)\(accidentalText)=\(noteText)" : "\(accidentalText)\(spaceRelateOnRightAccidental)\(noteText)="
     } else if isNeedSeparateNotes {
       isRightNote ? "\(accidentalText)=\(noteText)" : "\(accidentalText)\(noteText)="
     } else if isNeedSeparateAccidentals {
-      isRightNote ? "=\(accidentalText)\(noteText)" : "\(accidentalText)=\(noteText)"
+      isRightNote ? "\(spaceRelateOnRightAccidental)\(accidentalText)\(noteText)" : "\(accidentalText)\(spaceRelateOnRightAccidental)\(noteText)"
     } else {
       "\(accidentalText)\(noteText)"
     }
     
     let maxCount = if isNeedSeparateNotes && isNeedSeparateAccidentals {
-      5
+      rightAccidental == .doubleFlat || rightAccidental == .doubleSharp ? 6 : 5
     } else if isNeedSeparateNotes {
       4
     } else if isNeedSeparateAccidentals {
-      4
+      rightAccidental == .doubleFlat || rightAccidental == .doubleSharp ? 5 : 4
     } else {
       3
     }
@@ -84,6 +95,10 @@ extension Note {
   
   var orthodoxPitch: Int {
     12 + letter.basePitch + Int(accidental.rawValue) + octave * 12
+  }
+  
+  var relativeNotePosition: Int {
+    letter.rawValue + octave * 7
   }
   
   func playSound() {
