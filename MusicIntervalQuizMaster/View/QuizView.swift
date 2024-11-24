@@ -17,6 +17,8 @@ struct QuizView: View {
   @State private var answerMessage: String = ""
   @State private var isMusiqwikViewPressed = false
   
+  @State private var offsetX: CGFloat = 0
+  
   private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
     Text(text == "0" ? "-" : text)
       .padding()
@@ -38,6 +40,7 @@ struct QuizView: View {
         } label: {
           Label("Auto Play \(cfgQuizSoundAutoplay ? "ON" : "OFF")", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
             .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
+            .font(.system(size: 14))
         }
       }
       .padding()
@@ -46,6 +49,7 @@ struct QuizView: View {
         .frame(maxWidth: .infinity)
         .scaleEffect(isMusiqwikViewPressed ? 0.965 : 1.0) // 눌렀을 때 살짝 작아짐
         .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
+        .offset(x: offsetX)
         .onAppear {
           if cfgQuizSoundAutoplay {
             initDataAndPlaySounds()
@@ -64,6 +68,37 @@ struct QuizView: View {
           
           initDataAndPlaySounds()
         }
+        .gesture(
+          DragGesture()
+            .onChanged { value in
+              // 드래그 중 감지
+              offsetX = value.translation.width
+            }
+            .onEnded { value in
+              // 드래그 완료 후 동작
+              if value.translation.width > 50 {
+                viewModel.prev()
+                if viewModel.currentPairCount != 0 {
+                  offsetX = -300
+                  withAnimation {
+                    offsetX = 100
+                  }
+                }
+              } else if value.translation.width < -50 {
+                viewModel.next()
+                offsetX = 300
+                withAnimation {
+                  offsetX = -100
+                }
+              }
+              
+              // 원래 위치로 돌아가기
+              withAnimation(.easeOut(duration: 0.5)) {
+                offsetX = 0
+              }
+            }
+        )
+      
       Text("Count: \(viewModel.currentPairCount)")
       Text(viewModel.currentPair.description)
         .font(.footnote)
@@ -98,8 +133,9 @@ struct QuizView: View {
       }
       
       IntervalTouchKeyboardView {
-        if let currentPairDescrition = viewModel.currentPair.interval?.description
-           {
+        initDataAndPlaySounds()
+        
+        if let currentPairDescrition = viewModel.currentPair.interval?.description {
           if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
             answerMessage = "✅ 맞았습니다. (\(keyboardViewModel.intervalAbbrDescription))"
           } else {
@@ -108,7 +144,7 @@ struct QuizView: View {
           
         }
       }
-        .environmentObject(keyboardViewModel)
+      .environmentObject(keyboardViewModel)
     }
   }
   
