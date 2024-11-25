@@ -18,7 +18,9 @@ final class QuizViewModel: ObservableObject {
   
   init() {
     for _ in 0..<100000 {
-      pairs.append(generateRandomIntervalPair()!)
+      if let pair = generateRandomIntervalPair() {
+        pairs.append(pair)
+      }
     }
   }
   
@@ -44,7 +46,7 @@ final class QuizViewModel: ObservableObject {
           let accidental1 = determinedAccidental,
           let accidental2 = determinedAccidental
     else {
-      print("category, clef, accidental는 반드시 만들어져야 하는데")
+      print("category, clef, accidental는 반드시 만들어져야 하는데:", determinedCategory, determinedClef, determinedAccidental)
       return nil
     }
     

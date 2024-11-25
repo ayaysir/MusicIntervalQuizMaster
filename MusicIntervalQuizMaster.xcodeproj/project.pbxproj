@@ -85,6 +85,8 @@
 		44D6F2CC2CF245E300B91BBA /* Piano_BPM60_4B2E_37.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44D6F29A2CF245E300B91BBA /* Piano_BPM60_4B2E_37.mp3 */; };
 		44D6F2CD2CF245E300B91BBA /* Piano_BPM60_4B2E_76.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44D6F29B2CF245E300B91BBA /* Piano_BPM60_4B2E_76.mp3 */; };
 		44D6F2CE2CF245E300B91BBA /* Piano_BPM60_4B2E_79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44D6F29C2CF245E300B91BBA /* Piano_BPM60_4B2E_79.mp3 */; };
+		44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */; };
+		44D6F2D32CF4CD2500B91BBA /* IntervalHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,8 @@
 		44D6F29A2CF245E300B91BBA /* Piano_BPM60_4B2E_37.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_BPM60_4B2E_37.mp3; sourceTree = "<group>"; };
 		44D6F29B2CF245E300B91BBA /* Piano_BPM60_4B2E_76.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_BPM60_4B2E_76.mp3; sourceTree = "<group>"; };
 		44D6F29C2CF245E300B91BBA /* Piano_BPM60_4B2E_79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_BPM60_4B2E_79.mp3; sourceTree = "<group>"; };
+		44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelper.swift; sourceTree = "<group>"; };
+		44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelperTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +284,7 @@
 		44C4CEF12C8C47A80092C452 /* MusicIntervalQuizMaster */ = {
 			isa = PBXGroup;
 			children = (
+				44D6F2CF2CF4CB7600B91BBA /* Helper */,
 				44D6F2652CF2324500B91BBA /* Manager */,
 				4469E8D42CEA373F00CC506C /* Extension */,
 				4469E8CF2CEA304800CC506C /* Protocol */,
@@ -327,6 +332,7 @@
 		44D6F1F62CEF73A400B91BBA /* MusicIntervalQuizMasterTests */ = {
 			isa = PBXGroup;
 			children = (
+				44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */,
 				44D6F1F72CEF73A400B91BBA /* MusicIntervalQuizMasterTests.swift */,
 			);
 			path = MusicIntervalQuizMasterTests;
@@ -403,6 +409,14 @@
 				44D6F2692CF2392900B91BBA /* EmbossedButtonStyle.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		44D6F2CF2CF4CB7600B91BBA /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -574,6 +588,7 @@
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
 				4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */,
+				44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */,
 				44D6F1FF2CEF78A200B91BBA /* Tonic.Letter+.swift in Sources */,
 				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,
 				44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */,
@@ -592,6 +607,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44D6F2D32CF4CD2500B91BBA /* IntervalHelperTests.swift in Sources */,
 				44D6F1F82CEF73A400B91BBA /* MusicIntervalQuizMasterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -804,7 +820,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicIntervalQuizMasterTests;
@@ -826,7 +842,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicIntervalQuizMasterTests;

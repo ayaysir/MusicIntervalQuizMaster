@@ -13,11 +13,13 @@ struct MusicIntervalQuizMasterApp: App {
     FontManager.registerFonts()
     
     checkAppFirstrunOrUpdateStatus {
-      initConfigValues()
+      
     } updated: {
       
     } nothingChanged: {
-      
+      if !store.bool(forKey: .checkInitConfigCompleted) {
+        initConfigValues()
+      }
     }
   }
   
@@ -47,6 +49,9 @@ struct MusicIntervalQuizMasterApp: App {
     store.set(true, forKey: .cfgAccidentalFlat)
     store.set(false, forKey: .cfgAccidentalDoubleSharp)
     store.set(false, forKey: .cfgAccidentalDoubleFlat)
+    
+    // set completed status
+    store.set(true, forKey: .checkInitConfigCompleted)
   }
 }
 

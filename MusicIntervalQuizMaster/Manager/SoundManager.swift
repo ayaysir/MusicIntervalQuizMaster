@@ -23,8 +23,8 @@ class SoundManager {
     
     do {
       let player = try AVAudioPlayer(contentsOf: url)
-      players.append(player)
       player.play()
+      players.append(player)
     } catch {
       print("Error playing sound: \(error.localizedDescription)")
     }

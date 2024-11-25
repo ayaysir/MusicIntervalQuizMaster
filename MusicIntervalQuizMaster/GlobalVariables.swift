@@ -38,6 +38,8 @@ extension String {
   static let cfgAccidentalFlat = "Config_Accidental_Flat"
   static let cfgAccidentalDoubleSharp = "Config_Accidental_DoubleSharp"
   static let cfgAccidentalDoubleFlat = "Config_Accidental_DoubleFlat"
+  
+  static let checkInitConfigCompleted = "Check_InitConfigCompleted"
 }
 
 // MARK: - Initial config values
