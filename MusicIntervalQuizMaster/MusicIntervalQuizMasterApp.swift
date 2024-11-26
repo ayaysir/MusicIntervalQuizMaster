@@ -50,6 +50,9 @@ struct MusicIntervalQuizMasterApp: App {
     store.set(false, forKey: .cfgAccidentalDoubleSharp)
     store.set(false, forKey: .cfgAccidentalDoubleFlat)
     
+    store.set(false, forKey: .cfgIntervalFilterCompound)
+    store.set(false, forKey: .cfgIntervalFilterDoublyTritone)
+    
     // set completed status
     store.set(true, forKey: .checkInitConfigCompleted)
   }

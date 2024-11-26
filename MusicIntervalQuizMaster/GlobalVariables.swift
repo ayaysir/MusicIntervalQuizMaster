@@ -40,6 +40,9 @@ extension String {
   static let cfgAccidentalDoubleFlat = "Config_Accidental_DoubleFlat"
   
   static let checkInitConfigCompleted = "Check_InitConfigCompleted"
+  
+  static let cfgIntervalFilterCompound = "Config_IntervalFilter_Compound"
+  static let cfgIntervalFilterDoublyTritone = "Config_IntervalFilter_DoublyTritone"
 }
 
 // MARK: - Initial config values

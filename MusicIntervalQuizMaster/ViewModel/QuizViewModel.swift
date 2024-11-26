@@ -140,9 +140,27 @@ final class QuizViewModel: ObservableObject {
           return
         }
         
-        if $0.value {
-          list.append(.init(modifier: modifier, number: number))
+        let isIncludeCompound = store.bool(forKey: .cfgIntervalFilterCompound)
+        let isIncludeDoublyTritone = store.bool(forKey: .cfgIntervalFilterDoublyTritone)
+        
+        /*
+         꺼져 있을 때
+         [P1, m2, M2, d2, m3, M3, d3, P4, A4, d4, m5, M5, A5, d5, P6, A6, d6, m7, M7, d7, P8, A8, d8]
+
+         둘 다 켜져 있을 때
+         [P1, m2, M2, d2, m3, M3, d3, P4, A4, AA4, d4, dd4, m5, M5, A5, AA5, d5, dd5, P6, A6, d6, m7, M7, d7, P8, A8, d8, m12, M12, P13]
+
+         차이점
+         [AA4, AA5, dd4, dd5, m12, M12, P13]
+         */
+        guard $0.value,
+              (isIncludeCompound || number <= 8), // isIncludeCompound가 false면 number <= 8 이어야 함
+              (isIncludeDoublyTritone || (modifier != .doublyAugmented && modifier != .doublyDiminished)) // isIncludeDoublyTritone가 false면 특정 modifier 포함 금지
+        else {
+          return
         }
+        
+        list.append(.init(modifier: modifier, number: number))
       }
     } catch {
       print(error)
