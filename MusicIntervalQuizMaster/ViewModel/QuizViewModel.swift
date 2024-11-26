@@ -131,6 +131,7 @@ final class QuizViewModel: ObservableObject {
     
     do {
       let boolStates = try store.getObject(forKey: .cfgIntervalTypeStates, castTo: StringBoolDict.self)
+      
       boolStates.forEach {
         let splitted = $0.key.split(separator: "_")
         
@@ -139,7 +140,9 @@ final class QuizViewModel: ObservableObject {
           return
         }
         
-        list.append(.init(modifier: modifier, number: number))
+        if $0.value {
+          list.append(.init(modifier: modifier, number: number))
+        }
       }
     } catch {
       print(error)

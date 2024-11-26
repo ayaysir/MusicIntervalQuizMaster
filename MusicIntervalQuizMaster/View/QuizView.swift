@@ -15,6 +15,7 @@ struct QuizView: View {
   
   @State private var workItem: DispatchWorkItem?
   @State private var isMusiqwikViewPressed = false
+  @State private var showAnswerAlert = false
   @State private var offsetX: CGFloat = 0
   
   enum CurrentAnswerMode {
@@ -72,7 +73,8 @@ struct QuizView: View {
       .padding()
       
       MusiqwikView(pair: viewModel.currentPair)
-        .frame(maxWidth: .infinity)
+        // .frame(maxWidth: .infinity)
+        .frame(height: 150)
         .scaleEffect(isMusiqwikViewPressed ? 0.965 : 1.0) // 눌렀을 때 살짝 작아짐
         .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
         .offset(x: offsetX)
@@ -119,34 +121,39 @@ struct QuizView: View {
       //   .font(.footnote)
       let answerText = switch currentAnswerMode {
       case .inQuiz:
-        ""
+        "🤔"
       case .correct:
-        "✅ 맞았습니다."
+        "✅ 맞았습니다. (\(viewModel.currentPair.advancedInterval?.description ?? ""))"
       case .wrong:
-        "❌ 틀렸습니다."
+        "❌ 틀렸습니다. 눌러서 힌트 보기"
       }
-      Text("\(answerText) (\(keyboardViewModel.intervalAbbrDescription))")
-        .frame(height: 40)
-        .frame(maxWidth: .infinity)
-        .background(.gray.opacity(0.3))
       
       HStack {
-        Button {
-          viewModel.prev()
-          prevAnimation()
-          comebackAndToggleButtonImage()
-        } label: {
-          Text("prev")
-        }
-        Button {
-          viewModel.next()
-          nextAnimation(afterOffsetX: -350)
-          comebackAndToggleButtonImage()
-        } label: {
-          Text("next")
-        }
+        Text("\(answerText)")
+          .font(.caption)
+          .frame(height: 30)
+          .frame(maxWidth: .infinity)
+          .background(.gray.opacity(0.3))
+          .clipShape(RoundedRectangle(cornerRadius: 10))
+          .padding(.horizontal, 10)
+          .opacity(currentAnswerMode == .inQuiz ? 0 : 1)
+        
+          Button {
+            viewModel.prev()
+            prevAnimation()
+            comebackAndToggleButtonImage()
+          } label: {
+            Text("<")
+          }
+          Button {
+            viewModel.next()
+            nextAnimation(afterOffsetX: -350)
+            comebackAndToggleButtonImage()
+          } label: {
+            Text(">")
+          }
       }
-      
+  
       Group {
         HStack {
           intervalTextField(
@@ -168,11 +175,31 @@ struct QuizView: View {
       .padding(.horizontal, 10)
       .padding(.bottom, 10)
     }
+    .alert(isPresent: $showAnswerAlert, view: customAlertView)
+  }
+  
+  private var customAlertView: CustomAlertView {
+    let intervalDescription = viewModel.currentPair.advancedInterval?.description ?? ""
+    // 약어
+    let title = currentAnswerMode == .correct 
+    ? "맞았습니다. \(intervalDescription) 입니다."
+    : "틀렸습니다."
+    // 정식 명칭
+    let subtitle = currentAnswerMode == .correct
+    ? "해당 음정은 \(intervalDescription) 입니다."
+    : "다시 한 번 풀어보세요."
+    
+    return CustomAlertView(
+      title: title,
+      subtitle: subtitle,
+      icon: currentAnswerMode == .correct ? .done : .error
+    )
   }
   
   private func playSounds() {
     SoundManager.shared.stopAllSounds()
     SoundManager.shared.cleanupFinishedPlayers()
+    
     if let workItem {
       workItem.cancel()
     }
@@ -200,6 +227,7 @@ struct QuizView: View {
   }
   
   private func checkAnswer() {
+    showAnswerAlert = true
     if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
       if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
         currentAnswerMode = .correct
