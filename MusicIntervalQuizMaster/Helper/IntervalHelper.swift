@@ -61,12 +61,6 @@ extension AdvancedInterval {
     let sortedNotes = [note1, note2].sorted(by: Note.sortNotes(_:_:))
     let (n1, n2) = (sortedNotes[0], sortedNotes[1])
     
-    // 숫자 구하기
-    let number = n2.relativeNotePosition - n1.relativeNotePosition + 1
-    let essentialNumber = (number - 1) % 7 + 1
-    
-    // print(#function, n1.relativeNotePosition, n2.relativeNotePosition)
-    
     guard n1.relativeNotePosition < n2.relativeNotePosition else {
       return 0
     }

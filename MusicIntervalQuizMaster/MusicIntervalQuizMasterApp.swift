@@ -18,7 +18,7 @@ struct MusicIntervalQuizMasterApp: App {
       
     } nothingChanged: {
       if !store.bool(forKey: .checkInitConfigCompleted) {
-        initConfigValues()
+        Self.initConfigValues()
       }
     }
   }
@@ -29,7 +29,7 @@ struct MusicIntervalQuizMasterApp: App {
     }
   }
   
-  private func initConfigValues() {
+  static func initConfigValues() {
     // 최초 실행 시 설정값
     try? store.setObject(INTERVAL_TYPE_STATE_FIRST, forKey: .cfgIntervalTypeStates)
     

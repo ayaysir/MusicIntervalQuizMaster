@@ -17,8 +17,17 @@ final class QuizViewModel: ObservableObject {
   }
   
   init() {
-    for _ in 0..<100000 {
-      if let pair = generateRandomIntervalPair() {
+    if !store.bool(forKey: .checkInitConfigCompleted) {
+      MusicIntervalQuizMasterApp.initConfigValues()
+    }
+    
+    let availableIntervalList = availableIntervalList
+    print(availableIntervalList)
+    
+    while pairs.count <= 300 {
+      if let pair = generateRandomIntervalPair(),
+         let interval = pair.advancedInterval,
+         availableIntervalList.contains(interval) {
         pairs.append(pair)
       }
     }
@@ -115,5 +124,27 @@ final class QuizViewModel: ObservableObject {
       store.bool(forKey: .cfgAccidentalDoubleSharp) ? Accidental.doubleSharp : nil,
       store.bool(forKey: .cfgAccidentalDoubleFlat) ? Accidental.doubleFlat : nil,
     ].compactMap { $0 }.randomElement()
+  }
+  
+  var availableIntervalList: [AdvancedInterval] {
+    var list: [AdvancedInterval] = []
+    
+    do {
+      let boolStates = try store.getObject(forKey: .cfgIntervalTypeStates, castTo: StringBoolDict.self)
+      boolStates.forEach {
+        let splitted = $0.key.split(separator: "_")
+        
+        guard let number = Int(splitted[1]),
+              let modifier = IntervalModifier.from(abbreviation: String(splitted[0])) else {
+          return
+        }
+        
+        list.append(.init(modifier: modifier, number: number))
+      }
+    } catch {
+      print(error)
+    }
+    
+    return list
   }
 }

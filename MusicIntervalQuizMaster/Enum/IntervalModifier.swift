@@ -58,6 +58,19 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
     }
   }
   
+  static func from(abbreviation: String) -> IntervalModifier? {
+    switch abbreviation {
+    case "M": return .major
+    case "m": return .minor
+    case "P": return .perfect
+    case "d": return .diminished
+    case "A": return .augmented
+    case "dd": return .doublyDiminished
+    case "AA": return .doublyAugmented
+    default: return nil
+    }
+  }
+  
   func next(isPerfectGroup: Bool) -> Self? {
     switch self {
     case .major: .augmented

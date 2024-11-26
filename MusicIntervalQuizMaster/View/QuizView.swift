@@ -29,6 +29,29 @@ struct QuizView: View {
       .clipShape(RoundedRectangle(cornerRadius: 5))
   }
   
+  private func prevAnimation(beforeOffsetX: CGFloat = -300, afterOffsetX: CGFloat = 200) {
+    if viewModel.currentPairCount != 0 {
+      offsetX = beforeOffsetX
+      withAnimation {
+        offsetX = afterOffsetX
+      }
+    }
+  }
+  
+  private func nextAnimation(beforeOffsetX: CGFloat = 300, afterOffsetX: CGFloat = -200) {
+    offsetX = beforeOffsetX
+    withAnimation {
+      offsetX = afterOffsetX
+    }
+  }
+  
+  private func comebackAnimation() {
+    // 원래 위치로 돌아가기
+    withAnimation(.easeOut(duration: 0.5)) {
+      offsetX = 0
+    }
+  }
+  
   var body: some View {
     VStack {
       Spacer()
@@ -78,24 +101,13 @@ struct QuizView: View {
               // 드래그 완료 후 동작
               if value.translation.width > 50 {
                 viewModel.prev()
-                if viewModel.currentPairCount != 0 {
-                  offsetX = -300
-                  withAnimation {
-                    offsetX = 100
-                  }
-                }
+                prevAnimation()
               } else if value.translation.width < -50 {
                 viewModel.next()
-                offsetX = 300
-                withAnimation {
-                  offsetX = -100
-                }
+                nextAnimation()
               }
               
-              // 원래 위치로 돌아가기
-              withAnimation(.easeOut(duration: 0.5)) {
-                offsetX = 0
-              }
+              comebackAnimation()
             }
         )
       
@@ -110,41 +122,48 @@ struct QuizView: View {
       HStack {
         Button {
           viewModel.prev()
+          prevAnimation()
+          comebackAnimation()
         } label: {
           Text("prev")
         }
         Button {
           viewModel.next()
+          nextAnimation(afterOffsetX: -350)
+          comebackAnimation()
         } label: {
           Text("next")
         }
       }
       
-      HStack {
-        intervalTextField(
-          "\(keyboardViewModel.intervalModifier)",
-          backgroundColor: .red.opacity(0.5),
-          isLeading: false
-        )
-        intervalTextField(
-          "\(keyboardViewModel.intervalNumber)",
-          backgroundColor: .cyan.opacity(0.5)
-        )
-      }
-      
-      IntervalTouchKeyboardView {
-        initDataAndPlaySounds()
-        
-        if let currentPairDescrition = viewModel.currentPair.interval?.description {
-          if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
-            answerMessage = "✅ 맞았습니다. (\(keyboardViewModel.intervalAbbrDescription))"
-          } else {
-            answerMessage = "❌ 틀렸습니다. (\(keyboardViewModel.intervalAbbrDescription))"
-          }
-          
+      Group {
+        HStack {
+          intervalTextField(
+            "\(keyboardViewModel.intervalModifier)",
+            backgroundColor: .red.opacity(0.5),
+            isLeading: false
+          )
+          intervalTextField(
+            "\(keyboardViewModel.intervalNumber)",
+            backgroundColor: .cyan.opacity(0.5)
+          )
         }
+        
+        IntervalTouchKeyboardView {
+          initDataAndPlaySounds()
+          
+          if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
+            if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
+              answerMessage = "✅ 맞았습니다. (\(keyboardViewModel.intervalAbbrDescription))"
+            } else {
+              answerMessage = "❌ 틀렸습니다. (\(keyboardViewModel.intervalAbbrDescription))"
+            }
+          }
+        }
+        .environmentObject(keyboardViewModel)
       }
-      .environmentObject(keyboardViewModel)
+      .padding(.horizontal, 10)
+      .padding(.bottom, 10)
     }
   }
   
