@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EmbossedButtonStyle: ButtonStyle {
   var pressedBorderColor: Color = .red
+  var backgroundColor: Color = .intervalButtonBackground
   
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
@@ -39,8 +40,8 @@ struct EmbossedButtonStyle: ButtonStyle {
           RoundedRectangle(cornerRadius: 10)
             .fill(LinearGradient(
               gradient: Gradient(colors: [
-                configuration.isPressed ? .intervalButtonBackground.opacity(0.9) : .intervalButtonBackground.opacity(0.7),
-                configuration.isPressed ? .intervalButtonBackground.opacity(0.6) : .intervalButtonBackground
+                configuration.isPressed ? backgroundColor.opacity(0.9) : backgroundColor.opacity(0.7),
+                configuration.isPressed ? backgroundColor.opacity(0.6) : backgroundColor
               ]),
               startPoint: .topLeading,
               endPoint: .bottomTrailing

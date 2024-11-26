@@ -88,6 +88,7 @@
 		44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */; };
 		44D6F2D32CF4CD2500B91BBA /* IntervalHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */; };
 		44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */; };
+		44D6F2D72CF5E4CF00B91BBA /* HapticMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D62CF5E4CF00B91BBA /* HapticMananger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +185,7 @@
 		44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelper.swift; sourceTree = "<group>"; };
 		44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelperTests.swift; sourceTree = "<group>"; };
 		44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Accidental+.swift"; sourceTree = "<group>"; };
+		44D6F2D62CF5E4CF00B91BBA /* HapticMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticMananger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -402,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				44D6F2662CF2324F00B91BBA /* SoundManager.swift */,
+				44D6F2D62CF5E4CF00B91BBA /* HapticMananger.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -588,6 +591,7 @@
 				4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
+				44D6F2D72CF5E4CF00B91BBA /* HapticMananger.swift in Sources */,
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
 				4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */,

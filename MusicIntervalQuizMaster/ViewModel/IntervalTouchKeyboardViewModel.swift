@@ -7,9 +7,23 @@
 
 import Foundation
 
+enum EnterButtonMode {
+  case inQuiz, viewAnswer
+  
+  var systemImageString: String {
+    switch self {
+    case .inQuiz:
+      "return"
+    case .viewAnswer:
+      "arrow.turn.up.right"
+    }
+  }
+}
+
 final class IntervalTouchKeyboardViewModel: ObservableObject {
   @Published var intervalModifier: IntervalModifier = .major
   @Published var intervalNumber: Int = 0
+  @Published var enterButtonMode: EnterButtonMode = .inQuiz
   
   var intervalAbbrDescription: String {
     "\(intervalModifier.abbrDescription)\(intervalNumber)"

@@ -14,10 +14,13 @@ struct QuizView: View {
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
   @State private var workItem: DispatchWorkItem?
-  @State private var answerMessage: String = ""
   @State private var isMusiqwikViewPressed = false
-  
   @State private var offsetX: CGFloat = 0
+  
+  enum CurrentAnswerMode {
+    case inQuiz, correct, wrong
+  }
+  @State private var currentAnswerMode: CurrentAnswerMode = .inQuiz
   
   private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
     Text(text == "0" ? "-" : text)
@@ -75,12 +78,12 @@ struct QuizView: View {
         .offset(x: offsetX)
         .onAppear {
           if cfgQuizSoundAutoplay {
-            initDataAndPlaySounds()
+            playSounds()
           }
         }
         .onChange(of: viewModel.currentPair) { _ in
           if cfgQuizSoundAutoplay {
-            initDataAndPlaySounds()
+            playSounds()
           }
         }
         .onTapGesture {
@@ -89,7 +92,7 @@ struct QuizView: View {
             isMusiqwikViewPressed = false
           }
           
-          initDataAndPlaySounds()
+          playSounds()
         }
         .gesture(
           DragGesture()
@@ -107,15 +110,23 @@ struct QuizView: View {
                 nextAnimation()
               }
               
-              comebackAnimation()
+              comebackAndToggleButtonImage()
             }
         )
       
-      Text("Count: \(viewModel.currentPairCount)")
-      Text(viewModel.currentPair.description)
-        .font(.footnote)
-      Text(answerMessage)
-        .frame(height: 30)
+      // Text("Count: \(viewModel.currentPairCount)")
+      // Text(viewModel.currentPair.description)
+      //   .font(.footnote)
+      let answerText = switch currentAnswerMode {
+      case .inQuiz:
+        ""
+      case .correct:
+        "✅ 맞았습니다."
+      case .wrong:
+        "❌ 틀렸습니다."
+      }
+      Text("\(answerText) (\(keyboardViewModel.intervalAbbrDescription))")
+        .frame(height: 40)
         .frame(maxWidth: .infinity)
         .background(.gray.opacity(0.3))
       
@@ -123,14 +134,14 @@ struct QuizView: View {
         Button {
           viewModel.prev()
           prevAnimation()
-          comebackAnimation()
+          comebackAndToggleButtonImage()
         } label: {
           Text("prev")
         }
         Button {
           viewModel.next()
           nextAnimation(afterOffsetX: -350)
-          comebackAnimation()
+          comebackAndToggleButtonImage()
         } label: {
           Text("next")
         }
@@ -150,15 +161,7 @@ struct QuizView: View {
         }
         
         IntervalTouchKeyboardView {
-          initDataAndPlaySounds()
-          
-          if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
-            if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
-              answerMessage = "✅ 맞았습니다. (\(keyboardViewModel.intervalAbbrDescription))"
-            } else {
-              answerMessage = "❌ 틀렸습니다. (\(keyboardViewModel.intervalAbbrDescription))"
-            }
-          }
+          pressEnterButton()
         }
         .environmentObject(keyboardViewModel)
       }
@@ -167,9 +170,7 @@ struct QuizView: View {
     }
   }
   
-  private func initDataAndPlaySounds() {
-    answerMessage = ""
-    
+  private func playSounds() {
     SoundManager.shared.stopAllSounds()
     SoundManager.shared.cleanupFinishedPlayers()
     if let workItem {
@@ -189,6 +190,40 @@ struct QuizView: View {
     case .simultaneously:
       viewModel.currentPair.startNote.playSound()
       viewModel.currentPair.endNote.playSound()
+    }
+  }
+  
+  private func comebackAndToggleButtonImage() {
+    comebackAnimation()
+    currentAnswerMode = .inQuiz
+    keyboardViewModel.enterButtonMode = .inQuiz
+  }
+  
+  private func checkAnswer() {
+    if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
+      if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
+        currentAnswerMode = .correct
+        keyboardViewModel.enterButtonMode = .viewAnswer
+      } else {
+        currentAnswerMode = .wrong
+      }
+    }
+  }
+  
+  private func pressEnterButton() {
+    if keyboardViewModel.enterButtonMode == .inQuiz {
+      playSounds()
+      checkAnswer()
+    } else {
+      if currentAnswerMode == .correct {
+        viewModel.next()
+        nextAnimation(afterOffsetX: -350)
+        comebackAndToggleButtonImage()
+        keyboardViewModel.intervalNumber = 0
+      } else {
+        playSounds()
+        checkAnswer()
+      }
     }
   }
 }

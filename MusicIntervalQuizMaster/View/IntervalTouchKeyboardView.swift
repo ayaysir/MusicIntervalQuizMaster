@@ -9,11 +9,18 @@ import SwiftUI
 
 struct IntervalTouchKeyboardView: View {
   @EnvironmentObject var keyboardViewModel: IntervalTouchKeyboardViewModel
+  @AppStorage(.cfgHapticPressedIntervalKeyboard) var isHaptic = false
   
   let enterAction: (() -> Void)?
   
   init(enterAction: (() -> Void)? = nil) {
     self.enterAction = enterAction
+  }
+  
+  private func vibrate() {
+    if isHaptic {
+      HapticMananger.rigid.vibrate()
+    }
   }
   
   private func internalButtonText(_ title: String, color: Color = .intervalButtonBackground) -> some View {
@@ -24,6 +31,7 @@ struct IntervalTouchKeyboardView: View {
   
   private func internalButton(_ title: String, intervalModifier: IntervalModifier) -> some View {
     Button(action: {
+      vibrate()
       keyboardViewModel.intervalModifier = intervalModifier
     }) {
       internalButtonText(title)
@@ -33,6 +41,7 @@ struct IntervalTouchKeyboardView: View {
   
   private func numberButton(_ inputNumber: Int) -> some View {
     Button(action: {
+      vibrate()
       keyboardViewModel.setIntervalNumber(inputNumber)
     }) {
       let buttonText = inputNumber == 0 ? "0 / CLR" : "\(inputNumber)"
@@ -43,11 +52,11 @@ struct IntervalTouchKeyboardView: View {
   
   private func enterButton(action: @escaping (() -> Void)) -> some View {
     Button(action: action) {
-      Image(systemName: "return")
+      Image(systemName: keyboardViewModel.enterButtonMode.systemImageString)
         .frame(height: 50)
         .frame(maxWidth: .infinity)
     }
-    .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .orange))
+    .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .orange, backgroundColor: .orange.opacity(0.7)))
   }
   
   var body: some View {
