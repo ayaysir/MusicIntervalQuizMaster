@@ -87,6 +87,7 @@
 		44D6F2CE2CF245E300B91BBA /* Piano_BPM60_4B2E_79.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 44D6F29C2CF245E300B91BBA /* Piano_BPM60_4B2E_79.mp3 */; };
 		44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */; };
 		44D6F2D32CF4CD2500B91BBA /* IntervalHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */; };
+		44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +183,7 @@
 		44D6F29C2CF245E300B91BBA /* Piano_BPM60_4B2E_79.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Piano_BPM60_4B2E_79.mp3; sourceTree = "<group>"; };
 		44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelper.swift; sourceTree = "<group>"; };
 		44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelperTests.swift; sourceTree = "<group>"; };
+		44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Accidental+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				4469E8D52CEA374800CC506C /* Tonic.Note+.swift */,
 				44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */,
 				44D6F1FE2CEF78A200B91BBA /* Tonic.Letter+.swift */,
+				44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */,
 				44D6F1FF2CEF78A200B91BBA /* Tonic.Letter+.swift in Sources */,
 				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,
+				44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */,
 				44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */,
 				44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */,
 				44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */,

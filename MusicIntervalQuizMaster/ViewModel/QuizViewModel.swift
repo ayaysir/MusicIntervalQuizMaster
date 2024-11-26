@@ -46,11 +46,19 @@ final class QuizViewModel: ObservableObject {
           let accidental1 = determinedAccidental,
           let accidental2 = determinedAccidental
     else {
-      print("category, clef, accidental는 반드시 만들어져야 하는데:", determinedCategory, determinedClef, determinedAccidental)
+      print("category, clef, accidental는 반드시 만들어져야 하는데:", 
+            determinedCategory as Any,
+            determinedClef as Any,
+            determinedAccidental as Any,
+            store.bool(forKey: .checkInitConfigCompleted)
+      )
+      
+      print(store.bool(forKey: .cfgNotesAscending), 
+            store.bool(forKey: .cfgNotesDescending),
+            store.bool(forKey: .cfgNotesSimultaneously)
+      )
       return nil
     }
-    
-    // TODO: - 더블 샵, 더블 플랫이 포함되거나, 복합음정이라도 음정이 표시되도록 Interval 업그레이드 (현재 기능이 부실함)
     
     let startLetter = Letter(rawValue: .random(in: 0...6))
     let endLetter = Letter(rawValue: .random(in: 0...6))

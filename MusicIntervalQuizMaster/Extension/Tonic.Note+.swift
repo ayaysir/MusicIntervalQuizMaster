@@ -104,4 +104,12 @@ extension Note {
   func playSound() {
     SoundManager.shared.playSound(named: "Piano_BPM60_4B2E_\(orthodoxPitch)")
   }
+  
+  static func sortNotes(_ lhs: Note, _ rhs: Note) -> Bool {
+    if lhs.relativeNotePosition != rhs.relativeNotePosition {
+      lhs.relativeNotePosition < rhs.relativeNotePosition
+    } else {
+      lhs.accidental.rawValue < rhs.accidental.rawValue
+    }
+  }
 }

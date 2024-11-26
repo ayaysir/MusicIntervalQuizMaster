@@ -17,14 +17,17 @@ struct IntervalPair: CustomStringConvertible, Equatable, Hashable {
     Interval.betweenNotes(startNote, endNote)
   }
   
+  var advancedInterval: AdvancedInterval? {
+    AdvancedInterval.betweenNotes(startNote, endNote)
+  }
+  
   var description: String {
     """
     category: \(category)
     startNote: \(startNote.description) (\(startNote.noteNumber)) (\(startNote.orthodoxPitch))
-    [octave: \(startNote.octave), letterBasePitch: \(startNote.letter.basePitch), accRawValue: \(startNote.accidental.rawValue)]
     endNote: \(endNote.description) (\(endNote.noteNumber)) (\(endNote.orthodoxPitch))
-    [octave: \(endNote.octave), letterBasePitch: \(endNote.letter.basePitch), accRawValue: \(endNote.accidental.rawValue)]
     interval: \(interval?.description ?? "error")
+    AdvancedInterval: \(advancedInterval?.description ?? "error")
     """
   }
 }
