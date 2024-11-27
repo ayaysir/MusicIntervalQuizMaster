@@ -137,6 +137,7 @@ struct QuizView: View {
           .clipShape(RoundedRectangle(cornerRadius: 10))
           .padding(.horizontal, 10)
           .opacity(currentAnswerMode == .inQuiz ? 0 : 1)
+          .animation(.easeInOut(duration: 0.3), value: currentAnswerMode)
         
           Button {
             viewModel.prev()
@@ -230,10 +231,18 @@ struct QuizView: View {
     showAnswerAlert = true
     if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
       if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
+        // 정답인 경우
         currentAnswerMode = .correct
         keyboardViewModel.enterButtonMode = .viewAnswer
+        if store.bool(forKey: .cfgHapticAnswer) {
+          HapticMananger.success.vibrate()
+        }
       } else {
+        // 오답인 경우
         currentAnswerMode = .wrong
+        if store.bool(forKey: .cfgHapticWrong) {
+          HapticMananger.warning.vibrate()
+        }
       }
     }
   }
