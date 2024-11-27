@@ -106,6 +106,8 @@
 		44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2EA2CF60F1500B91BBA /* AlertViewStyle.swift */; };
 		44D6F2FC2CF611CC00B91BBA /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2FB2CF611CC00B91BBA /* CustomAlertView.swift */; };
 		44D6F2FE2CF6EFA200B91BBA /* AppSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */; };
+		44D6F3002CF729F700B91BBA /* CircularProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2FF2CF729F700B91BBA /* CircularProgressBar.swift */; };
+		44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F3022CF7388E00B91BBA /* TimerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +222,8 @@
 		44D6F2EA2CF60F1500B91BBA /* AlertViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewStyle.swift; sourceTree = "<group>"; };
 		44D6F2FB2CF611CC00B91BBA /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingView.swift; sourceTree = "<group>"; };
+		44D6F2FF2CF729F700B91BBA /* CircularProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressBar.swift; sourceTree = "<group>"; };
+		44D6F3022CF7388E00B91BBA /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,8 +265,10 @@
 		440BE64F2CEA28F800B01C1B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				44D6F3012CF72A0D00B91BBA /* Component */,
 				44D6F2682CF2390F00B91BBA /* Style */,
 				44C4CF052C8C617C0092C452 /* Representable */,
+				44D6F3022CF7388E00B91BBA /* TimerView.swift */,
 				4469E8D72CEB920600CC506C /* MainTabBarView.swift */,
 				44C4CEF42C8C47A80092C452 /* QuizView.swift */,
 				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
@@ -516,6 +522,14 @@
 			path = AlertKit;
 			sourceTree = "<group>";
 		};
+		44D6F3012CF72A0D00B91BBA /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				44D6F2FF2CF729F700B91BBA /* CircularProgressBar.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -673,6 +687,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
 				44C4CEF52C8C47A80092C452 /* QuizView.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
@@ -710,6 +725,7 @@
 				44D6F2F02CF60F1500B91BBA /* AlertIconErrorView.swift in Sources */,
 				4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */,
 				44D6F2FC2CF611CC00B91BBA /* CustomAlertView.swift in Sources */,
+				44D6F3002CF729F700B91BBA /* CircularProgressBar.swift in Sources */,
 				44D6F2F32CF60F1500B91BBA /* AlertAppleMusic16View.swift in Sources */,
 				44D6F2EF2CF60F1500B91BBA /* AlertIconDoneView.swift in Sources */,
 				440BE63D2CE7994000B01C1B /* QuizViewModel.swift in Sources */,

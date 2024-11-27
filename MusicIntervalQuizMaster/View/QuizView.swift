@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuizView: View {
   @AppStorage(.cfgQuizSoundAutoplay) var cfgQuizSoundAutoplay = true
+  @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 5
   
   @StateObject var viewModel = QuizViewModel()
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
@@ -18,6 +19,12 @@ struct QuizView: View {
   @State private var showAnswerAlert = false
   @State private var animateAlertDismiss = false
   @State private var offsetX: CGFloat = 0
+  
+  @State private var remainingTime: Double = 5
+  // @State private var timerProgress: Double = 1
+  // @State private var timerText: String = ""
+  @State private var timerActive: Bool = true
+  @State private var timer: Timer?
   
   enum CurrentAnswerMode {
     case inQuiz, correct, wrong
@@ -75,8 +82,22 @@ struct QuizView: View {
         .background(.gray.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 5))
         
-        
         Spacer()
+        
+        if cfgTimerSeconds != 0 {
+          // CircularProgressBar(progress: $timerProgress, text: $timerText)
+          //   .frame(width: 40)
+          //   .padding()
+          //   .onChange(of: remainingTime) { newValue in
+          //     timerText = String(format: "%0.f", ceil(remainingTime))
+          //     timerProgress = Double(remainingTime) / Double(cfgTimerSeconds)
+          //   }
+          
+          TimerView(remainingTime: $remainingTime, totalDuration: Double(cfgTimerSeconds))
+          
+          Spacer()
+        }
+        
         Button {
           cfgQuizSoundAutoplay.toggle()
         } label: {
@@ -97,11 +118,17 @@ struct QuizView: View {
           if cfgQuizSoundAutoplay {
             playSounds()
           }
+          
+          invalidateTimer()
+          startCountdown()
         }
         .onChange(of: viewModel.currentPair) { _ in
           if cfgQuizSoundAutoplay {
             playSounds()
           }
+          
+          invalidateTimer()
+          startCountdown()
         }
         .onTapGesture {
           isMusiqwikViewPressed = true
@@ -184,9 +211,7 @@ struct QuizView: View {
         }
         
         IntervalTouchKeyboardView {
-          withAnimation {
-            pressEnterButton()
-          }
+          pressEnterButton()
         }
         .environmentObject(keyboardViewModel)
         .disabled(showAnswerAlert)
@@ -268,6 +293,7 @@ struct QuizView: View {
       return
     }
     
+    invalidateTimer()
     showAnswerAlert = true
     
     if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
@@ -289,14 +315,18 @@ struct QuizView: View {
           }
         }
       } else {
-        // 오답인 경우
-        currentAnswerMode = .wrong
-        viewModel.appendAnswerCount(isCorrect: false)
-        
-        if store.bool(forKey: .cfgHapticWrong) {
-          HapticMananger.warning.vibrate()
-        }
+        setWrong()
       }
+    }
+  }
+  
+  private func setWrong() {
+    // 오답인 경우
+    currentAnswerMode = .wrong
+    viewModel.appendAnswerCount(isCorrect: false)
+    
+    if store.bool(forKey: .cfgHapticWrong) {
+      HapticMananger.warning.vibrate()
     }
   }
   
@@ -319,6 +349,44 @@ struct QuizView: View {
         checkAnswer()
       }
     }
+  }
+  
+  private func startCountdown() {
+    guard cfgTimerSeconds > 0 else {
+      return
+    }
+    
+    // timerText = "\(cfgTimerSeconds)"
+    remainingTime = Double(cfgTimerSeconds)
+    
+    timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
+      if remainingTime > 0 {
+        withAnimation {
+          remainingTime = max(remainingTime - 0.1, 0)
+        }
+      } else {
+        invalidateTimer()
+        
+        performActionAfterCountdown()
+      }
+    }
+  }
+  
+  private func invalidateTimer() {
+    timer?.invalidate()
+    // timerProgress = 0
+    // timerText = "-"
+    remainingTime = 0
+    withAnimation {
+      timerActive = false
+    }
+  }
+
+  private func performActionAfterCountdown() {
+    // 5초 후 실행할 작업
+    // print("카운트다운 완료, 작업 실행!")
+    showAnswerAlert = true
+    setWrong()
   }
 }
 
