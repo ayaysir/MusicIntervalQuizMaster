@@ -28,6 +28,9 @@ struct SettingView: View {
   
   @StateObject var viewModel = SettingViewModel()
   
+  @State private var showAlert = false
+  private let alert17 = AlertAppleMusic17View(title: "그룹에서 한 개 이상 선택", subtitle: "해당 그룹 중 한 개 이상 옵션은 반드시 선택되어야 합니다.", icon: .custom(UIImage(systemName: "exclamationmark.triangle.fill")!))
+  
   var body: some View {
     NavigationStack {
       Form {
@@ -64,9 +67,9 @@ struct SettingView: View {
         }
 
         Section {
-          Toggle("동시", isOn: $cfgNotesAscending)
-          Toggle("상행", isOn: $cfgNotesDescending)
-          Toggle("하행", isOn: $cfgNotesSimultaneously)
+          Toggle("상행", isOn: $cfgNotesAscending)
+          Toggle("하행", isOn: $cfgNotesDescending)
+          Toggle("동시", isOn: $cfgNotesSimultaneously)
         } header: {
           Text("음표 제시 방법")
         }
@@ -105,6 +108,7 @@ struct SettingView: View {
           Text("출제 대상 음자리표")
         }
         
+        
         Section {
           Toggle("♯ (Sharp)", isOn: $cfgAccidentalSharp)
           Toggle("♭ (Flat)", isOn: $cfgAccidentalFlat)
@@ -116,6 +120,44 @@ struct SettingView: View {
       }
       .navigationTitle("Settings")
       .navigationBarTitleDisplayMode(.inline)
+      .onChange(of: toggleStatesOfClefs) { _ in
+        ensureAtLeastOneToggle(group: .clefs)
+      }
+      .onChange(of: toggleStatesOfDirections) { _ in
+        ensureAtLeastOneToggle(group: .directions)
+      }
+      .alert("해당 섹션에서 반드시 한 개 이상 옵션이 선택되어야 합니다.", isPresented: $showAlert) {
+        
+      }
+    }
+  }
+}
+
+fileprivate enum SettingGroup {
+  case directions, clefs
+}
+
+extension SettingView {
+  private var toggleStatesOfDirections: [Bool] {
+    [cfgNotesAscending, cfgNotesDescending, cfgNotesSimultaneously]
+  }
+  
+  private var toggleStatesOfClefs: [Bool] {
+    [cfgClefAlto, cfgClefBass, cfgClefTreble]
+  }
+  
+  private func ensureAtLeastOneToggle(group: SettingGroup) {
+    switch group {
+    case .directions:
+      if toggleStatesOfDirections.allSatisfy({ !$0 }) {
+        showAlert = true
+        cfgNotesAscending = true
+      }
+    case .clefs:
+      if toggleStatesOfClefs.allSatisfy({ !$0 }) {
+        showAlert = true
+        cfgClefTreble = true
+      }
     }
   }
 }
