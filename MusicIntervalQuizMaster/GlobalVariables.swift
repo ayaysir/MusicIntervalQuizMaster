@@ -11,6 +11,10 @@ import Foundation
 
 let store = UserDefaults.standard
 
+// MARK: - Global Constants
+
+let ALERT_PRESENT_TIME = 1
+
 // MARK: - Typealiases
 
 typealias StringBoolDict = [String : Bool]
@@ -43,6 +47,10 @@ extension String {
   
   static let cfgIntervalFilterCompound = "Config_IntervalFilter_Compound"
   static let cfgIntervalFilterDoublyTritone = "Config_IntervalFilter_DoublyTritone"
+  
+  static let cfgTimerSeconds = "Config_Timer_Seconds"
+  
+  static let cfgAppAutoNextMove = "Config_App_AutoNextMove"
 }
 
 // MARK: - Initial config values

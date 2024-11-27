@@ -105,6 +105,7 @@
 		44D6F2F92CF60F1500B91BBA /* AlertKitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2E92CF60F1500B91BBA /* AlertKitAPI.swift */; };
 		44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2EA2CF60F1500B91BBA /* AlertViewStyle.swift */; };
 		44D6F2FC2CF611CC00B91BBA /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2FB2CF611CC00B91BBA /* CustomAlertView.swift */; };
+		44D6F2FE2CF6EFA200B91BBA /* AppSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,6 +219,7 @@
 		44D6F2E92CF60F1500B91BBA /* AlertKitAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertKitAPI.swift; sourceTree = "<group>"; };
 		44D6F2EA2CF60F1500B91BBA /* AlertViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewStyle.swift; sourceTree = "<group>"; };
 		44D6F2FB2CF611CC00B91BBA /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +268,7 @@
 				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
 				440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */,
 				4469E8D92CEB92DE00CC506C /* SettingView.swift */,
+				44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */,
 				44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */,
 			);
 			path = View;
@@ -712,6 +715,7 @@
 				440BE63D2CE7994000B01C1B /* QuizViewModel.swift in Sources */,
 				44D6F26A2CF2392900B91BBA /* EmbossedButtonStyle.swift in Sources */,
 				4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */,
+				44D6F2FE2CF6EFA200B91BBA /* AppSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,26 +7,6 @@
 
 import SwiftUI
 
-struct AppSettingView: View {
-  @AppStorage(.cfgHapticPressedIntervalKeyboard) var cfgHapicPressed = true
-  @AppStorage(.cfgHapticAnswer) var cfgHapicAnswer = true
-  @AppStorage(.cfgHapticWrong) var cfgHapicWrong = true
-  
-  var body: some View {
-    NavigationStack {
-      Form {
-        Section {
-          Toggle("음정 키보드를 누를 때", isOn: $cfgHapicPressed)
-          Toggle("정답일 때", isOn: $cfgHapicAnswer)
-          Toggle("오답일 때", isOn: $cfgHapicWrong)
-        } header: {
-          Text("햅틱")
-        }
-      }
-    }
-  }
-}
-
 struct SettingView: View {
   @AppStorage(.cfgNotesAscending) var cfgNotesAscending = true
   @AppStorage(.cfgNotesDescending) var cfgNotesDescending = true
@@ -41,6 +21,11 @@ struct SettingView: View {
   @AppStorage(.cfgAccidentalDoubleSharp) var cfgAccidentalDoubleSharp = false
   @AppStorage(.cfgAccidentalDoubleFlat) var cfgAccidentalDoubleFlat = false
   
+  @AppStorage(.cfgIntervalFilterCompound) var cfgIntervalFilterCompound = false
+  @AppStorage(.cfgIntervalFilterDoublyTritone) var cfgIntervalFilterDoublyTritone = false
+  
+  @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
+  
   @StateObject var viewModel = SettingViewModel()
   
   var body: some View {
@@ -53,14 +38,29 @@ struct SettingView: View {
         }
         
         Section {
+          Stepper(value: $cfgTimerSeconds, in: 0...60, step: 1) {
+            HStack {
+              Text("문제풀이 타이머")
+              Spacer()
+              Text(cfgTimerSeconds == 0 ? "제한없음" : "\(1)초")
+                .foregroundColor(.gray)
+            }
+          }
+        }
+        
+        Section {
+          Toggle("복합 음정 (9도 이상)", isOn: $cfgIntervalFilterCompound)
+          Toggle("겹증/겹감", isOn: $cfgIntervalFilterDoublyTritone)
           NavigationLink {
             IntervalTypeSelectSettingView()
               .environmentObject(viewModel)
           } label: {
-            Text("선택하기 (\(viewModel.intervalStatesTurnOnCount)/\(viewModel.totalIntervalStatesCount))")
+            Text("음정 자세하게 선택하기 (\(viewModel.intervalStatesTurnOnCount)/\(viewModel.totalIntervalStatesCount))")
           }
         } header: {
-          Text("출제 대상 음정 종류 선택")
+          Text("심화 내용의 문제 포함 여부")
+        } footer: {
+          Text("복합 음정, 겹증/겹감을 문제에 포함시키려면 On 하세요. 세부 설정보다 우선합니다.")
         }
 
         Section {

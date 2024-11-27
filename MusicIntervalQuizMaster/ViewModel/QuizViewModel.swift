@@ -11,6 +11,25 @@ import Tonic
 final class QuizViewModel: ObservableObject {
   private(set) var pairs: [IntervalPair] = []
   @Published private(set) var currentPairCount = 0
+  @Published var currentSessionDict: [Int : Bool] = [:]
+  
+  var answerCount: Int {
+    currentSessionDict.filter { $0.value }.count
+  }
+  
+  var wrongCount: Int {
+    currentSessionDict.count - answerCount
+  }
+  
+  func appendAnswerCount(isCorrect: Bool) {
+    if isCorrect {
+      if currentSessionDict[currentPairCount] == nil {
+        currentSessionDict[currentPairCount] = true
+      }
+    } else {
+      currentSessionDict[currentPairCount] = false
+    }
+  }
   
   var currentPair: IntervalPair {
     pairs[currentPairCount]

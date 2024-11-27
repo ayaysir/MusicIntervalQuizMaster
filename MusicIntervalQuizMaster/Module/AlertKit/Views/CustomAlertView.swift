@@ -5,7 +5,7 @@ public class CustomAlertView: UIView, AlertViewProtocol {
   
   open var dismissByTap: Bool = true
   open var dismissInTime: Bool = true
-  open var duration: TimeInterval = 1.5
+  open var duration: TimeInterval = 1
   open var haptic: AlertHaptic? = nil
   
   public let titleLabel: UILabel?

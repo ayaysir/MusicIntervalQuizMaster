@@ -16,6 +16,7 @@ struct QuizView: View {
   @State private var workItem: DispatchWorkItem?
   @State private var isMusiqwikViewPressed = false
   @State private var showAnswerAlert = false
+  @State private var animateAlertDismiss = false
   @State private var offsetX: CGFloat = 0
   
   enum CurrentAnswerMode {
@@ -61,6 +62,20 @@ struct QuizView: View {
       Spacer()
       
       HStack {
+        VStack(alignment: .leading) {
+          Text("Current Session:")
+            .font(.system(size: 14))
+            .bold()
+          Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)")
+            .font(.system(size: 12))
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .frame(width: 135, alignment: .leading)
+        .background(.gray.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 5))
+        
+        
         Spacer()
         Button {
           cfgQuizSoundAutoplay.toggle()
@@ -137,22 +152,22 @@ struct QuizView: View {
           .clipShape(RoundedRectangle(cornerRadius: 10))
           .padding(.horizontal, 10)
           .opacity(currentAnswerMode == .inQuiz ? 0 : 1)
-          .animation(.easeInOut(duration: 0.3), value: currentAnswerMode)
+          .animation(.easeInOut, value: currentAnswerMode)
         
-          Button {
-            viewModel.prev()
-            prevAnimation()
-            comebackAndToggleButtonImage()
-          } label: {
-            Text("<")
-          }
-          Button {
-            viewModel.next()
-            nextAnimation(afterOffsetX: -350)
-            comebackAndToggleButtonImage()
-          } label: {
-            Text(">")
-          }
+          // Button {
+          //   viewModel.prev()
+          //   prevAnimation()
+          //   comebackAndToggleButtonImage()
+          // } label: {
+          //   Text("<")
+          // }
+          // Button {
+          //   viewModel.next()
+          //   nextAnimation(afterOffsetX: -350)
+          //   comebackAndToggleButtonImage()
+          // } label: {
+          //   Text(">")
+          // }
       }
   
       Group {
@@ -169,9 +184,29 @@ struct QuizView: View {
         }
         
         IntervalTouchKeyboardView {
-          pressEnterButton()
+          withAnimation {
+            pressEnterButton()
+          }
         }
         .environmentObject(keyboardViewModel)
+        .disabled(showAnswerAlert)
+        .foregroundColor(animateAlertDismiss ? .gray : nil)
+        .contrast(animateAlertDismiss ? 0.9 : 1)
+        // .foregroundStyle(showAnswerAlert ? .gray : nil)
+        .onChange(of: showAnswerAlert) { newValue in
+          if newValue {
+            withAnimation {
+              animateAlertDismiss = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1400)) {
+              withAnimation {
+                showAnswerAlert = false
+                animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
+              }
+            }
+          }
+        }
       }
       .padding(.horizontal, 10)
       .padding(.bottom, 10)
@@ -228,23 +263,48 @@ struct QuizView: View {
   }
   
   private func checkAnswer() {
+    guard keyboardViewModel.intervalNumber != 0 else {
+      HapticMananger.warning.vibrate()
+      return
+    }
+    
     showAnswerAlert = true
+    
     if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
       if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
         // 정답인 경우
         currentAnswerMode = .correct
         keyboardViewModel.enterButtonMode = .viewAnswer
+        
+        viewModel.appendAnswerCount(isCorrect: true)
+        
         if store.bool(forKey: .cfgHapticAnswer) {
           HapticMananger.success.vibrate()
+        }
+        
+        if store.bool(forKey: .cfgAppAutoNextMove) {
+          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1301)) {
+            showAnswerAlert = false
+            goNextQuestion()
+          }
         }
       } else {
         // 오답인 경우
         currentAnswerMode = .wrong
+        viewModel.appendAnswerCount(isCorrect: false)
+        
         if store.bool(forKey: .cfgHapticWrong) {
           HapticMananger.warning.vibrate()
         }
       }
     }
+  }
+  
+  private func goNextQuestion() {
+    viewModel.next()
+    nextAnimation(afterOffsetX: -350)
+    comebackAndToggleButtonImage()
+    keyboardViewModel.intervalNumber = 0
   }
   
   private func pressEnterButton() {
@@ -253,10 +313,7 @@ struct QuizView: View {
       checkAnswer()
     } else {
       if currentAnswerMode == .correct {
-        viewModel.next()
-        nextAnimation(afterOffsetX: -350)
-        comebackAndToggleButtonImage()
-        keyboardViewModel.intervalNumber = 0
+        goNextQuestion()
       } else {
         playSounds()
         checkAnswer()
