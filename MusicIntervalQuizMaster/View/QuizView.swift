@@ -385,6 +385,7 @@ struct QuizView: View {
   private func performActionAfterCountdown() {
     // 5초 후 실행할 작업
     // print("카운트다운 완료, 작업 실행!")
+    playSounds()
     showAnswerAlert = true
     setWrong()
   }
