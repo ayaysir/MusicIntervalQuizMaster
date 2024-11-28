@@ -23,12 +23,16 @@
 		4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D72CEB920600CC506C /* MainTabBarView.swift */; };
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
 		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
+		448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E12CF873D3006D81BD /* TutorialGuideView.swift */; };
+		448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E32CF874EA006D81BD /* LicenseView.swift */; };
+		448C64EB2CF883F0006D81BD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64EA2CF883F0006D81BD /* ChartView.swift */; };
+		448C64ED2CF88623006D81BD /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64EC2CF88623006D81BD /* StatsView.swift */; };
+		448C64EE2CF88785006D81BD /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* QuizView.swift */; };
 		44B4B8E92CEB9D7400D344B6 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 44B4B8E82CEB9D7400D344B6 /* Tonic */; };
 		44B4B8EC2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */; };
 		44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */; };
 		44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */; };
 		44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF22C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift */; };
-		44C4CEF52C8C47A80092C452 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* QuizView.swift */; };
 		44C4CEF72C8C47A90092C452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C4CEF62C8C47A90092C452 /* Assets.xcassets */; };
 		44C4CEFA2C8C47A90092C452 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44C4CEF92C8C47A90092C452 /* Preview Assets.xcassets */; };
 		44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F1ED2CECB34D00B91BBA /* SettingViewModel.swift */; };
@@ -138,6 +142,10 @@
 		4469E8D72CEB920600CC506C /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
+		448C64E12CF873D3006D81BD /* TutorialGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialGuideView.swift; sourceTree = "<group>"; };
+		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		448C64EA2CF883F0006D81BD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		448C64EC2CF88623006D81BD /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeSelectSettingView.swift; sourceTree = "<group>"; };
 		44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -267,18 +275,15 @@
 		440BE64F2CEA28F800B01C1B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				448C64E92CF883D7006D81BD /* Stats */,
+				448C64E82CF883BE006D81BD /* MoreInfo */,
+				448C64E72CF883B2006D81BD /* Setting */,
+				448C64E62CF8839A006D81BD /* Common */,
+				448C64E52CF8837E006D81BD /* Quiz */,
 				44D6F3012CF72A0D00B91BBA /* Component */,
 				44D6F2682CF2390F00B91BBA /* Style */,
 				44C4CF052C8C617C0092C452 /* Representable */,
-				44D6F3022CF7388E00B91BBA /* TimerView.swift */,
 				4469E8D72CEB920600CC506C /* MainTabBarView.swift */,
-				44C4CEF42C8C47A80092C452 /* QuizView.swift */,
-				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
-				440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */,
-				4469E8D92CEB92DE00CC506C /* SettingView.swift */,
-				44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */,
-				44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */,
-				448C64DF2CF86122006D81BD /* MoreInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -310,6 +315,53 @@
 				44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		448C64E52CF8837E006D81BD /* Quiz */ = {
+			isa = PBXGroup;
+			children = (
+				44C4CEF42C8C47A80092C452 /* QuizView.swift */,
+			);
+			path = Quiz;
+			sourceTree = "<group>";
+		};
+		448C64E62CF8839A006D81BD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				44D6F3022CF7388E00B91BBA /* TimerView.swift */,
+				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
+				440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		448C64E72CF883B2006D81BD /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				4469E8D92CEB92DE00CC506C /* SettingView.swift */,
+				44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */,
+				44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		448C64E82CF883BE006D81BD /* MoreInfo */ = {
+			isa = PBXGroup;
+			children = (
+				448C64DF2CF86122006D81BD /* MoreInfoView.swift */,
+				448C64E12CF873D3006D81BD /* TutorialGuideView.swift */,
+				448C64E32CF874EA006D81BD /* LicenseView.swift */,
+			);
+			path = MoreInfo;
+			sourceTree = "<group>";
+		};
+		448C64E92CF883D7006D81BD /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				448C64EA2CF883F0006D81BD /* ChartView.swift */,
+				448C64EC2CF88623006D81BD /* StatsView.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		44C4CEE62C8C47A80092C452 = {
@@ -692,7 +744,6 @@
 			files = (
 				44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
-				44C4CEF52C8C47A80092C452 /* QuizView.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
 				44D6F2F52CF60F1500B91BBA /* AlertViewInternalDismissProtocol.swift in Sources */,
 				44B4B8EC2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift in Sources */,
@@ -700,10 +751,13 @@
 				440BE6422CE799B500B01C1B /* IntervalPair.swift in Sources */,
 				4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */,
 				440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */,
+				448C64EB2CF883F0006D81BD /* ChartView.swift in Sources */,
+				448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */,
 				4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
 				44D6F2D72CF5E4CF00B91BBA /* HapticMananger.swift in Sources */,
+				448C64ED2CF88623006D81BD /* StatsView.swift in Sources */,
 				44D6F2ED2CF60F1500B91BBA /* UIFontExtension.swift in Sources */,
 				44D6F2F92CF60F1500B91BBA /* AlertKitAPI.swift in Sources */,
 				44D6F2F62CF60F1500B91BBA /* AlertViewProtocol.swift in Sources */,
@@ -715,6 +769,8 @@
 				4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */,
 				44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */,
 				44D6F1FF2CEF78A200B91BBA /* Tonic.Letter+.swift in Sources */,
+				448C64EE2CF88785006D81BD /* QuizView.swift in Sources */,
+				448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */,
 				44D6F2EE2CF60F1500B91BBA /* UILabelExtension.swift in Sources */,
 				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,
 				44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */,

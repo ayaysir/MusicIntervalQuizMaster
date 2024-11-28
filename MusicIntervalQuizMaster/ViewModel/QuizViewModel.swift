@@ -11,6 +11,7 @@ import Tonic
 final class QuizViewModel: ObservableObject {
   private(set) var pairs: [IntervalPair] = []
   @Published private(set) var currentPairCount = 0
+  @Published private(set) var lastMaxPairCount = 0
   @Published var currentSessionDict: [Int : Bool] = [:]
   
   init() {
@@ -63,6 +64,10 @@ final class QuizViewModel: ObservableObject {
     }
   }
   
+  var isNextQuestionAlreadyAppeared: Bool {
+    currentPairCount + 1 <= lastMaxPairCount
+  }
+  
   var currentPair: IntervalPair {
     pairs[currentPairCount]
   }
@@ -73,6 +78,8 @@ final class QuizViewModel: ObservableObject {
     }
     
     currentPairCount += 1
+    
+    lastMaxPairCount = max(lastMaxPairCount, currentPairCount)
   }
   
   func prev() {

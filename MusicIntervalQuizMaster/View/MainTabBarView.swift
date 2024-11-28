@@ -14,7 +14,7 @@ struct MainTabBarView: View {
         .tabItem {
           Label("Quiz", systemImage: "greetingcard")
         }
-      Text("StatsView")
+      StatsView()
         .tabItem {
           Label("Statistics", systemImage: "chart.bar.xaxis")
         }

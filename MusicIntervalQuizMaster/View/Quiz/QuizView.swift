@@ -129,6 +129,7 @@ struct QuizView: View {
         .onDisappear {
           invalidateTimer()
           setWrong()
+          stopSounds()
         }
         .onChange(of: viewModel.currentPair) { _ in
           if cfgQuizSoundAutoplay {
@@ -157,12 +158,16 @@ struct QuizView: View {
               if value.translation.width > 50 {
                 viewModel.prev()
                 prevAnimation()
+                comebackAndToggleButtonImage()
               } else if value.translation.width < -50 {
-                viewModel.next()
-                nextAnimation()
+                if viewModel.isNextQuestionAlreadyAppeared || (currentAnswerMode == .correct && viewModel.currentPairCount == viewModel.lastMaxPairCount) {
+                  viewModel.next()
+                  nextAnimation()
+                  comebackAndToggleButtonImage()
+                } else {
+                  comebackAnimation()
+                }
               }
-              
-              comebackAndToggleButtonImage()
             }
         )
       
@@ -264,13 +269,18 @@ struct QuizView: View {
     )
   }
   
-  private func playSounds() {
+  private func stopSounds() {
     SoundManager.shared.stopAllSounds()
     SoundManager.shared.cleanupFinishedPlayers()
     
     if let workItem {
       workItem.cancel()
     }
+    
+  }
+  
+  private func playSounds() {
+    stopSounds()
     
     workItem = .init {
       viewModel.currentPair.endNote.playSound()
