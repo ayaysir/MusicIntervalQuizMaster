@@ -125,6 +125,9 @@ struct QuizView: View {
             startCountdown()
           }
           
+          // record step 1
+          if viewModel.currentSessionDict[viewModel.currentPairCount] == nil {
+          }
         }
         .onDisappear {
           invalidateTimer()
@@ -193,21 +196,6 @@ struct QuizView: View {
           .padding(.horizontal, 10)
           .opacity(currentAnswerMode == .inQuiz ? 0 : 1)
           .animation(.easeInOut, value: currentAnswerMode)
-        
-          // Button {
-          //   viewModel.prev()
-          //   prevAnimation()
-          //   comebackAndToggleButtonImage()
-          // } label: {
-          //   Text("<")
-          // }
-          // Button {
-          //   viewModel.next()
-          //   nextAnimation(afterOffsetX: -350)
-          //   comebackAndToggleButtonImage()
-          // } label: {
-          //   Text(">")
-          // }
       }
   
       Group {
@@ -268,7 +256,9 @@ struct QuizView: View {
       icon: currentAnswerMode == .correct ? .done : .error
     )
   }
-  
+}
+
+extension QuizView {
   private func stopSounds() {
     SoundManager.shared.stopAllSounds()
     SoundManager.shared.cleanupFinishedPlayers()
@@ -276,7 +266,6 @@ struct QuizView: View {
     if let workItem {
       workItem.cancel()
     }
-    
   }
   
   private func playSounds() {

@@ -9,4 +9,15 @@ import Foundation
 
 enum IntervalPairCategory {
   case ascending, descending, simultaneously
+  
+  var dataDescription: String {
+    switch self {
+    case .ascending:
+      "asc"
+    case .descending:
+      "dsc"
+    case .simultaneously:
+      "sml"
+    }
+  }
 }

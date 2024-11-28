@@ -22,6 +22,9 @@
 		4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D52CEA374800CC506C /* Tonic.Note+.swift */; };
 		4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D72CEB920600CC506C /* MainTabBarView.swift */; };
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
+		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
+		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
+		448A3D492CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */; };
 		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
 		448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E12CF873D3006D81BD /* TutorialGuideView.swift */; };
 		448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E32CF874EA006D81BD /* LicenseView.swift */; };
@@ -141,6 +144,9 @@
 		4469E8D52CEA374800CC506C /* Tonic.Note+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Note+.swift"; sourceTree = "<group>"; };
 		4469E8D72CEB920600CC506C /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
+		448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityCreateHelper.swift; sourceTree = "<group>"; };
 		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		448C64E12CF873D3006D81BD /* TutorialGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialGuideView.swift; sourceTree = "<group>"; };
 		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -317,6 +323,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		448A3D402CF8B0BE00D0D758 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				448A3D412CF8B0CC00D0D758 /* Persistence.swift */,
+				448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		448C64E52CF8837E006D81BD /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				44D6F2D82CF60F0700B91BBA /* Module */,
+				448A3D402CF8B0BE00D0D758 /* CoreData */,
 				44D6F2CF2CF4CB7600B91BBA /* Helper */,
 				44D6F2652CF2324500B91BBA /* Manager */,
 				4469E8D42CEA373F00CC506C /* Extension */,
@@ -401,6 +417,7 @@
 				44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */,
 				44C4CEF62C8C47A90092C452 /* Assets.xcassets */,
 				44C4CEF82C8C47A90092C452 /* Preview Content */,
+				448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */,
 			);
 			path = MusicIntervalQuizMaster;
 			sourceTree = "<group>";
@@ -763,8 +780,10 @@
 				44D6F2F62CF60F1500B91BBA /* AlertViewProtocol.swift in Sources */,
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
+				448A3D492CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift in Sources */,
 				44D6F2F82CF60F1500B91BBA /* AlertIcon.swift in Sources */,
 				44D6F2F42CF60F1500B91BBA /* AlertAppleMusic17View.swift in Sources */,
+				448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */,
 				448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */,
 				4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */,
 				44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */,
@@ -778,6 +797,7 @@
 				44D6F2EC2CF60F1500B91BBA /* SwiftUIExtension.swift in Sources */,
 				44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */,
 				44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */,
+				448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */,
 				44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */,
 				4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */,
 				44D6F2F72CF60F1500B91BBA /* AlertHaptic.swift in Sources */,
@@ -1098,6 +1118,20 @@
 			productName = Tonic;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */,
+			);
+			currentVersion = 448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */;
+			name = MusicIntervalQuizMaster.xcdatamodeld;
+			path = "/Users/yoonbumtae/Desktop/Xcode Project/MusicIntervalQuizMaster/MusicIntervalQuizMaster/MusicIntervalQuizMaster.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 44C4CEE72C8C47A80092C452 /* Project object */;
 }

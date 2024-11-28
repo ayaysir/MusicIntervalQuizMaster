@@ -33,6 +33,17 @@ enum Clef: HasMusiqwikText, CaseIterable {
     }
   }
   
+  var dataDescription: String {
+    switch self {
+    case .treble:
+      "treble"
+    case .bass:
+      "bass"
+    case .alto:
+      "alto"
+    }
+  }
+  
   var musiqwikBaseScalar: Int {
     // 반드시 Unicode Scalar 112 ~ 126 사이에 위치
     // treble: 86 + (octave * 7)
