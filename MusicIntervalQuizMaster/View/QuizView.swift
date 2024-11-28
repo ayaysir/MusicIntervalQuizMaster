@@ -64,35 +64,40 @@ struct QuizView: View {
     }
   }
   
+  private var currentSessionButton: some View {
+    Menu {
+      Button("새로운 세션 시작") {
+        viewModel.preparePairData()
+      }
+      Text("현재 기록을 초기화하고 새로운 세션을 시작합니다.")
+        .font(.caption2)
+    } label: {
+      VStack(alignment: .leading) {
+        Text("Current Session:")
+          .font(.system(size: 14))
+          .bold()
+        Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)")
+          .font(.system(size: 12))
+      }
+      .foregroundStyle(.foreground)
+      .padding(.horizontal, 8)
+      .padding(.vertical, 4)
+      .frame(width: 135, alignment: .leading)
+      .background(.gray.opacity(0.2))
+      .clipShape(RoundedRectangle(cornerRadius: 5))
+    }
+  }
+  
   var body: some View {
     VStack {
       Spacer()
       
       HStack {
-        VStack(alignment: .leading) {
-          Text("Current Session:")
-            .font(.system(size: 14))
-            .bold()
-          Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)")
-            .font(.system(size: 12))
-        }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .frame(width: 135, alignment: .leading)
-        .background(.gray.opacity(0.2))
-        .clipShape(RoundedRectangle(cornerRadius: 5))
+        currentSessionButton
         
         Spacer()
         
         if cfgTimerSeconds != 0 {
-          // CircularProgressBar(progress: $timerProgress, text: $timerText)
-          //   .frame(width: 40)
-          //   .padding()
-          //   .onChange(of: remainingTime) { newValue in
-          //     timerText = String(format: "%0.f", ceil(remainingTime))
-          //     timerProgress = Double(remainingTime) / Double(cfgTimerSeconds)
-          //   }
-          
           TimerView(remainingTime: $remainingTime, totalDuration: Double(cfgTimerSeconds))
           
           Spacer()
@@ -339,13 +344,13 @@ struct QuizView: View {
   
   private func pressEnterButton() {
     if keyboardViewModel.enterButtonMode == .inQuiz {
-      playSounds()
+      // playSounds()
       checkAnswer()
     } else {
       if currentAnswerMode == .correct {
         goNextQuestion()
       } else {
-        playSounds()
+        // playSounds()
         checkAnswer()
       }
     }
@@ -385,7 +390,7 @@ struct QuizView: View {
   private func performActionAfterCountdown() {
     // 5초 후 실행할 작업
     // print("카운트다운 완료, 작업 실행!")
-    playSounds()
+    // playSounds()
     showAnswerAlert = true
     setWrong()
   }

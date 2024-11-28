@@ -13,6 +13,38 @@ final class QuizViewModel: ObservableObject {
   @Published private(set) var currentPairCount = 0
   @Published var currentSessionDict: [Int : Bool] = [:]
   
+  init() {
+    if !store.bool(forKey: .checkInitConfigCompleted) {
+      MusicIntervalQuizMasterApp.initConfigValues()
+    }
+    
+    preparePairData()
+  }
+  
+  func preparePairData() {
+    pairs = []
+    currentPairCount = 0
+    currentSessionDict = [:]
+    
+    let availableIntervalList = if !availableIntervalList.isEmpty {
+      availableIntervalList
+    } else {
+      [
+        AdvancedInterval(modifier: .perfect, number: 5)
+      ]
+    }
+    
+    print(availableIntervalList)
+    
+    while pairs.count <= 1000 {
+      if let pair = generateRandomIntervalPair(),
+         let interval = pair.advancedInterval,
+         availableIntervalList.contains(interval) {
+        pairs.append(pair)
+      }
+    }
+  }
+  
   var answerCount: Int {
     currentSessionDict.filter { $0.value }.count
   }
@@ -33,23 +65,6 @@ final class QuizViewModel: ObservableObject {
   
   var currentPair: IntervalPair {
     pairs[currentPairCount]
-  }
-  
-  init() {
-    if !store.bool(forKey: .checkInitConfigCompleted) {
-      MusicIntervalQuizMasterApp.initConfigValues()
-    }
-    
-    let availableIntervalList = availableIntervalList
-    print(availableIntervalList)
-    
-    while pairs.count <= 300 {
-      if let pair = generateRandomIntervalPair(),
-         let interval = pair.advancedInterval,
-         availableIntervalList.contains(interval) {
-        pairs.append(pair)
-      }
-    }
   }
   
   func next() {

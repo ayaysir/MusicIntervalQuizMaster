@@ -16,8 +16,6 @@ struct IntervalTypeSelectSettingView: View {
   
   var body: some View {
     Form {
-      
-      
       ForEach(1...13, id: \.self) { currentDegree in
         Section {
           ForEach(IntervalModifier.availableModifierList(of: currentDegree), id: \.self) { modifier in
