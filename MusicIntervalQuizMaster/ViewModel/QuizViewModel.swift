@@ -54,9 +54,13 @@ final class QuizViewModel: ObservableObject {
     currentSessionDict.count - answerCount
   }
   
+  var currentPairIsNotSolved: Bool {
+    currentSessionDict[currentPairCount] == nil
+  }
+  
   func appendAnswerCount(isCorrect: Bool) {
     if isCorrect {
-      if currentSessionDict[currentPairCount] == nil {
+      if currentPairIsNotSolved {
         currentSessionDict[currentPairCount] = true
       }
     } else {

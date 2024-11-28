@@ -8,12 +8,21 @@
 import SwiftUI
 
 struct MoreInfoView: View {
+  var recordHelper = QuestionRecordEntityCreateHelper()
+  
   var body: some View {
     NavigationStack {
       Form {
         Section("도움말") {
           NavigationLink("튜토리얼 가이드") {
             TutorialGuideView()
+          }
+        }
+        
+        Section("데이터") {
+          NavigationLink("CSV 다운로드") {
+            Text("\(recordHelper.read())")
+              .font(.system(size: 7))
           }
         }
         
@@ -40,5 +49,5 @@ struct MoreInfoView: View {
 }
 
 #Preview {
-  MoreInfoView()
+  MoreInfoView(recordHelper: .init(isForPreview: true))
 }

@@ -3,15 +3,15 @@
     <entity name="QuestionRecordEntity" representedClassName="QuestionRecordEntity" syncable="YES" codeGenerationType="class">
         <attribute name="clef" optional="YES" attributeType="String"/>
         <attribute name="direction" optional="YES" attributeType="String"/>
-        <attribute name="endNoteLetterAbbr" optional="YES" attributeType="String"/>
-        <attribute name="endNoteNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endNoteLetter" optional="YES" attributeType="String"/>
+        <attribute name="endNoteOctave" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="finalAnswerTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstTryTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="isCorrect" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="myIntervalLetterAbbr" optional="YES" attributeType="String"/>
+        <attribute name="myIntervalModifier" optional="YES" attributeType="String"/>
         <attribute name="myIntervalNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="startNoteLetterAbbr" optional="YES" attributeType="String"/>
-        <attribute name="startNoteNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startNoteLetter" optional="YES" attributeType="String"/>
+        <attribute name="startNoteOctave" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="timerLimit" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="tryCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

@@ -24,10 +24,14 @@ struct QuizView: View {
   @State private var timerActive: Bool = true
   @State private var timer: Timer?
   
+  var recordHelper = QuestionRecordEntityCreateHelper()
+  
   enum CurrentAnswerMode {
     case inQuiz, correct, wrong
   }
   @State private var currentAnswerMode: CurrentAnswerMode = .inQuiz
+  @State private var currentTryCount: Int = 0
+  @State private var isReachedFirstAnswer = false
   
   private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
     Text(text == "0" ? "-" : text)
@@ -123,10 +127,8 @@ struct QuizView: View {
           if currentAnswerMode == .inQuiz {
             invalidateTimer()
             startCountdown()
-          }
-          
-          // record step 1
-          if viewModel.currentSessionDict[viewModel.currentPairCount] == nil {
+            
+            recordStep1()
           }
         }
         .onDisappear {
@@ -141,6 +143,8 @@ struct QuizView: View {
           
           invalidateTimer()
           startCountdown()
+          
+          recordStep1()
         }
         .onTapGesture {
           isMusiqwikViewPressed = true
@@ -302,6 +306,8 @@ extension QuizView {
     invalidateTimer()
     showAnswerAlert = true
     
+    currentTryCount += 1
+    
     if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
       if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
         // 정답인 경우
@@ -309,6 +315,19 @@ extension QuizView {
         keyboardViewModel.enterButtonMode = .viewAnswer
         
         viewModel.appendAnswerCount(isCorrect: true)
+        
+        if !isReachedFirstAnswer {
+          if currentTryCount > 1,
+             currentAnswerMode == .correct {
+            // record step 3: 마지막 시도
+            recordHelper.create_step3_whenWrongFirstTryAndFinallyAnswered(
+              finalAnswerTime: .now,
+              tryCount: Int16(currentTryCount)
+            )
+          }
+          
+          isReachedFirstAnswer = true
+        }
         
         if store.bool(forKey: .cfgHapticAnswer) {
           HapticMananger.success.vibrate()
@@ -323,6 +342,16 @@ extension QuizView {
       } else {
         setWrong()
       }
+    }
+    
+    if currentTryCount == 1,
+       let myInterval = viewModel.currentPair.advancedInterval {
+      // record step 2: 최초 시도
+      recordHelper.create_step2_afterFirstTry(
+        firstTryTime: .now,
+        isCorrect: currentAnswerMode == .correct,
+        myInterval: myInterval
+      )
     }
   }
   
@@ -341,6 +370,8 @@ extension QuizView {
     nextAnimation(afterOffsetX: -350)
     comebackAndToggleButtonImage()
     keyboardViewModel.intervalNumber = 0
+    isReachedFirstAnswer = false
+    currentTryCount = 0
   }
   
   private func pressEnterButton() {
@@ -395,8 +426,24 @@ extension QuizView {
     showAnswerAlert = true
     setWrong()
   }
+  
+  private func recordStep1() {
+    guard viewModel.currentPairIsNotSolved else {
+      return
+    }
+    // record step 1: 시작할 때
+    let currentPair = viewModel.currentPair
+    
+    recordHelper.create_step1_afterOnAppear(
+      direction: currentPair.category,
+      clef: currentPair.clef,
+      startTime: .now,
+      startNote: currentPair.startNote,
+      endNote: currentPair.endNote
+    )
+  }
 }
 
 #Preview {
-  QuizView()
+  QuizView(recordHelper: .init(isForPreview: true))
 }
