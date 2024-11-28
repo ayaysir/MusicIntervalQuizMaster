@@ -22,7 +22,7 @@ struct MainTabBarView: View {
         .tabItem {
           Label("Settings", systemImage: "gearshape.fill")
         }
-      Text("Info & Learn")
+      MoreInfoView()
         .tabItem {
           Label("More Info", systemImage: "info.circle.fill")
         }

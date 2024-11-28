@@ -12,10 +12,24 @@ struct AppSettingView: View {
   @AppStorage(.cfgHapticAnswer) var cfgHapicAnswer = true
   @AppStorage(.cfgHapticWrong) var cfgHapicWrong = true
   @AppStorage(.cfgAppAutoNextMove) var cfgAppAutoNextMove = false
+  @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   
   var body: some View {
     NavigationStack {
       Form {
+        Section {
+          Stepper(value: $cfgTimerSeconds, in: 0...60, step: 5) {
+            HStack {
+              Text("문제풀이 타이머")
+              Spacer()
+              Text(cfgTimerSeconds == 0 ? "제한없음" : "\(cfgTimerSeconds)초")
+                .foregroundColor(.gray)
+            }
+          }
+        } header: {
+          Text("타이머")
+        }
+        
         Section {
           Toggle("음정 키보드를 누를 때", isOn: $cfgHapicPressed)
           Toggle("정답일 때", isOn: $cfgHapicAnswer)

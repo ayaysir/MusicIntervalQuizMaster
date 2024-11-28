@@ -22,6 +22,7 @@
 		4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D52CEA374800CC506C /* Tonic.Note+.swift */; };
 		4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D72CEB920600CC506C /* MainTabBarView.swift */; };
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
+		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
 		44B4B8E92CEB9D7400D344B6 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 44B4B8E82CEB9D7400D344B6 /* Tonic */; };
 		44B4B8EC2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */; };
 		44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */; };
@@ -136,6 +137,7 @@
 		4469E8D52CEA374800CC506C /* Tonic.Note+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Note+.swift"; sourceTree = "<group>"; };
 		4469E8D72CEB920600CC506C /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeSelectSettingView.swift; sourceTree = "<group>"; };
 		44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				4469E8D92CEB92DE00CC506C /* SettingView.swift */,
 				44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */,
 				44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */,
+				448C64DF2CF86122006D81BD /* MoreInfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
 				44D6F2F82CF60F1500B91BBA /* AlertIcon.swift in Sources */,
 				44D6F2F42CF60F1500B91BBA /* AlertAppleMusic17View.swift in Sources */,
+				448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */,
 				4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */,
 				44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */,
 				44D6F1FF2CEF78A200B91BBA /* Tonic.Letter+.swift in Sources */,

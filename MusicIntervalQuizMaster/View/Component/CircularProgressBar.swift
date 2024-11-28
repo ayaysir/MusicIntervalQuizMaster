@@ -31,10 +31,11 @@ struct CircularProgressBar: View {
       
       // 중앙 텍스트
       Text(text.isEmpty ? String(format: "%.0f", progress * 100) : text)
-        // .font(.largeTitle)
+        .font(.footnote)
         .bold()
         .foregroundColor(.blue)
     }
+    // .background(.gray.opacity(0.5))
     // .padding(20)
   }
 }

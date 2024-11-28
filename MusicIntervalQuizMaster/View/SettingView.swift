@@ -24,8 +24,6 @@ struct SettingView: View {
   @AppStorage(.cfgIntervalFilterCompound) var cfgIntervalFilterCompound = false
   @AppStorage(.cfgIntervalFilterDoublyTritone) var cfgIntervalFilterDoublyTritone = false
   
-  @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
-  
   @StateObject var viewModel = SettingViewModel()
   
   @State private var showAlert = false
@@ -38,17 +36,6 @@ struct SettingView: View {
           AppSettingView()
         } label: {
           Text("App 설정")
-        }
-        
-        Section {
-          Stepper(value: $cfgTimerSeconds, in: 0...60, step: 1) {
-            HStack {
-              Text("문제풀이 타이머")
-              Spacer()
-              Text(cfgTimerSeconds == 0 ? "제한없음" : "\(1)초")
-                .foregroundColor(.gray)
-            }
-          }
         }
         
         Section {
@@ -119,7 +106,7 @@ struct SettingView: View {
         }
       }
       .navigationTitle("Settings")
-      .navigationBarTitleDisplayMode(.inline)
+      // .navigationBarTitleDisplayMode(.inline)
       .onChange(of: toggleStatesOfClefs) { _ in
         ensureAtLeastOneToggle(group: .clefs)
       }

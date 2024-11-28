@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuizView: View {
   @AppStorage(.cfgQuizSoundAutoplay) var cfgQuizSoundAutoplay = true
-  @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 5
+  @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   
   @StateObject var viewModel = QuizViewModel()
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
@@ -21,8 +21,6 @@ struct QuizView: View {
   @State private var offsetX: CGFloat = 0
   
   @State private var remainingTime: Double = 5
-  // @State private var timerProgress: Double = 1
-  // @State private var timerText: String = ""
   @State private var timerActive: Bool = true
   @State private var timer: Timer?
   
@@ -35,7 +33,7 @@ struct QuizView: View {
     Text(text == "0" ? "-" : text)
       .padding()
       .font(.system(size: 25).bold())
-      .frame(height: 50, alignment: isLeading ? .leading : .trailing)
+      .frame(height: 40, alignment: isLeading ? .leading : .trailing)
       .frame(maxWidth: .infinity)
       .background(backgroundColor)
       .clipShape(RoundedRectangle(cornerRadius: 5))
@@ -97,21 +95,19 @@ struct QuizView: View {
         
         Spacer()
         
-        if cfgTimerSeconds != 0 {
-          TimerView(remainingTime: $remainingTime, totalDuration: Double(cfgTimerSeconds))
-          
-          Spacer()
-        }
+        TimerView(remainingTime: $remainingTime, totalDuration: Double(cfgTimerSeconds))
+        
+        Spacer()
         
         Button {
           cfgQuizSoundAutoplay.toggle()
         } label: {
-          Label("Auto Play \(cfgQuizSoundAutoplay ? "ON" : "OFF")", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
+          Label("Auto Sound", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
             .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
             .font(.system(size: 14))
         }
       }
-      .padding()
+      .padding(.horizontal, 10)
       
       MusiqwikView(pair: viewModel.currentPair)
         // .frame(maxWidth: .infinity)
@@ -124,8 +120,15 @@ struct QuizView: View {
             playSounds()
           }
           
+          if currentAnswerMode == .inQuiz {
+            invalidateTimer()
+            startCountdown()
+          }
+          
+        }
+        .onDisappear {
           invalidateTimer()
-          startCountdown()
+          setWrong()
         }
         .onChange(of: viewModel.currentPair) { _ in
           if cfgQuizSoundAutoplay {
@@ -168,20 +171,20 @@ struct QuizView: View {
       //   .font(.footnote)
       let answerText = switch currentAnswerMode {
       case .inQuiz:
-        "🤔"
+        ""
       case .correct:
         "✅ 맞았습니다. (\(viewModel.currentPair.advancedInterval?.description ?? ""))"
       case .wrong:
-        "❌ 틀렸습니다. 눌러서 힌트 보기"
+        "❌ 틀렸습니다. [눌러서 힌트 보기]"
       }
       
       HStack {
         Text("\(answerText)")
-          .font(.caption)
-          .frame(height: 30)
+          .font(.subheadline).bold()
+          .frame(height: 40)
           .frame(maxWidth: .infinity)
-          .background(.gray.opacity(0.3))
-          .clipShape(RoundedRectangle(cornerRadius: 10))
+          .background(.gray.opacity(0.2))
+          .clipShape(RoundedRectangle(cornerRadius: 5))
           .padding(.horizontal, 10)
           .opacity(currentAnswerMode == .inQuiz ? 0 : 1)
           .animation(.easeInOut, value: currentAnswerMode)
@@ -222,15 +225,14 @@ struct QuizView: View {
         .disabled(showAnswerAlert)
         .foregroundColor(animateAlertDismiss ? .gray : nil)
         .contrast(animateAlertDismiss ? 0.9 : 1)
-        // .foregroundStyle(showAnswerAlert ? .gray : nil)
         .onChange(of: showAnswerAlert) { newValue in
           if newValue {
-            withAnimation {
+            withAnimation(.easeInOut(duration: 0.2)) {
               animateAlertDismiss = true
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1400)) {
-              withAnimation {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1300)) {
+              withAnimation(.easeInOut(duration: 0.2)) {
                 showAnswerAlert = false
                 animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
               }

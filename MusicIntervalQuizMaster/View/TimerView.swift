@@ -13,10 +13,9 @@ struct TimerView: View {
 
   var body: some View {
     let progress = remainingTime / totalDuration
-    let timerText = String(format: "%0.f", ceil(remainingTime))
+    let timerText = String(format: totalDuration == .zero ? "∞" : "%0.f", ceil(remainingTime))
     
     CircularProgressBar(progress: .constant(progress), text: .constant(timerText))
       .frame(width: 40)
-      .padding()
   }
 }
