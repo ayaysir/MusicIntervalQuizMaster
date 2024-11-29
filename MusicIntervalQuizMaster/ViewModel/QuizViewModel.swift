@@ -10,9 +10,14 @@ import Tonic
 
 final class QuizViewModel: ObservableObject {
   private(set) var pairs: [IntervalPair] = []
+  
+  @Published var currentSessionDict: [Int : Bool] = [:]
+  
   @Published private(set) var currentPairCount = 0
   @Published private(set) var lastMaxPairCount = 0
-  @Published var currentSessionDict: [Int : Bool] = [:]
+  @Published var currentAnswerMode: QuizAnswerMode = .inQuiz
+  @Published var currentTryCount: Int = 0
+  @Published var isReachedFirstAnswer = false
   
   init() {
     if !store.bool(forKey: .checkInitConfigCompleted) {
@@ -56,6 +61,21 @@ final class QuizViewModel: ObservableObject {
   
   var currentPairIsNotSolved: Bool {
     currentSessionDict[currentPairCount] == nil
+  }
+  
+  var isCurrentPairCountEqualLastMax: Bool {
+    currentPairCount == lastMaxPairCount
+  }
+  
+  var answerText: String {
+    switch currentAnswerMode {
+    case .inQuiz:
+      ""
+    case .correct:
+      "✅ 맞았습니다. (\(currentPair.advancedInterval?.localizedDescription ?? ""); \(currentPair.startNote) - \(currentPair.endNote))"
+    case .wrong:
+      "❌ 틀렸습니다. 다시 한 번 풀어보세요."
+    }
   }
   
   func appendAnswerCount(isCorrect: Bool) {

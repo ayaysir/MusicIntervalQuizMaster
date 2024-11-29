@@ -27,6 +27,7 @@
 		448A3D492CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */; };
 		448A3D4B2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
+		448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */; };
 		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
 		448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E12CF873D3006D81BD /* TutorialGuideView.swift */; };
 		448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E32CF874EA006D81BD /* LicenseView.swift */; };
@@ -151,6 +152,7 @@
 		448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityCreateHelper.swift; sourceTree = "<group>"; };
 		448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityHelper.swift; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
+		448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAnswerMode.swift; sourceTree = "<group>"; };
 		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		448C64E12CF873D3006D81BD /* TutorialGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialGuideView.swift; sourceTree = "<group>"; };
 		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				4469E8CB2CEA298100CC506C /* IntervalModifier.swift */,
 				4469E8CD2CEA2D0D00CC506C /* Clef.swift */,
 				4469E8D22CEA327200CC506C /* IntervalPairCategory.swift */,
+				448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */,
 				44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */,
 				44D6F2EC2CF60F1500B91BBA /* SwiftUIExtension.swift in Sources */,
+				448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */,
 				44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */,
 				44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */,
 				448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */,

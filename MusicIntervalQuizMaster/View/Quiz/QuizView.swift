@@ -14,25 +14,196 @@ struct QuizView: View {
   @StateObject var viewModel = QuizViewModel()
   @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
-  @State private var workItem: DispatchWorkItem?
   @State private var isMusiqwikViewPressed = false
   @State private var showAnswerAlert = false
   @State private var animateAlertDismiss = false
   @State private var offsetX: CGFloat = 0
   
+  @State private var workItem: DispatchWorkItem?
   @State private var remainingTime: Double = 5
   @State private var timerActive: Bool = true
   @State private var timer: Timer?
   
   var recordHelper = QuestionRecordEntityCreateHelper()
   
-  enum CurrentAnswerMode {
-    case inQuiz, correct, wrong
-  }
-  @State private var currentAnswerMode: CurrentAnswerMode = .inQuiz
-  @State private var currentTryCount: Int = 0
-  @State private var isReachedFirstAnswer = false
+  var body: some View {
+    VStack {
+      Spacer()
+      
+      HStack {
+        currentSessionButton
+        
+        Spacer()
+        
+        TimerView(remainingTime: $remainingTime, totalDuration: Double(cfgTimerSeconds))
+        
+        Spacer()
+        
+        Button {
+          cfgQuizSoundAutoplay.toggle()
+        } label: {
+          Label("Auto Sound", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
+            .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
+            .font(.system(size: 14))
+        }
+      }
+      .padding(.horizontal, 10)
+      
+      MusiqwikView(pair: viewModel.currentPair)
+        // .frame(maxWidth: .infinity)
+        .frame(height: 150)
+        .scaleEffect(isMusiqwikViewPressed ? 0.965 : 1.0) // 눌렀을 때 살짝 작아짐
+        .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
+        .offset(x: offsetX)
+        .onAppear {
+          if cfgQuizSoundAutoplay {
+            playSounds()
+          }
+          
+          if viewModel.currentAnswerMode == .inQuiz {
+            invalidateTimer()
+            startCountdown()
+            
+            // recordStep1()
+          }
+        }
+        .onDisappear {
+          if viewModel.currentAnswerMode == .inQuiz {
+            invalidateTimer()
+            setWrong()
+          }
+          
+          stopSounds()
+        }
+        .onChange(of: viewModel.currentPair) { _ in
+          if cfgQuizSoundAutoplay {
+            playSounds()
+          }
+          
+          invalidateTimer()
+          startCountdown()
+          
+          // recordStep1()
+        }
+        .onTapGesture {
+          isMusiqwikViewPressed = true
+          DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.2) {
+            isMusiqwikViewPressed = false
+          }
+          
+          playSounds()
+        }
+        .gesture(
+          DragGesture()
+            .onChanged { value in
+              // 드래그 중 감지
+              offsetX = value.translation.width
+            }
+            .onEnded { value in
+              // 드래그 완료 후 동작
+              if value.translation.width > 50 {
+                viewModel.currentAnswerMode = .inQuiz
+                keyboardViewModel.enterButtonMode = .inQuiz
+                
+                viewModel.prev()
+                prevAnimation()
+                comebackAnimation()
+              } else if value.translation.width < -50 {
+                if viewModel.isNextQuestionAlreadyAppeared || (viewModel.currentAnswerMode == .correct && viewModel.isCurrentPairCountEqualLastMax) {
+                  viewModel.currentAnswerMode = .inQuiz
+                  keyboardViewModel.enterButtonMode = .inQuiz
+                  
+                  viewModel.next()
+                  nextAnimation()
+                  comebackAnimation()
+                } else {
+                  comebackAnimation()
+                }
+              }
+            }
+        )
+      
+      HStack {
+        Text("\(viewModel.answerText)")
+          .font(.subheadline).bold()
+          .frame(height: 40)
+      }
+      .frame(maxWidth: .infinity)
+      .background(.gray.opacity(0.2))
+      .clipShape(RoundedRectangle(cornerRadius: 5))
+      .padding(.horizontal, 10)
+      .opacity(viewModel.currentAnswerMode == .inQuiz ? 0 : 1)
+      .animation(.easeInOut, value: viewModel.currentAnswerMode)
   
+      Group {
+        HStack {
+          intervalTextField(
+            "\(keyboardViewModel.intervalModifier.textFieldLocalizedDescription)",
+            backgroundColor: .red.opacity(0.5),
+            isLeading: false
+          )
+          intervalTextField(
+            "\(keyboardViewModel.intervalNumber)",
+            backgroundColor: .cyan.opacity(0.5)
+          )
+        }
+        
+        IntervalTouchKeyboardView {
+          pressEnterButton()
+        }
+        .environmentObject(keyboardViewModel)
+        .disabled(showAnswerAlert)
+        .foregroundColor(animateAlertDismiss ? .gray : nil)
+        .contrast(animateAlertDismiss ? 0.9 : 1)
+        .onChange(of: showAnswerAlert) { newValue in
+          if newValue {
+            withAnimation(.easeInOut(duration: 0.2)) {
+              animateAlertDismiss = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1300)) {
+              withAnimation(.easeInOut(duration: 0.2)) {
+                showAnswerAlert = false
+                animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
+              }
+            }
+          }
+        }
+      }
+      .padding(.horizontal, 10)
+      .padding(.bottom, 10)
+    }
+    .alert(isPresent: $showAnswerAlert, view: customAlertView)
+  }
+  
+  private var customAlertView: CustomAlertView {
+    guard let interval = viewModel.currentPair.advancedInterval else {
+      return CustomAlertView(
+        title: "에러가 발생했습니다.",
+        subtitle: "학습 범위를 넘어서는 음정입니다.",
+        icon: .error
+      )
+    }
+    
+    // 약어
+    let title = viewModel.currentAnswerMode == .correct
+    ? "맞았습니다. \(interval.abbrDescription) 입니다."
+    : "틀렸습니다."
+    // 정식 명칭
+    let subtitle = viewModel.currentAnswerMode == .correct
+    ? "해당 음정은 \(interval.localizedDescription) 입니다. "
+    : "다시 한 번 풀어보세요."
+    
+    return CustomAlertView(
+      title: title,
+      subtitle: subtitle,
+      icon: viewModel.currentAnswerMode == .correct ? .done : .error
+    )
+  }
+}
+
+// view와 관련된 변수들
+extension QuizView {
   private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
     Text(text == "0" ? "-" : text)
       .padding()
@@ -91,187 +262,6 @@ struct QuizView: View {
       .clipShape(RoundedRectangle(cornerRadius: 5))
     }
   }
-  
-  var body: some View {
-    VStack {
-      Spacer()
-      
-      HStack {
-        currentSessionButton
-        
-        Spacer()
-        
-        TimerView(remainingTime: $remainingTime, totalDuration: Double(cfgTimerSeconds))
-        
-        Spacer()
-        
-        Button {
-          cfgQuizSoundAutoplay.toggle()
-        } label: {
-          Label("Auto Sound", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
-            .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
-            .font(.system(size: 14))
-        }
-      }
-      .padding(.horizontal, 10)
-      
-      MusiqwikView(pair: viewModel.currentPair)
-        // .frame(maxWidth: .infinity)
-        .frame(height: 150)
-        .scaleEffect(isMusiqwikViewPressed ? 0.965 : 1.0) // 눌렀을 때 살짝 작아짐
-        .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
-        .offset(x: offsetX)
-        .onAppear {
-          if cfgQuizSoundAutoplay {
-            playSounds()
-          }
-          
-          if currentAnswerMode == .inQuiz {
-            invalidateTimer()
-            startCountdown()
-            
-            recordStep1()
-          }
-        }
-        .onDisappear {
-          if currentAnswerMode == .inQuiz {
-            invalidateTimer()
-            setWrong()
-          }
-          
-          stopSounds()
-        }
-        .onChange(of: viewModel.currentPair) { _ in
-          if cfgQuizSoundAutoplay {
-            playSounds()
-          }
-          
-          invalidateTimer()
-          startCountdown()
-          
-          recordStep1()
-        }
-        .onTapGesture {
-          isMusiqwikViewPressed = true
-          DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.2) {
-            isMusiqwikViewPressed = false
-          }
-          
-          playSounds()
-        }
-        .gesture(
-          DragGesture()
-            .onChanged { value in
-              // 드래그 중 감지
-              offsetX = value.translation.width
-            }
-            .onEnded { value in
-              // 드래그 완료 후 동작
-              if value.translation.width > 50 {
-                viewModel.prev()
-                prevAnimation()
-                comebackAndToggleButtonImage()
-              } else if value.translation.width < -50 {
-                if viewModel.isNextQuestionAlreadyAppeared || (currentAnswerMode == .correct && viewModel.currentPairCount == viewModel.lastMaxPairCount) {
-                  viewModel.next()
-                  nextAnimation()
-                  comebackAndToggleButtonImage()
-                } else {
-                  comebackAnimation()
-                }
-              }
-            }
-        )
-      
-      // Text("Count: \(viewModel.currentPairCount)")
-      // Text(viewModel.currentPair.description)
-      //   .font(.footnote)
-      let answerText = switch currentAnswerMode {
-      case .inQuiz:
-        ""
-      case .correct:
-        "✅ 맞았습니다. (\(viewModel.currentPair.advancedInterval?.localizedDescription ?? ""); \(viewModel.currentPair.startNote) ~ \(viewModel.currentPair.endNote))"
-      case .wrong:
-        "❌ 틀렸습니다. 다시 한 번 풀어보세요."
-      }
-      
-      HStack {
-        Text("\(answerText)")
-          .font(.subheadline).bold()
-          .frame(height: 40)
-          .frame(maxWidth: .infinity)
-          .background(.gray.opacity(0.2))
-          .clipShape(RoundedRectangle(cornerRadius: 5))
-          .padding(.horizontal, 10)
-          .opacity(currentAnswerMode == .inQuiz ? 0 : 1)
-          .animation(.easeInOut, value: currentAnswerMode)
-      }
-  
-      Group {
-        HStack {
-          intervalTextField(
-            "\(keyboardViewModel.intervalModifier.textFieldLocalizedDescription)",
-            backgroundColor: .red.opacity(0.5),
-            isLeading: false
-          )
-          intervalTextField(
-            "\(keyboardViewModel.intervalNumber)",
-            backgroundColor: .cyan.opacity(0.5)
-          )
-        }
-        
-        IntervalTouchKeyboardView {
-          pressEnterButton()
-        }
-        .environmentObject(keyboardViewModel)
-        .disabled(showAnswerAlert)
-        .foregroundColor(animateAlertDismiss ? .gray : nil)
-        .contrast(animateAlertDismiss ? 0.9 : 1)
-        .onChange(of: showAnswerAlert) { newValue in
-          if newValue {
-            withAnimation(.easeInOut(duration: 0.2)) {
-              animateAlertDismiss = true
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1300)) {
-              withAnimation(.easeInOut(duration: 0.2)) {
-                showAnswerAlert = false
-                animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
-              }
-            }
-          }
-        }
-      }
-      .padding(.horizontal, 10)
-      .padding(.bottom, 10)
-    }
-    .alert(isPresent: $showAnswerAlert, view: customAlertView)
-  }
-  
-  private var customAlertView: CustomAlertView {
-    guard let interval = viewModel.currentPair.advancedInterval else {
-      return CustomAlertView(
-        title: "에러가 발생했습니다.",
-        subtitle: "학습 범위를 넘어서는 음정입니다. 해당 부분을 스크린샷해서 개발자에게 피드백해주시면 매우 도움이 될 것 같습니다.",
-        icon: .error
-      )
-    }
-    
-    // 약어
-    let title = currentAnswerMode == .correct 
-    ? "맞았습니다. \(interval.abbrDescription) 입니다."
-    : "틀렸습니다."
-    // 정식 명칭
-    let subtitle = currentAnswerMode == .correct
-    ? "해당 음정은 \(interval.localizedDescription) 입니다. "
-    : "다시 한 번 풀어보세요."
-    
-    return CustomAlertView(
-      title: title,
-      subtitle: subtitle,
-      icon: currentAnswerMode == .correct ? .done : .error
-    )
-  }
 }
 
 extension QuizView {
@@ -303,12 +293,6 @@ extension QuizView {
     }
   }
   
-  private func comebackAndToggleButtonImage() {
-    comebackAnimation()
-    currentAnswerMode = .inQuiz
-    keyboardViewModel.enterButtonMode = .inQuiz
-  }
-  
   private func checkAnswer() {
     guard keyboardViewModel.intervalNumber != 0 else {
       HapticMananger.warning.vibrate()
@@ -318,28 +302,28 @@ extension QuizView {
     invalidateTimer()
     showAnswerAlert = true
     
-    currentTryCount += 1
+    viewModel.currentTryCount += 1
     
     if let currentPairDescrition = viewModel.currentPair.advancedInterval?.abbrDescription {
       if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
         // 정답인 경우
-        currentAnswerMode = .correct
+        viewModel.currentAnswerMode = .correct
         keyboardViewModel.enterButtonMode = .viewAnswer
         
         viewModel.appendAnswerCount(isCorrect: true)
         
-        if !isReachedFirstAnswer {
-          if currentTryCount > 1,
-             currentAnswerMode == .correct {
-            // record step 3: 마지막 시도
-            recordHelper.create_step3_whenWrongFirstTryAndFinallyAnswered(
-              finalAnswerTime: .now,
-              tryCount: Int16(currentTryCount)
-            )
-          }
-          
-          isReachedFirstAnswer = true
-        }
+        // if !isReachedFirstAnswer {
+        //   if currentTryCount > 1,
+        //      currentAnswerMode == .correct {
+        //     // record step 3: 마지막 시도
+        //     recordHelper.create_step3_whenWrongFirstTryAndFinallyAnswered(
+        //       finalAnswerTime: .now,
+        //       tryCount: Int16(currentTryCount)
+        //     )
+        //   }
+        //   
+        //   isReachedFirstAnswer = true
+        // }
         
         if store.bool(forKey: .cfgHapticAnswer) {
           HapticMananger.success.vibrate()
@@ -356,20 +340,20 @@ extension QuizView {
       }
     }
     
-    if currentTryCount == 1,
-       let myInterval = viewModel.currentPair.advancedInterval {
-      // record step 2: 최초 시도
-      recordHelper.create_step2_afterFirstTry(
-        firstTryTime: .now,
-        isCorrect: currentAnswerMode == .correct,
-        myInterval: myInterval
-      )
-    }
+    // if currentTryCount == 1,
+    //    let myInterval = viewModel.currentPair.advancedInterval {
+    //   // record step 2: 최초 시도
+    //   recordHelper.create_step2_afterFirstTry(
+    //     firstTryTime: .now,
+    //     isCorrect: currentAnswerMode == .correct,
+    //     myInterval: myInterval
+    //   )
+    // }
   }
   
   private func setWrong() {
     // 오답인 경우
-    currentAnswerMode = .wrong
+    viewModel.currentAnswerMode = .wrong
     viewModel.appendAnswerCount(isCorrect: false)
     
     if store.bool(forKey: .cfgHapticWrong) {
@@ -378,23 +362,24 @@ extension QuizView {
   }
   
   private func goNextQuestion() {
+    viewModel.currentAnswerMode = .inQuiz
+    keyboardViewModel.enterButtonMode = .inQuiz
+    
     viewModel.next()
     nextAnimation(afterOffsetX: -350)
-    comebackAndToggleButtonImage()
+    comebackAnimation()
     keyboardViewModel.intervalNumber = 0
-    isReachedFirstAnswer = false
-    currentTryCount = 0
+    // isReachedFirstAnswer = false
+    viewModel.currentTryCount = 0
   }
   
   private func pressEnterButton() {
     if keyboardViewModel.enterButtonMode == .inQuiz {
-      // playSounds()
       checkAnswer()
     } else {
-      if currentAnswerMode == .correct {
+      if viewModel.currentAnswerMode == .correct {
         goNextQuestion()
       } else {
-        // playSounds()
         checkAnswer()
       }
     }
