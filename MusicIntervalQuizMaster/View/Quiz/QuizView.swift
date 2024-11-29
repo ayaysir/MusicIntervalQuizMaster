@@ -69,6 +69,8 @@ struct QuizView: View {
   private var currentSessionButton: some View {
     Menu {
       Button("새로운 세션 시작") {
+        recordHelper.createNewSession()
+        recordHelper.createNewRecordEntity()
         viewModel.preparePairData()
       }
       Text("현재 기록을 초기화하고 새로운 세션을 시작합니다.")
@@ -132,8 +134,11 @@ struct QuizView: View {
           }
         }
         .onDisappear {
-          invalidateTimer()
-          setWrong()
+          if currentAnswerMode == .inQuiz {
+            invalidateTimer()
+            setWrong()
+          }
+          
           stopSounds()
         }
         .onChange(of: viewModel.currentPair) { _ in

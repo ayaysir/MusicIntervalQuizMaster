@@ -61,7 +61,7 @@ class QuestionRecordEntityCreateHelper {
     currentSession?.addToQuestionRecords(newRecord)
     saveContext()
     
-    print(newRecord, "step1 comp")
+    // print(newRecord, "step1 comp")
   }
   
   func create_step2_afterFirstTry(
@@ -91,7 +91,7 @@ class QuestionRecordEntityCreateHelper {
     }
     
     saveContext()
-    print(newRecord, "step2 comp")
+    // print(newRecord, "step2 comp")
   }
   
   func create_step3_whenWrongFirstTryAndFinallyAnswered(
@@ -112,7 +112,7 @@ class QuestionRecordEntityCreateHelper {
     newRecord.tryCount = tryCount
     
     saveContext()
-    print(newRecord, "step3 comp")
+    // print(newRecord, "step3 comp")
   }
   
   func createNewRecordEntity() {
@@ -121,6 +121,14 @@ class QuestionRecordEntityCreateHelper {
     }
     
     newRecord = QuestionRecordEntity(context: context)
+  }
+  
+  func createNewSession() {
+    guard let context else {
+      return
+    }
+    
+    currentSession = SessionEntity(context: context)
   }
   
   // MARK: - Save
