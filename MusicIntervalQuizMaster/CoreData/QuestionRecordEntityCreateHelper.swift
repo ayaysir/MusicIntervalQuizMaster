@@ -45,7 +45,7 @@ class QuestionRecordEntityCreateHelper {
   private var newRecord: QuestionRecordEntity?
   
   func create_step1_afterOnAppear(
-    direction: IntervalPairCategory,
+    direction: IntervalPairDirection,
     clef: Clef,
     startTime: Date,
     startNote: Note,

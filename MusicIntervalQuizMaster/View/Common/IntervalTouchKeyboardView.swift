@@ -52,7 +52,7 @@ struct IntervalTouchKeyboardView: View {
   
   private func enterButton(action: @escaping (() -> Void)) -> some View {
     Button(action: action) {
-      Image(systemName: keyboardViewModel.enterButtonMode.systemImageString)
+      Image(systemName: keyboardViewModel.answerMode.systemImageString)
         .frame(height: 50)
         .frame(maxWidth: .infinity)
     }

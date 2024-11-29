@@ -9,4 +9,13 @@ import Foundation
 
 enum QuizAnswerMode {
   case inQuiz, correct, wrong
+  
+  var systemImageString: String {
+    switch self {
+    case .inQuiz, .wrong:
+      "return"
+    case .correct:
+      "arrow.turn.up.right"
+    }
+  }
 }

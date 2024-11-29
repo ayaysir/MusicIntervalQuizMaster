@@ -28,6 +28,10 @@ struct QuizView: View {
   
   var body: some View {
     VStack {
+      ScrollView {
+        Text("\(viewModel.session)")
+          .font(.system(size: 7))
+      }
       Spacer()
       
       HStack {
@@ -42,7 +46,7 @@ struct QuizView: View {
         Button {
           cfgQuizSoundAutoplay.toggle()
         } label: {
-          Label("Auto Sound", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
+          Label("Auto Sound \(viewModel.answerMode)", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
             .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
             .font(.system(size: 14))
         }
@@ -60,7 +64,7 @@ struct QuizView: View {
             playSounds()
           }
           
-          if viewModel.currentAnswerMode == .inQuiz {
+          if viewModel.answerMode == .inQuiz {
             invalidateTimer()
             startCountdown()
             
@@ -68,9 +72,10 @@ struct QuizView: View {
           }
         }
         .onDisappear {
-          if viewModel.currentAnswerMode == .inQuiz {
+          if viewModel.answerMode == .inQuiz {
             invalidateTimer()
-            setWrong()
+            
+            // TODO: - 문제 갈아끼기
           }
           
           stopSounds()
@@ -102,20 +107,20 @@ struct QuizView: View {
             .onEnded { value in
               // 드래그 완료 후 동작
               if value.translation.width > 50 {
-                viewModel.currentAnswerMode = .inQuiz
-                keyboardViewModel.enterButtonMode = .inQuiz
-                
                 viewModel.prev()
                 prevAnimation()
                 comebackAnimation()
+                
+                keyboardViewModel.answerMode = viewModel.answerMode
               } else if value.translation.width < -50 {
-                if viewModel.isNextQuestionAlreadyAppeared || (viewModel.currentAnswerMode == .correct && viewModel.isCurrentPairCountEqualLastMax) {
-                  viewModel.currentAnswerMode = .inQuiz
-                  keyboardViewModel.enterButtonMode = .inQuiz
+                print(viewModel.isNextQuestionAlreadyAppeared, viewModel.answerMode, viewModel.isCurrentPairCountEqualLastMax)
+                if viewModel.isNextQuestionAlreadyAppeared || (viewModel.answerMode == .correct && viewModel.isCurrentPairCountEqualLastMax) {
                   
                   viewModel.next()
                   nextAnimation()
                   comebackAnimation()
+                  
+                  keyboardViewModel.answerMode = viewModel.answerMode
                 } else {
                   comebackAnimation()
                 }
@@ -132,8 +137,8 @@ struct QuizView: View {
       .background(.gray.opacity(0.2))
       .clipShape(RoundedRectangle(cornerRadius: 5))
       .padding(.horizontal, 10)
-      .opacity(viewModel.currentAnswerMode == .inQuiz ? 0 : 1)
-      .animation(.easeInOut, value: viewModel.currentAnswerMode)
+      .opacity(viewModel.answerMode == .inQuiz ? 0 : 1)
+      .animation(.easeInOut, value: viewModel.answerMode)
   
       Group {
         HStack {
@@ -186,18 +191,18 @@ struct QuizView: View {
     }
     
     // 약어
-    let title = viewModel.currentAnswerMode == .correct
+    let title = viewModel.answerMode == .correct
     ? "맞았습니다. \(interval.abbrDescription) 입니다."
     : "틀렸습니다."
     // 정식 명칭
-    let subtitle = viewModel.currentAnswerMode == .correct
+    let subtitle = viewModel.answerMode == .correct
     ? "해당 음정은 \(interval.localizedDescription) 입니다. "
     : "다시 한 번 풀어보세요."
     
     return CustomAlertView(
       title: title,
       subtitle: subtitle,
-      icon: viewModel.currentAnswerMode == .correct ? .done : .error
+      icon: viewModel.answerMode == .correct ? .done : .error
     )
   }
 }
@@ -215,11 +220,13 @@ extension QuizView {
   }
   
   private func prevAnimation(beforeOffsetX: CGFloat = -300, afterOffsetX: CGFloat = 200) {
-    if viewModel.currentPairCount != 0 {
-      offsetX = beforeOffsetX
-      withAnimation {
-        offsetX = afterOffsetX
-      }
+    if viewModel.currentPairIndex != 0 {
+      
+    }
+    
+    offsetX = beforeOffsetX
+    withAnimation {
+      offsetX = afterOffsetX
     }
   }
   
@@ -281,7 +288,7 @@ extension QuizView {
       viewModel.currentPair.endNote.playSound()
     }
     
-    switch viewModel.currentPair.category {
+    switch viewModel.currentPair.direction {
     case .ascending, .descending:
       viewModel.currentPair.startNote.playSound()
       if let workItem {
@@ -302,59 +309,31 @@ extension QuizView {
     invalidateTimer()
     showAnswerAlert = true
     
-    viewModel.currentTryCount += 1
+    let isCorrect = viewModel.checkAnswer(keyboardViewModel.intervalModifier, keyboardViewModel.intervalNumber)
     
-    if let currentPairDescrition = viewModel.currentPair.advancedInterval?.abbrDescription {
-      if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
-        // 정답인 경우
-        viewModel.currentAnswerMode = .correct
-        keyboardViewModel.enterButtonMode = .viewAnswer
-        
-        viewModel.appendAnswerCount(isCorrect: true)
-        
-        // if !isReachedFirstAnswer {
-        //   if currentTryCount > 1,
-        //      currentAnswerMode == .correct {
-        //     // record step 3: 마지막 시도
-        //     recordHelper.create_step3_whenWrongFirstTryAndFinallyAnswered(
-        //       finalAnswerTime: .now,
-        //       tryCount: Int16(currentTryCount)
-        //     )
-        //   }
-        //   
-        //   isReachedFirstAnswer = true
-        // }
-        
-        if store.bool(forKey: .cfgHapticAnswer) {
-          HapticMananger.success.vibrate()
-        }
-        
-        if store.bool(forKey: .cfgAppAutoNextMove) {
-          DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1301)) {
-            showAnswerAlert = false
-            goNextQuestion()
-          }
-        }
-      } else {
-        setWrong()
+    // 정답 처리는 viewModel.checkAnswer() 가 함
+    
+    if isCorrect {
+      if store.bool(forKey: .cfgHapticAnswer) {
+        HapticMananger.success.vibrate()
       }
+      
+      if store.bool(forKey: .cfgAppAutoNextMove) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1301)) {
+          showAnswerAlert = false
+          goNextQuestion()
+        }
+      }
+      
+    } else {
+      setWrong()
     }
     
-    // if currentTryCount == 1,
-    //    let myInterval = viewModel.currentPair.advancedInterval {
-    //   // record step 2: 최초 시도
-    //   recordHelper.create_step2_afterFirstTry(
-    //     firstTryTime: .now,
-    //     isCorrect: currentAnswerMode == .correct,
-    //     myInterval: myInterval
-    //   )
-    // }
+    keyboardViewModel.answerMode = viewModel.answerMode
   }
   
   private func setWrong() {
-    // 오답인 경우
-    viewModel.currentAnswerMode = .wrong
-    viewModel.appendAnswerCount(isCorrect: false)
+    keyboardViewModel.answerMode = viewModel.answerMode
     
     if store.bool(forKey: .cfgHapticWrong) {
       HapticMananger.warning.vibrate()
@@ -362,22 +341,18 @@ extension QuizView {
   }
   
   private func goNextQuestion() {
-    viewModel.currentAnswerMode = .inQuiz
-    keyboardViewModel.enterButtonMode = .inQuiz
-    
     viewModel.next()
     nextAnimation(afterOffsetX: -350)
     comebackAnimation()
     keyboardViewModel.intervalNumber = 0
-    // isReachedFirstAnswer = false
-    viewModel.currentTryCount = 0
+    keyboardViewModel.answerMode = viewModel.answerMode
   }
   
   private func pressEnterButton() {
-    if keyboardViewModel.enterButtonMode == .inQuiz {
+    if viewModel.answerMode == .inQuiz {
       checkAnswer()
     } else {
-      if viewModel.currentAnswerMode == .correct {
+      if viewModel.answerMode == .correct {
         goNextQuestion()
       } else {
         checkAnswer()
@@ -408,8 +383,6 @@ extension QuizView {
   
   private func invalidateTimer() {
     timer?.invalidate()
-    // timerProgress = 0
-    // timerText = "-"
     remainingTime = 0
     withAnimation {
       timerActive = false
@@ -421,7 +394,7 @@ extension QuizView {
     // print("카운트다운 완료, 작업 실행!")
     // playSounds()
     showAnswerAlert = true
-    setWrong()
+    checkAnswer()
   }
   
   private func recordStep1() {
@@ -432,7 +405,7 @@ extension QuizView {
     let currentPair = viewModel.currentPair
     
     recordHelper.create_step1_afterOnAppear(
-      direction: currentPair.category,
+      direction: currentPair.direction,
       clef: currentPair.clef,
       startTime: .now,
       startNote: currentPair.startNote,

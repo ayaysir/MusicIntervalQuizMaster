@@ -16,7 +16,7 @@ public class CustomAlertView: UIView, AlertViewProtocol {
   
   public static var defaultContentColor = UIColor { trait in
     switch trait.userInterfaceStyle {
-    case .dark: return UIColor(red: 127 / 255, green: 127 / 255, blue: 129 / 255, alpha: 1)
+    case .dark: return UIColor(red: 177 / 255, green: 177 / 255, blue: 179 / 255, alpha: 1)
     default: return UIColor.white
     }
   }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IntervalPairCategory {
+enum IntervalPairDirection {
   case ascending, descending, simultaneously
   
   var dataDescription: String {

@@ -11,13 +11,9 @@ import Tonic
 final class QuizViewModel: ObservableObject {
   private(set) var pairs: [IntervalPair] = []
   
-  @Published var currentSessionDict: [Int : Bool] = [:]
-  
-  @Published private(set) var currentPairCount = 0
-  @Published private(set) var lastMaxPairCount = 0
-  @Published var currentAnswerMode: QuizAnswerMode = .inQuiz
-  @Published var currentTryCount: Int = 0
-  @Published var isReachedFirstAnswer = false
+  @Published var session = QuizSession(uuid: .init(), createTime: .now)
+  @Published private(set) var currentPairIndex = 0
+  @Published var answerMode: QuizAnswerMode = .inQuiz
   
   init() {
     if !store.bool(forKey: .checkInitConfigCompleted) {
@@ -27,48 +23,52 @@ final class QuizViewModel: ObservableObject {
     preparePairData()
   }
   
+  /// 신규 Pair 준비
+  /// - 신규 pairs들 중 푼 문제들이 Session.records에 들어가므로 여기서 세션 초기화
   func preparePairData() {
     pairs = []
-    currentPairCount = 0
-    currentSessionDict = [:]
+    currentPairIndex = 0
     
-    let availableIntervalList = if !availableIntervalList.isEmpty {
-      availableIntervalList
-    } else {
-      [
-        AdvancedInterval(modifier: .perfect, number: 5)
-      ]
-    }
+    let availableIntervalList = availableIntervalList()
     
     print(availableIntervalList)
     
-    while pairs.count <= 1000 {
+    while pairs.count <= MAX_QUESTION_COUNT {
       if let pair = generateRandomIntervalPair(),
          let interval = pair.advancedInterval,
          availableIntervalList.contains(interval) {
         pairs.append(pair)
       }
     }
+  
+    session = QuizSession(uuid: .init(), createTime: .now)
+    // 첫 번째 Record 생성
+    createRecordsFromPairIndex()
+  }
+  
+  func createRecordsFromPairIndex() {
+    let record: QuestionRecord = .init(sessionId: session.uuid, seq: currentPairIndex, questionPair: pairs[currentPairIndex], firstAppearedTime: .now)
+    session.records.append(record)
   }
   
   var answerCount: Int {
-    currentSessionDict.filter { $0.value }.count
+    session.records.filter { $0.isCorrectAtFirstTry }.count
   }
   
   var wrongCount: Int {
-    currentSessionDict.count - answerCount
+    session.records.filter { $0.attempts.count > 0 && !$0.isCorrectAtFirstTry }.count
   }
   
   var currentPairIsNotSolved: Bool {
-    currentSessionDict[currentPairCount] == nil
+    session.recordsCount <= currentPairIndex
   }
   
   var isCurrentPairCountEqualLastMax: Bool {
-    currentPairCount == lastMaxPairCount
+    currentPairIndex == session.records.endIndex
   }
   
   var answerText: String {
-    switch currentAnswerMode {
+    switch answerMode {
     case .inQuiz:
       ""
     case .correct:
@@ -78,40 +78,65 @@ final class QuizViewModel: ObservableObject {
     }
   }
   
-  func appendAnswerCount(isCorrect: Bool) {
-    if isCorrect {
-      if currentPairIsNotSolved {
-        currentSessionDict[currentPairCount] = true
-      }
-    } else {
-      currentSessionDict[currentPairCount] = false
+  func checkAnswer(_ modifier: IntervalModifier, _ number: Int) -> Bool {
+    guard let interval = currentPair.advancedInterval else {
+      print(#function, "Interval is nil")
+      return false
     }
+    
+    let myInterval = AdvancedInterval(modifier: modifier, number: number)
+    let isCorrect = myInterval == interval
+    let attempt = QuizAttempt(time: .now, myInterval: myInterval, isCorrect: isCorrect)
+    
+    if isCorrect, session.records[currentPairIndex].attempts.isEmpty {
+      session.records[currentPairIndex].isCorrectAtFirstTry = true
+    }
+    
+    if let last = session.records.last, currentPairIndex == last.seq {
+      session.records[currentPairIndex].attempts.append(attempt)
+    }
+    
+    answerMode = isCorrect ? .correct : .wrong
+    
+    return isCorrect
   }
   
   var isNextQuestionAlreadyAppeared: Bool {
-    currentPairCount + 1 <= lastMaxPairCount
+    
+    print(currentPairIndex, session.records.endIndex)
+    return currentPairIndex + 1 < session.records.endIndex
   }
   
   var currentPair: IntervalPair {
-    pairs[currentPairCount]
+    pairs[currentPairIndex]
+  }
+  
+  var currentRecord: QuestionRecord {
+    session.records[currentPairIndex]
   }
   
   func next() {
-    guard currentPairCount <= pairs.count - 1 else {
+    guard currentPairIndex <= pairs.count - 1 else {
       return
     }
     
-    currentPairCount += 1
+    answerMode = .inQuiz
+    currentPairIndex += 1
     
-    lastMaxPairCount = max(lastMaxPairCount, currentPairCount)
+    if currentPairIndex > (session.recordsCount - 1) {
+      // Set to complete
+      session.records[currentPairIndex - 1].isCompleted = true
+      createRecordsFromPairIndex()
+    }
   }
   
   func prev() {
-    guard currentPairCount > 0 else {
+    guard currentPairIndex > 0 else {
       return
     }
     
-    currentPairCount -= 1
+    answerMode = .inQuiz
+    currentPairIndex -= 1
   }
   
   private func generateRandomIntervalPair() -> IntervalPair? {
@@ -158,18 +183,18 @@ final class QuizViewModel: ObservableObject {
     let pair = IntervalPair(
       startNote: category != .descending ? notes[0] : notes[1],
       endNote: category != .descending ? notes[1] : notes[0],
-      category: category,
+      direction: category,
       clef: clef
     )
     
     return pair
   }
   
-  var determinedCategory: IntervalPairCategory? {
+  var determinedCategory: IntervalPairDirection? {
     [
-      store.bool(forKey: .cfgNotesAscending) ? IntervalPairCategory.ascending : nil,
-      store.bool(forKey: .cfgNotesDescending) ? IntervalPairCategory.descending : nil,
-      store.bool(forKey: .cfgNotesSimultaneously) ? IntervalPairCategory.simultaneously : nil,
+      store.bool(forKey: .cfgNotesAscending) ? IntervalPairDirection.ascending : nil,
+      store.bool(forKey: .cfgNotesDescending) ? IntervalPairDirection.descending : nil,
+      store.bool(forKey: .cfgNotesSimultaneously) ? IntervalPairDirection.simultaneously : nil,
     ].compactMap { $0 }.randomElement()
   }
   
@@ -191,7 +216,7 @@ final class QuizViewModel: ObservableObject {
     ].compactMap { $0 }.randomElement()
   }
   
-  var availableIntervalList: [AdvancedInterval] {
+  func availableIntervalList() -> [AdvancedInterval] {
     var list: [AdvancedInterval] = []
     
     do {
@@ -231,6 +256,15 @@ final class QuizViewModel: ObservableObject {
       print(error)
     }
     
+    if list.isEmpty {
+      return [AdvancedInterval(modifier: .perfect, number: 5)]
+    }
+    
     return list
   }
+}
+
+import SwiftUI
+#Preview {
+  QuizView()
 }

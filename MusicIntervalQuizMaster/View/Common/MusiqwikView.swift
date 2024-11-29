@@ -11,9 +11,9 @@ extension IntervalPair {
   var musiqwikSheetArea: some View {
     ZStack {
       let isSameNotePosition = startNote.octave == endNote.octave && startNote.letter == endNote.letter
-      let isSameAndSimultaneous = isSameNotePosition && category == .simultaneously
+      let isSameAndSimultaneous = isSameNotePosition && direction == .simultaneously
       
-      if category != .simultaneously || isSameAndSimultaneous {
+      if direction != .simultaneously || isSameAndSimultaneous {
         let startNoteText = startNote.musiqwikText(
           clef: clef,
           leftAccidental: startNote.accidental,
@@ -80,14 +80,14 @@ struct MusiqwikView: View {
         pair: .init(
           startNote: .init(.B, accidental: .doubleFlat, octave: 3),
           endNote: .init(.D, accidental: .doubleSharp, octave: 4),
-          category: .simultaneously,
+          direction: .simultaneously,
           clef: .treble)
       )
       MusiqwikView(
         pair: .init(
           startNote: .init(.F, accidental: .flat, octave: 5),
           endNote: .init(.G, accidental: .doubleSharp, octave: 5),
-          category: .simultaneously,
+          direction: .simultaneously,
           clef: .treble)
       )
       Divider()
@@ -95,21 +95,21 @@ struct MusiqwikView: View {
         pair: .init(
           startNote: .init(.C, accidental: .flat, octave: 3),
           endNote: .init(.C, accidental: .doubleSharp, octave: 4),
-          category: .ascending,
+          direction: .ascending,
           clef: .bass)
       )
       MusiqwikView(
         pair: .init(
           startNote: .init(.F, accidental: .sharp, octave: 4),
           endNote: .init(.E, accidental: .natural, octave: 4),
-          category: .descending,
+          direction: .descending,
           clef: .treble)
       )
       MusiqwikView(
         pair: .init(
           startNote: .init(.G, accidental: .sharp, octave: 4),
           endNote: .init(.G, accidental: .natural, octave: 4),
-          category: .descending,
+          direction: .descending,
           clef: .treble)
       )
       
@@ -117,35 +117,35 @@ struct MusiqwikView: View {
         pair: .init(
           startNote: .init(.B, accidental: .flat, octave: 3),
           endNote: .init(.C, accidental: .flat, octave: 4),
-          category: .simultaneously,
+          direction: .simultaneously,
           clef: .treble)
       )
       MusiqwikView(
         pair: .init(
           startNote: .init(.F, accidental: .sharp, octave: 4),
           endNote: .init(.G, accidental: .flat, octave: 4),
-          category: .simultaneously,
+          direction: .simultaneously,
           clef: .treble)
       )
       MusiqwikView(
         pair: .init(
           startNote: .init(.C, accidental: .flat, octave: 4),
           endNote: .init(.E, accidental: .sharp, octave: 4),
-          category: .simultaneously,
+          direction: .simultaneously,
           clef: .alto)
       )
       MusiqwikView(
         pair: .init(
           startNote: .init(.G, accidental: .sharp, octave: 4),
           endNote: .init(.C, accidental: .doubleFlat, octave: 5),
-          category: .simultaneously,
+          direction: .simultaneously,
           clef: .treble)
       )
       MusiqwikView(
         pair: .init(
           startNote: .init(.G, accidental: .doubleFlat, octave: 4),
           endNote: .init(.C, accidental: .doubleFlat, octave: 5),
-          category: .simultaneously,
+          direction: .simultaneously,
           clef: .treble)
       )
     }

@@ -18,7 +18,7 @@
 		4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CB2CEA298100CC506C /* IntervalModifier.swift */; };
 		4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CD2CEA2D0D00CC506C /* Clef.swift */; };
 		4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */; };
-		4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D22CEA327200CC506C /* IntervalPairCategory.swift */; };
+		4469E8D32CEA327300CC506C /* IntervalPairDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D22CEA327200CC506C /* IntervalPairDirection.swift */; };
 		4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D52CEA374800CC506C /* Tonic.Note+.swift */; };
 		4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D72CEB920600CC506C /* MainTabBarView.swift */; };
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
@@ -28,6 +28,8 @@
 		448A3D4B2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
 		448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */; };
+		448A3D512CFA0D7300D0D758 /* QuizSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D502CFA0D7300D0D758 /* QuizSession.swift */; };
+		448A3D532CFA133F00D0D758 /* QuizAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D522CFA133F00D0D758 /* QuizAttempt.swift */; };
 		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
 		448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E12CF873D3006D81BD /* TutorialGuideView.swift */; };
 		448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E32CF874EA006D81BD /* LicenseView.swift */; };
@@ -143,7 +145,7 @@
 		4469E8CB2CEA298100CC506C /* IntervalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalModifier.swift; sourceTree = "<group>"; };
 		4469E8CD2CEA2D0D00CC506C /* Clef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clef.swift; sourceTree = "<group>"; };
 		4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMusiqwikText.swift; sourceTree = "<group>"; };
-		4469E8D22CEA327200CC506C /* IntervalPairCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPairCategory.swift; sourceTree = "<group>"; };
+		4469E8D22CEA327200CC506C /* IntervalPairDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPairDirection.swift; sourceTree = "<group>"; };
 		4469E8D52CEA374800CC506C /* Tonic.Note+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Note+.swift"; sourceTree = "<group>"; };
 		4469E8D72CEB920600CC506C /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
@@ -153,6 +155,8 @@
 		448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityHelper.swift; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
 		448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAnswerMode.swift; sourceTree = "<group>"; };
+		448A3D502CFA0D7300D0D758 /* QuizSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSession.swift; sourceTree = "<group>"; };
+		448A3D522CFA133F00D0D758 /* QuizAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAttempt.swift; sourceTree = "<group>"; };
 		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		448C64E12CF873D3006D81BD /* TutorialGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialGuideView.swift; sourceTree = "<group>"; };
 		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -272,6 +276,8 @@
 			children = (
 				440BE6412CE799B500B01C1B /* IntervalPair.swift */,
 				448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */,
+				448A3D502CFA0D7300D0D758 /* QuizSession.swift */,
+				448A3D522CFA133F00D0D758 /* QuizAttempt.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -306,7 +312,7 @@
 			children = (
 				4469E8CB2CEA298100CC506C /* IntervalModifier.swift */,
 				4469E8CD2CEA2D0D00CC506C /* Clef.swift */,
-				4469E8D22CEA327200CC506C /* IntervalPairCategory.swift */,
+				4469E8D22CEA327200CC506C /* IntervalPairDirection.swift */,
 				448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */,
 			);
 			path = Enum;
@@ -768,6 +774,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				448A3D532CFA133F00D0D758 /* QuizAttempt.swift in Sources */,
+				448A3D512CFA0D7300D0D758 /* QuizSession.swift in Sources */,
 				44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
@@ -795,7 +803,7 @@
 				44D6F2F42CF60F1500B91BBA /* AlertAppleMusic17View.swift in Sources */,
 				448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */,
 				448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */,
-				4469E8D32CEA327300CC506C /* IntervalPairCategory.swift in Sources */,
+				4469E8D32CEA327300CC506C /* IntervalPairDirection.swift in Sources */,
 				44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */,
 				44D6F1FF2CEF78A200B91BBA /* Tonic.Letter+.swift in Sources */,
 				448C64EE2CF88785006D81BD /* QuizView.swift in Sources */,

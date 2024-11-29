@@ -14,6 +14,7 @@ let store = UserDefaults.standard
 // MARK: - Global Constants
 
 let ALERT_PRESENT_TIME = 1
+let MAX_QUESTION_COUNT = 1000
 
 // MARK: - Typealiases
 

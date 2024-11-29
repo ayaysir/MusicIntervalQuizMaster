@@ -10,12 +10,12 @@ import Tonic
 struct IntervalPair: CustomStringConvertible, Equatable, Hashable {
   let startNote: Note
   let endNote: Note
-  let category: IntervalPairCategory
+  let direction: IntervalPairDirection
   let clef: Clef
   
-  var interval: Interval? {
-    Interval.betweenNotes(startNote, endNote)
-  }
+  // var interval: Interval? {
+  //   Interval.betweenNotes(startNote, endNote)
+  // }
   
   var advancedInterval: AdvancedInterval? {
     AdvancedInterval.betweenNotes(startNote, endNote)
@@ -23,10 +23,9 @@ struct IntervalPair: CustomStringConvertible, Equatable, Hashable {
   
   var description: String {
     """
-    category: \(category)
+    category: \(direction)
     startNote: \(startNote.description) (\(startNote.noteNumber)) (\(startNote.orthodoxPitch))
     endNote: \(endNote.description) (\(endNote.noteNumber)) (\(endNote.orthodoxPitch))
-    interval: \(interval?.description ?? "error")
     AdvancedInterval: \(advancedInterval?.description ?? "error")
     """
   }
