@@ -11,6 +11,20 @@ import Tonic
 enum Clef: HasMusiqwikText, CaseIterable {
   case treble, bass, alto
   
+  // dataDescription 값을 기반으로 enum으로 초기화
+  init?(dataDescription: String?) {
+    switch dataDescription {
+    case "treble":
+      self = .treble
+    case "bass":
+      self = .bass
+    case "alto":
+      self = .alto
+    default:
+      return nil // 유효하지 않은 값
+    }
+  }
+  
   var musiqwikText: String {
     switch self {
     case .treble:

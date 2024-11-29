@@ -18,13 +18,26 @@ class QuestionRecordEntityCreateHelper {
     
     if !isForPreview {
       context = PersistenceController.shared.container.viewContext
-      currentSession = .init(context: context!)
-      currentSession?.createTime = .now
+      createNewSession()
     } else {
       context = nil
       currentSession = nil
     }
+  }
+  
+  // MARK: - Save
+  private func saveContext() {
+    guard let context else {
+      return
+    }
     
+    if context.hasChanges {
+      do {
+        try context.save()
+      } catch {
+        print("Failed to save context: \(error.localizedDescription)")
+      }
+    }
   }
   
   // MARK: - 3-step entry
@@ -54,8 +67,10 @@ class QuestionRecordEntityCreateHelper {
     newRecord.clef = clef.dataDescription
     newRecord.startTime = startTime
     newRecord.startNoteLetter = startNote.letter.description
+    newRecord.startNoteAccidental = startNote.accidental.description
     newRecord.startNoteOctave = Int16(startNote.octave)
     newRecord.endNoteLetter = endNote.letter.description
+    newRecord.endNoteAccidental = endNote.octave.description
     newRecord.endNoteOctave = Int16(endNote.octave)
     
     currentSession?.addToQuestionRecords(newRecord)
@@ -129,26 +144,13 @@ class QuestionRecordEntityCreateHelper {
     }
     
     currentSession = SessionEntity(context: context)
-  }
-  
-  // MARK: - Save
-  private func saveContext() {
-    guard let context else {
-      return
-    }
-    
-    if context.hasChanges {
-      do {
-        try context.save()
-      } catch {
-        print("Failed to save context: \(error.localizedDescription)")
-      }
-    }
+    currentSession?.createTime = .now
+    currentSession?.id = .init()
   }
 }
 
 extension QuestionRecordEntityCreateHelper {
-  func read() -> String {
+  func readAsCSV() -> String {
     if isForPreview {
       return "프리뷰 모드에서는 지원하지 않습니다."
     }
@@ -158,34 +160,38 @@ extension QuestionRecordEntityCreateHelper {
     }
     
     let sessionRequest: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
-    var csvString = "Session Name, Timestamp, Direction, Clef, Start Note, Start Octave, End Note, End Octave, First Try Time, Is Correct, Try Count, Final Answer Time, My Interval Modifier, My Interval Number\n"
+    var csvString = "S_id, S_Timestamp, Direction, Clef, Start Note, Start Octave, End Note, End Octave, First Try Time, Is Correct, Try Count, Final Answer Time, My Interval Modifier, My Interval Number\n"
     
     do {
       let sessions = try context.fetch(sessionRequest)
       
       for session in sessions {
-        let sessionName = "Unnamed"
-        let timestamp = session.createTime?.formatted() ?? "N/A"
+        let sessionId = session.id?.uuidString ?? "N/A"
+        let timestamp = session.createTime?.timeIntervalSince1970.description ?? "N/A"
         
         if let records = session.questionRecords as? Set<QuestionRecordEntity> {
           for record in records {
             let direction = record.direction ?? "N/A"
             let clef = record.clef ?? "N/A"
             let startNote = record.startNoteLetter ?? "N/A"
+            let startAccidental = record.startNoteAccidental ?? "N/A"
             let startOctave = record.startNoteOctave
             let endNote = record.endNoteLetter ?? "N/A"
+            let endAccidental = record.endNoteAccidental ?? "N/A"
             let endOctave = record.endNoteOctave
-            let firstTryTime = record.firstTryTime?.formatted() ?? "N/A"
+            let firstTryTime = record.firstTryTime?.timeIntervalSince1970.description ?? "N/A"
             let isCorrect = record.isCorrect ? "True" : "False"
             let tryCount = record.tryCount
-            let finalAnswerTime = record.finalAnswerTime?.formatted() ?? "N/A"
+            let finalAnswerTime = record.finalAnswerTime?.timeIntervalSince1970.description ?? "N/A"
             let myIntervalModifier = record.myIntervalModifier ?? "N/A"
             let myIntervalNumber = "\(record.myIntervalNumber)"
             
-            csvString += "\(sessionName), \(timestamp), \(direction), \(clef), \(startNote), \(startOctave), \(endNote), \(endOctave), \(firstTryTime), \(isCorrect), \(tryCount), \(finalAnswerTime), \(myIntervalModifier), \(myIntervalNumber)\n"
+            csvString += """
+            "\(sessionId)", "\(timestamp)", "\(direction)", "\(clef)", "\(startNote)", "\(startAccidental)", "\(startOctave)", "\(endNote)", "\(endAccidental)", "\(endOctave)", "\(firstTryTime)", "\(isCorrect)", "\(tryCount)", "\(finalAnswerTime)", "\(myIntervalModifier)", "\(myIntervalNumber)"\n
+            """
           }
         } else {
-          csvString += "\(sessionName), \(timestamp), No Records\n"
+          csvString += "\(timestamp), No Records\n"
         }
       }
       

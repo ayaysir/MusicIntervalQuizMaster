@@ -25,6 +25,8 @@
 		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
 		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
 		448A3D492CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */; };
+		448A3D4B2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */; };
+		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
 		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
 		448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E12CF873D3006D81BD /* TutorialGuideView.swift */; };
 		448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E32CF874EA006D81BD /* LicenseView.swift */; };
@@ -147,6 +149,8 @@
 		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
 		448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityCreateHelper.swift; sourceTree = "<group>"; };
+		448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityHelper.swift; sourceTree = "<group>"; };
+		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
 		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		448C64E12CF873D3006D81BD /* TutorialGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialGuideView.swift; sourceTree = "<group>"; };
 		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -265,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				440BE6412CE799B500B01C1B /* IntervalPair.swift */,
+				448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 			children = (
 				448A3D412CF8B0CC00D0D758 /* Persistence.swift */,
 				448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */,
+				448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -781,6 +787,7 @@
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
 				448A3D492CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift in Sources */,
+				448A3D4B2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift in Sources */,
 				44D6F2F82CF60F1500B91BBA /* AlertIcon.swift in Sources */,
 				44D6F2F42CF60F1500B91BBA /* AlertAppleMusic17View.swift in Sources */,
 				448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */,
@@ -798,6 +805,7 @@
 				44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */,
 				44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */,
 				448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */,
+				448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */,
 				44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */,
 				4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */,
 				44D6F2F72CF60F1500B91BBA /* AlertHaptic.swift in Sources */,

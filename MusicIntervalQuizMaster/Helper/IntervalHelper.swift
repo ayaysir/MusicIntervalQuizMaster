@@ -19,7 +19,15 @@ struct AdvancedInterval: Equatable, Hashable {
 
 extension AdvancedInterval: CustomStringConvertible {
   var description: String {
+    "\(modifier.description)\(number)"
+  }
+  
+  var abbrDescription: String {
     "\(modifier.abbrDescription)\(number)"
+  }
+  
+  var localizedDescription: String {
+    "\(modifier.localizedDescription) \(number)st"
   }
 }
 

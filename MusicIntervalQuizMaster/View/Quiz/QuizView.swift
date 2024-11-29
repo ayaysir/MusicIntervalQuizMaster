@@ -190,9 +190,9 @@ struct QuizView: View {
       case .inQuiz:
         ""
       case .correct:
-        "✅ 맞았습니다. (\(viewModel.currentPair.advancedInterval?.description ?? ""))"
+        "✅ 맞았습니다. (\(viewModel.currentPair.advancedInterval?.localizedDescription ?? ""); \(viewModel.currentPair.startNote) ~ \(viewModel.currentPair.endNote))"
       case .wrong:
-        "❌ 틀렸습니다. [눌러서 힌트 보기]"
+        "❌ 틀렸습니다. 다시 한 번 풀어보세요."
       }
       
       HStack {
@@ -210,7 +210,7 @@ struct QuizView: View {
       Group {
         HStack {
           intervalTextField(
-            "\(keyboardViewModel.intervalModifier)",
+            "\(keyboardViewModel.intervalModifier.textFieldLocalizedDescription)",
             backgroundColor: .red.opacity(0.5),
             isLeading: false
           )
@@ -249,14 +249,21 @@ struct QuizView: View {
   }
   
   private var customAlertView: CustomAlertView {
-    let intervalDescription = viewModel.currentPair.advancedInterval?.description ?? ""
+    guard let interval = viewModel.currentPair.advancedInterval else {
+      return CustomAlertView(
+        title: "에러가 발생했습니다.",
+        subtitle: "학습 범위를 넘어서는 음정입니다. 해당 부분을 스크린샷해서 개발자에게 피드백해주시면 매우 도움이 될 것 같습니다.",
+        icon: .error
+      )
+    }
+    
     // 약어
     let title = currentAnswerMode == .correct 
-    ? "맞았습니다. \(intervalDescription) 입니다."
+    ? "맞았습니다. \(interval.abbrDescription) 입니다."
     : "틀렸습니다."
     // 정식 명칭
     let subtitle = currentAnswerMode == .correct
-    ? "해당 음정은 \(intervalDescription) 입니다."
+    ? "해당 음정은 \(interval.localizedDescription) 입니다. "
     : "다시 한 번 풀어보세요."
     
     return CustomAlertView(
@@ -313,7 +320,7 @@ extension QuizView {
     
     currentTryCount += 1
     
-    if let currentPairDescrition = viewModel.currentPair.advancedInterval?.description {
+    if let currentPairDescrition = viewModel.currentPair.advancedInterval?.abbrDescription {
       if keyboardViewModel.intervalAbbrDescription == currentPairDescrition {
         // 정답인 경우
         currentAnswerMode = .correct

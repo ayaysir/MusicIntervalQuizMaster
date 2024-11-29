@@ -21,8 +21,21 @@ struct MoreInfoView: View {
         
         Section("데이터") {
           NavigationLink("CSV 다운로드") {
-            Text("\(recordHelper.read())")
-              .font(.system(size: 7))
+            ScrollView {
+              let _ = print(recordHelper.readAsCSV())
+              TextEditor(text: .constant(recordHelper.readAsCSV()))
+                .font(.system(size: 7))
+            }
+            .toolbar {
+              ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                  QuestionRecordEntityHelper().deleteAllSessions()
+                }) {
+                  Image(systemName: "gearshape") // 아이콘
+                    .font(.title2)
+                }
+              }
+            }
           }
         }
         

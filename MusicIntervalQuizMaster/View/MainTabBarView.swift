@@ -27,6 +27,10 @@ struct MainTabBarView: View {
           Label("More Info", systemImage: "info.circle.fill")
         }
     }
+    .onAppear {
+      // let result = QuestionRecordEntityHelper().fetchSessionRecordsGroupedByUUID()
+      // print("fetchSessionRecordsGroupedByUUID():", result)
+    }
   }
 }
 
