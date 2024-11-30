@@ -30,6 +30,8 @@
 		448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */; };
 		448A3D512CFA0D7300D0D758 /* QuizSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D502CFA0D7300D0D758 /* QuizSession.swift */; };
 		448A3D532CFA133F00D0D758 /* QuizAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D522CFA133F00D0D758 /* QuizAttempt.swift */; };
+		448A3D572CFADC9B00D0D758 /* ColorScheme+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D562CFADC9B00D0D758 /* ColorScheme+.swift */; };
+		448A3D592CFAE2C400D0D758 /* ForMacStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D582CFAE2C400D0D758 /* ForMacStepper.swift */; };
 		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
 		448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E12CF873D3006D81BD /* TutorialGuideView.swift */; };
 		448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E32CF874EA006D81BD /* LicenseView.swift */; };
@@ -157,6 +159,8 @@
 		448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAnswerMode.swift; sourceTree = "<group>"; };
 		448A3D502CFA0D7300D0D758 /* QuizSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSession.swift; sourceTree = "<group>"; };
 		448A3D522CFA133F00D0D758 /* QuizAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAttempt.swift; sourceTree = "<group>"; };
+		448A3D562CFADC9B00D0D758 /* ColorScheme+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorScheme+.swift"; sourceTree = "<group>"; };
+		448A3D582CFAE2C400D0D758 /* ForMacStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForMacStepper.swift; sourceTree = "<group>"; };
 		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		448C64E12CF873D3006D81BD /* TutorialGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialGuideView.swift; sourceTree = "<group>"; };
 		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -329,10 +333,9 @@
 		4469E8D42CEA373F00CC506C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4469E8D52CEA374800CC506C /* Tonic.Note+.swift */,
+				448A3D552CFADC9200D0D758 /* SwiftUI */,
+				448A3D542CFADC8200D0D758 /* Tonic */,
 				44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */,
-				44D6F1FE2CEF78A200B91BBA /* Tonic.Letter+.swift */,
-				44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -345,6 +348,24 @@
 				448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		448A3D542CFADC8200D0D758 /* Tonic */ = {
+			isa = PBXGroup;
+			children = (
+				4469E8D52CEA374800CC506C /* Tonic.Note+.swift */,
+				44D6F1FE2CEF78A200B91BBA /* Tonic.Letter+.swift */,
+				44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */,
+			);
+			path = Tonic;
+			sourceTree = "<group>";
+		};
+		448A3D552CFADC9200D0D758 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				448A3D562CFADC9B00D0D758 /* ColorScheme+.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		448C64E52CF8837E006D81BD /* Quiz */ = {
@@ -361,6 +382,7 @@
 				44D6F3022CF7388E00B91BBA /* TimerView.swift */,
 				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
 				440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */,
+				448A3D582CFAE2C400D0D758 /* ForMacStepper.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -779,6 +801,7 @@
 				44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
+				448A3D592CFAE2C400D0D758 /* ForMacStepper.swift in Sources */,
 				44D6F2F52CF60F1500B91BBA /* AlertViewInternalDismissProtocol.swift in Sources */,
 				44B4B8EC2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift in Sources */,
 				44D6F2F12CF60F1500B91BBA /* AlertIconHeartView.swift in Sources */,
@@ -812,6 +835,7 @@
 				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,
 				44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */,
 				44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */,
+				448A3D572CFADC9B00D0D758 /* ColorScheme+.swift in Sources */,
 				44D6F2EC2CF60F1500B91BBA /* SwiftUIExtension.swift in Sources */,
 				448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */,
 				44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */,

@@ -52,6 +52,9 @@ extension String {
   static let cfgTimerSeconds = "Config_Timer_Seconds"
   
   static let cfgAppAutoNextMove = "Config_App_AutoNextMove"
+  
+  /// 다크모드 여부 (Int) - 0: 시스템, 1: 라이트 고정 2: 다크 고정
+  static let cfgAppAppearance = "Config_App_Appearance"
 }
 
 // MARK: - Initial config values

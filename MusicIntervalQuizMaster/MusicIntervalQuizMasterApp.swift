@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct MusicIntervalQuizMasterApp: App {
+  @AppStorage(.cfgAppAppearance) private var cfgAppAppearance = 0
+  
   init() {
     FontManager.registerFonts()
     
@@ -26,6 +28,7 @@ struct MusicIntervalQuizMasterApp: App {
   var body: some Scene {
     WindowGroup {
       MainTabBarView()
+        .preferredColorScheme(ColorScheme.fromAppAppearance(cfgAppAppearance))
     }
   }
   
@@ -52,6 +55,11 @@ struct MusicIntervalQuizMasterApp: App {
     
     store.set(false, forKey: .cfgIntervalFilterCompound)
     store.set(false, forKey: .cfgIntervalFilterDoublyTritone)
+    
+    store.set(0, forKey: .cfgAppAppearance)
+    store.set(false, forKey: .cfgAppAutoNextMove)
+    
+    store.set(30, forKey: .cfgTimerSeconds)
     
     // set completed status
     store.set(true, forKey: .checkInitConfigCompleted)
