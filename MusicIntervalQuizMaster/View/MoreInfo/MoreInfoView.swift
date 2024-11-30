@@ -8,34 +8,33 @@
 import SwiftUI
 
 struct MoreInfoView: View {
-  var recordHelper = QuestionRecordEntityCreateHelper()
   
   var body: some View {
     NavigationStack {
       Form {
+        // NavigationLink {
+        //   ScrollView {
+        //     let text = QuizSessionManager(context: PersistenceController.shared.container.viewContext).fetchAllStats().map { $0.oneLineDescription }.joined(separator: "\n")
+        //     Text(text)
+        //       .font(.system(size: 7))
+        //       .onTapGesture {
+        //         UIPasteboard.general.string = text
+        //       }
+        //   }
+        //   .toolbar {
+        //     ToolbarItem {
+        //       Button("delete") {
+        //         QuizSessionManager(context: PersistenceController.shared.container.viewContext).deleteAllSessions()
+        //       }
+        //     }
+        //   }
+        // } label: {
+        //   Text("View Logs")
+        // }
+        
         Section("도움말") {
           NavigationLink("튜토리얼 가이드") {
             TutorialGuideView()
-          }
-        }
-        
-        Section("데이터") {
-          NavigationLink("CSV 다운로드") {
-            ScrollView {
-              let _ = print(recordHelper.readAsCSV())
-              TextEditor(text: .constant(recordHelper.readAsCSV()))
-                .font(.system(size: 7))
-            }
-            .toolbar {
-              ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                  QuestionRecordEntityHelper().deleteAllSessions()
-                }) {
-                  Image(systemName: "gearshape") // 아이콘
-                    .font(.title2)
-                }
-              }
-            }
           }
         }
         
@@ -62,5 +61,5 @@ struct MoreInfoView: View {
 }
 
 #Preview {
-  MoreInfoView(recordHelper: .init(isForPreview: true))
+  MoreInfoView()
 }

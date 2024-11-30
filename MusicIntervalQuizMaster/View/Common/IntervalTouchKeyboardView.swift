@@ -19,7 +19,7 @@ struct IntervalTouchKeyboardView: View {
   
   private func vibrate() {
     if isHaptic {
-      HapticMananger.rigid.vibrate()
+      HapticManager.rigid.vibrate()
     }
   }
   

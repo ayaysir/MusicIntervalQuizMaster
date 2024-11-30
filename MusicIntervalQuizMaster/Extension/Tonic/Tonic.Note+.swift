@@ -113,3 +113,36 @@ extension Note {
     }
   }
 }
+
+extension Note {
+  static func from(letterString: String, accidentalString: String, octave: Int) -> Note? {
+    // Convert letterString to Letter
+    guard let letter = Letter.allCases.first(where: { "\($0)" == letterString.uppercased() }) else {
+      print("Invalid letter string: \(letterString)")
+      return nil
+    }
+
+    // Convert accidentalString to Accidental
+    let accidentalMap: [String: Accidental] = [
+      "𝄫": .doubleFlat,
+      "♭": .flat,
+      "": .natural,
+      "♯": .sharp,
+      "𝄪": .doubleSharp
+    ]
+    
+    guard let accidental = accidentalMap[accidentalString] else {
+      print("Invalid accidental string: \(accidentalString)")
+      return nil
+    }
+
+    // Ensure octave is in a reasonable range
+    guard (0...10).contains(octave) else {
+      print("Invalid octave value: \(octave)")
+      return nil
+    }
+
+    // Create and return the Note object
+    return Note(letter, accidental: accidental, octave: octave)
+  }
+}

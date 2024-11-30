@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-enum HapticMananger: String, CaseIterable {
+enum HapticManager: String, CaseIterable {
   case error
   case success
   case warning

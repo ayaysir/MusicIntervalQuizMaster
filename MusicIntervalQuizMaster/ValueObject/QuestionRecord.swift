@@ -12,6 +12,7 @@ struct QuestionRecord {
   let seq: Int
   let questionPair: IntervalPair
   let firstAppearedTime: Date
+  let timerLimit: Int
   var attempts: [QuizAttempt] = []
   
   var isCorrectAtFirstTry: Bool = false

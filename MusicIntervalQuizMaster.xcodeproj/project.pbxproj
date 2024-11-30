@@ -24,14 +24,14 @@
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
 		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
 		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
-		448A3D492CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */; };
-		448A3D4B2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
 		448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */; };
 		448A3D512CFA0D7300D0D758 /* QuizSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D502CFA0D7300D0D758 /* QuizSession.swift */; };
 		448A3D532CFA133F00D0D758 /* QuizAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D522CFA133F00D0D758 /* QuizAttempt.swift */; };
 		448A3D572CFADC9B00D0D758 /* ColorScheme+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D562CFADC9B00D0D758 /* ColorScheme+.swift */; };
 		448A3D592CFAE2C400D0D758 /* ForMacStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D582CFAE2C400D0D758 /* ForMacStepper.swift */; };
+		448A3D5B2CFB637D00D0D758 /* QuizSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D5A2CFB637D00D0D758 /* QuizSessionManager.swift */; };
+		448A3D5D2CFB689600D0D758 /* Stat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D5C2CFB689600D0D758 /* Stat.swift */; };
 		448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64DF2CF86122006D81BD /* MoreInfoView.swift */; };
 		448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E12CF873D3006D81BD /* TutorialGuideView.swift */; };
 		448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64E32CF874EA006D81BD /* LicenseView.swift */; };
@@ -103,7 +103,7 @@
 		44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */; };
 		44D6F2D32CF4CD2500B91BBA /* IntervalHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */; };
 		44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */; };
-		44D6F2D72CF5E4CF00B91BBA /* HapticMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D62CF5E4CF00B91BBA /* HapticMananger.swift */; };
+		44D6F2D72CF5E4CF00B91BBA /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D62CF5E4CF00B91BBA /* HapticManager.swift */; };
 		44D6F2EC2CF60F1500B91BBA /* SwiftUIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2D92CF60F1500B91BBA /* SwiftUIExtension.swift */; };
 		44D6F2ED2CF60F1500B91BBA /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2DA2CF60F1500B91BBA /* UIFontExtension.swift */; };
 		44D6F2EE2CF60F1500B91BBA /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44D6F2DB2CF60F1500B91BBA /* UILabelExtension.swift */; };
@@ -153,14 +153,14 @@
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
-		448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityCreateHelper.swift; sourceTree = "<group>"; };
-		448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecordEntityHelper.swift; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
 		448A3D4E2CF9EBD800D0D758 /* QuizAnswerMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAnswerMode.swift; sourceTree = "<group>"; };
 		448A3D502CFA0D7300D0D758 /* QuizSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSession.swift; sourceTree = "<group>"; };
 		448A3D522CFA133F00D0D758 /* QuizAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizAttempt.swift; sourceTree = "<group>"; };
 		448A3D562CFADC9B00D0D758 /* ColorScheme+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ColorScheme+.swift"; sourceTree = "<group>"; };
 		448A3D582CFAE2C400D0D758 /* ForMacStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForMacStepper.swift; sourceTree = "<group>"; };
+		448A3D5A2CFB637D00D0D758 /* QuizSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSessionManager.swift; sourceTree = "<group>"; };
+		448A3D5C2CFB689600D0D758 /* Stat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stat.swift; sourceTree = "<group>"; };
 		448C64DF2CF86122006D81BD /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
 		448C64E12CF873D3006D81BD /* TutorialGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialGuideView.swift; sourceTree = "<group>"; };
 		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelper.swift; sourceTree = "<group>"; };
 		44D6F2D22CF4CD2500B91BBA /* IntervalHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalHelperTests.swift; sourceTree = "<group>"; };
 		44D6F2D42CF4FD4700B91BBA /* Tonic.Accidental+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Accidental+.swift"; sourceTree = "<group>"; };
-		44D6F2D62CF5E4CF00B91BBA /* HapticMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticMananger.swift; sourceTree = "<group>"; };
+		44D6F2D62CF5E4CF00B91BBA /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		44D6F2D92CF60F1500B91BBA /* SwiftUIExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIExtension.swift; sourceTree = "<group>"; };
 		44D6F2DA2CF60F1500B91BBA /* UIFontExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
 		44D6F2DB2CF60F1500B91BBA /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
@@ -282,6 +282,7 @@
 				448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */,
 				448A3D502CFA0D7300D0D758 /* QuizSession.swift */,
 				448A3D522CFA133F00D0D758 /* QuizAttempt.swift */,
+				448A3D5C2CFB689600D0D758 /* Stat.swift */,
 			);
 			path = ValueObject;
 			sourceTree = "<group>";
@@ -344,8 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				448A3D412CF8B0CC00D0D758 /* Persistence.swift */,
-				448A3D482CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift */,
-				448A3D4A2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift */,
+				448A3D5A2CFB637D00D0D758 /* QuizSessionManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -555,7 +555,7 @@
 			isa = PBXGroup;
 			children = (
 				44D6F2662CF2324F00B91BBA /* SoundManager.swift */,
-				44D6F2D62CF5E4CF00B91BBA /* HapticMananger.swift */,
+				44D6F2D62CF5E4CF00B91BBA /* HapticManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -813,23 +813,23 @@
 				4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
-				44D6F2D72CF5E4CF00B91BBA /* HapticMananger.swift in Sources */,
+				44D6F2D72CF5E4CF00B91BBA /* HapticManager.swift in Sources */,
 				448C64ED2CF88623006D81BD /* StatsView.swift in Sources */,
 				44D6F2ED2CF60F1500B91BBA /* UIFontExtension.swift in Sources */,
 				44D6F2F92CF60F1500B91BBA /* AlertKitAPI.swift in Sources */,
 				44D6F2F62CF60F1500B91BBA /* AlertViewProtocol.swift in Sources */,
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
-				448A3D492CF8BDF500D0D758 /* QuestionRecordEntityCreateHelper.swift in Sources */,
-				448A3D4B2CF9D86500D0D758 /* QuestionRecordEntityHelper.swift in Sources */,
 				44D6F2F82CF60F1500B91BBA /* AlertIcon.swift in Sources */,
 				44D6F2F42CF60F1500B91BBA /* AlertAppleMusic17View.swift in Sources */,
 				448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */,
+				448A3D5B2CFB637D00D0D758 /* QuizSessionManager.swift in Sources */,
 				448C64E02CF86122006D81BD /* MoreInfoView.swift in Sources */,
 				4469E8D32CEA327300CC506C /* IntervalPairDirection.swift in Sources */,
 				44D6F2D12CF4CB8100B91BBA /* IntervalHelper.swift in Sources */,
 				44D6F1FF2CEF78A200B91BBA /* Tonic.Letter+.swift in Sources */,
 				448C64EE2CF88785006D81BD /* QuizView.swift in Sources */,
+				448A3D5D2CFB689600D0D758 /* Stat.swift in Sources */,
 				448C64E22CF873D3006D81BD /* TutorialGuideView.swift in Sources */,
 				44D6F2EE2CF60F1500B91BBA /* UILabelExtension.swift in Sources */,
 				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,

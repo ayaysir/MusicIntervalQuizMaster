@@ -13,10 +13,6 @@ struct IntervalPair: CustomStringConvertible, Equatable, Hashable {
   let direction: IntervalPairDirection
   let clef: Clef
   
-  // var interval: Interval? {
-  //   Interval.betweenNotes(startNote, endNote)
-  // }
-  
   var advancedInterval: AdvancedInterval? {
     AdvancedInterval.betweenNotes(startNote, endNote)
   }

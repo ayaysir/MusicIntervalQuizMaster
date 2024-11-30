@@ -15,26 +15,25 @@ struct AppSettingView: View {
   @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   @AppStorage(.cfgAppAppearance) var cfgAppAppearance = 0
   
+  private var stepperLabel: some View {
+    HStack {
+      Text("문제풀이 타이머")
+      Spacer()
+      Text(cfgTimerSeconds == 0 ? "제한없음" : "\(cfgTimerSeconds)초")
+        .foregroundColor(.gray)
+    }
+  }
+  
   var body: some View {
     Form {
       Section {
         if ProcessInfo.processInfo.isiOSAppOnMac {
           ForMacStepper(value: $cfgTimerSeconds, range: 0...60, step: 5) {
-            HStack {
-              Text("문제풀이 타이머")
-              Spacer()
-              Text(cfgTimerSeconds == 0 ? "제한없음" : "\(cfgTimerSeconds)초")
-                .foregroundColor(.gray)
-            }
+            stepperLabel
           }
         } else {
           Stepper(value: $cfgTimerSeconds, in: 0...60, step: 5) {
-            HStack {
-              Text("문제풀이 타이머")
-              Spacer()
-              Text(cfgTimerSeconds == 0 ? "제한없음" : "\(cfgTimerSeconds)초")
-                .foregroundColor(.gray)
-            }
+            stepperLabel
           }
         }
       } header: {

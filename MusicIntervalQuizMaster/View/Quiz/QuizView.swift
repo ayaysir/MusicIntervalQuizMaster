@@ -24,14 +24,8 @@ struct QuizView: View {
   @State private var timerActive: Bool = true
   @State private var timer: Timer?
   
-  var recordHelper = QuestionRecordEntityCreateHelper()
-  
   var body: some View {
     VStack {
-      ScrollView {
-        Text("\(viewModel.session)")
-          .font(.system(size: 7))
-      }
       Spacer()
       
       HStack {
@@ -46,7 +40,7 @@ struct QuizView: View {
         Button {
           cfgQuizSoundAutoplay.toggle()
         } label: {
-          Label("Auto Sound \(viewModel.answerMode)", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
+          Label("Auto Sound", systemImage: cfgQuizSoundAutoplay ? "speaker.wave.2.fill" : "speaker.fill")
             .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
             .font(.system(size: 14))
         }
@@ -91,6 +85,11 @@ struct QuizView: View {
           // recordStep1()
         }
         .onTapGesture {
+          if store.bool(forKey: .cfgHapticPressedIntervalKeyboard) {
+            HapticManager.rigid.vibrate()
+          }
+          HapticManager.soft.vibrate()
+          
           isMusiqwikViewPressed = true
           DispatchQueue.main.asyncAfter(wallDeadline: .now() + 0.2) {
             isMusiqwikViewPressed = false
@@ -247,8 +246,7 @@ extension QuizView {
   private var currentSessionButton: some View {
     Menu {
       Button("새로운 세션 시작") {
-        recordHelper.createNewSession()
-        recordHelper.createNewRecordEntity()
+        // CoreData: 세션 생성
         viewModel.preparePairData()
       }
       Text("현재 기록을 초기화하고 새로운 세션을 시작합니다.")
@@ -302,7 +300,7 @@ extension QuizView {
   
   private func checkAnswer() {
     guard keyboardViewModel.intervalNumber != 0 else {
-      HapticMananger.warning.vibrate()
+      HapticManager.warning.vibrate()
       return
     }
     
@@ -315,7 +313,7 @@ extension QuizView {
     
     if isCorrect {
       if store.bool(forKey: .cfgHapticAnswer) {
-        HapticMananger.success.vibrate()
+        HapticManager.success.vibrate()
       }
       
       if store.bool(forKey: .cfgAppAutoNextMove) {
@@ -336,16 +334,21 @@ extension QuizView {
     keyboardViewModel.answerMode = viewModel.answerMode
     
     if store.bool(forKey: .cfgHapticWrong) {
-      HapticMananger.warning.vibrate()
+      HapticManager.warning.vibrate()
     }
   }
   
   private func goNextQuestion() {
+    if store.bool(forKey: .cfgHapticPressedIntervalKeyboard) {
+      HapticManager.rigid.vibrate()
+    }
+    
     viewModel.next()
     nextAnimation(afterOffsetX: -350)
     comebackAnimation()
     keyboardViewModel.intervalNumber = 0
     keyboardViewModel.answerMode = viewModel.answerMode
+    
   }
   
   private func pressEnterButton() {
@@ -396,24 +399,8 @@ extension QuizView {
     showAnswerAlert = true
     checkAnswer()
   }
-  
-  private func recordStep1() {
-    guard viewModel.currentPairIsNotSolved else {
-      return
-    }
-    // record step 1: 시작할 때
-    let currentPair = viewModel.currentPair
-    
-    recordHelper.create_step1_afterOnAppear(
-      direction: currentPair.direction,
-      clef: currentPair.clef,
-      startTime: .now,
-      startNote: currentPair.startNote,
-      endNote: currentPair.endNote
-    )
-  }
 }
 
 #Preview {
-  QuizView(recordHelper: .init(isForPreview: true))
+  QuizView(viewModel: .init(cdManager: nil))
 }

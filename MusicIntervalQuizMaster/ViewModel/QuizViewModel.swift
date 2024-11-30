@@ -15,9 +15,15 @@ final class QuizViewModel: ObservableObject {
   @Published private(set) var currentPairIndex = 0
   @Published var answerMode: QuizAnswerMode = .inQuiz
   
-  init() {
+  private var manager = QuizSessionManager(context: PersistenceController.shared.container.viewContext)
+  
+  init(cdManager: QuizSessionManager? = nil) {
     if !store.bool(forKey: .checkInitConfigCompleted) {
       MusicIntervalQuizMasterApp.initConfigValues()
+    }
+    
+    if let cdManager {
+      self.manager = cdManager
     }
     
     preparePairData()
@@ -41,13 +47,20 @@ final class QuizViewModel: ObservableObject {
       }
     }
   
-    session = QuizSession(uuid: .init(), createTime: .now)
+    let uuid = UUID()
+    let createTime = Date.now
+    
+    // 세션 생성 및 CD에 등록, uuid는 session 내부에 저장되어있음
+    session = QuizSession(uuid: uuid, createTime: createTime)
+    _ = manager.createSession(uuid: uuid, createTime: createTime)
+    print("created session ID:", uuid, createTime)
+    
     // 첫 번째 Record 생성
     createRecordsFromPairIndex()
   }
   
   func createRecordsFromPairIndex() {
-    let record: QuestionRecord = .init(sessionId: session.uuid, seq: currentPairIndex, questionPair: pairs[currentPairIndex], firstAppearedTime: .now)
+    let record: QuestionRecord = .init(sessionId: session.uuid, seq: currentPairIndex, questionPair: pairs[currentPairIndex], firstAppearedTime: .now, timerLimit: store.integer(forKey: .cfgTimerSeconds))
     session.records.append(record)
   }
   
@@ -88,11 +101,17 @@ final class QuizViewModel: ObservableObject {
     let isCorrect = myInterval == interval
     let attempt = QuizAttempt(time: .now, myInterval: myInterval, isCorrect: isCorrect)
     
-    if isCorrect, session.records[currentPairIndex].attempts.isEmpty {
-      session.records[currentPairIndex].isCorrectAtFirstTry = true
+    
+    if isCorrect {
+      let currentRecord = session.records[currentPairIndex]
+      session.records[currentPairIndex].isCorrectAtFirstTry = currentRecord.attempts.isEmpty
+      
+      let cdAppendResult = manager.addQuestionRecord(toSessionWithID: session.uuid, record: session.records[currentPairIndex])
+      print(cdAppendResult ? "CD에 record append 성공: \(currentRecord)" : "CD에 record append 실패")
     }
     
-    if let last = session.records.last, currentPairIndex == last.seq {
+    if let last = session.records.last,
+       currentPairIndex == last.seq {
       session.records[currentPairIndex].attempts.append(attempt)
     }
     
