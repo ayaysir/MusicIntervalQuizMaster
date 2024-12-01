@@ -12,25 +12,25 @@ struct MoreInfoView: View {
   var body: some View {
     NavigationStack {
       Form {
-        // NavigationLink {
-        //   ScrollView {
-        //     let text = QuizSessionManager(context: PersistenceController.shared.container.viewContext).fetchAllStats().map { $0.oneLineDescription }.joined(separator: "\n")
-        //     Text(text)
-        //       .font(.system(size: 7))
-        //       .onTapGesture {
-        //         UIPasteboard.general.string = text
-        //       }
-        //   }
-        //   .toolbar {
-        //     ToolbarItem {
-        //       Button("delete") {
-        //         QuizSessionManager(context: PersistenceController.shared.container.viewContext).deleteAllSessions()
-        //       }
-        //     }
-        //   }
-        // } label: {
-        //   Text("View Logs")
-        // }
+        NavigationLink {
+          ScrollView {
+            let text = QuizSessionManager(context: PersistenceController.shared.container.viewContext).fetchAllStatsAsCSV()
+            Text(text)
+              .font(.system(size: 7))
+              .onTapGesture {
+                UIPasteboard.general.string = text
+              }
+          }
+          .toolbar {
+            ToolbarItem {
+              Button("delete") {
+                QuizSessionManager(context: PersistenceController.shared.container.viewContext).deleteAllSessions()
+              }
+            }
+          }
+        } label: {
+          Text("View Logs")
+        }
         
         Section("도움말") {
           NavigationLink("튜토리얼 가이드") {

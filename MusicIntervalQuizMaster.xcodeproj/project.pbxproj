@@ -15,6 +15,8 @@
 		440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6482CEA282F00B01C1B /* FontManager.swift */; };
 		440BE64C2CEA285600B01C1B /* Musiqwik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 440BE64B2CEA285600B01C1B /* Musiqwik.ttf */; };
 		440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */; };
+		446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300282CFB807800C33BCB /* StatsViewModel.swift */; };
+		4463002C2CFC2C6900C33BCB /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463002B2CFC2C6900C33BCB /* Int+.swift */; };
 		4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CB2CEA298100CC506C /* IntervalModifier.swift */; };
 		4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CD2CEA2D0D00CC506C /* Clef.swift */; };
 		4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */; };
@@ -144,6 +146,9 @@
 		440BE6482CEA282F00B01C1B /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		440BE64B2CEA285600B01C1B /* Musiqwik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Musiqwik.ttf; sourceTree = "<group>"; };
 		440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusiqwikView.swift; sourceTree = "<group>"; };
+		446300282CFB807800C33BCB /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
+		4463002A2CFB86EE00C33BCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4463002B2CFC2C6900C33BCB /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		4469E8CB2CEA298100CC506C /* IntervalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalModifier.swift; sourceTree = "<group>"; };
 		4469E8CD2CEA2D0D00CC506C /* Clef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clef.swift; sourceTree = "<group>"; };
 		4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMusiqwikText.swift; sourceTree = "<group>"; };
@@ -337,6 +342,7 @@
 				448A3D552CFADC9200D0D758 /* SwiftUI */,
 				448A3D542CFADC8200D0D758 /* Tonic */,
 				44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */,
+				4463002B2CFC2C6900C33BCB /* Int+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -437,6 +443,7 @@
 		44C4CEF12C8C47A80092C452 /* MusicIntervalQuizMaster */ = {
 			isa = PBXGroup;
 			children = (
+				4463002A2CFB86EE00C33BCB /* Info.plist */,
 				44D6F2D82CF60F0700B91BBA /* Module */,
 				448A3D402CF8B0BE00D0D758 /* CoreData */,
 				44D6F2CF2CF4CB7600B91BBA /* Helper */,
@@ -473,6 +480,7 @@
 				440BE63C2CE7994000B01C1B /* QuizViewModel.swift */,
 				440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */,
 				44D6F1ED2CECB34D00B91BBA /* SettingViewModel.swift */,
+				446300282CFB807800C33BCB /* StatsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -816,6 +824,8 @@
 				44D6F2D72CF5E4CF00B91BBA /* HapticManager.swift in Sources */,
 				448C64ED2CF88623006D81BD /* StatsView.swift in Sources */,
 				44D6F2ED2CF60F1500B91BBA /* UIFontExtension.swift in Sources */,
+				446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */,
+				4463002C2CFC2C6900C33BCB /* Int+.swift in Sources */,
 				44D6F2F92CF60F1500B91BBA /* AlertKitAPI.swift in Sources */,
 				44D6F2F62CF60F1500B91BBA /* AlertViewProtocol.swift in Sources */,
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
@@ -1010,6 +1020,7 @@
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicIntervalQuizMaster/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Interval Quiz";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1045,6 +1056,7 @@
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MusicIntervalQuizMaster/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Interval Quiz";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

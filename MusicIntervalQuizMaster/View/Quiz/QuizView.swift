@@ -26,7 +26,10 @@ struct QuizView: View {
   
   var body: some View {
     VStack {
-      Spacer()
+      Rectangle()
+        .foregroundStyle(.gray)
+        .opacity(0.08)
+        .ignoresSafeArea()
       
       HStack {
         currentSessionButton
@@ -46,6 +49,7 @@ struct QuizView: View {
         }
       }
       .padding(.horizontal, 10)
+      .padding(.top, 20)
       
       MusiqwikView(pair: viewModel.currentPair)
         // .frame(maxWidth: .infinity)

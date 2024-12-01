@@ -57,6 +57,8 @@ final class QuizViewModel: ObservableObject {
     
     // 첫 번째 Record 생성
     createRecordsFromPairIndex()
+    
+    answerMode = .inQuiz
   }
   
   func createRecordsFromPairIndex() {
@@ -85,7 +87,7 @@ final class QuizViewModel: ObservableObject {
     case .inQuiz:
       ""
     case .correct:
-      "✅ 맞았습니다. (\(currentPair.advancedInterval?.localizedDescription ?? ""); \(currentPair.startNote) - \(currentPair.endNote))"
+      "✅ 맞았습니다. \(currentPair.advancedInterval?.localizedDescription ?? "") [\(currentPair.startNote) - \(currentPair.endNote)]"
     case .wrong:
       "❌ 틀렸습니다. 다시 한 번 풀어보세요."
     }
@@ -101,19 +103,27 @@ final class QuizViewModel: ObservableObject {
     let isCorrect = myInterval == interval
     let attempt = QuizAttempt(time: .now, myInterval: myInterval, isCorrect: isCorrect)
     
+    // attempt 넣기
+    if let last = session.records.last {
+      // 마지막 인덱스랑 현재 인덱스가 동일한 경우
+      // 틀렸다면 attempts에 요소를 넣을 것이고
+      // 맞았다면 바로 다음문제로 넘어가도록 되어있으니 넣을 일이 없다.
+      if currentPairIndex == last.seq {
+        session.records[currentPairIndex].attempts.append(attempt)
+      }
+    } else if session.records[currentPairIndex].attempts.isEmpty {
+      session.records[currentPairIndex].attempts.append(attempt)
+    }
     
     if isCorrect {
       let currentRecord = session.records[currentPairIndex]
-      session.records[currentPairIndex].isCorrectAtFirstTry = currentRecord.attempts.isEmpty
+      session.records[currentPairIndex].isCorrectAtFirstTry = currentRecord.tryCount == 1
       
       let cdAppendResult = manager.addQuestionRecord(toSessionWithID: session.uuid, record: session.records[currentPairIndex])
       print(cdAppendResult ? "CD에 record append 성공: \(currentRecord)" : "CD에 record append 실패")
     }
     
-    if let last = session.records.last,
-       currentPairIndex == last.seq {
-      session.records[currentPairIndex].attempts.append(attempt)
-    }
+    
     
     answerMode = isCorrect ? .correct : .wrong
     

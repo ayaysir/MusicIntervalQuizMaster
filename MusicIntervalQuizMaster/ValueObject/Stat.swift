@@ -49,4 +49,8 @@ extension Stat {
     \(finalAnswerTime)\t\(isCorrect)\t\(tryCount)\t\(myIntervalModifier)\t\(myIntervalNumber)
     """
   }
+  
+  var recordId: String {
+    "\(sessionId.uuidString)_\(seq)"
+  }
 }

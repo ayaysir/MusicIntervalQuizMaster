@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct StatsView: View {
-  // 샘플 데이터
-  let items = Array(1...20)
+  @StateObject var viewModel = StatsViewModel()
   
   // 두 개의 열을 가진 Grid 설정
   let columns: [GridItem] = [
@@ -18,20 +17,26 @@ struct StatsView: View {
   ]
   
   var body: some View {
-    VStack {
+    NavigationStack {
       ChartView()
         .padding(.horizontal, 10)
         .frame(height: 200)
       // Spacer()
       ScrollView {
         LazyVGrid(columns: columns, spacing: 16) {
-          ForEach(items, id: \.self) { item in
-            Text("Item \(item)")
-              .frame(height: 100)
-              .frame(maxWidth: .infinity)
-              .background(Color.gray)
-              .foregroundColor(.white)
-              .cornerRadius(8)
+          ForEach(viewModel.stats, id: \.recordId) { stat in
+            NavigationLink {
+              let text = stat.oneLineDescription.split(separator: "\t").map(String.init).joined(separator: "\n")
+              Text("\(text)")
+            } label: {
+              Text("\(stat.oneLineDescription)")
+                .frame(height: 100)
+                .frame(maxWidth: .infinity)
+                .background(Color.gray)
+                .foregroundColor(.white)
+                .cornerRadius(8)
+            }
+
           }
         }
         .padding(10) // Grid 전체 패딩
@@ -41,5 +46,10 @@ struct StatsView: View {
 }
 
 #Preview {
-  StatsView()
+  StatsView(
+    viewModel: StatsViewModel(
+      cdManager: .init(
+        context: PersistenceController.preview.container.viewContext)
+    )
+  )
 }

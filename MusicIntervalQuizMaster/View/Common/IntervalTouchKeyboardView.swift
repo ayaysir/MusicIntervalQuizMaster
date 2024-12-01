@@ -25,6 +25,7 @@ struct IntervalTouchKeyboardView: View {
   
   private func internalButtonText(_ title: String, color: Color = .intervalButtonBackground) -> some View {
     Text(title)
+      .fontWeight(.medium)
       .frame(height: 50)
       .frame(maxWidth: .infinity)
   }
@@ -53,6 +54,7 @@ struct IntervalTouchKeyboardView: View {
   private func enterButton(action: @escaping (() -> Void)) -> some View {
     Button(action: action) {
       Image(systemName: keyboardViewModel.answerMode.systemImageString)
+        .fontWeight(.medium)
         .frame(height: 50)
         .frame(maxWidth: .infinity)
     }

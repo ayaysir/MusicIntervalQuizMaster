@@ -44,6 +44,7 @@ class QuizSessionManager {
     }
   }
   
+  /// Create QuestionRecordEntity and append to SessionEntity
   func addQuestionRecord(toSessionWithID sessionID: UUID, record: QuestionRecordEntity) -> Bool {
     let fetchRequest: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "id == %@", sessionID as CVarArg)
@@ -61,6 +62,7 @@ class QuizSessionManager {
     return false
   }
   
+  /// Create record(not entity) and append to SessionEntity
   func addQuestionRecord(toSessionWithID sessionID: UUID, record: QuestionRecord) -> Bool {
     let fetchRequest: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
     fetchRequest.predicate = NSPredicate(format: "id == %@", sessionID as CVarArg)
@@ -88,6 +90,8 @@ class QuizSessionManager {
         recordEntity.myIntervalNumber = Int16(firstAttempt.myInterval.number)
       }
       
+      recordEntity.finalAnswerTime = record.attempts.last?.time ?? .now
+      
       // IntervalPair 매핑
       recordEntity.startNoteLetter = record.questionPair.startNote.letter.description
       recordEntity.startNoteAccidental = record.questionPair.startNote.accidental.description
@@ -113,6 +117,7 @@ class QuizSessionManager {
     }
   }
   
+  /// featch all stats as [Stat]
   func fetchAllStats() -> [Stat] {
     let fetchRequest: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
     
@@ -137,9 +142,9 @@ class QuizSessionManager {
               let clef = record.clef,
               let direction = record.direction,
               let startNoteLetter = record.startNoteLetter,
-              let startNoteAccidental = record.startNoteAccidental,
+              // let startNoteAccidental = record.startNoteAccidental,
               let endNoteLetter = record.endNoteLetter,
-              let endNoteAccidental = record.endNoteAccidental,
+              // let endNoteAccidental = record.endNoteAccidental,
               let myIntervalModifier = record.myIntervalModifier
             else {
               continue
@@ -154,10 +159,10 @@ class QuizSessionManager {
               clef: clef,
               direction: direction,
               startNoteLetter: startNoteLetter,
-              startNoteAccidental: startNoteAccidental,
+              startNoteAccidental: record.startNoteAccidental ?? "",
               startNoteOctave: Int(record.startNoteOctave),
               endNoteLetter: endNoteLetter,
-              endNoteAccidental: endNoteAccidental,
+              endNoteAccidental: record.endNoteAccidental ?? "",
               endNoteOctave: Int(record.endNoteOctave),
               firstTryTime: firstTryTime,
               finalAnswerTime: finalAnswerTime,
@@ -197,6 +202,61 @@ class QuizSessionManager {
     } catch {
       // 오류 처리
       print("Error deleting all sessions: \(error.localizedDescription)")
+    }
+  }
+  
+  func fetchAllStatsAsCSV() -> String {
+    let fetchRequest: NSFetchRequest<SessionEntity> = SessionEntity.fetchRequest()
+    
+    do {
+      let sessions = try context.fetch(fetchRequest)
+      var csvRows: [String] = []
+      
+      // CSV 헤더 추가
+      csvRows.append("""
+        sessionId,sessionCreateTime,seq,startTime,timerLimit,clef,direction,startNoteLetter,startNoteAccidental,startNoteOctave,endNoteLetter,endNoteAccidental,endNoteOctave,firstTryTime,finalAnswerTime,isCorrect,tryCount,myIntervalModifier,myIntervalNumber
+        """)
+      
+      for session in sessions {
+        let sessionId = session.id?.uuidString ?? "N/A"
+        let sessionCreateTime = session.createTime?.description ?? "N/A"
+        
+        if let records = session.questionRecords as? Set<QuestionRecordEntity> {
+          for record in records {
+            let seq = record.seq
+            let startTime = record.startTime?.description ?? "N/A"
+            let timerLimit = record.timerLimit
+            let clef = record.clef ?? "N/A"
+            let direction = record.direction ?? "N/A"
+            
+            let startNoteLetter = record.startNoteLetter ?? "N/A"
+            let startNoteAccidental = record.startNoteAccidental ?? "N/A"
+            let startNoteOctave = record.startNoteOctave
+            
+            let endNoteLetter = record.endNoteLetter ?? "N/A"
+            let endNoteAccidental = record.endNoteAccidental ?? "N/A"
+            let endNoteOctave = record.endNoteOctave
+            
+            let firstTryTime = record.firstTryTime?.description ?? "N/A"
+            let finalAnswerTime = record.finalAnswerTime?.description ?? "N/A"
+            let isCorrect = record.isCorrect
+            let tryCount = record.tryCount
+            
+            let myIntervalModifier = record.myIntervalModifier ?? "N/A"
+            let myIntervalNumber = record.myIntervalNumber
+            
+            let csvRow = """
+              \(sessionId),\(sessionCreateTime),\(seq),\(startTime),\(timerLimit),\(clef),\(direction),\(startNoteLetter),\(startNoteAccidental),\(startNoteOctave),\(endNoteLetter),\(endNoteAccidental),\(endNoteOctave),\(firstTryTime),\(finalAnswerTime),\(isCorrect),\(tryCount),\(myIntervalModifier),\(myIntervalNumber)
+              """
+            csvRows.append(csvRow)
+          }
+        }
+      }
+      
+      return csvRows.joined(separator: "\n")
+    } catch {
+      print("Failed to fetch stats: \(error.localizedDescription)")
+      return ""
     }
   }
 }
