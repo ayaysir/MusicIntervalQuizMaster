@@ -5,11 +5,13 @@
 //  Created by 윤범태 on 11/19/24.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - Global Variables
 
 let store = UserDefaults.standard
+let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+let osVersion = UIDevice.current.systemVersion
 
 // MARK: - Global Constants
 

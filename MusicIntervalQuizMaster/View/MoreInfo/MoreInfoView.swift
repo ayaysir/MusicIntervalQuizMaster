@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct MoreInfoView: View {
+  @State private var isShowingMailView = false
+  @State private var alertItem: AlertItem? = nil
   
   var body: some View {
     NavigationStack {
       Form {
+        #if DEBUG
         NavigationLink {
           ScrollView {
             let text = QuizSessionManager(context: PersistenceController.shared.container.viewContext).fetchAllStatsAsCSV()
@@ -31,31 +34,63 @@ struct MoreInfoView: View {
         } label: {
           Text("View Logs")
         }
+        #endif
         
-        Section("도움말") {
-          NavigationLink("튜토리얼 가이드") {
+        Section("Help") {
+          NavigationLink("Tutorial Guide") {
             TutorialGuideView()
           }
         }
-        
-        Section("저작권 정보") {
-          NavigationLink("오픈 소스 저작권 보기") {
+
+        Section("Copyright Information") {
+          NavigationLink("View Open Source Licenses") {
             LicenseView()
           }
         }
-        
+
         Section {
-          Button("개발자에게 이메일 보내기") {}
-          Button("App Store에서 유용한 다른 앱 더 보기") {}
+          Button("Send Email to Developer") {
+            if MailRPView.canSendMail {
+              isShowingMailView = true
+            } else {
+              alertItem = AlertItem(message: "Unable to send email. Please set up your email account.")
+            }
+          }
+          Button("View My Other Useful Apps") {
+            openAppStoreLink()
+          }
         } header: {
-          Text("피드백 및 더 보기")
+          Text("Feedback & More")
         } footer: {
-          let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
           Text("APP VERSION: \(appVersion ?? "unknown")")
-          
         }
       }
       .navigationTitle("More Info")
+      .sheet(isPresented: $isShowingMailView) {
+        MailRPView(
+          recipientEmail: "yoonbumtae@gmail.com",
+          subject: "Inquiry About the Interval Quiz App",
+          body: """
+          - App Version: \(appVersion ?? "unknown")
+          - OS Version: \(osVersion)
+          - Device: \(UIDevice.modelName)
+          
+          Please write your inquiries or feedback.
+          """
+        )
+      }
+      .alert(item: $alertItem) { item in
+        Alert(title: Text("Not available."), message: Text(item.message), dismissButton: .default(Text("OK")))
+      }
+    }
+  }
+}
+
+extension MoreInfoView {
+  private func openAppStoreLink() {
+    if let url = URL(string: "https://apps.apple.com/developer/id1578285460"), // 앱스토어 링크
+       UIApplication.shared.canOpenURL(url) {
+      UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
   }
 }

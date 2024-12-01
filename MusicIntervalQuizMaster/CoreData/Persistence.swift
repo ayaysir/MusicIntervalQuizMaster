@@ -16,11 +16,6 @@ struct PersistenceController {
   init(inMemory: Bool = false) {
     container = NSPersistentCloudKitContainer(name: "MusicIntervalQuizMaster")
     
-    // 로그 끄기
-    let description = container.persistentStoreDescriptions.first
-    description?.setOption(false as NSNumber, forKey: "NSPersistentHistoryTrackingKey")
-    description?.setOption(false as NSNumber, forKey: "NSPersistentStoreRemoteChangeNotificationOptionKey")
-    
     if inMemory {
       container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
     }
