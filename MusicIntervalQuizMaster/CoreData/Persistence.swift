@@ -39,24 +39,24 @@ extension PersistenceController {
 
     // Stat 데이터를 기반으로 초기화
     let stats: [Stat] = [
-      Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
-           sessionCreateTime: Date(), seq: 0, startTime: Date(), timerLimit: 0,
-           clef: "bass", direction: "asc", startNoteLetter: "F", startNoteAccidental: "𝄫",
-           startNoteOctave: 2, endNoteLetter: "G", endNoteAccidental: "𝄪",
-           endNoteOctave: 3, firstTryTime: Date(), finalAnswerTime: Date(),
-           isCorrect: false, tryCount: 5, myIntervalModifier: "AA", myIntervalNumber: 9),
-      Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
-           sessionCreateTime: Date(), seq: 1, startTime: Date(), timerLimit: 0,
-           clef: "treble", direction: "asc", startNoteLetter: "E", startNoteAccidental: "𝄪",
-           startNoteOctave: 4, endNoteLetter: "F", endNoteAccidental: "𝄪",
-           endNoteOctave: 5, firstTryTime: Date(), finalAnswerTime: Date(),
-           isCorrect: false, tryCount: 3, myIntervalModifier: "dd", myIntervalNumber: 9),
-      Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
-           sessionCreateTime: Date(), seq: 2, startTime: Date(), timerLimit: 0,
-           clef: "bass", direction: "asc", startNoteLetter: "F", startNoteAccidental: "𝄪",
-           startNoteOctave: 2, endNoteLetter: "A", endNoteAccidental: "♯",
-           endNoteOctave: 2, firstTryTime: Date(), finalAnswerTime: Date(),
-           isCorrect: false, tryCount: 2, myIntervalModifier: "d", myIntervalNumber: 3)
+      // Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
+      //      sessionCreateTime: Date(), seq: 0, startTime: Date(), timerLimit: 0,
+      //      clef: "bass", direction: "asc", startNoteLetter: "F", startNoteAccidental: "𝄫",
+      //      startNoteOctave: 2, endNoteLetter: "G", endNoteAccidental: "𝄪",
+      //      endNoteOctave: 3, firstTryTime: Date(), finalAnswerTime: Date(),
+      //      isCorrect: false, tryCount: 5, myIntervalModifier: "AA", myIntervalNumber: 9),
+      // Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
+      //      sessionCreateTime: Date(), seq: 1, startTime: Date(), timerLimit: 0,
+      //      clef: "treble", direction: "asc", startNoteLetter: "E", startNoteAccidental: "𝄪",
+      //      startNoteOctave: 4, endNoteLetter: "F", endNoteAccidental: "𝄪",
+      //      endNoteOctave: 5, firstTryTime: Date(), finalAnswerTime: Date(),
+      //      isCorrect: false, tryCount: 3, myIntervalModifier: "dd", myIntervalNumber: 9),
+      // Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
+      //      sessionCreateTime: Date(), seq: 2, startTime: Date(), timerLimit: 0,
+      //      clef: "bass", direction: "asc", startNoteLetter: "F", startNoteAccidental: "𝄪",
+      //      startNoteOctave: 2, endNoteLetter: "A", endNoteAccidental: "♯",
+      //      endNoteOctave: 2, firstTryTime: Date(), finalAnswerTime: Date(),
+      //      isCorrect: false, tryCount: 2, myIntervalModifier: "d", myIntervalNumber: 3)
     ]
 
     // 첫 번째 세션 생성

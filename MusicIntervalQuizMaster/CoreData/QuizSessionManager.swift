@@ -102,6 +102,9 @@ class QuizSessionManager {
       recordEntity.direction = record.questionPair.direction.dataDescription
       recordEntity.clef = record.questionPair.clef.dataDescription
       
+      recordEntity.intervalModifier = record.questionPair.advancedInterval?.modifier.abbrDescription
+      recordEntity.intervalNumber = Int16(record.questionPair.advancedInterval?.number ?? 0)
+      
       // 세션과 관계 설정
       recordEntity.session = session
       session.addToQuestionRecords(recordEntity)
@@ -142,11 +145,13 @@ class QuizSessionManager {
               let clef = record.clef,
               let direction = record.direction,
               let startNoteLetter = record.startNoteLetter,
-              // let startNoteAccidental = record.startNoteAccidental,
               let endNoteLetter = record.endNoteLetter,
-              // let endNoteAccidental = record.endNoteAccidental,
               let myIntervalModifier = record.myIntervalModifier
             else {
+              continue
+            }
+            
+            guard let intervalModifier = record.intervalModifier else {
               continue
             }
             
@@ -164,6 +169,8 @@ class QuizSessionManager {
               endNoteLetter: endNoteLetter,
               endNoteAccidental: record.endNoteAccidental ?? "",
               endNoteOctave: Int(record.endNoteOctave),
+              intervalModifier: intervalModifier,
+              intervalNumber: Int(record.intervalNumber),
               firstTryTime: firstTryTime,
               finalAnswerTime: finalAnswerTime,
               isCorrect: record.isCorrect,
@@ -214,7 +221,7 @@ class QuizSessionManager {
       
       // CSV 헤더 추가
       csvRows.append("""
-        sessionId,sessionCreateTime,seq,startTime,timerLimit,clef,direction,startNoteLetter,startNoteAccidental,startNoteOctave,endNoteLetter,endNoteAccidental,endNoteOctave,firstTryTime,finalAnswerTime,isCorrect,tryCount,myIntervalModifier,myIntervalNumber
+        sessionId,sessionCreateTime,seq,startTime,timerLimit,clef,direction,startNoteLetter,startNoteAccidental,startNoteOctave,endNoteLetter,endNoteAccidental,endNoteOctave,intervalModifier,intervalNumber,firstTryTime,finalAnswerTime,isCorrect,tryCount,myIntervalModifier,myIntervalNumber
         """)
       
       for session in sessions {
@@ -237,6 +244,9 @@ class QuizSessionManager {
             let endNoteAccidental = record.endNoteAccidental ?? "N/A"
             let endNoteOctave = record.endNoteOctave
             
+            let intervalModifier = record.intervalModifier ?? "N/A"
+            let intervalNumber = record.intervalNumber
+            
             let firstTryTime = record.firstTryTime?.description ?? "N/A"
             let finalAnswerTime = record.finalAnswerTime?.description ?? "N/A"
             let isCorrect = record.isCorrect
@@ -246,7 +256,7 @@ class QuizSessionManager {
             let myIntervalNumber = record.myIntervalNumber
             
             let csvRow = """
-              \(sessionId),\(sessionCreateTime),\(seq),\(startTime),\(timerLimit),\(clef),\(direction),\(startNoteLetter),\(startNoteAccidental),\(startNoteOctave),\(endNoteLetter),\(endNoteAccidental),\(endNoteOctave),\(firstTryTime),\(finalAnswerTime),\(isCorrect),\(tryCount),\(myIntervalModifier),\(myIntervalNumber)
+              \(sessionId),\(sessionCreateTime),\(seq),\(startTime),\(timerLimit),\(clef),\(direction),\(startNoteLetter),\(startNoteAccidental),\(startNoteOctave),\(endNoteLetter),\(endNoteAccidental),\(endNoteOctave),\(intervalModifier),\(intervalNumber),\(firstTryTime),\(finalAnswerTime),\(isCorrect),\(tryCount),\(myIntervalModifier),\(myIntervalNumber)
               """
             csvRows.append(csvRow)
           }

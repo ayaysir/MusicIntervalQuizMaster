@@ -7,8 +7,18 @@
 
 import Foundation
 
+struct AnswerStatus {
+  var correct: Int
+  var total: Int
+  
+  var rate: Double {
+    Double(correct) / Double(total)
+  }
+}
+
 final class StatsViewModel: ObservableObject {
   @Published var stats: [Stat] = []
+  
   private var manager: QuizSessionManager = .init(context: PersistenceController.shared.container.viewContext)
   
   init(cdManager: QuizSessionManager? = nil) {
@@ -17,5 +27,26 @@ final class StatsViewModel: ObservableObject {
     }
     
     stats = manager.fetchAllStats()
+  }
+  
+  // 정답률을 계산하여 리턴
+  var answerStatuses: [String : AnswerStatus] {
+    var result: [String : AnswerStatus] = [:]
+
+    // stats 배열 순회
+    for stat in stats {
+      let key = "\(stat.intervalModifier)\(stat.intervalNumber)"
+      
+      var currentData = result[key, default: .init(correct: 0, total: 0)]
+      currentData.total += 1
+      if stat.isCorrect {
+        currentData.correct += 1
+      }
+      
+      // 업데이트된 데이터를 사전에 반영
+      result[key] = currentData
+    }
+
+    return result
   }
 }

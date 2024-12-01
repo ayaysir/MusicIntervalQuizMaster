@@ -70,6 +70,18 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
     }
   }
   
+  var shortLocalizedDescription: String {
+    switch self {
+    case .major: "Maj"
+    case .minor: "min"
+    case .perfect: "Pfc"
+    case .diminished: "dim"
+    case .augmented: "Aug"
+    case .doublyDiminished: "dd"
+    case .doublyAugmented: "AA"
+    }
+  }
+  
   static func from(abbreviation: String) -> IntervalModifier? {
     switch abbreviation {
     case "M": return .major

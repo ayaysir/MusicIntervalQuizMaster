@@ -113,7 +113,7 @@ struct QuizView: View {
         } label: {
           let imageName = cfgQuizSheetPosition == 0 ? "square.split.1x2.fill" : cfgQuizSheetPosition == 1 ? "square.bottomhalf.filled" : "square.tophalf.filled"
           Image(systemName: imageName)
-            .foregroundStyle(.darkGray)
+            .foregroundStyle(.solidGray)
             .font(.system(size: 13))
             .frame(width: 20, height: 20)
         }

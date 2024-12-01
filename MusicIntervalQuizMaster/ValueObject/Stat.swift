@@ -30,6 +30,9 @@ struct Stat {
   let endNoteAccidental: String
   let endNoteOctave: Int
   
+  let intervalModifier: String
+  let intervalNumber: Int
+  
   // 문제풀이 상황
   let firstTryTime: Date
   let finalAnswerTime: Date

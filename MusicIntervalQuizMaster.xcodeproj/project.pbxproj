@@ -19,6 +19,7 @@
 		4463002C2CFC2C6900C33BCB /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463002B2CFC2C6900C33BCB /* Int+.swift */; };
 		4463002E2CFC30E500C33BCB /* MailRPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463002D2CFC30E500C33BCB /* MailRPView.swift */; };
 		446300302CFC336C00C33BCB /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463002F2CFC336C00C33BCB /* UIDevice+.swift */; };
+		446300322CFCABE100C33BCB /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300312CFCABE100C33BCB /* Double.swift */; };
 		4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CB2CEA298100CC506C /* IntervalModifier.swift */; };
 		4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CD2CEA2D0D00CC506C /* Clef.swift */; };
 		4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */; };
@@ -153,6 +154,7 @@
 		4463002B2CFC2C6900C33BCB /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		4463002D2CFC30E500C33BCB /* MailRPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailRPView.swift; sourceTree = "<group>"; };
 		4463002F2CFC336C00C33BCB /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
+		446300312CFCABE100C33BCB /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		4469E8CB2CEA298100CC506C /* IntervalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalModifier.swift; sourceTree = "<group>"; };
 		4469E8CD2CEA2D0D00CC506C /* Clef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clef.swift; sourceTree = "<group>"; };
 		4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMusiqwikText.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */,
 				4463002B2CFC2C6900C33BCB /* Int+.swift */,
 				4463002F2CFC336C00C33BCB /* UIDevice+.swift */,
+				446300312CFCABE100C33BCB /* Double.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -853,6 +856,7 @@
 				44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */,
 				44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */,
 				448A3D572CFADC9B00D0D758 /* ColorScheme+.swift in Sources */,
+				446300322CFCABE100C33BCB /* Double.swift in Sources */,
 				44D6F2EC2CF60F1500B91BBA /* SwiftUIExtension.swift in Sources */,
 				448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */,
 				44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */,

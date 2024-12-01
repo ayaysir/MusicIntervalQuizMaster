@@ -8,6 +8,8 @@
         <attribute name="endNoteOctave" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="finalAnswerTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="firstTryTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="intervalModifier" optional="YES" attributeType="String"/>
+        <attribute name="intervalNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isCorrect" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="myIntervalModifier" optional="YES" attributeType="String"/>
         <attribute name="myIntervalNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

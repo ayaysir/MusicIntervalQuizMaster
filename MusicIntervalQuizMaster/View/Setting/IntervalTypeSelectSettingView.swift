@@ -9,9 +9,6 @@ import SwiftUI
 
 struct IntervalTypeSelectSettingView: View {
   @EnvironmentObject var viewModel: SettingViewModel
-  
-  
-  
   @State private var searchKeyword = ""
   
   var body: some View {
@@ -39,7 +36,6 @@ struct IntervalTypeSelectSettingView: View {
           if currentDegree == 1 {
             Text("도수별 세부 설정")
           }
-          
         }
       }
     }
