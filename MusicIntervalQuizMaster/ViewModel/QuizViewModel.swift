@@ -74,6 +74,12 @@ final class QuizViewModel: ObservableObject {
     session.records.filter { $0.attempts.count > 0 && !$0.isCorrectAtFirstTry }.count
   }
   
+  var answerPercentText: String {
+    let percentText = "\(Int(Double(answerCount) / Double(session.records.count) * 100))%"
+    return answerMode == .inQuiz ? "📝" : percentText
+    
+  }
+  
   var currentPairIsNotSolved: Bool {
     session.recordsCount <= currentPairIndex
   }
@@ -120,10 +126,8 @@ final class QuizViewModel: ObservableObject {
       session.records[currentPairIndex].isCorrectAtFirstTry = currentRecord.tryCount == 1
       
       let cdAppendResult = manager.addQuestionRecord(toSessionWithID: session.uuid, record: session.records[currentPairIndex])
-      print(cdAppendResult ? "CD에 record append 성공: \(currentRecord)" : "CD에 record append 실패")
+      print(cdAppendResult ? "CD에 record append 성공: \(currentRecord.seq)" : "CD에 record append 실패")
     }
-    
-    
     
     answerMode = isCorrect ? .correct : .wrong
     

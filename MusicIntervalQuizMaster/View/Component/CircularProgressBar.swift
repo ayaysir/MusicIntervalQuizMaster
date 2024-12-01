@@ -11,6 +11,8 @@ struct CircularProgressBar: View {
   @Binding var progress: Double // 0.0 ~ 1.0
   @Binding var text: String
   
+  @State private var progressText = ""
+  
   let lineWidth: CGFloat = 5
   
   var body: some View {
@@ -28,15 +30,17 @@ struct CircularProgressBar: View {
         .foregroundColor(Color.blue)
         .rotationEffect(.degrees(-90)) // 시작점을 위로 이동
         .scaleEffect(x: -1, y: 1) // X축 반전
+        // .animation(.linear(duration: 0.1), value: progress)
       
       // 중앙 텍스트
-      Text(text.isEmpty ? String(format: "%.0f", progress * 100) : text)
+      Text(text.isEmpty ? progressText : text)
         .font(.footnote)
         .bold()
         .foregroundColor(.blue)
     }
-    // .background(.gray.opacity(0.5))
-    // .padding(20)
+    .onChange(of: progress) { newValue in
+      progressText = String(format: "%.0f", newValue * 100)
+    }
   }
 }
 

@@ -40,6 +40,8 @@ extension String {
   static let cfgHapticWrong = "Config_Haptic_Wrong"
   
   static let cfgQuizSoundAutoplay = "Config_Quiz_SoundAutoplay"
+  /// 악보 위치 (Int) - 0: 중앙, 1: 아래 2: 위
+  static let cfgQuizSheetPosition = "Config_Quiz_SheetPosition"
   
   static let cfgAccidentalSharp = "Config_Accidental_Sharp"
   static let cfgAccidentalFlat = "Config_Accidental_Flat"
@@ -57,6 +59,8 @@ extension String {
   
   /// 다크모드 여부 (Int) - 0: 시스템, 1: 라이트 고정 2: 다크 고정
   static let cfgAppAppearance = "Config_App_Appearance"
+  
+  
 }
 
 // MARK: - Initial config values
