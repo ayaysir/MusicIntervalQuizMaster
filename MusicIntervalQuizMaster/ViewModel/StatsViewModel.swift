@@ -47,9 +47,10 @@ enum ChartXCategory: CaseIterable, Hashable {
 final class StatsViewModel: ObservableObject {
   @Published private(set) var stats: [Stat] = []
   @Published private(set) var filteredStats: [Stat] = []
+  @Published private(set) var statuses: [String : AnswerStatus] = [:]
   
   @Published var selectedYSegment = 0
-  
+  @Published var currentChartPage: Int = 0
   
   private var manager: QuizSessionManager = .init(context: PersistenceController.shared.container.viewContext)
   
@@ -60,6 +61,8 @@ final class StatsViewModel: ObservableObject {
     
     stats = manager.fetchAllStats()
     filteredStats = stats
+    
+    answerStatuses(.init(.basic, .treble, .ascending))
   }
   
   func filterBy(selectedModifier: IntervalModifier) {
@@ -67,24 +70,35 @@ final class StatsViewModel: ObservableObject {
   }
   
   // 정답률을 계산하여 리턴
-  var answerStatuses: [String : AnswerStatus] {
-    var result: [String : AnswerStatus] = [:]
+  func answerStatuses(_ categoryParameters: ChartXCategory.Parameters) {
+    statuses = [:]
 
     // stats 배열 순회
     for stat in stats {
+      switch categoryParameters.category {
+      case .basic:
+        break
+      case .clef:
+        if stat.clef != categoryParameters.clef.dataDescription {
+          continue
+        }
+      case .direction:
+        if stat.direction != categoryParameters.direction.dataDescription {
+          continue
+        }
+      }
+      
       let key = "\(stat.intervalModifier)\(stat.intervalNumber)"
       
-      var currentData = result[key, default: .init(correct: 0, total: 0)]
+      var currentData = statuses[key, default: .init(correct: 0, total: 0)]
       currentData.total += 1
       if stat.isCorrect {
         currentData.correct += 1
       }
       
       // 업데이트된 데이터를 사전에 반영
-      result[key] = currentData
+      statuses[key] = currentData
     }
-
-    return result
   }
 }
 

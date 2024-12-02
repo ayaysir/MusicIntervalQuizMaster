@@ -17,6 +17,8 @@ struct StatsView: View {
   @State private var selectedSolved: SolvingStatus? = nil
   @State private var selectedQuality: IntervalModifier? = nil
   
+  @State private var chartPageForAnimation: Int = 0
+  
   // 두 개의 열을 가진 Grid 설정
   let columns: [GridItem] = [
     GridItem(.flexible(), spacing: 16),
@@ -37,6 +39,17 @@ struct StatsView: View {
         ChartView(viewModel: viewModel)
           .padding(.horizontal, 10)
           .frame(height: CHART_VERTICAL_SIZE)
+          .transaction { transaction in
+            // ChartView의 업데이트는 애니메이션 없이 적용
+            transaction.animation = nil
+          }
+      }
+      .onChange(of: viewModel.currentChartPage) { page in
+          chartPageForAnimation = page
+        
+        withAnimation {
+          viewModel.answerStatuses(ChartXCategory.categories[page])
+        }
       }
       
       ScrollView(.horizontal) {
@@ -97,9 +110,9 @@ struct StatsView: View {
             ForEach(availableModifierList, id: \.self) { modifier in
               let degreeText = "\(modifier.localizedDescription) \(currentDegree)도"
               let abbrText = "\(modifier.abbrDescription)\(currentDegree)"
-              
-              let answerStatus = viewModel.answerStatuses[abbrText]
+               
               // Filter 3: 풀었는지 여부
+              let answerStatus = viewModel.statuses[abbrText]
               if checkVisibility(answerStatus: answerStatus) {
                 cellNaviLink(answerStatus: answerStatus, degreeText: degreeText, abbrText: abbrText)
               }
@@ -261,10 +274,21 @@ extension StatsView {
 
 extension StatsView {
   @ViewBuilder private func cell(degreeText: String, abbrText: String, answerStatus: AnswerStatus?) -> some View {
+    let currentCategory = ChartXCategory.categories[chartPageForAnimation]
+    
     let rate = answerStatus?.rate
     let rateString = answerStatus?.rate.percentageString ?? "-"
     let gradient = rate == nil ? neutralGradient : gradientColors(percentage: rate!)
     let countString = answerStatus == nil ? "- / -" : "\(answerStatus!.correct) / \(answerStatus!.total)"
+    
+    let categoryText = switch currentCategory.category {
+    case .basic:
+      ""
+    case .clef:
+      currentCategory.clef.shortLocalizedDescription
+    case .direction:
+      currentCategory.direction.localizedDescription
+    }
     
     HStack {
       VStack(alignment: .leading) {
@@ -276,6 +300,11 @@ extension StatsView {
       }
       Spacer()
       VStack(spacing: 0) {
+        if currentCategory.category != .basic {
+          Text(categoryText)
+            .font(.system(size: 10))
+            .opacity(0.8)
+        }
         Text(rateString)
           .font(.title2)
           .fontWeight(.semibold)

@@ -12,9 +12,11 @@ struct ChartView: View {
   @StateObject var viewModel: StatsViewModel
   
   var body: some View {
-    TabView {
-      ForEach(ChartXCategory.categories, id: \.self) { parameters in
+    TabView(selection: $viewModel.currentChartPage) {
+      ForEach(ChartXCategory.categories.indices, id: \.self) { index in
+        let parameters = ChartXCategory.categories[index]
         let data: [BarChartData] = viewModel.generateBarChartData(by: parameters.category, clef: parameters.clef, direction: parameters.direction)
+        
         ZStack {
           if data.isEmpty {
             let title = switch parameters.category {
@@ -35,22 +37,26 @@ struct ChartView: View {
             
           } else {
             if viewModel.selectedYSegment == 0 {
-              rateBarChart(data,
-                           category: parameters.category,
-                           clef: parameters.clef,
-                           direction: parameters.direction)
+              rateBarChart(
+                data,
+                category: parameters.category,
+                clef: parameters.clef,
+                direction: parameters.direction
+              )
             } else {
-              timeBarChart(data,
-                           category: parameters.category,
-                           clef: parameters.clef,
-                           direction: parameters.direction)
+              timeBarChart(
+                data,
+                category: parameters.category,
+                clef: parameters.clef,
+                direction: parameters.direction
+              )
             }
           }
           
         }
+        .tag(parameters)
       }
       .padding(.bottom, 20)
-      
     }
     .tabViewStyle(.page)
   }
@@ -82,7 +88,7 @@ extension ChartView {
         )
         .foregroundStyle(
           LinearGradient(
-            colors: [Color.cyan.opacity(0.9), interpolatedColorByRate(for: item.accuracy).opacity(0.7)],
+            colors: [Color.cyan.opacity(0.95), interpolatedColorByRate(for: item.accuracy).opacity(0.75)],
             startPoint: .top,
             endPoint: .bottom
           )
@@ -130,7 +136,7 @@ extension ChartView {
         )
         .foregroundStyle(
           LinearGradient(
-            colors: [Color.cyan.opacity(0.9), interpolatedColorByTime(for: item.averageResponseTime).opacity(0.7)],
+            colors: [Color.cyan.opacity(0.95), interpolatedColorByTime(for: item.averageResponseTime).opacity(0.75)],
             startPoint: .top,
             endPoint: .bottom
           )
@@ -191,16 +197,16 @@ extension ChartView {
         .padding()
         .background(Color.red)
         .onAppear {
-          let red = UIColor(Color.red)
-          print("Red Color: \(CIColor(color: red))")
+          // let red = UIColor(Color.red)
+          // print("Red Color: \(CIColor(color: red))")
         }
       
       Text("Green Color Values")
         .padding()
         .background(Color.green)
         .onAppear {
-          let green = UIColor(Color.green)
-          print("Green Color: \(CIColor(color: green))")
+          // let green = UIColor(Color.green)
+          // print("Green Color: \(CIColor(color: green))")
         }
     }
   }

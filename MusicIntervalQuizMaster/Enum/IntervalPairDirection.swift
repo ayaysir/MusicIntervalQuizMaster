@@ -17,7 +17,7 @@ enum IntervalPairDirection {
     case .descending:
       "Descending"
     case .simultaneously:
-      "Simultaneously"
+      "At Once"
     }
   }
   

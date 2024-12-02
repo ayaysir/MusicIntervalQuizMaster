@@ -51,7 +51,7 @@ extension PersistenceController {
         seq: 0,
         startTime: currentDate,
         timerLimit: 0,
-        clef: ["treble", "bass", "alto"].randomElement()!,
+        clef: ["treble", "bass"].randomElement()!,
         direction: ["asc", "dsc", "sml"].randomElement()!,
         startNoteLetter: "F",
         startNoteAccidental: "𝄫",

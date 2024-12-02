@@ -22,7 +22,6 @@
 		446300322CFCABE100C33BCB /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300312CFCABE100C33BCB /* Double.swift */; };
 		446300342CFD8C3B00C33BCB /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300332CFD8C3B00C33BCB /* Filter.swift */; };
 		446300362CFD8C5F00C33BCB /* SolvingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300352CFD8C5F00C33BCB /* SolvingStatus.swift */; };
-		446300392CFDCFA800C33BCB /* BarChartByModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300382CFDCFA800C33BCB /* BarChartByModifier.swift */; };
 		4463003B2CFDDA1300C33BCB /* BarChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463003A2CFDDA1300C33BCB /* BarChartData.swift */; };
 		4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CB2CEA298100CC506C /* IntervalModifier.swift */; };
 		4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CD2CEA2D0D00CC506C /* Clef.swift */; };
@@ -161,7 +160,6 @@
 		446300312CFCABE100C33BCB /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		446300332CFD8C3B00C33BCB /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		446300352CFD8C5F00C33BCB /* SolvingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvingStatus.swift; sourceTree = "<group>"; };
-		446300382CFDCFA800C33BCB /* BarChartByModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartByModifier.swift; sourceTree = "<group>"; };
 		4463003A2CFDDA1300C33BCB /* BarChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartData.swift; sourceTree = "<group>"; };
 		4469E8CB2CEA298100CC506C /* IntervalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalModifier.swift; sourceTree = "<group>"; };
 		4469E8CD2CEA2D0D00CC506C /* Clef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clef.swift; sourceTree = "<group>"; };
@@ -332,14 +330,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		446300372CFDBE2400C33BCB /* Chart */ = {
-			isa = PBXGroup;
-			children = (
-				446300382CFDCFA800C33BCB /* BarChartByModifier.swift */,
-			);
-			path = Chart;
-			sourceTree = "<group>";
-		};
 		4469E8CA2CEA296D00CC506C /* Enum */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,7 +433,6 @@
 		448C64E92CF883D7006D81BD /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				446300372CFDBE2400C33BCB /* Chart */,
 				448C64EA2CF883F0006D81BD /* ChartView.swift */,
 				448C64EC2CF88623006D81BD /* StatsView.swift */,
 			);
@@ -837,7 +826,6 @@
 				448A3D512CFA0D7300D0D758 /* QuizSession.swift in Sources */,
 				44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */,
 				446300302CFC336C00C33BCB /* UIDevice+.swift in Sources */,
-				446300392CFDCFA800C33BCB /* BarChartByModifier.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
 				448A3D592CFAE2C400D0D758 /* ForMacStepper.swift in Sources */,

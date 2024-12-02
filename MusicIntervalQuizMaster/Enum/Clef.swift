@@ -47,6 +47,17 @@ enum Clef: HasMusiqwikText, CaseIterable {
     }
   }
   
+  var shortLocalizedDescription: String {
+    switch self {
+    case .treble:
+      "Treble Clef"
+    case .bass:
+      "Bass Clef"
+    case .alto:
+      "Alto Clef"
+    }
+  }
+  
   var dataDescription: String {
     switch self {
     case .treble:
