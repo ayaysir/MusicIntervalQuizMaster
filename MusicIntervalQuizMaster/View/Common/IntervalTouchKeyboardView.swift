@@ -37,7 +37,7 @@ struct IntervalTouchKeyboardView: View {
     }) {
       internalButtonText(title)
     }
-    .buttonStyle(EmbossedButtonStyle())
+    .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .purple))
   }
   
   private func numberButton(_ inputNumber: Int) -> some View {
@@ -48,7 +48,7 @@ struct IntervalTouchKeyboardView: View {
       let buttonText = inputNumber == 0 ? "0 / CLR" : "\(inputNumber)"
       internalButtonText(buttonText, color: .red)
     }
-    .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .blue))
+    .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .cyan))
   }
   
   private func enterButton(action: @escaping (() -> Void)) -> some View {
@@ -65,22 +65,22 @@ struct IntervalTouchKeyboardView: View {
     HStack(spacing: 16) {
       VStack {
         HStack {
-          internalButton("완전음정", intervalModifier: .perfect)
+          internalButton(IntervalModifier.perfect.keyboardLocalizedDescription, intervalModifier: .perfect)
         }
         
         HStack {
-          internalButton("단음정", intervalModifier: .minor)
-          internalButton("장음정", intervalModifier: .major)
+          internalButton(IntervalModifier.minor.keyboardLocalizedDescription, intervalModifier: .minor)
+          internalButton(IntervalModifier.major.keyboardLocalizedDescription, intervalModifier: .major)
         }
         
         HStack {
-          internalButton("감음정", intervalModifier: .diminished)
-          internalButton("증음정", intervalModifier: .augmented)
+          internalButton(IntervalModifier.diminished.keyboardLocalizedDescription, intervalModifier: .diminished)
+          internalButton(IntervalModifier.augmented.keyboardLocalizedDescription, intervalModifier: .augmented)
         }
         
         HStack {
-          internalButton("겹감음정", intervalModifier: .doublyDiminished)
-          internalButton("겹증음정", intervalModifier: .doublyAugmented)
+          internalButton(IntervalModifier.doublyDiminished.keyboardLocalizedDescription, intervalModifier: .doublyDiminished)
+          internalButton(IntervalModifier.doublyAugmented.keyboardLocalizedDescription, intervalModifier: .doublyAugmented)
         }
       }
       VStack {

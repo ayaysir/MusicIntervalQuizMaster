@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  MusicIntervalQuizMaster
+
+  Created by 윤범태 on 12/3/24.
+  English
+*/
+
+// QuizView
+"correct_message" = "That's right!";
+"interval_message" = "It's %@.";
+"incorrect_message" = "That's wrong!";
+"incorrect_message_try_again" = "Wrong. Try solving it again.";
+"message_correct_interval" = "The interval is %@.";
+"message_try_again" = "Try again.";
+"error_occurred" = "An error has occurred.";
+"out_of_range_interval" = "The interval is beyond the learning range.";
+"new_session_start" = "Start New Session";
+"reset_current_record_and_start_new_session" = "This will reset the current record and start a new session.";
+"current_session" = "Current Session:";
+
+"modifier_key_major" = "Major";
+"modifier_key_minor" = "minor";
+"modifier_key_perfect" = "Perfect";
+"modifier_key_diminished" = "dim.";
+"modifier_key_augmented" = "Aug.";
+"modifier_key_2xdiminished" = "2x dim.";
+"modifier_key_2xaugmented" = "2x Aug.";
+
+"modifier_txf_major" = "Major";  // Major
+"modifier_txf_minor" = "minor";  // minor
+"modifier_txf_perfect" = "Perfect";  // Perfect
+"modifier_txf_diminished" = "diminished";  // diminished
+"modifier_txf_augmented" = "Augmented";  // Augmented
+"modifier_txf_2xdiminished" = "doubly dim.";  // doubly dim.
+"modifier_txf_2xaugmented" = "Doubly Aug.";  // Doubly Aug.
+
+"degree_ordinal_st" = "st";
+"degree_ordinal_nd" = "nd";
+"degree_ordinal_rd" = "rd";
+"degree_ordinal_th" = "th";
+
+"tab_drill" = "Drill";
+"tab_stats" = "Stats";
+"tab_settings" = "Settings";
+"tab_moreinfo" = "More Info";

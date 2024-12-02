@@ -60,12 +60,12 @@ struct QuizView: View {
         HStack {
           intervalTextField(
             "\(keyboardViewModel.intervalModifier.textFieldLocalizedDescription)",
-            backgroundColor: .red.opacity(0.5),
+            backgroundColor: .purple.opacity(0.4),
             isLeading: false
           )
           intervalTextField(
             "\(keyboardViewModel.intervalNumber)",
-            backgroundColor: .cyan.opacity(0.5)
+            backgroundColor: .cyan.opacity(0.4)
           )
         }
         
@@ -129,7 +129,7 @@ struct QuizView: View {
               .frame(width: 15)
             Text("Auto")
           }
-            .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
+          .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
             .font(.system(size: 13))
             .frame(width: 50, height: 20)
         }
@@ -223,20 +223,20 @@ struct QuizView: View {
   private var customAlertView: CustomAlertView {
     guard let interval = viewModel.currentPair.advancedInterval else {
       return CustomAlertView(
-        title: "에러가 발생했습니다.",
-        subtitle: "학습 범위를 넘어서는 음정입니다.",
+        title: "error_occurred".localized,
+        subtitle: "out_of_range_interval".localized,
         icon: .error
       )
     }
     
     // 약어
     let title = viewModel.answerMode == .correct
-    ? "맞았습니다. \(interval.abbrDescription) 입니다."
-    : "틀렸습니다."
+    ? "\("correct_message".localized) \("interval_message".localizedFormat(interval.abbrDescription))"
+    : "incorrect_message".localized
     // 정식 명칭
     let subtitle = viewModel.answerMode == .correct
-    ? "해당 음정은 \(interval.localizedDescription) 입니다. "
-    : "다시 한 번 풀어보세요."
+    ? "message_correct_interval".localizedFormat(interval.localizedDescription)
+    : "message_try_again".localized
     
     return CustomAlertView(
       title: title,
@@ -285,15 +285,16 @@ extension QuizView {
   
   private var currentSessionButton: some View {
     Menu {
-      Button("새로운 세션 시작") {
+      Button("new_session_start".localized) {
         // CoreData: 세션 생성
         viewModel.preparePairData()
       }
-      Text("현재 기록을 초기화하고 새로운 세션을 시작합니다.")
+
+      Text("reset_current_record_and_start_new_session".localized)
         .font(.caption2)
     } label: {
       VStack(alignment: .leading) {
-        Text("Current Session:")
+        Text("current_session".localized)
           .font(.system(size: 14))
           .bold()
         HStack {

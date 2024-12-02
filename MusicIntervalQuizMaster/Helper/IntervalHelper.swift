@@ -27,7 +27,7 @@ extension AdvancedInterval: CustomStringConvertible {
   }
   
   var localizedDescription: String {
-    "\(modifier.textFieldLocalizedDescription) \(number.ordinal)"
+    "\(modifier.textFieldLocalizedDescription) \(number)\(number.oridnalWithoutNumber)"
   }
 }
 

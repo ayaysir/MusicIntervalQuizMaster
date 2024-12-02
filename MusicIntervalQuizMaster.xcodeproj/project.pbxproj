@@ -23,6 +23,8 @@
 		446300342CFD8C3B00C33BCB /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300332CFD8C3B00C33BCB /* Filter.swift */; };
 		446300362CFD8C5F00C33BCB /* SolvingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300352CFD8C5F00C33BCB /* SolvingStatus.swift */; };
 		4463003B2CFDDA1300C33BCB /* BarChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463003A2CFDDA1300C33BCB /* BarChartData.swift */; };
+		4463003F2CFE12FC00C33BCB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463003E2CFE12FC00C33BCB /* String+.swift */; };
+		446300422CFE15CC00C33BCB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446300402CFE15CC00C33BCB /* Localizable.strings */; };
 		4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CB2CEA298100CC506C /* IntervalModifier.swift */; };
 		4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8CD2CEA2D0D00CC506C /* Clef.swift */; };
 		4469E8D12CEA305700CC506C /* HasMusiqwikText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */; };
@@ -161,6 +163,9 @@
 		446300332CFD8C3B00C33BCB /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		446300352CFD8C5F00C33BCB /* SolvingStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvingStatus.swift; sourceTree = "<group>"; };
 		4463003A2CFDDA1300C33BCB /* BarChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartData.swift; sourceTree = "<group>"; };
+		4463003E2CFE12FC00C33BCB /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		446300412CFE15CC00C33BCB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		446300432CFE15D000C33BCB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4469E8CB2CEA298100CC506C /* IntervalModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalModifier.swift; sourceTree = "<group>"; };
 		4469E8CD2CEA2D0D00CC506C /* Clef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clef.swift; sourceTree = "<group>"; };
 		4469E8D02CEA305700CC506C /* HasMusiqwikText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMusiqwikText.swift; sourceTree = "<group>"; };
@@ -360,6 +365,7 @@
 				4463002B2CFC2C6900C33BCB /* Int+.swift */,
 				4463002F2CFC336C00C33BCB /* UIDevice+.swift */,
 				446300312CFCABE100C33BCB /* Double.swift */,
+				4463003E2CFE12FC00C33BCB /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -479,6 +485,7 @@
 				44C4CEF62C8C47A90092C452 /* Assets.xcassets */,
 				44C4CEF82C8C47A90092C452 /* Preview Content */,
 				448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */,
+				446300402CFE15CC00C33BCB /* Localizable.strings */,
 			);
 			path = MusicIntervalQuizMaster;
 			sourceTree = "<group>";
@@ -732,6 +739,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 44C4CEE62C8C47A80092C452;
 			packageReferences = (
@@ -783,6 +791,7 @@
 				44D6F2C62CF245E300B91BBA /* Piano_BPM60_4B2E_83.mp3 in Resources */,
 				44D6F2C52CF245E300B91BBA /* Piano_BPM60_4B2E_55.mp3 in Resources */,
 				44D6F2B52CF245E300B91BBA /* Piano_BPM60_4B2E_66.mp3 in Resources */,
+				446300422CFE15CC00C33BCB /* Localizable.strings in Resources */,
 				44D6F2B12CF245E300B91BBA /* Piano_BPM60_4B2E_56.mp3 in Resources */,
 				44D6F2B32CF245E300B91BBA /* Piano_BPM60_4B2E_72.mp3 in Resources */,
 				44D6F2B62CF245E300B91BBA /* Piano_BPM60_4B2E_43.mp3 in Resources */,
@@ -865,6 +874,7 @@
 				44D6F2EE2CF60F1500B91BBA /* UILabelExtension.swift in Sources */,
 				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,
 				44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */,
+				4463003F2CFE12FC00C33BCB /* String+.swift in Sources */,
 				44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */,
 				448A3D572CFADC9B00D0D758 /* ColorScheme+.swift in Sources */,
 				446300322CFCABE100C33BCB /* Double.swift in Sources */,
@@ -911,6 +921,18 @@
 			targetProxy = 44D6F1F92CEF73A400B91BBA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		446300402CFE15CC00C33BCB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				446300412CFE15CC00C33BCB /* en */,
+				446300432CFE15D000C33BCB /* ko */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		44C4CEFB2C8C47A90092C452 /* Debug */ = {

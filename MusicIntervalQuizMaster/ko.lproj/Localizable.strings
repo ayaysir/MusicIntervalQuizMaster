@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  MusicIntervalQuizMaster
+
+  Created by 윤범태 on 12/3/24.
+  Korean
+*/
+
+// QuizView
+"correct_message" = "맞았습니다!";
+"interval_message" = "해당 음정은 %@ 입니다.";
+"incorrect_message" = "틀렸습니다!";
+"incorrect_message_try_again" = "틀렸습니다. 다시 한 번 풀어보세요!";
+"message_correct_interval" = "해당 음정은 %@ 입니다.";
+"message_try_again" = "다시 한 번 풀어보세요.";
+"error_occurred" = "오류가 발생했습니다.";
+"out_of_range_interval" = "음정이 학습 범위를 벗어났습니다.";
+"new_session_start" = "새로운 세션 시작";
+"reset_current_record_and_start_new_session" = "현재 기록을 초기화하고 새로운 세션을 시작합니다.";
+"current_session" = "현재 세션:";
+
+"modifier_key_major" = "장음정";
+"modifier_key_minor" = "단음정";
+"modifier_key_perfect" = "완전음정";
+"modifier_key_diminished" = "감음정";
+"modifier_key_augmented" = "증음정";
+"modifier_key_2xdiminished" = "겹감음정";
+"modifier_key_2xaugmented" = "겹증음정";
+
+"modifier_txf_major" = "장";  // Major
+"modifier_txf_minor" = "단";  // minor
+"modifier_txf_perfect" = "완전";  // Perfect
+"modifier_txf_diminished" = "감";  // diminished
+"modifier_txf_augmented" = "증";  // Augmented
+"modifier_txf_2xdiminished" = "겹감";  // doubly dim.
+"modifier_txf_2xaugmented" = "겹증";  // Doubly Aug.
+
+"degree_ordinal_st" = "도";
+"degree_ordinal_nd" = "도";
+"degree_ordinal_rd" = "도";
+"degree_ordinal_th" = "도";
+
+"tab_drill" = "퀴즈";
+"tab_stats" = "통계";
+"tab_settings" = "설정";
+"tab_moreinfo" = "더보기";

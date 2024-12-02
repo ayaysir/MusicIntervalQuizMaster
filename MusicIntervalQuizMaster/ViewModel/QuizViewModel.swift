@@ -93,9 +93,9 @@ final class QuizViewModel: ObservableObject {
     case .inQuiz:
       ""
     case .correct:
-      "✅ 맞았습니다. \(currentPair.advancedInterval?.localizedDescription ?? "") [\(currentPair.startNote) - \(currentPair.endNote)]"
+      "✅ \("correct_message".localized) \(currentPair.advancedInterval?.localizedDescription ?? "") [\(currentPair.startNote) - \(currentPair.endNote)]"
     case .wrong:
-      "❌ 틀렸습니다. 다시 한 번 풀어보세요."
+      "❌ " + "incorrect_message_try_again".localized
     }
   }
   

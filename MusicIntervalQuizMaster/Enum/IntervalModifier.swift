@@ -24,13 +24,13 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
   
   var textFieldLocalizedDescription: String {
     switch self {
-    case .major: "Major"
-    case .minor: "minor"
-    case .perfect: "Perfect"
-    case .diminished: "diminished"
-    case .augmented: "Augmented"
-    case .doublyDiminished: "doubly dim."
-    case .doublyAugmented: "Doubly Aug."
+    case .major: "modifier_txf_major".localized
+    case .minor: "modifier_txf_minor".localized
+    case .perfect: "modifier_txf_perfect".localized
+    case .diminished: "modifier_txf_diminished".localized
+    case .augmented: "modifier_txf_augmented".localized
+    case .doublyDiminished: "modifier_txf_2xdiminished".localized
+    case .doublyAugmented: "modifier_txf_2xaugmented".localized
     }
   }
   
@@ -90,7 +90,19 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
     case .diminished: "diminished"
     case .augmented: "Augmented"
     case .doublyDiminished: "2x dim."
-    case .doublyAugmented: "2x. Aug."
+    case .doublyAugmented: "2x Aug."
+    }
+  }
+  
+  var keyboardLocalizedDescription: String {
+    switch self {
+    case .major: "modifier_key_major".localized
+    case .minor: "modifier_key_minor".localized
+    case .perfect: "modifier_key_perfect".localized
+    case .diminished: "modifier_key_diminished".localized
+    case .augmented: "modifier_key_augmented".localized
+    case .doublyDiminished: "modifier_key_2xdiminished".localized
+    case .doublyAugmented: "modifier_key_2xaugmented".localized
     }
   }
   

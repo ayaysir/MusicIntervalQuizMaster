@@ -12,19 +12,19 @@ struct MainTabBarView: View {
     TabView {
       QuizView()
         .tabItem {
-          Label("Quiz", systemImage: "greetingcard")
+          Label("tab_drill".localized, systemImage: "greetingcard")
         }
       StatsView()
         .tabItem {
-          Label("Statistics", systemImage: "chart.bar.xaxis")
+          Label("tab_stats".localized, systemImage: "chart.bar.xaxis")
         }
       SettingView()
         .tabItem {
-          Label("Settings", systemImage: "gearshape.fill")
+          Label("tab_settings".localized, systemImage: "gearshape.fill")
         }
       MoreInfoView()
         .tabItem {
-          Label("More Info", systemImage: "info.circle.fill")
+          Label("tab_moreinfo".localized, systemImage: "info.circle.fill")
         }
     }
     .onAppear {

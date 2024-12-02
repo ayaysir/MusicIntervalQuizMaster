@@ -27,7 +27,7 @@ struct CircularProgressBar: View {
       Circle()
         .trim(from: 0.0, to: progress)
         .stroke(style: StrokeStyle(lineWidth: lineWidth, lineCap: .round, lineJoin: .round))
-        .foregroundColor(Color.blue)
+        .foregroundColor(Color.teal)
         .rotationEffect(.degrees(-90)) // 시작점을 위로 이동
         .scaleEffect(x: -1, y: 1) // X축 반전
         // .animation(.linear(duration: 0.1), value: progress)
@@ -36,7 +36,7 @@ struct CircularProgressBar: View {
       Text(text.isEmpty ? progressText : text)
         .font(.footnote)
         .bold()
-        .foregroundColor(.blue)
+        .foregroundColor(.solidGray)
     }
     .onChange(of: progress) { newValue in
       progressText = String(format: "%.0f", newValue * 100)
