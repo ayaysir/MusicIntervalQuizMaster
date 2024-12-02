@@ -33,31 +33,68 @@ struct PersistenceController {
 }
 
 extension PersistenceController {
+  
   static var preview: PersistenceController = {
     let result = PersistenceController(inMemory: true)
     let viewContext = result.container.viewContext
+    
+    func mockStat(intervalModifier: String, 
+                  intervalNumber: Int,
+                  myIntervalModifier: String,
+                  myIntervalNumber: Int) -> Stat {
+      Stat(sessionId: UUID(uuidString: "550e8400-e29b-41d4-a716-446655440000")!,
+           sessionCreateTime: Date(),
+           seq: 0, startTime: Date(),
+           timerLimit: 0,
+           clef: "bass",
+           direction: "asc",
+           startNoteLetter: "F",
+           startNoteAccidental: "𝄫",
+           startNoteOctave: 2,
+           endNoteLetter: "G",
+           endNoteAccidental: "𝄪",
+           endNoteOctave: 3,
+           intervalModifier: intervalModifier,
+           intervalNumber: intervalNumber,
+           firstTryTime: Date(),
+           finalAnswerTime: Date(),
+           isCorrect: intervalModifier == myIntervalModifier && intervalNumber == myIntervalNumber,
+           tryCount: 5,
+           myIntervalModifier: myIntervalModifier,
+           myIntervalNumber: myIntervalNumber
+      )
+    }
+    
+    func generateRateStats(totalCount: Int, correctRate: Double) -> [Stat] {
+      let modifiers = [
+        "M", "m", "A", "d", "P",
+                       // "dd", "AA",
+      ]
+      let numbers = Array(1...13)
+      
+      var stats: [Stat] = []
+      
+      for _ in 0..<totalCount {
+        let intervalModifier = modifiers.randomElement()!
+        let intervalNumber = numbers.randomElement()!
+        
+        let isCorrect = Double.random(in: 0...1) < correctRate
+        let myIntervalModifier = isCorrect ? intervalModifier : modifiers.randomElement()!
+        let myIntervalNumber = isCorrect ? intervalNumber : numbers.randomElement()!
+        
+        stats.append(mockStat(
+          intervalModifier: intervalModifier,
+          intervalNumber: intervalNumber,
+          myIntervalModifier: myIntervalModifier,
+          myIntervalNumber: myIntervalNumber
+        ))
+      }
+      
+      return stats
+    }
 
-    // Stat 데이터를 기반으로 초기화
-    let stats: [Stat] = [
-      // Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
-      //      sessionCreateTime: Date(), seq: 0, startTime: Date(), timerLimit: 0,
-      //      clef: "bass", direction: "asc", startNoteLetter: "F", startNoteAccidental: "𝄫",
-      //      startNoteOctave: 2, endNoteLetter: "G", endNoteAccidental: "𝄪",
-      //      endNoteOctave: 3, firstTryTime: Date(), finalAnswerTime: Date(),
-      //      isCorrect: false, tryCount: 5, myIntervalModifier: "AA", myIntervalNumber: 9),
-      // Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
-      //      sessionCreateTime: Date(), seq: 1, startTime: Date(), timerLimit: 0,
-      //      clef: "treble", direction: "asc", startNoteLetter: "E", startNoteAccidental: "𝄪",
-      //      startNoteOctave: 4, endNoteLetter: "F", endNoteAccidental: "𝄪",
-      //      endNoteOctave: 5, firstTryTime: Date(), finalAnswerTime: Date(),
-      //      isCorrect: false, tryCount: 3, myIntervalModifier: "dd", myIntervalNumber: 9),
-      // Stat(sessionId: UUID(uuidString: "E5205A03-8CA7-4001-A883-4E3F3D6745C0")!,
-      //      sessionCreateTime: Date(), seq: 2, startTime: Date(), timerLimit: 0,
-      //      clef: "bass", direction: "asc", startNoteLetter: "F", startNoteAccidental: "𝄪",
-      //      startNoteOctave: 2, endNoteLetter: "A", endNoteAccidental: "♯",
-      //      endNoteOctave: 2, firstTryTime: Date(), finalAnswerTime: Date(),
-      //      isCorrect: false, tryCount: 2, myIntervalModifier: "d", myIntervalNumber: 3)
-    ]
+    // 데이터 변환
+    let stats: [Stat] = generateRateStats(totalCount: 1000, correctRate: 0.4)
 
     // 첫 번째 세션 생성
     let sessionEntity = SessionEntity(context: viewContext)
@@ -78,6 +115,8 @@ extension PersistenceController {
       recordEntity.endNoteLetter = stat.endNoteLetter
       recordEntity.endNoteAccidental = stat.endNoteAccidental
       recordEntity.endNoteOctave = Int16(stat.endNoteOctave)
+      recordEntity.intervalModifier = stat.intervalModifier
+      recordEntity.intervalNumber = Int16(stat.intervalNumber)
       recordEntity.firstTryTime = stat.firstTryTime
       recordEntity.finalAnswerTime = stat.finalAnswerTime
       recordEntity.isCorrect = stat.isCorrect

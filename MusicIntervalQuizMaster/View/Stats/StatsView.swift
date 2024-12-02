@@ -10,18 +10,12 @@ import SwiftUI
 struct StatsView: View {
   @StateObject var viewModel = StatsViewModel()
   
+  @State private var selectedFilter: Filter = .Quality
+  
+  // 필터가 선택된 경우 반드시 세 개 중 하나만 값이 있어야 하고, 나머지는 nil
   @State private var selectedDegree: Int? = nil
   @State private var selectedSolved: SolvingStatus? = nil
   @State private var selectedQuality: IntervalModifier? = nil
-  @State private var selectedFilter: Filter = .Quality
-  
-  enum Filter: String, CaseIterable {
-    case Quality, Degree, Solved
-  }
-  
-  enum SolvingStatus: String, CaseIterable {
-    case Unsolved, Correct, Wrong
-  }
   
   // 두 개의 열을 가진 Grid 설정
   let columns: [GridItem] = [
@@ -41,6 +35,7 @@ struct StatsView: View {
             ForEach(Filter.allCases, id: \.self) { filter in
               Button(action: {
                 selectedFilter = filter
+                nullifyAllFilter()
               }) {
                 Text(filter.rawValue)
               }
@@ -69,16 +64,33 @@ struct StatsView: View {
       
       ScrollView {
         LazyVGrid(columns: columns, spacing: 16) {
-          ForEach(1...13, id: \.self) { currentDegree in
-            ForEach(IntervalModifier.availableModifierList(of: currentDegree), id: \.self) { modifier in
-              let degreeText = "\(modifier.localizedDescription) \(currentDegree)도"
-              let abbrText = "\(modifier.localizedAbbrDescription)\(currentDegree)"
+          // Filter 1: 도수
+          let availableDegreeList = Array(1...13).filter { degree in
+            guard let selectedDegree else {
+              return true
+            }
+            
+            return selectedDegree == degree
+          }
+          
+          ForEach(availableDegreeList, id: \.self) { currentDegree in
+            // Filter 2: 종류
+            let availableModifierList = IntervalModifier.availableModifierList(of: currentDegree).filter { modifier in
+              guard let selectedQuality else {
+                return true
+              }
               
-              NavigationLink {
-                Text("b")
-              } label: {
-                let answerStatus = viewModel.answerStatuses[abbrText]
-                cell(degreeText: degreeText, abbrText: abbrText, answerStatus: answerStatus)
+              return selectedQuality.abbrDescription == modifier.abbrDescription
+            }
+            
+            ForEach(availableModifierList, id: \.self) { modifier in
+              let degreeText = "\(modifier.localizedDescription) \(currentDegree)도"
+              let abbrText = "\(modifier.abbrDescription)\(currentDegree)"
+              
+              let answerStatus = viewModel.answerStatuses[abbrText]
+              // Filter 3: 풀었는지 여부
+              if checkVisibility(answerStatus: answerStatus) {
+                cellNaviLink(answerStatus: answerStatus, degreeText: degreeText, abbrText: abbrText)
               }
             }
           }
@@ -90,33 +102,96 @@ struct StatsView: View {
 }
 
 extension StatsView {
+  private func checkVisibility(answerStatus: AnswerStatus?) -> Bool {
+    guard let selectedSolved else {
+      return true
+    }
+    
+    guard let answerStatus else {
+      return selectedSolved == .unsolved
+    }
+    
+    return switch selectedSolved {
+    case .solved:
+      true
+    case .unsolved:
+      false
+    case .correct100:
+      answerStatus.rate == 1.0
+    case .correct0:
+      answerStatus.rate == 0.0
+    case .rate1_5:
+      0.0..<0.2 ~= answerStatus.rate
+    case .rate2_5:
+      0.2..<0.4 ~= answerStatus.rate
+    case .rate3_5:
+      0.4..<0.6 ~= answerStatus.rate
+    case .rate4_5:
+      0.6..<0.8 ~= answerStatus.rate
+    case .rate5_5:
+      0.8..<1.0 ~= answerStatus.rate
+    }
+  }
+  
+  private func nullifyAllFilter() {
+    selectedDegree = nil
+    selectedSolved = nil
+    selectedQuality = nil
+  }
+  
+  private func turnOnFilter(_ filter: Filter, value: Any?) {
+    switch filter {
+    case .Quality:
+      selectedQuality = value as? IntervalModifier
+      selectedDegree = nil
+      selectedSolved = nil
+    case .Degree:
+      selectedDegree = value as? Int
+      selectedSolved = nil
+      selectedQuality = nil
+    case .Solved:
+      selectedSolved = value as? SolvingStatus
+      selectedDegree = nil
+      selectedQuality = nil
+    }
+  }
+  
+  private func cellNaviLink(answerStatus: AnswerStatus?, degreeText: String, abbrText: String) -> some View {
+    // TODO: - NavLink로 상세 정보 제공 (다음 버전)
+    cell(degreeText: degreeText, abbrText: abbrText, answerStatus: answerStatus)
+  }
+  
+  private func allButton(padding: CGFloat, cornerRadius: CGFloat, filter: Any?) -> some View {
+    Button(action: {
+      nullifyAllFilter()
+    }) {
+      Text("ALL")
+        .fontWeight(.medium)
+        .padding(padding)
+        .frame(width: 50)
+        .foregroundColor(.white)
+        .background(filter == nil ? Color.orange : Color.gray)
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+    }
+  }
+
   private var degreeFilterView: some View {
     let cornerRadius: CGFloat = 17
     let padding: CGFloat = 6
     
     return HStack {
       // 전체보기 버튼
-      Button(action: {
-        
-      }) {
-        Text("ALL")
-          .fontWeight(.medium)
-          .padding(padding)
-          .frame(width: 50)
-          .foregroundColor(.white)
-          .background(selectedDegree == nil ? Color.orange : Color.gray)
-          .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-      }
+      allButton(padding: padding, cornerRadius: cornerRadius, filter: selectedDegree)
       
-      ForEach(1...13, id: \.self) { index in
+      ForEach(1...13, id: \.self) { degree in
         Button(action: {
-          selectedDegree = (selectedDegree == index) ? nil : index // 이미 선택된 숫자를 클릭하면 해제
+          turnOnFilter(.Degree, value: degree)
         }) {
-          Text("\(index)")
+          Text("\(degree)")
             .fontWeight(.medium)
             .padding(padding)
             .frame(width: 40)
-            .background(selectedDegree == index ? Color.orange : Color.gray)
+            .background(selectedDegree == degree ? Color.orange : Color.gray)
             .foregroundColor(.white)
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
         }
@@ -125,30 +200,21 @@ extension StatsView {
   }
   
   private var qualityFilterView: some View {
-    let cornerRadius: CGFloat = 17
+    let cornerRadius: CGFloat = 15
     let padding: CGFloat = 6
     
     return HStack {
       // 전체보기 버튼
-      Button(action: {
-        selectedQuality = nil
-      }) {
-        Text("ALL")
-          .fontWeight(.medium)
-          .padding(padding)
-          .frame(width: 50)
-          .foregroundColor(.white)
-          .background(selectedQuality == nil ? Color.orange : Color.gray)
-          .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-      }
+      allButton(padding: padding, cornerRadius: cornerRadius, filter: selectedQuality)
       
       ForEach(IntervalModifier.allCases, id: \.self) { modifier in
         Button(action: {
-          selectedQuality = modifier
+          turnOnFilter(.Quality, value: modifier)
         }) {
           Text("\(modifier.shortLocalizedDescription)")
             .fontWeight(.medium)
-            .padding(padding)
+            .padding(.vertical, padding)
+            .padding(.horizontal, 10)
             .background(selectedQuality == modifier ? Color.orange : Color.gray)
             .foregroundColor(.white)
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
@@ -158,28 +224,18 @@ extension StatsView {
   }
   
   private var solvedFilterView: some View {
-    let cornerRadius: CGFloat = 17
+    let cornerRadius: CGFloat = 14
     let padding: CGFloat = 6
     
     return HStack {
       // 전체보기 버튼
-      Button(action: {
-        
-      }) {
-        Text("ALL")
-          .fontWeight(.medium)
-          .padding(padding)
-          .frame(width: 50)
-          .foregroundColor(.white)
-          .background(selectedSolved == nil ? Color.orange : Color.gray)
-          .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-      }
+      allButton(padding: padding, cornerRadius: cornerRadius, filter: selectedSolved)
       
       ForEach(SolvingStatus.allCases, id: \.self) { status in
         Button(action: {
-          selectedSolved = status
+          turnOnFilter(.Solved, value: status)
         }) {
-          Text("\(status)")
+          Text("\(status.localizedDescription)")
             .fontWeight(.medium)
             .padding(padding)
             .background(selectedSolved == status ? Color.orange : Color.gray)

@@ -17,7 +17,8 @@ struct AnswerStatus {
 }
 
 final class StatsViewModel: ObservableObject {
-  @Published var stats: [Stat] = []
+  @Published private(set) var stats: [Stat] = []
+  @Published private(set) var filteredStats: [Stat] = []
   
   private var manager: QuizSessionManager = .init(context: PersistenceController.shared.container.viewContext)
   
@@ -27,6 +28,11 @@ final class StatsViewModel: ObservableObject {
     }
     
     stats = manager.fetchAllStats()
+    filteredStats = stats
+  }
+  
+  func filterBy(selectedModifier: IntervalModifier) {
+    filteredStats = stats.filter { $0.intervalModifier == selectedModifier.abbrDescription }
   }
   
   // 정답률을 계산하여 리턴

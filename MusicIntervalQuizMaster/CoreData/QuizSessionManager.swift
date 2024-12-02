@@ -133,6 +133,7 @@ class QuizSessionManager {
           let sessionId = session.id,
           let sessionCreateTime = session.createTime
         else {
+          // print("session is nil")
           continue
         }
         
@@ -148,10 +149,13 @@ class QuizSessionManager {
               let endNoteLetter = record.endNoteLetter,
               let myIntervalModifier = record.myIntervalModifier
             else {
+              // print("2nd is nil")
               continue
             }
             
             guard let intervalModifier = record.intervalModifier else {
+              print(startTime, firstTryTime, finalAnswerTime, clef, direction, startNoteLetter, endNoteLetter, myIntervalModifier)
+              // print("3rd is nil")
               continue
             }
             
@@ -178,11 +182,13 @@ class QuizSessionManager {
               myIntervalModifier: myIntervalModifier,
               myIntervalNumber: Int(record.myIntervalNumber)
             )
+            
             stats.append(stat)
+            // print("stat appended!", stat)
           }
         }
       }
-      
+      // print("Stats:", stats)
       return stats
     } catch {
       print("Failed to fetch stats: \(error.localizedDescription)")
