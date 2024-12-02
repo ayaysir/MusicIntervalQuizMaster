@@ -44,3 +44,70 @@
 "tab_stats" = "통계";
 "tab_settings" = "설정";
 "tab_moreinfo" = "더보기";
+
+"select_y_axis" = "Y축 선택";
+"select_by_accuracy" = "정답률";
+"select_by_time" = "풀이 시간";
+
+"modifier_medium_major" = "장";
+"modifier_medium_minor" = "단";
+"modifier_medium_perfect" = "완전";
+"modifier_medium_diminished" = "감";
+"modifier_medium_augmented" = "증";
+"modifier_medium_2xdiminished" = "겹감";
+"modifier_medium_2xaugmented" = "겹증";
+
+"filter_button_all" = "전체";
+"filter_menu_quality" = "성질";
+"filter_menu_degree" = "도수";
+"filter_menu_solved" = "풀이 여부";
+
+"clef_treble" = "높은음자리표 (G 음자리표)";
+"clef_bass" = "낮은음자리표 (F 음자리표)";
+"clef_alto" = "가온음자리표 (C 음자리표)";
+
+"order_ascending" = "상승";
+"order_descending" = "하강";
+"order_simultaneously" = "동시";
+
+"chart_interval_major" = "장";
+"chart_interval_minor" = "단";
+"chart_interval_perfect" = "완전";
+"chart_interval_diminished" = "감";
+"chart_interval_augmented" = "증";
+"chart_interval_doubly_diminished" = "겹감";
+"chart_interval_doubly_augmented" = "겹증";
+
+"no_data_yet" = "아직 데이터가 없습니다.";
+"by_interval_quality" = "음정 성질별 분류";
+"only_with_space" = "";
+"chart_direction" = "방향";
+"chart_accuracy" = "정답률";
+"accuracy_by_interval_quality" = "음정 성질별 정답률";
+"chart_accuracy_percentage" = "정답률 (%)";
+
+"clef_treble_short" = "높은음자리표";
+"clef_bass_short" = "낮은음자리표";
+"clef_alto_short" = "가온음자리표";
+
+"chart_response_time" = "풀이 시간";
+"response_time_by_interval_quality" = "음정 성질별 풀이 시간";
+"chart_yaxis_time_label" = "시간 (초)";
+
+"status_solved" = "풀이함";
+"status_unsolved" = "미풀이";
+"status_rate1_5" = "매우 낮음";
+"status_rate2_5" = "낮음";
+"status_rate3_5" = "보통";
+"status_rate4_5" = "높음";
+"status_rate5_5" = "매우 높음";
+
+"ordinal_korean_only" = "도";
+
+"modifier_short_major" = "장";
+"modifier_short_minor" = "단";
+"modifier_short_perfect" = "완전";
+"modifier_short_diminished" = "단";
+"modifier_short_augmented" = "증";
+"modifier_short_doublyDiminished" = "겹감";
+"modifier_short_doublyAugmented" = "겹증";

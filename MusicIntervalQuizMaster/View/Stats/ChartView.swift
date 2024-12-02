@@ -31,7 +31,7 @@ struct ChartView: View {
             VStack {
               Text(title)
                 .font(.subheadline).bold()
-              Text("There is no data yet.")
+              Text("no_data_yet")
                 .font(.caption)
             }
             
@@ -70,13 +70,16 @@ extension ChartView {
     direction: IntervalPairDirection = .ascending
   ) -> some View {
     ZStack(alignment: .topLeading) {
+      let accuracyText = "chart_accuracy".localized
+      let onlyWithSpace = "only_with_space".localized
+      
       let title = switch category {
       case .basic:
-        "Accuracy by Interval Quality"
+        "accuracy_by_interval_quality".localized
       case .clef:
-        "Accuracy - \(clef.localizedDescription) only"
+        "\(accuracyText) - \(clef.localizedDescription)\(onlyWithSpace)"
       case .direction:
-        "Accuracy - \(direction.localizedDescription) direction only"
+        "\(accuracyText) - \(direction.localizedDescription) \("chart_direction".localized)\(onlyWithSpace)"
       }
       
       Text(title)
@@ -84,7 +87,7 @@ extension ChartView {
       Chart(data) { item in
         BarMark(
           x: .value("Quality", item.intervalModifier),
-          y: .value("Correct Rates", item.accuracy)
+          y: .value("Accuracy", item.accuracy)
         )
         .foregroundStyle(
           LinearGradient(
@@ -106,7 +109,7 @@ extension ChartView {
           AxisGridLine() // 그리드라인 표시
         }
       }
-      .chartYAxisLabel("Accuracy (%)")
+      .chartYAxisLabel("chart_accuracy_percentage".localized)
     }
     .padding(10)
   }
@@ -118,13 +121,16 @@ extension ChartView {
     direction: IntervalPairDirection = .ascending
   ) -> some View {
     ZStack(alignment: .topLeading) {
+      let timeText = "chart_response_time".localized
+      let onlyWithSpace = "only_with_space".localized
+      
       let title = switch category {
       case .basic:
-        "Response Time by Interval Quality"
+        "response_time_by_interval_quality".localized
       case .clef:
-        "Time - \(clef.localizedDescription) only"
+        "\(timeText) - \(clef.localizedDescription)\(onlyWithSpace)"
       case .direction:
-        "Time - \(direction.localizedDescription) direction only"
+        "\(timeText) - \(direction.localizedDescription)\(onlyWithSpace)"
       }
       
       Text(title)
@@ -142,7 +148,7 @@ extension ChartView {
           )
         )
       }
-      .chartYAxisLabel("Time (s)")
+      .chartYAxisLabel("chart_yaxis_time_label".localized)
     }
     .padding(10)
   }
@@ -185,8 +191,9 @@ extension ChartView {
   )
   
   return VStack {
-    ChartView(viewModel: viewModel)
-      .frame(height: 300)
+    // ChartView(viewModel: viewModel)
+    //   .frame(height: 300)
+    StatsView()
     
     /*
      Green Color: <CIColor 0x600000c52730 (0.203922 0.780392 0.34902 1) sRGB>

@@ -58,6 +58,18 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
     }
   }
   
+  var mediumLocalizedDescription: String {
+    switch self {
+    case .major: "modifier_medium_major".localized
+    case .minor: "modifier_medium_minor".localized
+    case .perfect: "modifier_medium_perfect".localized
+    case .diminished: "modifier_medium_diminished".localized
+    case .augmented: "modifier_medium_augmented".localized
+    case .doublyDiminished: "modifier_medium_2xdiminished".localized
+    case .doublyAugmented: "modifier_medium_2xaugmented".localized
+    }
+  }
+  
   var localizedAbbrDescription: String {
     switch self {
     case .major: "M"
@@ -84,13 +96,13 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
   
   var chartLocalizedDescription: String {
     switch self {
-    case .major: "Major"
-    case .minor: "minor"
-    case .perfect: "Perfect"
-    case .diminished: "diminished"
-    case .augmented: "Augmented"
-    case .doublyDiminished: "2x dim."
-    case .doublyAugmented: "2x Aug."
+    case .major: "chart_interval_major".localized
+    case .minor: "chart_interval_minor".localized
+    case .perfect: "chart_interval_perfect".localized
+    case .diminished: "chart_interval_diminished".localized
+    case .augmented: "chart_interval_augmented".localized
+    case .doublyDiminished: "chart_interval_doubly_diminished".localized
+    case .doublyAugmented: "chart_interval_doubly_augmented".localized
     }
   }
   
@@ -108,14 +120,14 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
   
   static func from(abbreviation: String) -> IntervalModifier? {
     switch abbreviation {
-    case "M": return .major
-    case "m": return .minor
-    case "P": return .perfect
-    case "d": return .diminished
-    case "A": return .augmented
-    case "dd": return .doublyDiminished
-    case "AA": return .doublyAugmented
-    default: return nil
+    case "M": .major
+    case "m": .minor
+    case "P": .perfect
+    case "d": .diminished
+    case "A": .augmented
+    case "dd": doublyDiminished
+    case "AA": .doublyAugmented
+    default: nil
     }
   }
   

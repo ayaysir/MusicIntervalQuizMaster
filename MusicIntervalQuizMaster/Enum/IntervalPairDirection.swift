@@ -13,11 +13,11 @@ enum IntervalPairDirection {
   var localizedDescription: String {
     switch self {
     case .ascending:
-      "Ascending"
+      return "order_ascending".localized
     case .descending:
-      "Descending"
+      return "order_descending".localized
     case .simultaneously:
-      "At Once"
+      return "order_simultaneously".localized
     }
   }
   

@@ -28,9 +28,9 @@ struct StatsView: View {
   var body: some View {
     NavigationStack {
       VStack {
-        Picker("선택", selection: $viewModel.selectedYSegment) {
-          Text("by Accuracy").tag(0)
-          Text("by Response Time").tag(1)
+        Picker("select_y_axis", selection: $viewModel.selectedYSegment) {
+          Text("select_by_accuracy").tag(0)
+          Text("select_by_time").tag(1)
         }
         .pickerStyle(SegmentedPickerStyle()) // 세그먼트 바 스타일
         .frame(height: 20)
@@ -60,11 +60,11 @@ struct StatsView: View {
                 selectedFilter = filter
                 nullifyAllFilter()
               }) {
-                Text(filter.rawValue)
+                Text(filter.localizedDescription)
               }
             }
           } label: {
-            Label("\(selectedFilter)", systemImage: "line.horizontal.3.decrease.circle.fill")
+            Label("\(selectedFilter.localizedDescription)", systemImage: "line.horizontal.3.decrease.circle.fill")
               .fontWeight(.medium)
               .padding(.horizontal, 8)
               .padding(.vertical, 6)
@@ -108,7 +108,7 @@ struct StatsView: View {
             }
             
             ForEach(availableModifierList, id: \.self) { modifier in
-              let degreeText = "\(modifier.localizedDescription) \(currentDegree)도"
+              let degreeText = "\(modifier.shortLocalizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
               let abbrText = "\(modifier.abbrDescription)\(currentDegree)"
                
               // Filter 3: 풀었는지 여부
@@ -189,7 +189,7 @@ extension StatsView {
     Button(action: {
       nullifyAllFilter()
     }) {
-      Text("ALL")
+      Text("filter_button_all")
         .fontWeight(.medium)
         .padding(padding)
         .frame(width: 50)
@@ -235,7 +235,7 @@ extension StatsView {
         Button(action: {
           turnOnFilter(.Quality, value: modifier)
         }) {
-          Text("\(modifier.localizedDescription)")
+          Text("\(modifier.chartLocalizedDescription)")
             .fontWeight(.medium)
             .padding(.vertical, padding)
             .padding(.horizontal, 10)

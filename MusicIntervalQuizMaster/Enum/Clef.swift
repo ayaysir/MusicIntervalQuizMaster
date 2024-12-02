@@ -39,22 +39,22 @@ enum Clef: HasMusiqwikText, CaseIterable {
   var localizedDescription: String {
     switch self {
     case .treble:
-      "Treble Clef (G Clef)"
+      "clef_treble".localized
     case .bass:
-      "Bass Clef (F Clef)"
+      "clef_bass".localized
     case .alto:
-      "Alto Clef (C Clef)"
+      "clef_alto".localized
     }
   }
   
   var shortLocalizedDescription: String {
     switch self {
     case .treble:
-      "Treble Clef"
+      "clef_treble_short".localized
     case .bass:
-      "Bass Clef"
+      "clef_bass_short".localized
     case .alto:
-      "Alto Clef"
+      "clef_alto_short".localized
     }
   }
   

@@ -14,23 +14,23 @@ enum SolvingStatus: CaseIterable {
   var localizedDescription: String {
     switch self {
     case .solved:
-      "Solved"
+      "status_solved".localized
     case .unsolved:
-      "Unsolved"
+      "status_unsolved".localized
     case .correct100:
       "100%"
     case .correct0:
       "0%"
     case .rate1_5:
-      "Very Low"
+      "status_rate1_5".localized
     case .rate2_5:
-      "Low"
+      "status_rate2_5".localized
     case .rate3_5:
-      "Moderate"
+      "status_rate3_5".localized
     case .rate4_5:
-      "High"
+      "status_rate4_5".localized
     case .rate5_5:
-      "Very High"
+      "status_rate5_5".localized
     }
   }
 }

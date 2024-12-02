@@ -44,3 +44,70 @@
 "tab_stats" = "Stats";
 "tab_settings" = "Settings";
 "tab_moreinfo" = "More Info";
+
+"select_y_axis" = "Select Y Axis";
+"select_by_accuracy" = "by Accuracy";
+"select_by_time" = "by Solving Time";
+
+"modifier_medium_major" = "Major";
+"modifier_medium_minor" = "minor";
+"modifier_medium_perfect" = "Perfect";
+"modifier_medium_diminished" = "dim.";
+"modifier_medium_augmented" = "Aug.";
+"modifier_medium_2xdiminished" = "2x dim.";
+"modifier_medium_2xaugmented" = "2x Aug.";
+
+"filter_button_all" = "ALL";
+"filter_menu_quality" = "Quality";
+"filter_menu_degree" = "Degree";
+"filter_menu_solved" = "Solved";
+
+"clef_treble" = "Treble Clef (G Clef)";
+"clef_bass" = "Bass Clef (F Clef)";
+"clef_alto" = "Alto Clef (C Clef)";
+
+"order_ascending" = "Ascending";
+"order_descending" = "Descending";
+"order_simultaneously" = "At Once";
+
+"chart_interval_major" = "Major";
+"chart_interval_minor" = "minor";
+"chart_interval_perfect" = "Perfect";
+"chart_interval_diminished" = "diminished";
+"chart_interval_augmented" = "Augmented";
+"chart_interval_doubly_diminished" = "2x Dim.";
+"chart_interval_doubly_augmented" = "2x Aug.";
+
+"no_data_yet" = "There is no data yet.";
+"by_interval_quality" = "by Interval Quality";
+"only_with_space" = " only";
+"chart_direction" = "direction";
+"chart_accuracy" = "Accuracy";
+"accuracy_by_interval_quality" = "Accuracy by Interval Quality";
+"chart_accuracy_percentage" = "Accuracy (%)";
+
+"clef_treble_short" = "Treble Clef";
+"clef_bass_short" = "Bass Clef";
+"clef_alto_short" = "Alto Clef";
+
+"chart_response_time" = "Time";
+"response_time_by_interval_quality" = "Response Time by Interval Quality";
+"chart_yaxis_time_label" = "Time (s)";
+
+"status_solved" = "Solved";
+"status_unsolved" = "Unsolved";
+"status_rate1_5" = "Very Low";
+"status_rate2_5" = "Low";
+"status_rate3_5" = "Moderate";
+"status_rate4_5" = "High";
+"status_rate5_5" = "Very High";
+
+"ordinal_korean_only" = "";
+
+"modifier_short_major" = "Maj";
+"modifier_short_minor" = "min";
+"modifier_short_perfect" = "Pfc";
+"modifier_short_diminished" = "dim";
+"modifier_short_augmented" = "Aug";
+"modifier_short_doublyDiminished" = "dd";
+"modifier_short_doublyAugmented" = "AA";
