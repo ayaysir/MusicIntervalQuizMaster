@@ -17,6 +17,7 @@ let osVersion = UIDevice.current.systemVersion
 
 let ALERT_PRESENT_TIME = 1
 let MAX_QUESTION_COUNT = 1000
+let CHART_VERTICAL_SIZE: CGFloat = 270
 
 // MARK: - Typealiases
 

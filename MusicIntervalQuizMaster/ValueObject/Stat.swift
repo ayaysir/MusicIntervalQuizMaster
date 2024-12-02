@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Stat {
+struct Stat: Identifiable {
+  var id: String {
+    "\(sessionId)_\(seq)"
+  }
+  
   let sessionId: UUID
   let sessionCreateTime: Date
   

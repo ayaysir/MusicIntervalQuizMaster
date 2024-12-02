@@ -8,97 +8,200 @@
 import SwiftUI
 import Charts
 
-struct SalesData: Identifiable {
-  let id = UUID()
-  let day: String
-  let sales: Int
-}
-
-struct RegionSalesData: Identifiable {
-  let id = UUID()
-  let region: String
-  let day: String
-  let sales: Int
-}
-
 struct ChartView: View {
-  let data = [
-    SalesData(day: "Monday", sales: 150),
-    SalesData(day: "Tuesday", sales: 200),
-    SalesData(day: "Wednesday", sales: 170)
-  ]
-  
-  let regionalData = [
-    RegionSalesData(region: "North", day: "Monday", sales: 150),
-    RegionSalesData(region: "South", day: "Monday", sales: 100),
-    RegionSalesData(region: "North", day: "Tuesday", sales: 200),
-    RegionSalesData(region: "South", day: "Tuesday", sales: 130),
-  ]
-
+  @StateObject var viewModel: StatsViewModel
   
   var body: some View {
     TabView {
-      Group {
-        Chart(data) { item in
-          BarMark(
-            x: .value("Day", item.day),
-            y: .value("Sales", item.sales)
-          )
-        }
-        .chartXAxis {
-          AxisMarks(preset: .aligned) { value in
-            AxisValueLabel()
-            AxisTick()
+      ForEach(ChartXCategory.categories, id: \.self) { parameters in
+        let data: [BarChartData] = viewModel.generateBarChartData(by: parameters.category, clef: parameters.clef, direction: parameters.direction)
+        ZStack {
+          if data.isEmpty {
+            let title = switch parameters.category {
+            case .basic:
+              "by Interval Quality"
+            case .clef:
+              "\(parameters.clef.localizedDescription)"
+            case .direction:
+              "\(parameters.direction.localizedDescription) direction"
+            }
+            
+            VStack {
+              Text(title)
+                .font(.subheadline).bold()
+              Text("There is no data yet.")
+                .font(.caption)
+            }
+            
+          } else {
+            if viewModel.selectedYSegment == 0 {
+              rateBarChart(data,
+                           category: parameters.category,
+                           clef: parameters.clef,
+                           direction: parameters.direction)
+            } else {
+              timeBarChart(data,
+                           category: parameters.category,
+                           clef: parameters.clef,
+                           direction: parameters.direction)
+            }
           }
-        }
-        .chartYAxis {
-          AxisMarks(preset: .extended)
-        }
-        
-        Chart(regionalData) { item in
-          BarMark(
-            x: .value("Day", item.day),
-            y: .value("Sales", item.sales)
-          )
-          .foregroundStyle(by: .value("Region", item.region))
-        }
-        
-        Chart(data) { item in
-          BarMark(
-            x: .value("Day", item.day),
-            y: .value("Sales", item.sales)
-          )
-        }
-        
-        Chart(data) { item in
-          LineMark(
-            x: .value("Day", item.day),
-            y: .value("Sales", item.sales)
-          )
-        }
-        
-        Chart(data) { item in
-          AreaMark(
-            x: .value("Day", item.day),
-            y: .value("Sales", item.sales)
-          )
-        }
-        
-        Chart(data) { item in
-          PointMark(
-            x: .value("Day", item.day),
-            y: .value("Sales", item.sales)
-          )
+          
         }
       }
+      .padding(.bottom, 20)
+      
     }
     .tabViewStyle(.page)
+  }
+}
+
+extension ChartView {
+  @ViewBuilder private func rateBarChart(
+    _ data: [BarChartData],
+    category: ChartXCategory,
+    clef: Clef = .treble,
+    direction: IntervalPairDirection = .ascending
+  ) -> some View {
+    ZStack(alignment: .topLeading) {
+      let title = switch category {
+      case .basic:
+        "Accuracy by Interval Quality"
+      case .clef:
+        "Accuracy - \(clef.localizedDescription) only"
+      case .direction:
+        "Accuracy - \(direction.localizedDescription) direction only"
+      }
+      
+      Text(title)
+        .font(.subheadline).bold()
+      Chart(data) { item in
+        BarMark(
+          x: .value("Quality", item.intervalModifier),
+          y: .value("Correct Rates", item.accuracy)
+        )
+        .foregroundStyle(
+          LinearGradient(
+            colors: [Color.cyan.opacity(0.9), interpolatedColorByRate(for: item.accuracy).opacity(0.7)],
+            startPoint: .top,
+            endPoint: .bottom
+          )
+        )
+      }
+      .chartYAxis {
+        AxisMarks(position: .trailing, values: .stride(by: 0.2)) { value in
+          if let percent = value.as(Double.self) {
+            AxisValueLabel {
+              Text("\(percent.percentageStringWithoutMark)")
+            }
+          }
+          
+          // AxisTick() // 눈금 표시
+          AxisGridLine() // 그리드라인 표시
+        }
+      }
+      .chartYAxisLabel("Accuracy (%)")
+    }
+    .padding(10)
+  }
+  
+  @ViewBuilder private func timeBarChart(
+    _ data: [BarChartData],
+    category: ChartXCategory,
+    clef: Clef = .treble,
+    direction: IntervalPairDirection = .ascending
+  ) -> some View {
+    ZStack(alignment: .topLeading) {
+      let title = switch category {
+      case .basic:
+        "Response Time by Interval Quality"
+      case .clef:
+        "Time - \(clef.localizedDescription) only"
+      case .direction:
+        "Time - \(direction.localizedDescription) direction only"
+      }
+      
+      Text(title)
+        .font(.subheadline).bold()
+      Chart(data) { item in
+        BarMark(
+          x: .value("Quality", item.intervalModifier),
+          y: .value("Time", item.averageResponseTime)
+        )
+        .foregroundStyle(
+          LinearGradient(
+            colors: [Color.cyan.opacity(0.9), interpolatedColorByTime(for: item.averageResponseTime).opacity(0.7)],
+            startPoint: .top,
+            endPoint: .bottom
+          )
+        )
+      }
+      .chartYAxisLabel("Time (s)")
+    }
+    .padding(10)
+  }
+}
+
+extension ChartView {
+  func interpolatedColorByRate(for value: Double) -> Color {
+    let clampedValue = min(max(value, 0), 1) // 값 제한 (0.0 ~ 1.0)
     
-    
+    return switch clampedValue {
+    case 0..<0.4:
+        .red
+    case 0.4..<0.75:
+        .purple
+    case 0.75...1:
+        .green
+    default:
+        .purple
+    }
+  }
+  
+  func interpolatedColorByTime(for value: Double) -> Color {
+    return switch value {
+    case 0...10:
+        .green
+    case 11...30:
+        .purple
+    case 31...:
+        .red
+    default:
+        .purple
+    }
   }
 }
 
 #Preview {
-  ChartView()
-    .frame(height: 200)
+  let viewModel = StatsViewModel(
+    cdManager: .init(
+      context: PersistenceController.preview.container.viewContext)
+  )
+  
+  return VStack {
+    ChartView(viewModel: viewModel)
+      .frame(height: 300)
+    
+    /*
+     Green Color: <CIColor 0x600000c52730 (0.203922 0.780392 0.34902 1) sRGB>
+     Red Color: <CIColor 0x600000c62400 (1 0.231373 0.188235 1) sRGB>
+     */
+    VStack {
+      Text("Red Color Values")
+        .padding()
+        .background(Color.red)
+        .onAppear {
+          let red = UIColor(Color.red)
+          print("Red Color: \(CIColor(color: red))")
+        }
+      
+      Text("Green Color Values")
+        .padding()
+        .background(Color.green)
+        .onAppear {
+          let green = UIColor(Color.green)
+          print("Green Color: \(CIColor(color: green))")
+        }
+    }
+  }
 }

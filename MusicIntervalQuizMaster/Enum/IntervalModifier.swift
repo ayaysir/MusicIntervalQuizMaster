@@ -82,6 +82,18 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
     }
   }
   
+  var chartLocalizedDescription: String {
+    switch self {
+    case .major: "Major"
+    case .minor: "minor"
+    case .perfect: "Perfect"
+    case .diminished: "diminished"
+    case .augmented: "Augmented"
+    case .doublyDiminished: "2x dim."
+    case .doublyAugmented: "2x. Aug."
+    }
+  }
+  
   static func from(abbreviation: String) -> IntervalModifier? {
     switch abbreviation {
     case "M": return .major

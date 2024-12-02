@@ -25,9 +25,19 @@ struct StatsView: View {
   
   var body: some View {
     NavigationStack {
-      ChartView()
+      VStack {
+        Picker("선택", selection: $viewModel.selectedYSegment) {
+          Text("by Accuracy").tag(0)
+          Text("by Response Time").tag(1)
+        }
+        .pickerStyle(SegmentedPickerStyle()) // 세그먼트 바 스타일
+        .frame(height: 20)
         .padding(.horizontal, 10)
-        .frame(height: 200)
+        
+        ChartView(viewModel: viewModel)
+          .padding(.horizontal, 10)
+          .frame(height: CHART_VERTICAL_SIZE)
+      }
       
       ScrollView(.horizontal) {
         HStack {
@@ -61,6 +71,7 @@ struct StatsView: View {
         }
       }
       .padding(.horizontal, 10)
+      .padding(.bottom, 5)
       
       ScrollView {
         LazyVGrid(columns: columns, spacing: 16) {
@@ -129,7 +140,7 @@ extension StatsView {
     case .rate4_5:
       0.6..<0.8 ~= answerStatus.rate
     case .rate5_5:
-      0.8..<1.0 ~= answerStatus.rate
+      0.8...1.0 ~= answerStatus.rate
     }
   }
   
@@ -211,7 +222,7 @@ extension StatsView {
         Button(action: {
           turnOnFilter(.Quality, value: modifier)
         }) {
-          Text("\(modifier.shortLocalizedDescription)")
+          Text("\(modifier.localizedDescription)")
             .fontWeight(.medium)
             .padding(.vertical, padding)
             .padding(.horizontal, 10)
@@ -230,6 +241,7 @@ extension StatsView {
     return HStack {
       // 전체보기 버튼
       allButton(padding: padding, cornerRadius: cornerRadius, filter: selectedSolved)
+      
       
       ForEach(SolvingStatus.allCases, id: \.self) { status in
         Button(action: {
@@ -300,9 +312,9 @@ extension StatsView {
     let midColor: Color
     let endColor: Color
 
-    startColor = .init(red: 0.7 - percentage, green: percentage * 0.6, blue: 0.1)
-    midColor = .init(red: 0.85 - percentage, green: percentage * 0.7, blue: 0.1)
-    endColor = .init(red: 1 - percentage, green: percentage * 0.8, blue: 0.1)
+    startColor = .init(red: 0.8 - percentage, green: percentage * 0.6, blue: 0.3)
+    midColor = .init(red: 0.9 - percentage, green: percentage * 0.7, blue: 0.3)
+    endColor = .init(red: 1 - percentage, green: percentage * 0.8, blue: 0.3)
 
     return Gradient(colors: [startColor, midColor, endColor])
   }

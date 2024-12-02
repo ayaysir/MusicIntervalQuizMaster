@@ -10,6 +10,17 @@ import Foundation
 enum IntervalPairDirection {
   case ascending, descending, simultaneously
   
+  var localizedDescription: String {
+    switch self {
+    case .ascending:
+      "Ascending"
+    case .descending:
+      "Descending"
+    case .simultaneously:
+      "Simultaneously"
+    }
+  }
+  
   var dataDescription: String {
     switch self {
     case .ascending:

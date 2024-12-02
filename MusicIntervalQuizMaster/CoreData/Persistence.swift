@@ -42,26 +42,31 @@ extension PersistenceController {
                   intervalNumber: Int,
                   myIntervalModifier: String,
                   myIntervalNumber: Int) -> Stat {
-      Stat(sessionId: UUID(uuidString: "550e8400-e29b-41d4-a716-446655440000")!,
-           sessionCreateTime: Date(),
-           seq: 0, startTime: Date(),
-           timerLimit: 0,
-           clef: "bass",
-           direction: "asc",
-           startNoteLetter: "F",
-           startNoteAccidental: "𝄫",
-           startNoteOctave: 2,
-           endNoteLetter: "G",
-           endNoteAccidental: "𝄪",
-           endNoteOctave: 3,
-           intervalModifier: intervalModifier,
-           intervalNumber: intervalNumber,
-           firstTryTime: Date(),
-           finalAnswerTime: Date(),
-           isCorrect: intervalModifier == myIntervalModifier && intervalNumber == myIntervalNumber,
-           tryCount: 5,
-           myIntervalModifier: myIntervalModifier,
-           myIntervalNumber: myIntervalNumber
+      let currentDate = Date.now
+      let finalDate = currentDate.addingTimeInterval(Double.random(in: 5...30))
+      
+      return Stat(
+        sessionId: UUID(uuidString: "550e8400-e29b-41d4-a716-446655440000")!,
+        sessionCreateTime: Date(),
+        seq: 0,
+        startTime: currentDate,
+        timerLimit: 0,
+        clef: ["treble", "bass", "alto"].randomElement()!,
+        direction: ["asc", "dsc", "sml"].randomElement()!,
+        startNoteLetter: "F",
+        startNoteAccidental: "𝄫",
+        startNoteOctave: 2,
+        endNoteLetter: "G",
+        endNoteAccidental: "𝄪",
+        endNoteOctave: 3,
+        intervalModifier: intervalModifier,
+        intervalNumber: intervalNumber,
+        firstTryTime: finalDate,
+        finalAnswerTime: finalDate,
+        isCorrect: intervalModifier == myIntervalModifier && intervalNumber == myIntervalNumber,
+        tryCount: 5,
+        myIntervalModifier: myIntervalModifier,
+        myIntervalNumber: myIntervalNumber
       )
     }
     

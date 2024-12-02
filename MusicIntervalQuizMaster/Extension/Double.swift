@@ -8,7 +8,11 @@
 import Foundation
 
 extension Double {
+  var percentageStringWithoutMark: String {
+    String(format: "%.0f%", self * 100)
+  }
+  
   var percentageString: String {
-    return String(format: "%.0f%%", self * 100)
+    percentageStringWithoutMark + "%"
   }
 }
