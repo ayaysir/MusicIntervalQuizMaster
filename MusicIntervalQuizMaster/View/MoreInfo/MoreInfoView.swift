@@ -14,7 +14,7 @@ struct MoreInfoView: View {
   var body: some View {
     NavigationStack {
       Form {
-        #if DEBUG
+#if DEBUG
         NavigationLink {
           ScrollView {
             let text = QuizSessionManager(context: PersistenceController.shared.container.viewContext).fetchAllStatsAsCSV()
@@ -34,53 +34,53 @@ struct MoreInfoView: View {
         } label: {
           Text("View Logs")
         }
-        #endif
+#endif
         
-        Section("Help") {
-          NavigationLink("Tutorial Guide") {
+        Section("help_section_title") {
+          NavigationLink("tutorial_guide") {
             TutorialGuideView()
           }
         }
-
-        Section("Copyright Information") {
-          NavigationLink("View Open Source Licenses") {
+        
+        Section("copyright_section_title") {
+          NavigationLink("view_open_source_licenses") {
             LicenseView()
           }
         }
-
+        
         Section {
-          Button("Send Email to Developer") {
+          Button("send_email_to_developer") {
             if MailRPView.canSendMail {
               isShowingMailView = true
             } else {
-              alertItem = AlertItem(message: "Unable to send email. Please set up your email account.")
+              alertItem = AlertItem(message: "unable_to_send_email".localized)
             }
           }
-          Button("View My Other Useful Apps") {
+          Button("view_my_other_apps") {
             openAppStoreLink()
           }
         } header: {
-          Text("Feedback & More")
+          Text("feedback_and_more_header")
         } footer: {
-          Text("APP VERSION: \(appVersion ?? "unknown")")
+          Text("app_version") + Text(" \(appVersion ?? "unknown")")
         }
       }
-      .navigationTitle("More Info")
+      .navigationTitle("more_info")
       .sheet(isPresented: $isShowingMailView) {
         MailRPView(
           recipientEmail: "yoonbumtae@gmail.com",
-          subject: "Inquiry About the Interval Quiz App",
+          subject: "inquiry_subject".localized,
           body: """
           - App Version: \(appVersion ?? "unknown")
           - OS Version: \(osVersion)
           - Device: \(UIDevice.modelName)
           
-          Please write your inquiries or feedback.
+          \("inquiry_body".localized)
           """
         )
       }
       .alert(item: $alertItem) { item in
-        Alert(title: Text("Not available."), message: Text(item.message), dismissButton: .default(Text("OK")))
+        Alert(title: Text("not_available".localized), message: Text(item.message), dismissButton: .default(Text("ok_button".localized)))
       }
     }
   }

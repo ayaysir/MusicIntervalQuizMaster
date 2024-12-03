@@ -29,7 +29,7 @@ struct LicenseView: View {
       }
       .padding(.horizontal, 20)
     }
-    .navigationTitle("오픈 소스 저작권 보기")
+    .navigationTitle("open_source_licenses")
   }
 }
   

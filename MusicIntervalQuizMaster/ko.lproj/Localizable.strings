@@ -43,7 +43,7 @@
 "tab_drill" = "퀴즈";
 "tab_stats" = "통계";
 "tab_settings" = "설정";
-"tab_moreinfo" = "더보기";
+"tab_moreinfo" = "더 보기";
 
 "select_y_axis" = "Y축 선택";
 "select_by_accuracy" = "정답률";
@@ -158,3 +158,20 @@
 "degree_settings" = "도수, 성질별 세부 설정";
 "select_interval_type" = "음정 종류 선택";
 "search_prompt" = "음정 이름, 도수, 약어, 영문 음정(예: perfect) 이름을 입력하세요.";
+
+"help_section_title" = "도움말";
+"copyright_section_title" = "저작권 정보";
+"tutorial_guide" = "튜토리얼 가이드";
+"view_open_source_licenses" = "오픈 소스 라이센스 보기";
+"open_source_licenses" = "오픈 소스 라이센스";
+"send_email_to_developer" = "개발자에게 이메일 보내기";
+"view_my_other_apps" = "내 다른 유용한 앱 보기";
+"feedback_and_more_header" = "피드백 & 더 보기";
+"app_version" = "앱 버전:";
+"unable_to_send_email" = "이메일을 보낼 수 없습니다. 이메일 계정을 설정해주세요.";
+
+"more_info" = "더 보기";
+"inquiry_subject" = "음정 퀴즈 앱에 대한 문의";
+"inquiry_body" = "문의 사항이나 피드백을 작성해 주세요.";
+"not_available" = "사용할 수 없습니다.";
+"ok_button" = "확인";

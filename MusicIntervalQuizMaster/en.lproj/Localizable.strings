@@ -158,3 +158,22 @@
 "degree_settings" = "Specific Settings by Degree or Quality";
 "select_interval_type" = "Select Interval Type";
 "search_prompt" = "Enter the interval name, degree, abbreviation.";
+
+"help_section_title" = "Help";
+"copyright_section_title" = "Copyright Information";
+"tutorial_guide" = "Tutorial Guide";
+"view_open_source_licenses" = "View Open Source Licenses";
+"open_source_licenses" = "Open Source Licenses";
+"send_email_to_developer" = "Send Email to Developer";
+"view_my_other_apps" = "View My Other Useful Apps";
+"feedback_and_more_header" = "Feedback & More";
+"app_version" = "APP VERSION:";
+"unable_to_send_email" = "Unable to send email. Please set up your email account.";
+
+"more_info" = "More Info";
+"inquiry_subject" = "Inquiry About the Interval Quiz App";
+"inquiry_body" = "Please write your inquiries or feedback.";
+"not_available" = "Not available.";
+"ok_button" = "OK";
+
+
