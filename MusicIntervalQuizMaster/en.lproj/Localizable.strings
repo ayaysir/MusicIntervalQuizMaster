@@ -40,7 +40,7 @@
 "degree_ordinal_rd" = "rd";
 "degree_ordinal_th" = "th";
 
-"tab_drill" = "Drill";
+"tab_drill" = "Quiz";
 "tab_stats" = "Stats";
 "tab_settings" = "Settings";
 "tab_moreinfo" = "More Info";
@@ -176,4 +176,25 @@
 "not_available" = "Not available.";
 "ok_button" = "OK";
 
+"country_prefix" = "en";
 
+"script_1_title" = "Look at the score and press the key to enter.";
+"script_1_body" = "The entered interval is displayed on the screen. The keyboard is intuitively structured: the left side represents interval quality, and the right side represents degree.";
+
+"script_2_title" = "Press Enter after entering the interval to see if it's correct.";
+"script_2_body" = "Tap the score to play it. Press [🔊 AUTO] to automatically play it when a question is presented.";
+
+"script_3_title" = "The session status and timer are displayed at the top.";
+"script_3_body" = "You can set a timer to solve problems within the time limit. If the time runs out, it will be marked as incorrect.";
+
+"script_4_title" = "You can solve countless questions!";
+"script_4_body" = "You must answer correctly to move to the next question. Try again even if you make a mistake!";
+
+"script_5_title" = "Analyze your weaknesses and strengths.";
+"script_5_body" = "You can filter results by desired categories. Slide the graph to view detailed data.";
+
+"script_6_title" = "Set problem-solving conditions simply or in detail.";
+"script_6_body" = "You can configure detailed problem conditions, such as compound intervals, accidentals, clefs, and note placement.";
+
+"script_7_title" = "Customize the app settings to optimize your learning.";
+"script_7_body" = "Adjust timers, auto-skip, haptic feedback, and themes to enhance immersion.";

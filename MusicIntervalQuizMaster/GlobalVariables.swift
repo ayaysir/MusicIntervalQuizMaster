@@ -60,9 +60,14 @@ extension String {
   
   /// 다크모드 여부 (Int) - 0: 시스템, 1: 라이트 고정 2: 다크 고정
   static let cfgAppAppearance = "Config_App_Appearance"
-  
-  
 }
+
+// MARK: Tutorial Image Bundle
+let TUTORIAL_IMAGES: [String : [UIImage]] =  [
+  "ja": [.ja1QuizCorrectAlert, .ja2QuizCorrectView, .ja3QuizWrongAlert, .ja4QuizWrongView, .ja5Stats, .ja6Setting1, .ja7Setting2],
+  "en": [.en1QuizCorrectAlert, .en2QuizCorrectView, .en3QuizWrongAlert, .en4QuizWrongView, .en5Stats, .en6Setting1, .en7Setting2],
+  "ko": [.ko1QuizCorrectAlert, .ko2QuizCorrectView, .ko3QuizWrongAlert, .ko4QuizWrongView, .ko5Stats, .ko6Setting1, .ko7Setting2],
+]
 
 // MARK: - Initial config values
 

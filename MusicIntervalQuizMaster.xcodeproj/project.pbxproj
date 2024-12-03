@@ -48,6 +48,7 @@
 		448C64EB2CF883F0006D81BD /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64EA2CF883F0006D81BD /* ChartView.swift */; };
 		448C64ED2CF88623006D81BD /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C64EC2CF88623006D81BD /* StatsView.swift */; };
 		448C64EE2CF88785006D81BD /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* QuizView.swift */; };
+		449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449FE4852CFF550C00A8D840 /* ImageSlideView.swift */; };
 		44B4B8E92CEB9D7400D344B6 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 44B4B8E82CEB9D7400D344B6 /* Tonic */; };
 		44B4B8EC2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */; };
 		44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */; };
@@ -189,6 +190,7 @@
 		448C64EA2CF883F0006D81BD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		448C64EC2CF88623006D81BD /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		449FE4832CFF152B00A8D840 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		449FE4852CFF550C00A8D840 /* ImageSlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlideView.swift; sourceTree = "<group>"; };
 		44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeSelectSettingView.swift; sourceTree = "<group>"; };
 		44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 		448C64E82CF883BE006D81BD /* MoreInfo */ = {
 			isa = PBXGroup;
 			children = (
+				449FE4842CFF52E100A8D840 /* TutorialPage */,
 				448C64DF2CF86122006D81BD /* MoreInfoView.swift */,
 				448C64E12CF873D3006D81BD /* TutorialGuideView.swift */,
 				448C64E32CF874EA006D81BD /* LicenseView.swift */,
@@ -444,6 +447,14 @@
 				448C64EC2CF88623006D81BD /* StatsView.swift */,
 			);
 			path = Stats;
+			sourceTree = "<group>";
+		};
+		449FE4842CFF52E100A8D840 /* TutorialPage */ = {
+			isa = PBXGroup;
+			children = (
+				449FE4852CFF550C00A8D840 /* ImageSlideView.swift */,
+			);
+			path = TutorialPage;
 			sourceTree = "<group>";
 		};
 		44C4CEE62C8C47A80092C452 = {
@@ -851,6 +862,7 @@
 				448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */,
 				4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
+				449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
 				44D6F2D72CF5E4CF00B91BBA /* HapticManager.swift in Sources */,
 				448C64ED2CF88623006D81BD /* StatsView.swift in Sources */,
