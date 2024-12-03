@@ -111,3 +111,50 @@
 "modifier_short_augmented" = "Aug";
 "modifier_short_doublyDiminished" = "dd";
 "modifier_short_doublyAugmented" = "AA";
+
+"alert_group_minimum_title" = "Select at least one in the group";
+"alert_group_minimum_subtitle" = "At least one option must be selected from the group.";
+
+"app_settings" = "App Settings";
+
+"toggle_compound_intervals" = "Compound intervals (9th or higher)";
+"toggle_doubly_tritone" = "Doubly Augmented/Diminished";
+"link_detailed_interval_selection" = "Select intervals in detail";
+"header_include_advanced_questions" = "Include advanced questions";
+"footer_advanced_question_description" = "Turn On to include compound intervals and doubly augmented/diminished in questions. Takes precedence over detailed settings.";
+
+"note_direction_presentation_method" = "Note Direction for Question";
+"clef_for_question" = "Clef for Question";
+"accidental_for_question" = "Accidental for Question";
+"settings" = "Settings";
+
+"time_second_abbr" = "s";
+"unlimited" = "Unlimited";
+"problem_solving_timer" = "Solving Timer";
+
+"timer_problem_solving_within_limit" = "Solve problems within the time limit";
+"timer_limit_description" = "You can set the timer within 5 to 60 seconds. Setting it to 0 removes the time limit.";
+
+"auto_move_to_next_problem_toggle" = "Automatically move to next";
+"auto_move_to_next_problem" = "Move to the next question automatically when correct";
+"haptic_when_key_pressed" = "When pressing the interval keyboard";
+"haptic_when_correct" = "When correct";
+"haptic_when_wrong" = "When wrong";
+"haptic_feedback" = "Haptic Feedback";
+
+"appearance" = "Appearance";
+"appearance_use_device_theme" = "📱 Use device theme";
+"appearance_light_theme" = "☀️ Light theme";
+"appearance_dark_theme" = "🌘 Dark theme";
+
+"modifier_dsc_major" = "Major";  // Major
+"modifier_dsc_minor" = "minor";  // minor
+"modifier_dsc_perfect" = "Perfect";  // Perfect
+"modifier_dsc_diminished" = "diminished";  // diminished
+"modifier_dsc_augmented" = "Augmented";  // Augmented
+"modifier_dsc_2xdiminished" = "doubly diminished";  // doubly dim.
+"modifier_dsc_2xaugmented" = "Doubly Augmented";  // Doubly Aug.
+
+"degree_settings" = "Specific Settings by Degree or Quality";
+"select_interval_type" = "Select Interval Type";
+"search_prompt" = "Enter the interval name, degree, abbreviation.";

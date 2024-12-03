@@ -16,7 +16,7 @@ struct IntervalTypeSelectSettingView: View {
       ForEach(1...13, id: \.self) { currentDegree in
         Section {
           ForEach(IntervalModifier.availableModifierList(of: currentDegree), id: \.self) { modifier in
-            let degreeText = "\(modifier.localizedDescription) \(currentDegree)도"
+            let degreeText = "\(modifier.localizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
             let abbrText = "\(modifier.localizedAbbrDescription)\(currentDegree)"
             
             if searchKeyword.isEmpty || degreeText.lowercased().contains(searchKeyword.lowercased()) || abbrText.lowercased().contains(searchKeyword.lowercased()) ||
@@ -34,13 +34,13 @@ struct IntervalTypeSelectSettingView: View {
           }
         } header: {
           if currentDegree == 1 {
-            Text("도수별 세부 설정")
+            Text("degree_settings")
           }
         }
       }
     }
-    .navigationTitle("Select Interval Type")
-    .searchable(text: $searchKeyword, prompt: "입력")
+    .navigationTitle("select_interval_type")
+    .searchable(text: $searchKeyword, prompt: "search_prompt")
   }
 }
 

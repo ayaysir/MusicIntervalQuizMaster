@@ -17,9 +17,9 @@ struct AppSettingView: View {
   
   private var stepperLabel: some View {
     HStack {
-      Text("문제풀이 타이머")
+      Text("problem_solving_timer")
       Spacer()
-      Text(cfgTimerSeconds == 0 ? "제한없음" : "\(cfgTimerSeconds)초")
+      Text(cfgTimerSeconds == 0 ? "unlimited".localized : "\(cfgTimerSeconds)\("time_second_abbr".localized)")
         .foregroundColor(.gray)
     }
   }
@@ -37,30 +37,32 @@ struct AppSettingView: View {
           }
         }
       } header: {
-        Text("타이머")
+        Text("timer_problem_solving_within_limit")
+      } footer: {
+        Text("timer_limit_description")
       }
       
       Section {
-        Toggle("바로 다음문제로", isOn: $cfgAppAutoNextMove)
+        Toggle("auto_move_to_next_problem_toggle", isOn: $cfgAppAutoNextMove)
       } header: {
-        Text("정답인 경우 다음 문제로 자동으로 이동")
+        Text("auto_move_to_next_problem")
       }
       
       Section {
-        Toggle("음정 키보드를 누를 때", isOn: $cfgHapicPressed)
-        Toggle("정답일 때", isOn: $cfgHapicAnswer)
-        Toggle("오답일 때", isOn: $cfgHapicWrong)
+        Toggle("haptic_when_key_pressed", isOn: $cfgHapicPressed)
+        Toggle("haptic_when_correct", isOn: $cfgHapicAnswer)
+        Toggle("haptic_when_wrong", isOn: $cfgHapicWrong)
       } header: {
-        Text("햅틱")
+        Text("haptic_when_key_pressed".localized)
       }
       
-      Section("Appearance") {
-        appearanceButton("📱 Use device theme", 0)
-        appearanceButton("☀️ Light theme", 1)
-        appearanceButton("🌘 Dark theme", 2)
+      Section("appearance") {
+        appearanceButton("appearance_use_device_theme".localized, 0)
+        appearanceButton("appearance_light_theme".localized, 1)
+        appearanceButton("appearance_dark_theme".localized, 2)
       }
     }
-    .navigationTitle("App Settings")
+    .navigationTitle("app_settings")
   }
 }
 

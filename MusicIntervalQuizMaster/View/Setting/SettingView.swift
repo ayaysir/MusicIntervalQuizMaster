@@ -27,7 +27,12 @@ struct SettingView: View {
   @StateObject var viewModel = SettingViewModel()
   
   @State private var showAlert = false
-  private let alert17 = AlertAppleMusic17View(title: "그룹에서 한 개 이상 선택", subtitle: "해당 그룹 중 한 개 이상 옵션은 반드시 선택되어야 합니다.", icon: .custom(UIImage(systemName: "exclamationmark.triangle.fill")!))
+  
+  private let alert17 = AlertAppleMusic17View(
+    title: "alert_group_minimum_title".localized,
+    subtitle: "alert_group_minimum_subtitle".localized,
+    icon: .custom(UIImage(systemName: "exclamationmark.triangle.fill")!)
+  )
   
   var body: some View {
     NavigationStack {
@@ -35,30 +40,31 @@ struct SettingView: View {
         NavigationLink {
           AppSettingView()
         } label: {
-          Text("App 설정")
+          Text("app_settings")
         }
         
         Section {
-          Toggle("복합 음정 (9도 이상)", isOn: $cfgIntervalFilterCompound)
-          Toggle("겹증/겹감", isOn: $cfgIntervalFilterDoublyTritone)
+          Toggle("toggle_compound_intervals", isOn: $cfgIntervalFilterCompound)
+          Toggle("toggle_doubly_tritone", isOn: $cfgIntervalFilterDoublyTritone)
           NavigationLink {
             IntervalTypeSelectSettingView()
               .environmentObject(viewModel)
           } label: {
-            Text("음정 자세하게 선택하기 (\(viewModel.intervalStatesTurnOnCount)/\(viewModel.totalIntervalStatesCount))")
+            Text("link_detailed_interval_selection")
+            + Text(" (\(viewModel.intervalStatesTurnOnCount)/\(viewModel.totalIntervalStatesCount))")
           }
         } header: {
-          Text("심화 내용의 문제 포함 여부")
+          Text("header_include_advanced_questions".localized)
         } footer: {
-          Text("복합 음정, 겹증/겹감을 문제에 포함시키려면 On 하세요. 세부 설정보다 우선합니다.")
+          Text("footer_advanced_question_description".localized)
         }
 
         Section {
-          Toggle("상행", isOn: $cfgNotesAscending)
-          Toggle("하행", isOn: $cfgNotesDescending)
-          Toggle("동시", isOn: $cfgNotesSimultaneously)
+          Toggle(IntervalPairDirection.ascending.localizedDescription, isOn: $cfgNotesAscending)
+          Toggle(IntervalPairDirection.descending.localizedDescription, isOn: $cfgNotesDescending)
+          Toggle(IntervalPairDirection.simultaneously.localizedDescription, isOn: $cfgNotesSimultaneously)
         } header: {
-          Text("음표 제시 방법")
+          Text("note_direction_presentation_method")
         }
         
         Section {
@@ -92,20 +98,20 @@ struct SettingView: View {
             }
           }
         } header: {
-          Text("출제 대상 음자리표")
+          Text("clef_for_question")
         }
         
         
         Section {
-          Toggle("♯ (Sharp)", isOn: $cfgAccidentalSharp)
-          Toggle("♭ (Flat)", isOn: $cfgAccidentalFlat)
-          Toggle("♯♯ (Double Sharp)", isOn: $cfgAccidentalDoubleSharp)
-          Toggle("♭♭ (Double Flat)", isOn: $cfgAccidentalDoubleFlat)
+          Toggle("♯  Sharp", isOn: $cfgAccidentalSharp)
+          Toggle("♭  Flat", isOn: $cfgAccidentalFlat)
+          Toggle("♯♯  Double Sharp", isOn: $cfgAccidentalDoubleSharp)
+          Toggle("♭♭  Double Flat", isOn: $cfgAccidentalDoubleFlat)
         } header: {
-          Text("출제 대상 임시표")
+          Text("accidental_for_question")
         }
       }
-      .navigationTitle("Settings")
+      .navigationTitle("settings")
       // .navigationBarTitleDisplayMode(.inline)
       .onChange(of: toggleStatesOfClefs) { _ in
         ensureAtLeastOneToggle(group: .clefs)
@@ -113,8 +119,7 @@ struct SettingView: View {
       .onChange(of: toggleStatesOfDirections) { _ in
         ensureAtLeastOneToggle(group: .directions)
       }
-      .alert("해당 섹션에서 반드시 한 개 이상 옵션이 선택되어야 합니다.", isPresented: $showAlert) {
-        
+      .alert("alert_group_minimum_subtitle", isPresented: $showAlert) {
       }
     }
   }

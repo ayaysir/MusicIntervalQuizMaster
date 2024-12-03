@@ -48,13 +48,13 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
   
   var localizedDescription: String {
     switch self {
-    case .major: "장"
-    case .minor: "단"
-    case .perfect: "완전"
-    case .diminished: "감"
-    case .augmented: "증"
-    case .doublyDiminished: "겹감"
-    case .doublyAugmented: "겹증"
+    case .major: "modifier_dsc_major".localized
+    case .minor: "modifier_dsc_minor".localized
+    case .perfect: "modifier_dsc_perfect".localized
+    case .diminished: "modifier_dsc_diminished".localized
+    case .augmented: "modifier_dsc_augmented".localized
+    case .doublyDiminished: "modifier_dsc_2xdiminished".localized
+    case .doublyAugmented: "modifier_dsc_2xaugmented".localized
     }
   }
   

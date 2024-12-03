@@ -111,3 +111,50 @@
 "modifier_short_augmented" = "증";
 "modifier_short_doublyDiminished" = "겹감";
 "modifier_short_doublyAugmented" = "겹증";
+
+"alert_group_minimum_title" = "그룹에서 한 개 이상 선택";
+"alert_group_minimum_subtitle" = "해당 그룹 중 한 개 이상 옵션은 반드시 선택되어야 합니다.";
+
+"app_settings" = "App 설정";
+
+"toggle_compound_intervals" = "복합 음정 (9도 이상)";
+"toggle_doubly_tritone" = "겹증/겹감";
+"link_detailed_interval_selection" = "음정 자세하게 선택하기";
+"header_include_advanced_questions" = "심화 내용의 문제 포함 여부";
+"footer_advanced_question_description" = "복합 음정, 겹증/겹감을 문제에 포함시키려면 On 하세요. 세부 설정보다 우선합니다.";
+
+"note_direction_presentation_method" = "음표 방향 제시 방법";
+"clef_for_question" = "출제 대상 음자리표";
+"accidental_for_question" = "출제 대상 임시표";
+"settings" = "설정";
+
+"time_second_abbr" = "초";
+"unlimited" = "제한없음";
+"problem_solving_timer" = "문제풀이 타이머";
+
+"timer_problem_solving_within_limit" = "제한 시간 안에 문제 풀이 여부";
+"timer_limit_description" = "5초 - 60초 이내에 타이머 설정을 할 수 있습니다. 0으로 설정하면 시간 제한이 없어집니다.";
+
+"auto_move_to_next_problem_toggle" = "바로 다음문제로";
+"auto_move_to_next_problem" = "정답인 경우 다음 문제로 자동으로 이동";
+"haptic_when_key_pressed" = "음정 키보드를 누를 때";
+"haptic_when_correct" = "정답일 때";
+"haptic_when_wrong" = "오답일 때";
+"haptic_feedback" = "햅틱 진동";
+
+"appearance" = "앱 테마";
+"appearance_use_device_theme" = "📱 기기 테마 사용";
+"appearance_light_theme" = "☀️ 라이트 테마";
+"appearance_dark_theme" = "🌘 다크 테마";
+
+"modifier_dsc_major" = "장";  // Major
+"modifier_dsc_minor" = "단";  // minor
+"modifier_dsc_perfect" = "완전";  // Perfect
+"modifier_dsc_diminished" = "감";  // diminished
+"modifier_dsc_augmented" = "증";  // Augmented
+"modifier_dsc_2xdiminished" = "겹감";  // doubly dim.
+"modifier_dsc_2xaugmented" = "겹증";  // Doubly Aug.
+
+"degree_settings" = "도수, 성질별 세부 설정";
+"select_interval_type" = "음정 종류 선택";
+"search_prompt" = "음정 이름, 도수, 약어, 영문 음정(예: perfect) 이름을 입력하세요.";
