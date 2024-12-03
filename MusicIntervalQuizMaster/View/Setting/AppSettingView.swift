@@ -53,7 +53,7 @@ struct AppSettingView: View {
         Toggle("haptic_when_correct", isOn: $cfgHapicAnswer)
         Toggle("haptic_when_wrong", isOn: $cfgHapicWrong)
       } header: {
-        Text("haptic_when_key_pressed".localized)
+        Text("haptic_feedback".localized)
       }
       
       Section("appearance") {

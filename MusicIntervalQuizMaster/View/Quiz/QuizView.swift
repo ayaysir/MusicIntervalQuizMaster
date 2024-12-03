@@ -131,7 +131,7 @@ struct QuizView: View {
           }
           .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
             .font(.system(size: 13))
-            .frame(width: 50, height: 20)
+            .frame(width: 60, height: 20)
         }
         .padding(5)
         .background(.gray.opacity(0.4))
@@ -295,19 +295,18 @@ extension QuizView {
     } label: {
       VStack(alignment: .leading) {
         Text("current_session".localized)
-          .font(.system(size: 14))
+          .font(.system(size: 12))
           .bold()
         HStack {
-          Text("✅ \(viewModel.answerCount)  ❌ \(viewModel.wrongCount)")
-          Spacer()
-          Text("(\(viewModel.answerPercentText))")
+          Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)   (\(viewModel.answerPercentText))")
         }
-        .font(.system(size: 12))
+        .font(.system(size: 10))
       }
       .foregroundStyle(.foreground)
       .padding(.horizontal, 8)
       .padding(.vertical, 4)
-      .frame(width: 130, alignment: .leading)
+      .frame(width: 120, alignment: .leading)
+      // .frame(maxWidth: .infinity)
       .background(.gray.opacity(0.2))
       .clipShape(RoundedRectangle(cornerRadius: 5))
     }
