@@ -188,6 +188,7 @@
 		448C64E32CF874EA006D81BD /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		448C64EA2CF883F0006D81BD /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		448C64EC2CF88623006D81BD /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		449FE4832CFF152B00A8D840 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeSelectSettingView.swift; sourceTree = "<group>"; };
 		44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -740,6 +741,7 @@
 				en,
 				Base,
 				ko,
+				ja,
 			);
 			mainGroup = 44C4CEE62C8C47A80092C452;
 			packageReferences = (
@@ -928,6 +930,7 @@
 			children = (
 				446300412CFE15CC00C33BCB /* en */,
 				446300432CFE15D000C33BCB /* ko */,
+				449FE4832CFF152B00A8D840 /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

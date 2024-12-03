@@ -1,0 +1,179 @@
+/* 
+  Localizable.strings
+  MusicIntervalQuizMaster
+
+  Created by 윤범태 on 12/3/24.
+  English
+*/
+
+// QuizView
+"correct_message" = "正解です！";
+"interval_message" = "この音程は%@です。";
+"incorrect_message" = "不正解です！";
+"incorrect_message_try_again" = "不正解です。もう一度挑戦してください！";
+"message_correct_interval" = "この音程は%@です。";
+"message_try_again" = "もう一度挑戦してください。";
+"error_occurred" = "エラーが発生しました。";
+"out_of_range_interval" = "音程が学習範囲を超えています。";
+"new_session_start" = "新しいセッションを開始";
+"reset_current_record_and_start_new_session" = "現在の記録をリセットして新しいセッションを開始します。";
+"current_session" = "現在の状況：";
+
+"modifier_key_major" = "長音程";
+"modifier_key_minor" = "短音程";
+"modifier_key_perfect" = "完全音程";
+"modifier_key_diminished" = "減音程";
+"modifier_key_augmented" = "増音程";
+"modifier_key_2xdiminished" = "二重減";
+"modifier_key_2xaugmented" = "二重増";
+
+"modifier_txf_major" = "長";  // Major
+"modifier_txf_minor" = "短";  // Minor
+"modifier_txf_perfect" = "完全";  // Perfect
+"modifier_txf_diminished" = "減";  // Diminished
+"modifier_txf_augmented" = "増";  // Augmented
+"modifier_txf_2xdiminished" = "二重減";  // Doubly Diminished
+"modifier_txf_2xaugmented" = "二重増";  // Doubly Augmented
+
+"degree_ordinal_st" = "度";
+"degree_ordinal_nd" = "度";
+"degree_ordinal_rd" = "度";
+"degree_ordinal_th" = "度";
+
+"tab_drill" = "クイズ";
+"tab_stats" = "統計";
+"tab_settings" = "設定";
+"tab_moreinfo" = "詳細";
+
+"select_y_axis" = "Y軸を選択";
+"select_by_accuracy" = "正答率";
+"select_by_time" = "解答時間";
+
+"modifier_medium_major" = "長";
+"modifier_medium_minor" = "短";
+"modifier_medium_perfect" = "完全";
+"modifier_medium_diminished" = "減";
+"modifier_medium_augmented" = "増";
+"modifier_medium_2xdiminished" = "二重減";
+"modifier_medium_2xaugmented" = "二重増";
+
+"filter_button_all" = "ALL";
+"filter_menu_quality" = "音程の性質";
+"filter_menu_degree" = "度数";
+"filter_menu_solved" = "解答状態";
+
+"clef_treble" = "ト音記号 (G音記号)";
+"clef_bass" = "ヘ音記号 (F音記号)";
+"clef_alto" = "アルト記号 (C音記号)";
+
+"order_ascending" = "上昇";
+"order_descending" = "下降";
+"order_simultaneously" = "同時";
+
+"chart_interval_major" = "長";
+"chart_interval_minor" = "短";
+"chart_interval_perfect" = "完全";
+"chart_interval_diminished" = "減";
+"chart_interval_augmented" = "増";
+"chart_interval_doubly_diminished" = "二重減";
+"chart_interval_doubly_augmented" = "二重増";
+
+"no_data_yet" = "まだデータがありません。";
+"by_interval_quality" = "音程の性質による分類";
+"only_with_space" = "";
+"chart_direction" = "方向";
+"chart_accuracy" = "正答率";
+"accuracy_by_interval_quality" = "音程の性質による正答率";
+"chart_accuracy_percentage" = "正答率 (%)";
+
+"clef_treble_short" = "ト音記号";
+"clef_bass_short" = "ヘ音記号";
+"clef_alto_short" = "アルト記号";
+
+"chart_response_time" = "解答時間";
+"response_time_by_interval_quality" = "音程の性質による解答時間";
+"chart_yaxis_time_label" = "時間 (秒)";
+
+"status_solved" = "解答済み";
+"status_unsolved" = "未解答";
+"status_rate1_5" = "非常に低い";
+"status_rate2_5" = "低い";
+"status_rate3_5" = "普通";
+"status_rate4_5" = "高い";
+"status_rate5_5" = "非常に高い";
+
+"ordinal_korean_only" = "度";
+
+"modifier_short_major" = "長";
+"modifier_short_minor" = "短";
+"modifier_short_perfect" = "完全";
+"modifier_short_diminished" = "減";
+"modifier_short_augmented" = "増";
+"modifier_short_doublyDiminished" = "二重減";
+"modifier_short_doublyAugmented" = "二重増";
+
+"alert_group_minimum_title" = "グループで1つ以上選択";
+"alert_group_minimum_subtitle" = "このグループから1つ以上のオプションを選択する必要があります。";
+
+"app_settings" = "アプリ設定";
+
+"toggle_compound_intervals" = "複合音程 (9度以上)";
+"toggle_doubly_tritone" = "二重減三度/二重増三度";
+"link_detailed_interval_selection" = "音程を詳細に選択";
+"header_include_advanced_questions" = "高度な問題を含むかどうか";
+"footer_advanced_question_description" = "複合音程や二重減三度/二重増三度の問題を含めるには、オンにしてください。詳細設定より優先されます。";
+
+"note_direction_presentation_method" = "音符の向きの表示方法";
+"clef_for_question" = "出題する音楽記号";
+"accidental_for_question" = "出題する臨時記号";
+"settings" = "設定";
+
+"time_second_abbr" = "秒";
+"unlimited" = "制限なし";
+"problem_solving_timer" = "問題解答タイマー";
+
+"timer_problem_solving_within_limit" = "制限時間内に問題を解くか";
+"timer_limit_description" = "5秒から60秒以内でタイマーを設定できます。0に設定すると制限時間はありません。";
+
+"auto_move_to_next_problem_toggle" = "次の問題へ自動で移動";
+"auto_move_to_next_problem" = "正解した場合、次の問題に自動的に移動";
+"haptic_when_key_pressed" = "音程キーボードを押したとき";
+"haptic_when_correct" = "正解したとき";
+"haptic_when_wrong" = "不正解のとき";
+"haptic_feedback" = "ハプティックフィードバック";
+
+"appearance" = "アプリテーマ";
+"appearance_use_device_theme" = "📱 デバイステーマを使用";
+"appearance_light_theme" = "☀️ ライトテーマ";
+"appearance_dark_theme" = "🌘 ダークテーマ";
+
+"modifier_dsc_major" = "長";  // Major
+"modifier_dsc_minor" = "短";  // Minor
+"modifier_dsc_perfect" = "完全";  // Perfect
+"modifier_dsc_diminished" = "減";  // Diminished
+"modifier_dsc_augmented" = "増";  // Augmented
+"modifier_dsc_2xdiminished" = "二重減";  // Doubly Dim.
+"modifier_dsc_2xaugmented" = "二重増";  // Doubly Aug.
+
+"degree_settings" = "度数、性質別詳細設定";
+"select_interval_type" = "音程の種類を選択";
+"search_prompt" = "音程名、度数、略語、英語の音程名（例：perfect）を入力してください。";
+
+"help_section_title" = "ヘルプ";
+"copyright_section_title" = "著作権情報";
+"tutorial_guide" = "チュートリアルガイド";
+"view_open_source_licenses" = "オープンソースライセンスの表示";
+"open_source_licenses" = "オープンソースライセンス";
+"send_email_to_developer" = "開発者にメールを送る";
+"view_my_other_apps" = "他の有用なアプリを表示";
+"feedback_and_more_header" = "フィードバック & もっと";
+"app_version" = "アプリバージョン：";
+"unable_to_send_email" = "メールを送信できません。メールアカウントを設定してください。";
+
+"more_info" = "もっと見る";
+"inquiry_subject" = "音程クイズアプリについてのお問い合わせ";
+"inquiry_body" = "お問い合わせやフィードバックを記入してください。";
+"not_available" = "ご利用いただけません。";
+"ok_button" = "確認";
+
+
