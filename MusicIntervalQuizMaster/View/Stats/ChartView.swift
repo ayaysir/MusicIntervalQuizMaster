@@ -200,20 +200,20 @@ extension ChartView {
      Red Color: <CIColor 0x600000c62400 (1 0.231373 0.188235 1) sRGB>
      */
     VStack {
-      Text("Red Color Values")
+      Text("\(Color.purple.description) Color Values")
         .padding()
         .background(Color.red)
         .onAppear {
-          // let red = UIColor(Color.red)
-          // print("Red Color: \(CIColor(color: red))")
+          let color = UIColor(Color.purple)
+          print("\(Color.purple.description): \(CIColor(color: color))")
         }
       
-      Text("Green Color Values")
+      Text("\(Color.cyan.description) Green Color Values")
         .padding()
         .background(Color.green)
         .onAppear {
-          // let green = UIColor(Color.green)
-          // print("Green Color: \(CIColor(color: green))")
+          let color = UIColor(Color.cyan)
+          print("\(Color.cyan.description): \(CIColor(color: color))")
         }
     }
   }
