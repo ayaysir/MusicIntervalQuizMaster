@@ -59,8 +59,13 @@ final class StatsViewModel: ObservableObject {
       manager = cdManager
     }
     
+    fetchStats()
+  }
+  
+  func fetchStats() {
     stats = manager.fetchAllStats()
     filteredStats = stats
+    print("Stats count:", stats.count, filteredStats.count)
     
     answerStatuses(.init(.basic, .treble, .ascending))
   }

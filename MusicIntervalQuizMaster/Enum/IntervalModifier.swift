@@ -84,13 +84,13 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
   
   var shortLocalizedDescription: String {
     switch self {
-    case .major: "Maj"
-    case .minor: "min"
-    case .perfect: "Pfc"
-    case .diminished: "dim"
-    case .augmented: "Aug"
-    case .doublyDiminished: "dd"
-    case .doublyAugmented: "AA"
+    case .major: "modifier_short_major".localized
+    case .minor: "modifier_short_minor".localized
+    case .perfect: "modifier_short_perfect".localized
+    case .diminished: "modifier_short_diminished".localized
+    case .augmented: "modifier_short_augmented".localized
+    case .doublyDiminished: "modifier_short_doublyDiminished".localized
+    case .doublyAugmented: "modifier_short_doublyAugmented".localized
     }
   }
   
