@@ -34,6 +34,11 @@ struct MoreInfoView: View {
         } label: {
           Text("View Logs")
         }
+        NavigationLink {
+          AppStoreScreenshotsView()
+        } label: {
+          Text("AppStore screenshots")
+        }
 #endif
         
         Section("help_section_title") {
