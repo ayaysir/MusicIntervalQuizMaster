@@ -15,11 +15,17 @@ struct TutorialGuideView: View {
       VStack {
         Text(scripts[currentIndex].0)
           .font(.title)
-          .frame(height: proxy.size.height * 0.15)
+          .frame(height: proxy.size.height * 0.2, alignment: .bottom)
         ImageSlideView(images: TUTORIAL_IMAGES["country_prefix".localized] ?? [], currentIndex: $currentIndex)
-          .frame(height: proxy.size.height * 0.65)
+          .frame(height: proxy.size.height * 0.65, alignment: .center)
+          .offset(y: -10)
         Text(scripts[currentIndex].1)
           .font(.system(size: 14, weight: .medium))
+          .offset(y: -proxy.size.height * 0.06)
+          .frame(minHeight: 100, alignment: .top)
+          .padding(.top, 30)
+          .padding(.horizontal, 10)
+          .lineLimit(3)
           // .frame(height: proxy.size.height * 0.15)
       }
       .padding(10)
@@ -57,7 +63,9 @@ extension TutorialGuideView {
 }
 
 #Preview {
-  TutorialGuideView()
+  NavigationStack {
+    TutorialGuideView()
+  }
 }
 
 /*

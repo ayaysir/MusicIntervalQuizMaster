@@ -54,7 +54,16 @@ struct ImageSlideView: View {
 }
 
 #Preview {
-  ImageSlideView(images: TUTORIAL_IMAGES["ko"] ?? [], currentIndex: .constant(0))
-    // .frame(height: proxy.size.height * 0.7)
-    .background(Color.gray.opacity(0.2))
+  // @Previewable @State var currentIndex = 0
+  struct Preview: View {
+    @State private var currentIndex = 0
+    
+    var body: some View {
+      ImageSlideView(images: TUTORIAL_IMAGES["ko"] ?? [], currentIndex: $currentIndex)
+        // .frame(height: proxy.size.height * 0.7)
+        .background(Color.gray.opacity(0.2))
+    }
+  }
+  
+  return Preview()
 }
