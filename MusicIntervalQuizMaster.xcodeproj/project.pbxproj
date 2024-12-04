@@ -50,6 +50,7 @@
 		448C64EE2CF88785006D81BD /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C4CEF42C8C47A80092C452 /* QuizView.swift */; };
 		449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449FE4852CFF550C00A8D840 /* ImageSlideView.swift */; };
 		44A739EB2D0002210042A620 /* AppStoreScreenshotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A739EA2D0002210042A620 /* AppStoreScreenshotsView.swift */; };
+		44A739ED2D0037EA0042A620 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 44A739EC2D0037EA0042A620 /* PrivacyInfo.xcprivacy */; };
 		44B4B8E92CEB9D7400D344B6 /* Tonic in Frameworks */ = {isa = PBXBuildFile; productRef = 44B4B8E82CEB9D7400D344B6 /* Tonic */; };
 		44B4B8EC2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */; };
 		44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */; };
@@ -193,6 +194,7 @@
 		449FE4832CFF152B00A8D840 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		449FE4852CFF550C00A8D840 /* ImageSlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSlideView.swift; sourceTree = "<group>"; };
 		44A739EA2D0002210042A620 /* AppStoreScreenshotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreScreenshotsView.swift; sourceTree = "<group>"; };
+		44A739EC2D0037EA0042A620 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalTypeSelectSettingView.swift; sourceTree = "<group>"; };
 		44B4B8ED2CEBA39400D344B6 /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
@@ -501,6 +503,7 @@
 				44C4CEF82C8C47A90092C452 /* Preview Content */,
 				448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */,
 				446300402CFE15CC00C33BCB /* Localizable.strings */,
+				44A739EC2D0037EA0042A620 /* PrivacyInfo.xcprivacy */,
 			);
 			path = MusicIntervalQuizMaster;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				44D6F2BB2CF245E300B91BBA /* Piano_BPM60_4B2E_59.mp3 in Resources */,
 				44D6F2CE2CF245E300B91BBA /* Piano_BPM60_4B2E_79.mp3 in Resources */,
 				44D6F29D2CF245E300B91BBA /* Piano_BPM60_4B2E_78.mp3 in Resources */,
+				44A739ED2D0037EA0042A620 /* PrivacyInfo.xcprivacy in Resources */,
 				44D6F2C72CF245E300B91BBA /* Piano_BPM60_4B2E_49.mp3 in Resources */,
 				44D6F2A42CF245E300B91BBA /* Piano_BPM60_4B2E_44.mp3 in Resources */,
 				44D6F2C92CF245E300B91BBA /* Piano_BPM60_4B2E_82.mp3 in Resources */,
@@ -1099,7 +1103,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicIntervalQuizMaster;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1135,7 +1139,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.MusicIntervalQuizMaster;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
