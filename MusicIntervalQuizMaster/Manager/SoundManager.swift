@@ -10,34 +10,23 @@ import AVFoundation
 class SoundManager {
   static let shared = SoundManager()
   private var players: [AVAudioPlayer] = []
+  private var playersWithHash: [Int: AVAudioPlayer] = [:]
   
   init() {
     setupAudioSession()
+    initSounds()
   }
   
-  func playSound(named soundName: String) {
-    guard let url = Bundle.main.url(forResource: soundName, withExtension: "mp3") else {
-      print("Sound file not found")
-      return
-    }
-    
-    do {
-      let player = try AVAudioPlayer(contentsOf: url)
-      player.play()
-      players.append(player)
-    } catch {
-      print("Error playing sound: \(error.localizedDescription)")
-    }
+  func playSound(midiNumber number: Int) {
+    playersWithHash[number]?.play()
   }
   
   func stopAllSounds() {
     players.forEach { player in
-      player.stop()
+      if player.isPlaying {
+        player.stop()
+      }
     }
-  }
-  
-  func cleanupFinishedPlayers() {
-    players = players.filter { $0.isPlaying }
   }
   
   func setupAudioSession() {
@@ -52,6 +41,26 @@ class SoundManager {
       try audioSession.setActive(true)
     } catch {
       print("Failed to configure audio session: \(error)")
+    }
+  }
+  
+  func initSounds() {
+    for number in 34...83 {
+      guard let url = Bundle.main.url(
+        forResource: "Piano_BPM60_4B2E_\(number)",
+        withExtension: "mp3"
+      ) else {
+        print("Sound file not found")
+        return
+      }
+      
+      do {
+        let player = try AVAudioPlayer(contentsOf: url)
+        player.prepareToPlay()
+        playersWithHash[number] = player
+      } catch {
+        print("Error playing sound: \(error.localizedDescription)")
+      }
     }
   }
 }

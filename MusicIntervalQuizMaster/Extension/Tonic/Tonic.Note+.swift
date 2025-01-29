@@ -102,7 +102,7 @@ extension Note {
   }
   
   func playSound() {
-    SoundManager.shared.playSound(named: "Piano_BPM60_4B2E_\(orthodoxPitch)")
+    SoundManager.shared.playSound(midiNumber: orthodoxPitch)
   }
   
   static func sortNotes(_ lhs: Note, _ rhs: Note) -> Bool {

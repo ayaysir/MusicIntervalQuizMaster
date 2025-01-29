@@ -316,7 +316,6 @@ extension QuizView {
 extension QuizView {
   private func stopSounds() {
     SoundManager.shared.stopAllSounds()
-    SoundManager.shared.cleanupFinishedPlayers()
     
     if let workItem {
       workItem.cancel()
