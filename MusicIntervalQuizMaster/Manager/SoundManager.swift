@@ -9,7 +9,6 @@ import AVFoundation
 
 class SoundManager {
   static let shared = SoundManager()
-  private var players: [AVAudioPlayer] = []
   private var playersWithHash: [Int: AVAudioPlayer] = [:]
   
   init() {
@@ -18,14 +17,17 @@ class SoundManager {
   }
   
   func playSound(midiNumber number: Int) {
-    playersWithHash[number]?.play()
+    guard let player = playersWithHash[number] else {
+      return
+    }
+    
+    player.play()
   }
   
   func stopAllSounds() {
-    players.forEach { player in
-      if player.isPlaying {
-        player.stop()
-      }
+    playersWithHash.values.forEach {
+      $0.stop()
+      $0.currentTime = 0 // 위치를 처음으로 되돌려야 리셋
     }
   }
   

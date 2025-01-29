@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct QuizView: View {
+  @Environment(\.scenePhase) var scenePhase
+  @State private var isEnteredBackground = false
+  
   @AppStorage(.cfgQuizSoundAutoplay) var cfgQuizSoundAutoplay = true
   @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   @AppStorage(.cfgQuizSheetPosition) var cfgQuizSheetPosition = 0
@@ -158,15 +161,44 @@ struct QuizView: View {
           invalidateTimer()
           startCountdown()
         }
+        
+        if isEnteredBackground {
+          if viewModel.answerMode == .inQuiz {
+            viewModel.preparePairData()
+          }
+          
+          isEnteredBackground = false
+        }
       }
       .onDisappear {
         if viewModel.answerMode == .inQuiz {
           invalidateTimer()
           
-          // TODO: - 문제 갈아끼기
+          // 새로운 세션 시작 (퀴즈중이라면)
+          isEnteredBackground = true
         }
         
         stopSounds()
+      }
+      .onChange(of: scenePhase) { newPhase in
+        switch newPhase {
+        case .background:
+          print("newPhase: background")
+          isEnteredBackground = true
+        case .inactive:
+          print("newPhase: inactive")
+        case .active:
+          print("newPhase: isActive")
+          if isEnteredBackground {
+            if viewModel.answerMode == .inQuiz {
+              viewModel.preparePairData()
+            }
+            
+            isEnteredBackground = false
+          }
+        @unknown default:
+          print("newPhase: unknown default")
+        }
       }
       .onChange(of: viewModel.currentPair) { _ in
         if cfgQuizSoundAutoplay {
