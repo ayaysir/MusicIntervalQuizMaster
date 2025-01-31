@@ -32,6 +32,7 @@
 		4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D52CEA374800CC506C /* Tonic.Note+.swift */; };
 		4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D72CEB920600CC506C /* MainTabBarView.swift */; };
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
+		44753C4C2D4C979B003F82FA /* LocalNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */; };
 		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
 		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
@@ -176,6 +177,7 @@
 		4469E8D52CEA374800CC506C /* Tonic.Note+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Note+.swift"; sourceTree = "<group>"; };
 		4469E8D72CEB920600CC506C /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotiManager.swift; sourceTree = "<group>"; };
 		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
@@ -605,6 +607,7 @@
 		44D6F2652CF2324500B91BBA /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */,
 				44D6F2662CF2324F00B91BBA /* SoundManager.swift */,
 				44D6F2D62CF5E4CF00B91BBA /* HapticManager.swift */,
 			);
@@ -739,7 +742,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					44C4CEEE2C8C47A80092C452 = {
 						CreatedOnToolsVersion = 15.4;
@@ -908,6 +911,7 @@
 				448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */,
 				448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */,
 				44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */,
+				44753C4C2D4C979B003F82FA /* LocalNotiManager.swift in Sources */,
 				4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */,
 				44D6F2F72CF60F1500B91BBA /* AlertHaptic.swift in Sources */,
 				440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */,
@@ -963,6 +967,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1026,6 +1031,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1155,6 +1161,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1177,6 +1184,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 6S2SA26VAN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

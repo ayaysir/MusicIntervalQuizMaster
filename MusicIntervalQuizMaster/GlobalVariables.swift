@@ -60,6 +60,13 @@ extension String {
   
   /// 다크모드 여부 (Int) - 0: 시스템, 1: 라이트 고정 2: 다크 고정
   static let cfgAppAppearance = "Config_App_Appearance"
+  
+  /// 리마인더 온오프?
+  static let moreInfoRemindeIsOn = "MoreInfo_Reminder_IsOn"
+  /// 리마인더 노티 시각 (0~23시)
+  static let moreInfoReminderHour = "MoreInfo_Reminder_Hour"
+  /// 리마인더 노티 시각 (0~59분)
+  static let moreInfoReminderMinute = "MoreInfo_Reminder_Minute"
 }
 
 // MARK: Tutorial Image Bundle
