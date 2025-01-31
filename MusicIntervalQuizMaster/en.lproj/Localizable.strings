@@ -204,3 +204,14 @@
 "appstore_screenshots_3" = "Wrong answers? Keep trying until you succeed!\nMaster interval with endless questions";
 "appstore_screenshots_4" = "Use the statistics feature\nPlan your studies effectively";
 "appstore_screenshots_5" = "Set the question range\nCustomize the method to your preference";
+
+"reminder_noti_title" = "Reminder Notification Settings";
+"reminder_noti_toggle" = "Enable Reminder Alarm";
+"for_every_day" = "Every day:";
+
+"local_noti_body_1" = "🎶 Today's Interval 🎶";
+"local_noti_body_2" = "The interval between %@ and %@ is";
+"local_noti_body_3" = "[%@].";
+"local_noti_body_4" = "Open the app to learn more intervals!";
+
+"noti_promo_title" = "Music Interval Quiz Master";

@@ -12,9 +12,10 @@ struct MoreInfoView: View {
   @State private var alertItem: AlertItem? = nil
    
   @AppStorage(.moreInfoRemindeIsOn) var isReminderOn: Bool = false
-  @AppStorage(.moreInfoReminderHour) var reminderDate: Int = 0
+  @AppStorage(.moreInfoReminderHour) var reminderHour: Int = 0
   @AppStorage(.moreInfoReminderMinute) var reminderMinute: Int = 0
   @State private var reminderDatePickerValue: Date = .now
+  @State private var isNotiPermitted: Bool = false
   
   var body: some View {
     NavigationStack {
@@ -34,10 +35,36 @@ struct MoreInfoView: View {
             // .datePickerStyle(WheelDatePickerStyle())
             // .labelsHidden()
         }
+        .onAppear {
+          // isReminderOn이 켜져있으면 reminderHour, reminderMinute를 시 분이 반영된 Date 오브젝트를 reminderDatePickerValue에 할당
+          if isReminderOn {
+              let calendar = Calendar.current
+              let components = DateComponents(hour: reminderHour, minute: reminderMinute)
+              if let date = calendar.date(from: components) {
+                reminderDatePickerValue = date
+              }
+            }
+        }
+        .onChange(of: isReminderOn) { newValue in
+          Task {
+            if await LocalNotiManager.shared.requestNotificationPermission() {
+              if newValue {
+                LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
+              } else {
+                LocalNotiManager.shared.removeAllNoti()
+              }
+            }
+          }
+        }
         .onChange(of: reminderDatePickerValue) { newValue in
           let calendar = Calendar.current
-          reminderDate = calendar.component(.hour, from: newValue)
+          reminderHour = calendar.component(.hour, from: newValue)
           reminderMinute = calendar.component(.minute, from: newValue)
+          
+          if isReminderOn {
+            LocalNotiManager.shared.removeAllNoti()
+            LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
+          }
         }
         
         Section("help_section_title") {

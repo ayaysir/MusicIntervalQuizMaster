@@ -11,6 +11,10 @@ struct MainTabBarView: View {
   @State private var selectedIndex = 0
   @StateObject var statsViewModel = StatsViewModel()
   
+  @AppStorage(.moreInfoRemindeIsOn) var isReminderOn: Bool = false
+  @AppStorage(.moreInfoReminderHour) var reminderHour: Int = 0
+  @AppStorage(.moreInfoReminderMinute) var reminderMinute: Int = 0
+  
   var body: some View {
     TabView(selection: $selectedIndex) {
       QuizView()
@@ -33,6 +37,14 @@ struct MainTabBarView: View {
           Label("tab_moreinfo".localized, systemImage: "info.circle.fill")
         }
         .tag(3)
+    }
+    .onAppear {
+      DispatchQueue.global(qos: .background).async {
+        if isReminderOn {
+          LocalNotiManager.shared.removeAllNoti()
+          LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
+        }
+      }
     }
     .onChange(of: selectedIndex) { newValue in
       if newValue == 1 {

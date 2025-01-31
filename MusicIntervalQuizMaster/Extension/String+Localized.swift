@@ -1,5 +1,5 @@
 //
-//  String+.swift
+//  String+Localized.swift
 //  MusicIntervalQuizMaster
 //
 //  Created by 윤범태 on 12/3/24.
