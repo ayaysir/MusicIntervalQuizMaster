@@ -215,3 +215,6 @@
 "local_noti_body_4" = "앱을 열어 더 많은 음정을 학습합시다!";
 
 "noti_promo_title" = "Music Interval Quiz Master";
+
+"no_alert_permission_title" = "알림이 허용되지 않음";
+"no_alert_permission_detail" = "이 앱에 대한 알림 기능이 꺼져 있기 때문에 리마인더 기능을 사용할 수 없습니다. 기기의 설정 > 앱 > Interval Master 로 들어가서 알림을 허용해주세요.";

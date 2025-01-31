@@ -38,12 +38,12 @@ struct MoreInfoView: View {
         .onAppear {
           // isReminderOn이 켜져있으면 reminderHour, reminderMinute를 시 분이 반영된 Date 오브젝트를 reminderDatePickerValue에 할당
           if isReminderOn {
-              let calendar = Calendar.current
-              let components = DateComponents(hour: reminderHour, minute: reminderMinute)
-              if let date = calendar.date(from: components) {
-                reminderDatePickerValue = date
-              }
+            let calendar = Calendar.current
+            let components = DateComponents(hour: reminderHour, minute: reminderMinute)
+            if let date = calendar.date(from: components) {
+              reminderDatePickerValue = date
             }
+          }
         }
         .onChange(of: isReminderOn) { newValue in
           Task {
@@ -52,6 +52,13 @@ struct MoreInfoView: View {
                 LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
               } else {
                 LocalNotiManager.shared.removeAllNoti()
+              }
+            } else if newValue {
+              InstantAlert.show(
+                "no_alert_permission_title".localized,
+                message: "no_alert_permission_detail".localized
+              ) { _ in
+                isReminderOn = false
               }
             }
           }

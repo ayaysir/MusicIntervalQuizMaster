@@ -34,6 +34,8 @@
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
 		44753C4C2D4C979B003F82FA /* LocalNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */; };
 		44753C4E2D4C9DF9003F82FA /* QuizHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */; };
+		44753C532D4CC190003F82FA /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C522D4CC190003F82FA /* UIViewController+.swift */; };
+		44753C562D4CC1E6003F82FA /* InstantAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C552D4CC1E2003F82FA /* InstantAlert.swift */; };
 		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
 		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
@@ -180,6 +182,8 @@
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotiManager.swift; sourceTree = "<group>"; };
 		44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHelper.swift; sourceTree = "<group>"; };
+		44753C522D4CC190003F82FA /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		44753C552D4CC1E2003F82FA /* InstantAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantAlert.swift; sourceTree = "<group>"; };
 		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
@@ -370,6 +374,7 @@
 		4469E8D42CEA373F00CC506C /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				44753C512D4CC18A003F82FA /* UIKit */,
 				448A3D552CFADC9200D0D758 /* SwiftUI */,
 				448A3D542CFADC8200D0D758 /* Tonic */,
 				44B4B8EF2CECADAB00D344B6 /* UserDefaults+.swift */,
@@ -379,6 +384,14 @@
 				4463003E2CFE12FC00C33BCB /* String+Localized.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		44753C512D4CC18A003F82FA /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				44753C522D4CC190003F82FA /* UIViewController+.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		448A3D402CF8B0BE00D0D758 /* CoreData */ = {
@@ -627,6 +640,7 @@
 		44D6F2CF2CF4CB7600B91BBA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				44753C552D4CC1E2003F82FA /* InstantAlert.swift */,
 				44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */,
 				44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */,
 			);
@@ -868,6 +882,7 @@
 				44D6F2F52CF60F1500B91BBA /* AlertViewInternalDismissProtocol.swift in Sources */,
 				44B4B8EC2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift in Sources */,
 				44D6F2F12CF60F1500B91BBA /* AlertIconHeartView.swift in Sources */,
+				44753C532D4CC190003F82FA /* UIViewController+.swift in Sources */,
 				440BE6422CE799B500B01C1B /* IntervalPair.swift in Sources */,
 				4469E8CE2CEA2D0D00CC506C /* Clef.swift in Sources */,
 				440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */,
@@ -886,6 +901,7 @@
 				44D6F2F92CF60F1500B91BBA /* AlertKitAPI.swift in Sources */,
 				44D6F2F62CF60F1500B91BBA /* AlertViewProtocol.swift in Sources */,
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
+				44753C562D4CC1E6003F82FA /* InstantAlert.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,
 				44D6F2F82CF60F1500B91BBA /* AlertIcon.swift in Sources */,
 				44D6F2F42CF60F1500B91BBA /* AlertAppleMusic17View.swift in Sources */,

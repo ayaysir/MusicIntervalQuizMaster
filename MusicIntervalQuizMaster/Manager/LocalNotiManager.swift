@@ -62,8 +62,8 @@ struct LocalNotiManager {
       let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
       let uniqueIdentifier = "Noti_AppOpenPromotion_\(year)_\(month)_\(day)_\(hour)_\(minute)"
       let request = UNNotificationRequest(identifier: uniqueIdentifier, content: content, trigger: trigger)
-      let currentBody = content.body
       
+      // let currentBody = content.body
       // let dateString = {
       //   let formatter = ISO8601DateFormatter()
       //   formatter.timeZone = Calendar.current.timeZone
@@ -94,6 +94,7 @@ struct LocalNotiManager {
   func requestNotificationPermission() async -> Bool {
     await withCheckedContinuation { continuation in
       let center = UNUserNotificationCenter.current()
+      
       center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
         if let error = error {
           print("알림 권한 요청 실패: \(error.localizedDescription)")

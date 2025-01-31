@@ -215,3 +215,6 @@
 "local_noti_body_4" = "アプリを開いて、もっと音程を学びましょう！";
 
 "noti_promo_title" = "Music Interval Quiz Master";
+
+"no_alert_permission_title" = "通知が許可されていません";
+"no_alert_permission_detail" = "このアプリの通知が無効になっているため、リマインダー機能を使用できません。デバイスの設定 > アプリ > Interval Master に移動して、通知を許可してください。";

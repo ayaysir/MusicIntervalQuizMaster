@@ -215,3 +215,6 @@
 "local_noti_body_4" = "Open the app to learn more intervals!";
 
 "noti_promo_title" = "Music Interval Quiz Master";
+
+"no_alert_permission_title" = "Notifications Not Allowed";
+"no_alert_permission_detail" = "Reminder feature cannot be used because notifications for this app are disabled. Please go to Settings > Apps > Interval Master on your device and enable notifications.";
