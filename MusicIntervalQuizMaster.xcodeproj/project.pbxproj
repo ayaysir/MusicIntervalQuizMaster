@@ -33,6 +33,7 @@
 		4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D72CEB920600CC506C /* MainTabBarView.swift */; };
 		4469E8DA2CEB92DE00CC506C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* SettingView.swift */; };
 		44753C4C2D4C979B003F82FA /* LocalNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */; };
+		44753C4E2D4C9DF9003F82FA /* QuizHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */; };
 		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
 		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
@@ -178,6 +179,7 @@
 		4469E8D72CEB920600CC506C /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
 		4469E8D92CEB92DE00CC506C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotiManager.swift; sourceTree = "<group>"; };
+		44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHelper.swift; sourceTree = "<group>"; };
 		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
@@ -625,6 +627,7 @@
 		44D6F2CF2CF4CB7600B91BBA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */,
 				44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */,
 			);
 			path = Helper;
@@ -858,6 +861,7 @@
 				448A3D512CFA0D7300D0D758 /* QuizSession.swift in Sources */,
 				44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */,
 				446300302CFC336C00C33BCB /* UIDevice+.swift in Sources */,
+				44753C4E2D4C9DF9003F82FA /* QuizHelper.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
 				448A3D592CFAE2C400D0D758 /* ForMacStepper.swift in Sources */,
