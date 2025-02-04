@@ -210,7 +210,7 @@
 "for_every_day" = "매일:";
 
 "local_noti_body_1" = "🎶 오늘의 음정 🎶";
-"local_noti_body_2" = "\n알고 계셨나요? %@와 %@ 사이의 음정은";
+"local_noti_body_2" = "알고 계셨나요? %@와 %@ 사이의 음정은";
 "local_noti_body_3" = "[%@] 입니다.";
 "local_noti_body_4" = "앱을 열어 더 많은 음정을 학습합시다!";
 
