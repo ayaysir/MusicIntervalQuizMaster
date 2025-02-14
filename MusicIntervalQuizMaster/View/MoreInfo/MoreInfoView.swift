@@ -10,6 +10,7 @@ import SwiftUI
 struct MoreInfoView: View {
   @State private var isShowingMailView = false
   @State private var alertItem: AlertItem? = nil
+  @State private var showAlertDeleteAll: Bool = false
    
   @AppStorage(.moreInfoRemindeIsOn) var isReminderOn: Bool = false
   @AppStorage(.moreInfoReminderHour) var reminderHour: Int = 0
@@ -74,6 +75,8 @@ struct MoreInfoView: View {
           }
         }
         
+        csvArea
+        
         Section("help_section_title") {
           NavigationLink("tutorial_guide") {
             TutorialGuideView()
@@ -134,27 +137,35 @@ extension MoreInfoView {
 }
 
 extension MoreInfoView {
+  private var csvArea: some View {
+    Section {
+      NavigationLink {
+        CSVView()
+      } label: {
+        Text("csv_view")
+      }
+      
+      Button("csv_delete_all") {
+        showAlertDeleteAll = true
+      }
+      .foregroundStyle(.red)
+    } header: {
+      Text("csv_header")
+    }
+    .alert(
+      "csv_delete_alert_title", isPresented: $showAlertDeleteAll) {
+        Button(role: .destructive) {
+          QuizSessionManager(context: PersistenceController.shared.container.viewContext).deleteAllSessions()
+        } label: {
+          Text("btn_del")
+        }
+      } message: {
+        Text("csv_delete_alert_message")
+      }
+  }
+  
   private var debugArea: some View {
     Group {
-      NavigationLink {
-        ScrollView {
-          let text = QuizSessionManager(context: PersistenceController.shared.container.viewContext).fetchAllStatsAsCSV()
-          Text(text)
-            .font(.system(size: 7))
-            .onTapGesture {
-              UIPasteboard.general.string = text
-            }
-        }
-        .toolbar {
-          ToolbarItem {
-            Button("delete") {
-              QuizSessionManager(context: PersistenceController.shared.container.viewContext).deleteAllSessions()
-            }
-          }
-        }
-      } label: {
-        Text("View Logs")
-      }
       NavigationLink {
         AppStoreScreenshotsView()
       } label: {

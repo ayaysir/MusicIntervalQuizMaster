@@ -218,3 +218,11 @@
 
 "no_alert_permission_title" = "Notifications Not Allowed";
 "no_alert_permission_detail" = "Reminder feature cannot be used because notifications for this app are disabled. Please go to Settings > Apps > Interval Master on your device and enable notifications.";
+
+"csv_view" = "View All Quiz History";
+"csv_delete_all" = "Delete All Quiz History";
+"csv_header" = "Quiz Answer History";
+"csv_delete_alert_title" = "Warning";
+"btn_del" = "Delete";
+"csv_delete_alert_message" = "Executing this command will delete all quiz history. This action cannot be undone.";
+"export_csv" = "Export as CSV";  

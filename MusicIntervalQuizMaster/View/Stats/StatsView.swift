@@ -45,7 +45,7 @@ struct StatsView: View {
           }
       }
       .onChange(of: viewModel.currentChartPage) { page in
-          chartPageForAnimation = page
+        chartPageForAnimation = page
         
         withAnimation {
           viewModel.answerStatuses(ChartXCategory.categories[page])
@@ -254,7 +254,6 @@ extension StatsView {
     return HStack {
       // 전체보기 버튼
       allButton(padding: padding, cornerRadius: cornerRadius, filter: selectedSolved)
-      
       
       ForEach(SolvingStatus.allCases, id: \.self) { status in
         Button(action: {

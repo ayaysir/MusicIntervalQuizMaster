@@ -218,3 +218,11 @@
 
 "no_alert_permission_title" = "通知が許可されていません";
 "no_alert_permission_detail" = "このアプリの通知が無効になっているため、リマインダー機能を使用できません。デバイスの設定 > アプリ > Interval Master に移動して、通知を許可してください。";
+
+"csv_view" = "クイズ履歴を見る";
+"csv_delete_all" = "すべてのクイズ履歴を削除";
+"csv_header" = "クイズの解答履歴";
+"csv_delete_alert_title" = "警告";
+"btn_del" = "削除";
+"csv_delete_alert_message" = "このコマンドを実行すると、すべてのクイズ履歴が削除されます。この操作は元に戻せません。";
+"export_csv" = "Export as CSV";

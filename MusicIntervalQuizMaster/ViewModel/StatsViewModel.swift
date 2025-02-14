@@ -108,7 +108,11 @@ final class StatsViewModel: ObservableObject {
 }
 
 extension StatsViewModel {
-  func generateBarChartData(by category: ChartXCategory = .basic, clef: Clef = .treble, direction: IntervalPairDirection = .ascending) -> [BarChartData] {
+  func generateBarChartData(
+    by category: ChartXCategory = .basic,
+    clef: Clef = .treble,
+    direction: IntervalPairDirection = .ascending
+  ) -> [BarChartData] {
     
     let filteredStats = stats.filter { stat in
       return switch category {

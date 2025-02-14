@@ -47,6 +47,7 @@ struct MainTabBarView: View {
       }
     }
     .onChange(of: selectedIndex) { newValue in
+      // Stat 탭을 누를때마다 데이터를 새로 불러옴 (재방문하면 onAppear가 다시 동작 안함)
       if newValue == 1 {
         statsViewModel.fetchStats()
         print("StatsViewModel refreshed!")

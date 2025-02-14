@@ -15,6 +15,8 @@
 		440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6482CEA282F00B01C1B /* FontManager.swift */; };
 		440BE64C2CEA285600B01C1B /* Musiqwik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 440BE64B2CEA285600B01C1B /* Musiqwik.ttf */; };
 		440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */; };
+		44626DA72D5F9ADC008294BC /* CSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA62D5F9AD0008294BC /* CSVView.swift */; };
+		44626DA92D5FA716008294BC /* ShareTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA82D5FA716008294BC /* ShareTextView.swift */; };
 		446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300282CFB807800C33BCB /* StatsViewModel.swift */; };
 		4463002C2CFC2C6900C33BCB /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463002B2CFC2C6900C33BCB /* Int+.swift */; };
 		4463002E2CFC30E500C33BCB /* MailRPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4463002D2CFC30E500C33BCB /* MailRPView.swift */; };
@@ -161,6 +163,8 @@
 		440BE6482CEA282F00B01C1B /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		440BE64B2CEA285600B01C1B /* Musiqwik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Musiqwik.ttf; sourceTree = "<group>"; };
 		440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusiqwikView.swift; sourceTree = "<group>"; };
+		44626DA62D5F9AD0008294BC /* CSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVView.swift; sourceTree = "<group>"; };
+		44626DA82D5FA716008294BC /* ShareTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTextView.swift; sourceTree = "<group>"; };
 		446300282CFB807800C33BCB /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
 		4463002A2CFB86EE00C33BCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4463002B2CFC2C6900C33BCB /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
@@ -453,6 +457,7 @@
 		448C64E82CF883BE006D81BD /* MoreInfo */ = {
 			isa = PBXGroup;
 			children = (
+				44626DA62D5F9AD0008294BC /* CSVView.swift */,
 				449FE4842CFF52E100A8D840 /* TutorialPage */,
 				448C64DF2CF86122006D81BD /* MoreInfoView.swift */,
 				448C64E12CF873D3006D81BD /* TutorialGuideView.swift */,
@@ -547,6 +552,7 @@
 		44C4CF052C8C617C0092C452 /* Representable */ = {
 			isa = PBXGroup;
 			children = (
+				44626DA82D5FA716008294BC /* ShareTextView.swift */,
 				440BE6462CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift */,
 				4463002D2CFC30E500C33BCB /* MailRPView.swift */,
 			);
@@ -894,6 +900,7 @@
 				449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
 				44D6F2D72CF5E4CF00B91BBA /* HapticManager.swift in Sources */,
+				44626DA92D5FA716008294BC /* ShareTextView.swift in Sources */,
 				448C64ED2CF88623006D81BD /* StatsView.swift in Sources */,
 				44D6F2ED2CF60F1500B91BBA /* UIFontExtension.swift in Sources */,
 				446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */,
@@ -926,6 +933,7 @@
 				448A3D4F2CF9EBD800D0D758 /* QuizAnswerMode.swift in Sources */,
 				44B4B8F02CECADAB00D344B6 /* UserDefaults+.swift in Sources */,
 				44A739EB2D0002210042A620 /* AppStoreScreenshotsView.swift in Sources */,
+				44626DA72D5F9ADC008294BC /* CSVView.swift in Sources */,
 				44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */,
 				446300362CFD8C5F00C33BCB /* SolvingStatus.swift in Sources */,
 				448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */,

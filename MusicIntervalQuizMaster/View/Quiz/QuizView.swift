@@ -291,10 +291,6 @@ extension QuizView {
   }
   
   private func prevAnimation(beforeOffsetX: CGFloat = -300, afterOffsetX: CGFloat = 200) {
-    if viewModel.currentPairIndex != 0 {
-      
-    }
-    
     offsetX = beforeOffsetX
     withAnimation {
       offsetX = afterOffsetX
