@@ -9,28 +9,27 @@ import AVFoundation
 
 class SoundManager {
   static let shared = SoundManager()
+  private let starling = Starling()
   private var playersWithHash: [Int: AVAudioPlayer] = [:]
   
-  init() {
+  private init() {
     setupAudioSession()
     initSounds()
   }
   
+  /// 사운드를 재생
+  ///
+  /// - Parameter number: MIDI 노트 번호. 해당 번호에 매핑된 플레이어가 사운드를 재생합니다.
   func playSound(midiNumber number: Int) {
-    guard let player = playersWithHash[number] else {
-      return
-    }
-    
-    player.play()
+    starling.play("Piano_\(number)", allowOverlap: true)
   }
   
+  /// 재생 중인 모든 사운드를 즉시 정지
   func stopAllSounds() {
-    playersWithHash.values.forEach {
-      $0.stop()
-      $0.currentTime = 0 // 위치를 처음으로 되돌려야 리셋
-    }
+    starling.stopAll()
   }
   
+  /// 오디오 세션 초기화 및 설정
   func setupAudioSession() {
     let audioSession = AVAudioSession.sharedInstance()
     do {
@@ -46,23 +45,18 @@ class SoundManager {
     }
   }
   
+  /// 사운드를 Identifer에 할당하고, 로딩 및 플레이 준비
   func initSounds() {
     for number in 34...83 {
       guard let url = Bundle.main.url(
         forResource: "Piano_BPM60_4B2E_\(number)",
         withExtension: "mp3"
       ) else {
-        print("Sound file not found")
+        print("ERROR: Sound file \(number) not found")
         return
       }
       
-      do {
-        let player = try AVAudioPlayer(contentsOf: url)
-        player.prepareToPlay()
-        playersWithHash[number] = player
-      } catch {
-        print("Error playing sound: \(error.localizedDescription)")
-      }
+      starling.load(sound: url, for: "Piano_\(number)")
     }
   }
 }

@@ -38,6 +38,7 @@
 		44753C4E2D4C9DF9003F82FA /* QuizHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */; };
 		44753C532D4CC190003F82FA /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C522D4CC190003F82FA /* UIViewController+.swift */; };
 		44753C562D4CC1E6003F82FA /* InstantAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C552D4CC1E2003F82FA /* InstantAlert.swift */; };
+		447839BD2D8983DA002E9170 /* Starling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447839BC2D8983DA002E9170 /* Starling.swift */; };
 		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
 		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
@@ -188,6 +189,7 @@
 		44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHelper.swift; sourceTree = "<group>"; };
 		44753C522D4CC190003F82FA /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		44753C552D4CC1E2003F82FA /* InstantAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantAlert.swift; sourceTree = "<group>"; };
+		447839BC2D8983DA002E9170 /* Starling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starling.swift; sourceTree = "<group>"; };
 		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
@@ -396,6 +398,14 @@
 				44753C522D4CC190003F82FA /* UIViewController+.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		447839BB2D8983D1002E9170 /* Starling */ = {
+			isa = PBXGroup;
+			children = (
+				447839BC2D8983DA002E9170 /* Starling.swift */,
+			);
+			path = Starling;
 			sourceTree = "<group>";
 		};
 		448A3D402CF8B0BE00D0D758 /* CoreData */ = {
@@ -656,6 +666,7 @@
 		44D6F2D82CF60F0700B91BBA /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				447839BB2D8983D1002E9170 /* Starling */,
 				44D6F2EB2CF60F1500B91BBA /* AlertKit */,
 			);
 			path = Module;
@@ -883,6 +894,7 @@
 				446300302CFC336C00C33BCB /* UIDevice+.swift in Sources */,
 				44753C4E2D4C9DF9003F82FA /* QuizHelper.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
+				447839BD2D8983DA002E9170 /* Starling.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
 				448A3D592CFAE2C400D0D758 /* ForMacStepper.swift in Sources */,
 				44D6F2F52CF60F1500B91BBA /* AlertViewInternalDismissProtocol.swift in Sources */,
@@ -1136,7 +1148,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1172,7 +1184,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
