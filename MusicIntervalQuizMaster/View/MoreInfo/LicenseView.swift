@@ -11,25 +11,53 @@ struct LicenseView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Text("MusiQwik")
-          .font(.title2).bold()
-        Text("Copyright (c) 2001, 2008 by Robert Allgeyer. SIL Open Font License.")
-        Divider()
-        Text("Tonic")
-          .font(.title2).bold()
-        Text("MIT license")
-        Link("https://www.audiokit.io/Tonic", destination: URL(string: "https://www.audiokit.io/Tonic/")! )
-        Divider()
-        Text("AlertKit")
-          .font(.title2).bold()
-        Text("MIT license")
-        Link("https://github.com/sparrowcode/AlertKit", destination: URL(string: "https://github.com/sparrowcode/AlertKit")! )
-        Divider()
+        licenseInfoCell(
+          title: "MusiQwik",
+          licenseText: "Copyright (c) 2001, 2008 by Robert Allgeyer. SIL Open Font License."
+        )
+        
+        licenseInfoCell(
+          title: "Tonic",
+          licenseText: "MIT license",
+          urlString: "https://www.audiokit.io/Tonic"
+        )
+        
+        licenseInfoCell(
+          title: "AlertKit",
+          licenseText: "MIT license",
+          urlString: "https://github.com/sparrowcode/AlertKit"
+        )
+
+        licenseInfoCell(
+          title: "Starling",
+          licenseText: "MIT license",
+          urlString: "https://github.com/matthewreagan/Starling"
+        )
+        
         Spacer()
       }
       .padding(.horizontal, 20)
     }
     .navigationTitle("open_source_licenses")
+  }
+  
+  private func licenseInfoCell(
+    title: String,
+    licenseText: String,
+    urlString: String? = nil
+  ) -> some View {
+    Group {
+      VStack(alignment: .leading) {
+        Text(title)
+          .font(.title2).bold()
+        Text(licenseText)
+        if let urlString {
+          Link(urlString, destination: URL(string: urlString)! )
+        }
+      }
+      
+      Divider()
+    }
   }
 }
   
