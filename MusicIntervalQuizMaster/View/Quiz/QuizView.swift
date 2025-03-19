@@ -97,7 +97,7 @@ struct QuizView: View {
       .padding(.horizontal, 10)
       .padding(.bottom, 10)
     }
-    .alert(isPresent: $showAnswerAlert, view: customAlertView)
+    .alert(isPresent: $showAnswerAlert, view: answerAlertView)
   }
   
   private var headerView: some View {
@@ -252,7 +252,7 @@ struct QuizView: View {
       )
   }
   
-  private var customAlertView: CustomAlertView {
+  private var answerAlertView: CustomAlertView {
     guard let interval = viewModel.currentPair.advancedInterval else {
       return CustomAlertView(
         title: "error_occurred".localized,
@@ -357,15 +357,25 @@ extension QuizView {
       viewModel.currentPair.endNote.playSound()
     }
     
+    let qos = DispatchQoS.QoSClass.userInitiated
+    
     switch viewModel.currentPair.direction {
     case .ascending, .descending:
-      viewModel.currentPair.startNote.playSound()
+      DispatchQueue.global(qos: qos).async {
+        viewModel.currentPair.startNote.playSound()
+      }
+      
       if let workItem {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1200), execute: workItem)
+        DispatchQueue.global(qos: qos).asyncAfter(
+          deadline: .now() + .milliseconds(1200),
+          execute: workItem
+        )
       }
     case .simultaneously:
-      viewModel.currentPair.startNote.playSound()
-      viewModel.currentPair.endNote.playSound()
+      DispatchQueue.global(qos: qos).async {
+        viewModel.currentPair.startNote.playSound()
+        viewModel.currentPair.endNote.playSound()
+      }
     }
   }
   
@@ -469,6 +479,5 @@ extension QuizView {
 }
 
 #Preview {
-  // QuizView(viewModel: .init(cdManager: nil))
   MainTabBarView()
 }
