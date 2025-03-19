@@ -16,11 +16,12 @@ struct QuizView: View {
   @AppStorage(.cfgQuizSheetPosition) var cfgQuizSheetPosition = 0
   
   @StateObject var viewModel = QuizViewModel()
-  @StateObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
+  @ObservedObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
   @State private var isMusiqwikViewPressed = false
   @State private var showAnswerAlert = false
   @State private var animateAlertDismiss = false
+  @State private var showNewSessionAlert = false
   @State private var offsetX: CGFloat = 0
   
   @State private var workItem: DispatchWorkItem?
@@ -59,7 +60,7 @@ struct QuizView: View {
       .opacity(viewModel.answerMode == .inQuiz ? 0 : 1)
       .animation(.easeInOut, value: viewModel.answerMode)
   
-      Group {
+      VStack {
         HStack {
           intervalTextField(
             "\(keyboardViewModel.intervalModifier.textFieldLocalizedDescription)",
@@ -72,32 +73,19 @@ struct QuizView: View {
           )
         }
         
-        IntervalTouchKeyboardView {
-          pressEnterButton()
-        }
-        .environmentObject(keyboardViewModel)
-        .disabled(showAnswerAlert)
-        .foregroundColor(animateAlertDismiss ? .gray : nil)
-        .contrast(animateAlertDismiss ? 0.9 : 1)
-        .onChange(of: showAnswerAlert) { newValue in
-          if newValue {
-            withAnimation(.easeInOut(duration: 0.2)) {
-              animateAlertDismiss = true
-            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1300)) {
-              withAnimation(.easeInOut(duration: 0.2)) {
-                showAnswerAlert = false
-                animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
-              }
+        keyboardArea
+          .onReceive(keyboardViewModel.objectWillChange) { output in
+            if showNewSessionAlert {
+              showNewSessionAlert = false
             }
           }
-        }
       }
       .padding(.horizontal, 10)
       .padding(.bottom, 10)
     }
     .alert(isPresent: $showAnswerAlert, view: answerAlertView)
+    .alert(isPresent: $showNewSessionAlert, view: newSessionAlertView)
+    
   }
   
   private var headerView: some View {
@@ -169,6 +157,11 @@ struct QuizView: View {
           
           isEnteredBackground = false
         }
+        
+        print(viewModel.sessionCreated)
+        if viewModel.sessionCreated <= 1 && viewModel.answerMode == .inQuiz {
+          showNewSessionAlert = true
+        }
       }
       .onDisappear {
         if viewModel.answerMode == .inQuiz {
@@ -207,6 +200,9 @@ struct QuizView: View {
         
         invalidateTimer()
         startCountdown()
+      }
+      .onChange(of: viewModel.sessionCreated) { _ in
+        showNewSessionAlert = true
       }
       .onTapGesture {
         if store.bool(forKey: .cfgHapticPressedIntervalKeyboard) {
@@ -252,9 +248,34 @@ struct QuizView: View {
       )
   }
   
-  private var answerAlertView: CustomAlertView {
+  private var keyboardArea: some View {
+    IntervalTouchKeyboardView(keyboardViewModel: keyboardViewModel) {
+      pressEnterButton()
+    }
+    .disabled(showAnswerAlert)
+    .foregroundColor(animateAlertDismiss ? .gray : nil)
+    .contrast(animateAlertDismiss ? 0.9 : 1)
+    .onChange(of: showAnswerAlert) { isShow in
+      if isShow {
+        withAnimation(.easeInOut(duration: 0.2)) {
+          animateAlertDismiss = true
+        }
+        
+        DispatchQueue.main.asyncAfter(
+          deadline: .now() + .milliseconds(1300)
+        ) {
+          withAnimation(.easeInOut(duration: 0.2)) {
+            showAnswerAlert = false
+            animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
+          }
+        }
+      }
+    }
+  }
+  
+  private var answerAlertView: CenterAlertView {
     guard let interval = viewModel.currentPair.advancedInterval else {
-      return CustomAlertView(
+      return CenterAlertView(
         title: "error_occurred".localized,
         subtitle: "out_of_range_interval".localized,
         icon: .error
@@ -270,10 +291,18 @@ struct QuizView: View {
     ? "message_correct_interval".localizedFormat(interval.localizedDescription)
     : "message_try_again".localized
     
-    return CustomAlertView(
+    return CenterAlertView(
       title: title,
       subtitle: subtitle,
       icon: viewModel.answerMode == .correct ? .done : .error
+    )
+  }
+  
+  private var newSessionAlertView: BottomAlertView {
+    return BottomAlertView(
+      title: "new_session_start".localized,
+      subtitle: nil,
+      icon: .custom(.init(systemName: "newspaper")!)
     )
   }
 }

@@ -14,6 +14,7 @@ final class QuizViewModel: ObservableObject {
   @Published var session = QuizSession(uuid: .init(), createTime: .now)
   @Published private(set) var currentPairIndex = 0
   @Published var answerMode: QuizAnswerMode = .inQuiz
+  @Published var sessionCreated = 0
   
   private var manager = QuizSessionManager(context: PersistenceController.shared.container.viewContext)
   
@@ -29,7 +30,7 @@ final class QuizViewModel: ObservableObject {
     preparePairData()
   }
   
-  /// 신규 Pair 준비
+  /// 신규 Pair 준비: 새로운 세션
   /// - 신규 pairs들 중 푼 문제들이 Session.records에 들어가므로 여기서 세션 초기화
   func preparePairData() {
     pairs = []
@@ -59,6 +60,7 @@ final class QuizViewModel: ObservableObject {
     createRecordsFromPairIndex()
     
     answerMode = .inQuiz
+    sessionCreated += 1
   }
   
   func createRecordsFromPairIndex() {

@@ -226,3 +226,5 @@
 "btn_del" = "削除";
 "csv_delete_alert_message" = "このコマンドを実行すると、すべてのクイズ履歴が削除されます。この操作は元に戻せません。";
 "export_csv" = "Export as CSV";
+
+"new_session_start" = "新しいセッションが始まりました！";

@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct IntervalTouchKeyboardView: View {
-  @EnvironmentObject var keyboardViewModel: IntervalTouchKeyboardViewModel
+  @ObservedObject var keyboardViewModel: IntervalTouchKeyboardViewModel
   @AppStorage(.cfgHapticPressedIntervalKeyboard) var isHaptic = false
   
   let enterAction: (() -> Void)?
   
-  init(enterAction: (() -> Void)? = nil) {
+  init(keyboardViewModel: IntervalTouchKeyboardViewModel, enterAction: (() -> Void)? = nil) {
+    self._keyboardViewModel = .init(wrappedValue: keyboardViewModel)
     self.enterAction = enterAction
   }
   
@@ -112,6 +113,6 @@ struct IntervalTouchKeyboardView: View {
 }
 
 #Preview {
-  IntervalTouchKeyboardView()
+  IntervalTouchKeyboardView(keyboardViewModel: .init())
     .environmentObject(IntervalTouchKeyboardViewModel())
 }

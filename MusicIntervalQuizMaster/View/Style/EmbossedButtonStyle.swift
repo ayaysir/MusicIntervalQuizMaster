@@ -56,8 +56,3 @@ struct EmbossedButtonStyle: ButtonStyle {
       .scaleEffect(configuration.isPressed ? 0.98 : 1.0) // 클릭 시 축소 효과 강조
   }
 }
-
-#Preview {
-  IntervalTouchKeyboardView()
-    .environmentObject(IntervalTouchKeyboardViewModel())
-}

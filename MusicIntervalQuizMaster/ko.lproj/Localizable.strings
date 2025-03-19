@@ -226,3 +226,5 @@
 "btn_del" = "삭제";
 "csv_delete_alert_message" = "이 명령을 실행하면 모든 퀴즈 기록이 삭제됩니다. 이 작업은 되돌릴 수 없습니다.";
 "export_csv" = "CSV로 내보내기";
+
+"new_session_start" = "새로운 세션이 시작되었습니다!";

@@ -1,7 +1,7 @@
 import UIKit
 
 @available(iOS 13, *)
-public class CustomAlertView: UIView, AlertViewProtocol {
+public class CenterAlertView: UIView, AlertViewProtocol {
   
   open var dismissByTap: Bool = true
   open var dismissInTime: Bool = true
