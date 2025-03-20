@@ -22,6 +22,7 @@ struct QuizView: View {
   @State private var showAnswerAlert = false
   @State private var animateAlertDismiss = false
   @State private var showNewSessionAlert = false
+  @State private var showInfoModal = false
   @State private var offsetX: CGFloat = 0
   
   @State private var workItem: DispatchWorkItem?
@@ -48,10 +49,26 @@ struct QuizView: View {
         Spacer()
       }
       
-      HStack {
+      // 상태창
+      HStack(alignment: .center) {
         Text("\(viewModel.answerText)")
           .font(.subheadline).bold()
           .frame(height: 40)
+        if viewModel.answerMode == .correct {
+          Button {
+            showInfoModal = true
+          } label: {
+            if #available(iOS 18.0, *) {
+              Image(systemName: "text.page.badge.magnifyingglass")
+                .foregroundStyle(Color.teal)
+                .font(.system(size: 13))
+            } else {
+              Image(systemName: "doc.text.magnifyingglass")
+                .foregroundStyle(Color.teal)
+                .font(.system(size: 13))
+            }
+          }
+        }
       }
       .frame(maxWidth: .infinity)
       .background(.gray.opacity(0.2))
@@ -85,7 +102,9 @@ struct QuizView: View {
     }
     .alert(isPresent: $showAnswerAlert, view: answerAlertView)
     .alert(isPresent: $showNewSessionAlert, view: newSessionAlertView)
-    
+    .sheet(isPresented: $showInfoModal) {
+      IntervalInfoView(pair: viewModel.currentPair)
+    }
   }
   
   private var headerView: some View {

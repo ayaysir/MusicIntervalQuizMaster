@@ -228,3 +228,30 @@
 "export_csv" = "Export as CSV";  
 
 "new_session_start" = "New Session Started!";
+
+"info_title" = "Why is it a %@?";
+
+"info_1_1" = "1. Counting the size between the low and high notes equals %d.";
+"info_1_2" = "  - The number of an interval is the number of letter names or staff positions (lines and spaces) it encompasses, including the positions of both notes forming the interval.";
+"info_1_3" = " Since this interval exceeds an octave, it is a compound interval. It is an interval larger than an octave and determined by first reducing it to a simple interval by shifting one note by an octave. Then, 7 times the number of octaves shifted is added to the simple interval.";
+"info_1_4" = " The result of %1$@ is %2$d, meaning that a %3$@ has the same quality as a %4$@.";
+
+"info_2_1" = "2. If the size is %1$d and the number of half step is %2$d, it defaults to a '%3$@.'";
+
+"info_3_1" = "3. And on both notes, accidental is not attached. That is, there is no change in quality from the basic interval.";
+"info_3_2" = "3. And on both notes, accidentals are attached to both. That is, there is no change in quality from the basic interval.";
+"info_3_3" = "3. Here, the note in the lower position is %1$@ by %2$d half step, so it becomes a the quality of the interval is %3$@.";
+"info_3_4" = "3. Here, the note in the higher position is %1$@ by %2$d half step, so it becomes a the quality of the interval is %3$@.";
+
+"info_from_to" = "(from %1$@ to %2$@)";
+
+"info_4_1" = "4. Also, since the note in the higher position is %1$@ by %2$d half step, so it becomes a the quality of the interval is %3$@.";
+
+"info_therefore" = "Therefore, the final interval will be %@.";
+
+"info_raised" = "raised";
+"info_lowered" = "lowered";
+"info_expanded" = "expanded";
+"info_shrinked" = "shrinked";
+
+"info_ok" = "OK, Got it!";

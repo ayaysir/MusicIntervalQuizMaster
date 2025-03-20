@@ -155,6 +155,7 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
     }
   }
   
+  /// 음정 성질(quality)을 count만큼 이동
   func move(isPerfectGroup: Bool, count: Int) -> Self? {
     if count == 0 {
       return self

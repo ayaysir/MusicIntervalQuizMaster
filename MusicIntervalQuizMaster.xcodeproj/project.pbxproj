@@ -40,6 +40,8 @@
 		44753C562D4CC1E6003F82FA /* InstantAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C552D4CC1E2003F82FA /* InstantAlert.swift */; };
 		447839BD2D8983DA002E9170 /* Starling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447839BC2D8983DA002E9170 /* Starling.swift */; };
 		447839BF2D8AE4EB002E9170 /* BottomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447839BE2D8AE4E6002E9170 /* BottomAlertView.swift */; };
+		447839C12D8B2330002E9170 /* IntervalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447839C02D8B2330002E9170 /* IntervalInfoView.swift */; };
+		447839C32D8B2E57002E9170 /* AdvancedInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447839C22D8B2E53002E9170 /* AdvancedInterval.swift */; };
 		448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D412CF8B0CC00D0D758 /* Persistence.swift */; };
 		448A3D452CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D432CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodeld */; };
 		448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */; };
@@ -192,6 +194,8 @@
 		44753C552D4CC1E2003F82FA /* InstantAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantAlert.swift; sourceTree = "<group>"; };
 		447839BC2D8983DA002E9170 /* Starling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Starling.swift; sourceTree = "<group>"; };
 		447839BE2D8AE4E6002E9170 /* BottomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAlertView.swift; sourceTree = "<group>"; };
+		447839C02D8B2330002E9170 /* IntervalInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalInfoView.swift; sourceTree = "<group>"; };
+		447839C22D8B2E53002E9170 /* AdvancedInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedInterval.swift; sourceTree = "<group>"; };
 		448A3D412CF8B0CC00D0D758 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		448A3D442CF8B12900D0D758 /* MusicIntervalQuizMaster.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicIntervalQuizMaster.xcdatamodel; sourceTree = "<group>"; };
 		448A3D4C2CF9D91100D0D758 /* QuestionRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionRecord.swift; sourceTree = "<group>"; };
@@ -440,6 +444,7 @@
 		448C64E52CF8837E006D81BD /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				447839C02D8B2330002E9170 /* IntervalInfoView.swift */,
 				44C4CEF42C8C47A80092C452 /* QuizView.swift */,
 			);
 			path = Quiz;
@@ -661,6 +666,7 @@
 				44753C552D4CC1E2003F82FA /* InstantAlert.swift */,
 				44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */,
 				44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */,
+				447839C22D8B2E53002E9170 /* AdvancedInterval.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -892,6 +898,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				448A3D532CFA133F00D0D758 /* QuizAttempt.swift in Sources */,
+				447839C32D8B2E57002E9170 /* AdvancedInterval.swift in Sources */,
 				448A3D512CFA0D7300D0D758 /* QuizSession.swift in Sources */,
 				44D6F3032CF7388E00B91BBA /* TimerView.swift in Sources */,
 				446300302CFC336C00C33BCB /* UIDevice+.swift in Sources */,
@@ -952,6 +959,7 @@
 				44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */,
 				446300362CFD8C5F00C33BCB /* SolvingStatus.swift in Sources */,
 				448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */,
+				447839C12D8B2330002E9170 /* IntervalInfoView.swift in Sources */,
 				447839BF2D8AE4EB002E9170 /* BottomAlertView.swift in Sources */,
 				448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */,
 				44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */,
@@ -1152,7 +1160,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1188,7 +1196,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.2;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

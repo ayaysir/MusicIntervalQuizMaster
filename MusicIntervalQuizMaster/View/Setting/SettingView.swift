@@ -101,7 +101,6 @@ struct SettingView: View {
           Text("clef_for_question")
         }
         
-        
         Section {
           Toggle("♯  Sharp", isOn: $cfgAccidentalSharp)
           Toggle("♭  Flat", isOn: $cfgAccidentalFlat)
