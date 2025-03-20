@@ -239,7 +239,7 @@
 "info_2_1" = "2. If the size is %1$d and the number of half step is %2$d, it defaults to a '%3$@.'";
 
 "info_3_1" = "3. And on both notes, accidental is not attached. That is, there is no change in quality from the basic interval.";
-"info_3_2" = "3. And on both notes, accidentals are attached to both. That is, there is no change in quality from the basic interval.";
+"info_3_2" = "3. And on both notes, the same accidentals are attached. That is, there is no change in quality from the basic interval.";
 "info_3_3" = "3. Here, the note in the lower position is %1$@ by %2$d half step, so it becomes a the quality of the interval is %3$@.";
 "info_3_4" = "3. Here, the note in the higher position is %1$@ by %2$d half step, so it becomes a the quality of the interval is %3$@.";
 

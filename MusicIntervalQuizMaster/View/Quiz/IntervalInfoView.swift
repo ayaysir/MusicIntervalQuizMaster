@@ -51,11 +51,13 @@ extension IntervalInfoView {
   private func title(_ text: String) -> Text {
     Text(verbatim: text)
       .font(.largeTitle)
+      .bold()
   }
   
   private func subtitle(_ text: String) -> Text {
     Text(verbatim: text)
       .font(.title2)
+      .fontWeight(.semibold)
   }
   
   private func p(_ text: String) -> Text {
@@ -80,7 +82,7 @@ extension IntervalInfoView {
       VStack {
         // 악보
         MusiqwikView(pair: pair)
-          .frame(height: 150)
+          .frame(height: 100)
         Button {
           playSounds()
         } label: {
