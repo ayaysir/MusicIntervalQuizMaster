@@ -199,12 +199,6 @@
 "script_7_title" = "Customize the app settings to optimize your learning.";
 "script_7_body" = "Adjust timers, auto-skip, haptic feedback, and themes to enhance immersion.";
 
-"appstore_screenshots_1" = "Struggling with interval study?\nMaster intervals through drills with quizzes";
-"appstore_screenshots_2" = "Conveniently use the dedicated keyboard\nEnter your answers and get graded";
-"appstore_screenshots_3" = "Wrong answers? Keep trying until you succeed!\nMaster interval with endless questions";
-"appstore_screenshots_4" = "Use the statistics feature\nPlan your studies effectively";
-"appstore_screenshots_5" = "Set the question range\nCustomize the method to your preference";
-
 "reminder_noti_title" = "Reminder Notification Settings";
 "reminder_noti_toggle" = "Enable Reminder Alarm";
 "for_every_day" = "Every day:";
