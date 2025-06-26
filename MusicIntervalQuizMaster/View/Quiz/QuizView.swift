@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct QuizView: View {
   // MARK: - View Main
@@ -31,6 +32,16 @@ struct QuizView: View {
   @State private var remainingTime: Double = 5
   @State private var timerActive: Bool = true
   @State private var timer: Timer?
+  
+  var timerStore: StoreOf<TimerDomain> {
+    .init(
+      initialState: TimerDomain.State(
+        remainingTime: remainingTime,
+        totalDuration: Double(cfgTimerSeconds)
+      ),
+      reducer: { TimerDomain() }
+    )
+  }
   
   var body: some View {
     VStack {
@@ -125,6 +136,12 @@ extension QuizView {
       Spacer()
       
       TimerView(remainingTime: $remainingTime, totalDuration: Double(cfgTimerSeconds))
+      // TimerCircleView(
+      //   store: timerStore,
+      //   onExpire: {
+      //     performActionAfterCountdown()
+      //   }
+      // )
       
       Spacer()
       
@@ -526,6 +543,7 @@ extension QuizView {
     }
     
     remainingTime = Double(cfgTimerSeconds)
+    timerStore.send(.start(duration: remainingTime))
     
     timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
       if remainingTime > 0 {
