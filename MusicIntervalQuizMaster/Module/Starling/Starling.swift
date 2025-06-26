@@ -182,6 +182,7 @@ public class Starling {
     }
   }
   
+  /// 현재 재생중인 모든 사운드를 멈춤
   public func performSoundStopAll() {
     objc_sync_enter(players)
     defer { objc_sync_exit(players) }
@@ -341,7 +342,7 @@ private class StarlingAudioPlayer {
     }
   }
   
-  /// SoundIdentifer를 무시하고 즉시 멈춤
+  /// SoundIdentifer를 무시하고 현재 재생중인 플레이어를 즉시 멈춤
   func stop() {
     if state.status != .idle {
       node.stop()

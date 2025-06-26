@@ -11,50 +11,46 @@ import Tonic
 // TODO: - 하드코딩 없이 WebView등으로 분리, 내용 export 가능하게
 
 struct IntervalInfoView: View {
+  // MARK: - View main
+  
   let pair: IntervalPair
   @State private var workItem: DispatchWorkItem?
   
   @Environment(\.dismiss) var dismiss
   
-  let musiqwikFont: Font = .custom("Musiqwik", size: 60)
-  
   var body: some View {
     ScrollView {
       VStack(spacing: 20) {
         if let interval = pair.advancedInterval {
-          ZStack {
-            title(interval.localizedDescription)
-            closeButtonArea
-          }
-          
-          sheet
-          
-          content(interval: interval)
-          
-          Spacer().frame(height: 10)
-          
-          Button {
-            dismiss()
-          } label: {
-            Text("info_ok")
-          }
-          .buttonStyle(.borderedProminent)
+          TitleArea(interval: interval)
+          MusicSheetArea
+          ContentArea(interval: interval)
+          Spacer()
+            .frame(height: 10)
+          BottomButtonArea
         }
       }
       .padding()
     }
-    
   }
 }
 
 extension IntervalInfoView {
-  private func title(_ text: String) -> Text {
+  // MARK: - View segments
+  
+  private func TitleArea(interval: AdvancedInterval) -> some View {
+    ZStack {
+      Title(interval.localizedDescription)
+      CloseButtonArea
+    }
+  }
+  private func Title(_ text: String) -> Text {
     Text(verbatim: text)
       .font(.largeTitle)
       .bold()
   }
   
-  private func subtitle(_ text: String) -> Text {
+  private func Subtitle(_ text: String) -> Text {
     Text(verbatim: text)
       .font(.title2)
       .fontWeight(.semibold)
@@ -65,19 +61,19 @@ extension IntervalInfoView {
       .font(.body)
   }
   
-  private func footnote(_ text: String) -> Text {
+  private func Footnote(_ text: String) -> Text {
     Text(verbatim: text)
       .font(.footnote)
   }
   
-  private func image(_ image: Image) -> some View {
+  private func StyledImage(_ image: Image) -> some View {
     image
       .resizable()
       .scaledToFit()
       // .frame(width: 300)
   }
   
-  private var sheet: some View {
+  private var MusicSheetArea: some View {
     HStack(spacing: 50) {
       VStack {
         // 악보
@@ -95,7 +91,16 @@ extension IntervalInfoView {
     }
   }
   
-  private func content(interval: AdvancedInterval) -> some View {
+  private var BottomButtonArea: some View {
+    Button {
+      dismiss()
+    } label: {
+      Text("info_ok")
+    }
+    .buttonStyle(.borderedProminent)
+  }
+  
+  private func ContentArea(interval: AdvancedInterval) -> some View {
     let octave = interval.number / 8
     let simpleIntervalNumber = interval.number - (7 * octave)
     let formula = "\(interval.number) - (7 × \(octave))"
@@ -129,14 +134,14 @@ extension IntervalInfoView {
     
     return VStack(alignment: .leading) {
       if let defaultInterval = AdvancedInterval.betweenNotes(defaultNote1, defaultNote2) {
-        subtitle("info_title".localizedFormat(interval.localizedDescription))
+        Subtitle("info_title".localizedFormat(interval.localizedDescription))
         
         Divider()
         
         VStack(alignment: .leading) {
           p("info_1_1".localizedFormat(interval.number))
-          footnote("info_1_2".localized)
-          image(.init(.lineAndSpace))
+          Footnote("info_1_2".localized)
+          StyledImage(.init(.lineAndSpace))
         }
         Spacer().frame(height: 20)
         
@@ -165,7 +170,7 @@ extension IntervalInfoView {
         
         Divider()
         
-        image(.init(.intervalMovement))
+        StyledImage(.init(.intervalMovement))
         
         // if 양쪽 모두 높이 변화가 없는 경우
         if isSameAccidental {
@@ -264,7 +269,7 @@ extension IntervalInfoView {
     }
   }
   
-  private var closeButtonArea: some View {
+  private var CloseButtonArea: some View {
     HStack {
       Spacer()
       Button(action: dismiss.callAsFunction) {
@@ -277,10 +282,11 @@ extension IntervalInfoView {
       }
     }
   }
-
 }
 
 extension IntervalInfoView {
+  // MARK: - Content related funcs
+  
   private func getHalfStep(
     of accidental: Accidental,
     isLowerNoteChanged: Bool = false
@@ -331,6 +337,8 @@ extension IntervalInfoView {
 }
 
 extension IntervalInfoView {
+  // MARK: - Sound related funcs
+  
   private func stopSounds() {
     SoundManager.shared.stopAllSounds()
     

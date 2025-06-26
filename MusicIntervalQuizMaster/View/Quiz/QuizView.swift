@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct QuizView: View {
+  // MARK: - View Main
+  
   @Environment(\.scenePhase) var scenePhase
   @State private var isEnteredBackground = false
+  
+  @StateObject var viewModel = QuizViewModel()
+  @ObservedObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
   @AppStorage(.cfgQuizSoundAutoplay) var cfgQuizSoundAutoplay = true
   @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   @AppStorage(.cfgQuizSheetPosition) var cfgQuizSheetPosition = 0
-  
-  @StateObject var viewModel = QuizViewModel()
-  @ObservedObject var keyboardViewModel = IntervalTouchKeyboardViewModel()
   
   @State private var isMusiqwikViewPressed = false
   @State private var showAnswerAlert = false
@@ -41,64 +43,69 @@ struct QuizView: View {
         Spacer()
       }
       
-      headerView
+      HeaderArea
       
-      musiqwikView
+      MusiqwikViewArea
       
       if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 2 {
         Spacer()
       }
       
-      // 상태창
-      HStack(alignment: .center) {
-        Text("\(viewModel.answerText)")
-          .font(.subheadline).bold()
-          .frame(height: 40)
-        if viewModel.answerMode == .correct {
-          Button {
-            showInfoModal = true
-          } label: {
-            if #available(iOS 18.0, *) {
-              Image(systemName: "text.page.badge.magnifyingglass")
-                .foregroundStyle(Color.teal)
-                .font(.system(size: 13))
-            } else {
-              Image(systemName: "doc.text.magnifyingglass")
-                .foregroundStyle(Color.teal)
-                .font(.system(size: 13))
-            }
+      AnswerStatusArea
+      
+      BottomKeyArea
+    }
+    .onChange(of: scenePhase) { newPhase in
+      switch newPhase {
+      case .background:
+        print("newPhase: background")
+        isEnteredBackground = true
+      case .inactive:
+        print("newPhase: inactive")
+      case .active:
+        print("newPhase: isActive")
+        if isEnteredBackground {
+          if viewModel.answerMode == .inQuiz {
+            viewModel.preparePairData()
           }
+          
+          isEnteredBackground = false
         }
+      @unknown default:
+        print("newPhase: unknown default")
       }
-      .frame(maxWidth: .infinity)
-      .background(.gray.opacity(0.2))
-      .clipShape(RoundedRectangle(cornerRadius: 5))
-      .padding(.horizontal, 10)
-      .opacity(viewModel.answerMode == .inQuiz ? 0 : 1)
-      .animation(.easeInOut, value: viewModel.answerMode)
-  
-      VStack {
-        HStack {
-          intervalTextField(
-            "\(keyboardViewModel.intervalModifier.textFieldLocalizedDescription)",
-            backgroundColor: .purple.opacity(0.4),
-            isLeading: false
-          )
-          intervalTextField(
-            "\(keyboardViewModel.intervalNumber)",
-            backgroundColor: .cyan.opacity(0.4)
-          )
+    }
+    .onChange(of: viewModel.currentPair) { _ in
+      if cfgQuizSoundAutoplay {
+        playSounds()
+      }
+      
+      invalidateTimer()
+      startCountdown()
+    }
+    .onChange(of: viewModel.sessionCreated) { _ in
+      showNewSessionAlert = true
+    }
+    .onChange(of: showAnswerAlert) { isShow in
+      if isShow {
+        withAnimation(.easeInOut(duration: 0.2)) {
+          animateAlertDismiss = true
         }
         
-        keyboardArea
-          .onReceive(keyboardViewModel.objectWillChange) { output in
-            if showNewSessionAlert {
-              showNewSessionAlert = false
-            }
+        DispatchQueue.main.asyncAfter(
+          deadline: .now() + .milliseconds(1300)
+        ) {
+          withAnimation(.easeInOut(duration: 0.2)) {
+            showAnswerAlert = false
+            animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
           }
+        }
       }
-      .padding(.horizontal, 10)
-      .padding(.bottom, 10)
+    }
+    .onReceive(keyboardViewModel.objectWillChange) { output in
+      if showNewSessionAlert {
+        showNewSessionAlert = false
+      }
     }
     .alert(isPresent: $showAnswerAlert, view: answerAlertView)
     .alert(isPresent: $showNewSessionAlert, view: newSessionAlertView)
@@ -106,10 +113,14 @@ struct QuizView: View {
       IntervalInfoView(pair: viewModel.currentPair)
     }
   }
+}
+
+extension QuizView {
+  // MARK: - View segments
   
-  private var headerView: some View {
+  private var HeaderArea: some View {
     HStack(spacing: 0) {
-      currentSessionButton
+      SessionMenu
       
       Spacer()
       
@@ -140,8 +151,8 @@ struct QuizView: View {
             Text("Auto")
           }
           .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
-            .font(.system(size: 13))
-            .frame(width: 60, height: 20)
+          .font(.system(size: 13))
+          .frame(width: 60, height: 20)
         }
         .padding(5)
         .background(.gray.opacity(0.4))
@@ -152,10 +163,10 @@ struct QuizView: View {
     .padding(.top, 20)
   }
   
-  private var musiqwikView: some View {
+  private var MusiqwikViewArea: some View {
     MusiqwikView(pair: viewModel.currentPair)
-      // .frame(maxWidth: .infinity)
-      .frame(height: 150)
+    // .frame(maxWidth: .infinity)
+      .frame(height: 100)
       .scaleEffect(isMusiqwikViewPressed ? 0.965 : 1.0) // 눌렀을 때 살짝 작아짐
       .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
       .offset(x: offsetX)
@@ -192,37 +203,6 @@ struct QuizView: View {
         
         stopSounds()
       }
-      .onChange(of: scenePhase) { newPhase in
-        switch newPhase {
-        case .background:
-          print("newPhase: background")
-          isEnteredBackground = true
-        case .inactive:
-          print("newPhase: inactive")
-        case .active:
-          print("newPhase: isActive")
-          if isEnteredBackground {
-            if viewModel.answerMode == .inQuiz {
-              viewModel.preparePairData()
-            }
-            
-            isEnteredBackground = false
-          }
-        @unknown default:
-          print("newPhase: unknown default")
-        }
-      }
-      .onChange(of: viewModel.currentPair) { _ in
-        if cfgQuizSoundAutoplay {
-          playSounds()
-        }
-        
-        invalidateTimer()
-        startCountdown()
-      }
-      .onChange(of: viewModel.sessionCreated) { _ in
-        showNewSessionAlert = true
-      }
       .onTapGesture {
         if store.bool(forKey: .cfgHapticPressedIntervalKeyboard) {
           HapticManager.rigid.vibrate()
@@ -236,61 +216,102 @@ struct QuizView: View {
         
         playSounds()
       }
-      .gesture(
-        DragGesture()
-          .onChanged { value in
-            // 드래그 중 감지
-            offsetX = value.translation.width
-          }
-          .onEnded { value in
-            // 드래그 완료 후 동작
-            if value.translation.width > 50 {
-              viewModel.prev()
-              prevAnimation()
-              comebackAnimation()
-              
-              keyboardViewModel.answerMode = viewModel.answerMode
-            } else if value.translation.width < -50 {
-              print(viewModel.isNextQuestionAlreadyAppeared, viewModel.answerMode, viewModel.isCurrentPairCountEqualLastMax)
-              if viewModel.isNextQuestionAlreadyAppeared || (viewModel.answerMode == .correct && viewModel.isCurrentPairCountEqualLastMax) {
-                
-                viewModel.next()
-                nextAnimation()
-                comebackAnimation()
-                
-                keyboardViewModel.answerMode = viewModel.answerMode
-              } else {
-                comebackAnimation()
-              }
-            }
-          }
-      )
+      .gesture(musiqwikDragGesture)
   }
   
-  private var keyboardArea: some View {
+  private var AnswerStatusArea: some View {
+    // 상태창
+    HStack(alignment: .center) {
+      Text("\(viewModel.answerText)")
+        .font(.subheadline).bold()
+        .frame(height: 40)
+      if viewModel.answerMode == .correct {
+        Button {
+          showInfoModal = true
+        } label: {
+          if #available(iOS 18.0, *) {
+            Image(systemName: "text.page.badge.magnifyingglass")
+              .foregroundStyle(Color.teal)
+              .font(.system(size: 13))
+          } else {
+            Image(systemName: "doc.text.magnifyingglass")
+              .foregroundStyle(Color.teal)
+              .font(.system(size: 13))
+          }
+        }
+      }
+    }
+    .frame(maxWidth: .infinity)
+    .background(.gray.opacity(0.2))
+    .clipShape(RoundedRectangle(cornerRadius: 5))
+    .padding(.horizontal, 10)
+    .opacity(viewModel.answerMode == .inQuiz ? 0 : 1)
+    .animation(.easeInOut, value: viewModel.answerMode)
+  }
+  
+  private var BottomKeyArea: some View {
+    VStack {
+      BottomKeyPressStatusArea
+      BottomKeyPadArea
+    }
+    .padding(.horizontal, 10)
+    .padding(.bottom, 10)
+  }
+  
+  private var BottomKeyPressStatusArea: some View {
+    HStack {
+      intervalTextField(
+        "\(keyboardViewModel.intervalModifier.textFieldLocalizedDescription)",
+        backgroundColor: .purple.opacity(0.4),
+        isLeading: false
+      )
+      intervalTextField(
+        "\(keyboardViewModel.intervalNumber)",
+        backgroundColor: .cyan.opacity(0.4)
+      )
+    }
+  }
+  
+  private var BottomKeyPadArea: some View {
     IntervalTouchKeyboardView(keyboardViewModel: keyboardViewModel) {
       pressEnterButton()
     }
     .disabled(showAnswerAlert)
     .foregroundColor(animateAlertDismiss ? .gray : nil)
     .contrast(animateAlertDismiss ? 0.9 : 1)
-    .onChange(of: showAnswerAlert) { isShow in
-      if isShow {
-        withAnimation(.easeInOut(duration: 0.2)) {
-          animateAlertDismiss = true
-        }
-        
-        DispatchQueue.main.asyncAfter(
-          deadline: .now() + .milliseconds(1300)
-        ) {
-          withAnimation(.easeInOut(duration: 0.2)) {
-            showAnswerAlert = false
-            animateAlertDismiss = false // 애니메이션 완료 후 상태 초기화
-          }
-        }
+    
+  }
+  
+  private var SessionMenu: some View {
+    Menu {
+      Button("new_session_start".localized) {
+        // CoreData: 세션 생성
+        viewModel.preparePairData()
       }
+
+      Text("reset_current_record_and_start_new_session".localized)
+        .font(.caption2)
+    } label: {
+      VStack(alignment: .leading) {
+        Text("current_session".localized)
+          .font(.system(size: 12))
+          .bold()
+        HStack {
+          Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)   (\(viewModel.answerPercentText))")
+        }
+        .font(.system(size: 10))
+      }
+      .foregroundStyle(.foreground)
+      .padding(.horizontal, 8)
+      .padding(.vertical, 4)
+      .frame(width: 120, alignment: .leading)
+      // .frame(maxWidth: .infinity)
+      .background(.gray.opacity(0.2))
+      .clipShape(RoundedRectangle(cornerRadius: 5))
     }
   }
+  
+  // MARK: - AlertView segments
   
   private var answerAlertView: CenterAlertView {
     guard let interval = viewModel.currentPair.advancedInterval else {
@@ -324,10 +345,44 @@ struct QuizView: View {
       icon: .custom(.init(systemName: "newspaper")!)
     )
   }
+  
+  // MARK: - Drag Gestures
+  
+  private var musiqwikDragGesture: some Gesture {
+    DragGesture()
+      .onChanged { value in
+        // 드래그 중 감지
+        offsetX = value.translation.width
+      }
+      .onEnded { value in
+        // 드래그 완료 후 동작
+        if value.translation.width > 50 {
+          viewModel.prev()
+          prevAnimation()
+          comebackAnimation()
+          
+          keyboardViewModel.answerMode = viewModel.answerMode
+        } else if value.translation.width < -50 {
+          print(viewModel.isNextQuestionAlreadyAppeared, viewModel.answerMode, viewModel.isCurrentPairCountEqualLastMax)
+          if viewModel.isNextQuestionAlreadyAppeared || (viewModel.answerMode == .correct && viewModel.isCurrentPairCountEqualLastMax) {
+            
+            viewModel.next()
+            nextAnimation()
+            comebackAnimation()
+            
+            keyboardViewModel.answerMode = viewModel.answerMode
+          } else {
+            comebackAnimation()
+          }
+        }
+      }
+  }
 }
 
-// view와 관련된 변수들
 extension QuizView {
+  
+  // MARK: - View assistants
+  
   private func intervalTextField(_ text: String, backgroundColor: Color, isLeading: Bool = true) -> some View {
     Text(text == "0" ? "-" : text)
       .padding()
@@ -358,38 +413,11 @@ extension QuizView {
       offsetX = 0
     }
   }
-  
-  private var currentSessionButton: some View {
-    Menu {
-      Button("new_session_start".localized) {
-        // CoreData: 세션 생성
-        viewModel.preparePairData()
-      }
-
-      Text("reset_current_record_and_start_new_session".localized)
-        .font(.caption2)
-    } label: {
-      VStack(alignment: .leading) {
-        Text("current_session".localized)
-          .font(.system(size: 12))
-          .bold()
-        HStack {
-          Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)   (\(viewModel.answerPercentText))")
-        }
-        .font(.system(size: 10))
-      }
-      .foregroundStyle(.foreground)
-      .padding(.horizontal, 8)
-      .padding(.vertical, 4)
-      .frame(width: 120, alignment: .leading)
-      // .frame(maxWidth: .infinity)
-      .background(.gray.opacity(0.2))
-      .clipShape(RoundedRectangle(cornerRadius: 5))
-    }
-  }
 }
 
 extension QuizView {
+  // MARK: - Other funcs
+  
   private func stopSounds() {
     SoundManager.shared.stopAllSounds()
     

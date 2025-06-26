@@ -57,5 +57,10 @@ struct MainTabBarView: View {
 }
 
 #Preview {
-  MainTabBarView(statsViewModel: .init(cdManager: QuizSessionManager(context: PersistenceController.preview.container.viewContext)))
+  let statsPreviewViewModel = StatsViewModel(
+    cdManager: QuizSessionManager(
+      context: PersistenceController.preview.container.viewContext
+    )
+  )
+  MainTabBarView(statsViewModel: statsPreviewViewModel)
 }

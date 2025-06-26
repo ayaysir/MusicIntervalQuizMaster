@@ -37,7 +37,7 @@ struct ChartView: View {
             
           } else {
             if viewModel.selectedYSegment == 0 {
-              rateBarChart(
+              RateBarChart(
                 data,
                 category: parameters.category,
                 clef: parameters.clef,
@@ -63,7 +63,7 @@ struct ChartView: View {
 }
 
 extension ChartView {
-  @ViewBuilder private func rateBarChart(
+  @ViewBuilder private func RateBarChart(
     _ data: [BarChartData],
     category: ChartXCategory,
     clef: Clef = .treble,

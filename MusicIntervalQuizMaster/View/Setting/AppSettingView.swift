@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AppSettingView: View {
+  // MARK: - View main
+  
   @AppStorage(.cfgHapticPressedIntervalKeyboard) var cfgHapicPressed = true
   @AppStorage(.cfgHapticAnswer) var cfgHapicAnswer = true
   @AppStorage(.cfgHapticWrong) var cfgHapicWrong = true
@@ -15,25 +17,16 @@ struct AppSettingView: View {
   @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   @AppStorage(.cfgAppAppearance) var cfgAppAppearance = 0
   
-  private var stepperLabel: some View {
-    HStack {
-      Text("problem_solving_timer")
-      Spacer()
-      Text(cfgTimerSeconds == 0 ? "unlimited".localized : "\(cfgTimerSeconds)\("time_second_abbr".localized)")
-        .foregroundColor(.gray)
-    }
-  }
-  
   var body: some View {
     Form {
       Section {
         if ProcessInfo.processInfo.isiOSAppOnMac {
           ForMacStepper(value: $cfgTimerSeconds, range: 0...60, step: 5) {
-            stepperLabel
+            StepperLabel
           }
         } else {
           Stepper(value: $cfgTimerSeconds, in: 0...60, step: 5) {
-            stepperLabel
+            StepperLabel
           }
         }
       } header: {
@@ -57,9 +50,9 @@ struct AppSettingView: View {
       }
       
       Section("appearance") {
-        appearanceButton("appearance_use_device_theme".localized, 0)
-        appearanceButton("appearance_light_theme".localized, 1)
-        appearanceButton("appearance_dark_theme".localized, 2)
+        AppearanceButton("appearance_use_device_theme".localized, 0)
+        AppearanceButton("appearance_light_theme".localized, 1)
+        AppearanceButton("appearance_dark_theme".localized, 2)
       }
     }
     .navigationTitle("app_settings")
@@ -67,7 +60,18 @@ struct AppSettingView: View {
 }
 
 extension AppSettingView {
-  private func appearanceButton(_ title: String, _ cfgValue: Int) -> some View {
+  // MARK: - View segments
+  
+  private var StepperLabel: some View {
+    HStack {
+      Text("problem_solving_timer")
+      Spacer()
+      Text(cfgTimerSeconds == 0 ? "unlimited".localized : "\(cfgTimerSeconds)\("time_second_abbr".localized)")
+        .foregroundColor(.gray)
+    }
+  }
+  
+  private func AppearanceButton(_ title: String, _ cfgValue: Int) -> some View {
     Button(action: {
       cfgAppAppearance = cfgValue
     }) {

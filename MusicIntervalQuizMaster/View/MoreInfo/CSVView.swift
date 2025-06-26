@@ -19,10 +19,6 @@ struct CSVView: View {
       Text(csvText)
         .padding(10)
         .font(.system(size: 7))
-        // .textSelection(.enabled)
-        // .onTapGesture {
-        //   UIPasteboard.general.string = csvText
-        // }
     }
     .navigationTitle("csv_view")
     .navigationBarTitleDisplayMode(.inline)

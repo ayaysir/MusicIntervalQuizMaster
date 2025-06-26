@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// TODO: - 한줄씩 토글로 조절하는게 너무 불편, 버튼 그리드로 바꾸고 메인에서 바로 설정할 수 있게
+
 struct IntervalTypeSelectSettingView: View {
   @EnvironmentObject var viewModel: SettingViewModel
   @State private var searchKeyword = ""
