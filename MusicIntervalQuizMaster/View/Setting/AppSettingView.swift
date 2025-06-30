@@ -18,44 +18,46 @@ struct AppSettingView: View {
   @AppStorage(.cfgAppAppearance) var cfgAppAppearance = 0
   
   var body: some View {
-    Form {
-      Section {
-        if ProcessInfo.processInfo.isiOSAppOnMac {
-          ForMacStepper(value: $cfgTimerSeconds, range: 0...60, step: 5) {
-            StepperLabel
+    NavigationStack {
+      Form {
+        Section {
+          if ProcessInfo.processInfo.isiOSAppOnMac {
+            ForMacStepper(value: $cfgTimerSeconds, range: 0...60, step: 5) {
+              StepperLabel
+            }
+          } else {
+            Stepper(value: $cfgTimerSeconds, in: 0...60, step: 5) {
+              StepperLabel
+            }
           }
-        } else {
-          Stepper(value: $cfgTimerSeconds, in: 0...60, step: 5) {
-            StepperLabel
-          }
+        } header: {
+          Text("timer_problem_solving_within_limit")
+        } footer: {
+          Text("timer_limit_description")
         }
-      } header: {
-        Text("timer_problem_solving_within_limit")
-      } footer: {
-        Text("timer_limit_description")
+        
+        Section {
+          Toggle("auto_move_to_next_problem_toggle", isOn: $cfgAppAutoNextMove)
+        } header: {
+          Text("auto_move_to_next_problem")
+        }
+        
+        Section {
+          Toggle("haptic_when_key_pressed", isOn: $cfgHapicPressed)
+          Toggle("haptic_when_correct", isOn: $cfgHapicAnswer)
+          Toggle("haptic_when_wrong", isOn: $cfgHapicWrong)
+        } header: {
+          Text("haptic_feedback".localized)
+        }
+        
+        Section("appearance") {
+          AppearanceButton("appearance_use_device_theme".localized, 0)
+          AppearanceButton("appearance_light_theme".localized, 1)
+          AppearanceButton("appearance_dark_theme".localized, 2)
+        }
       }
-      
-      Section {
-        Toggle("auto_move_to_next_problem_toggle", isOn: $cfgAppAutoNextMove)
-      } header: {
-        Text("auto_move_to_next_problem")
-      }
-      
-      Section {
-        Toggle("haptic_when_key_pressed", isOn: $cfgHapicPressed)
-        Toggle("haptic_when_correct", isOn: $cfgHapicAnswer)
-        Toggle("haptic_when_wrong", isOn: $cfgHapicWrong)
-      } header: {
-        Text("haptic_feedback".localized)
-      }
-      
-      Section("appearance") {
-        AppearanceButton("appearance_use_device_theme".localized, 0)
-        AppearanceButton("appearance_light_theme".localized, 1)
-        AppearanceButton("appearance_dark_theme".localized, 2)
-      }
+      .navigationTitle("app_settings")
     }
-    .navigationTitle("app_settings")
   }
 }
 
@@ -89,7 +91,5 @@ extension AppSettingView {
 }
 
 #Preview {
-  NavigationStack {
-    AppSettingView()
-  }
+  AppSettingView()
 }

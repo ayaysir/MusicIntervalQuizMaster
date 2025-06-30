@@ -36,6 +36,10 @@ enum Clef: HasMusiqwikText, CaseIterable {
     }
   }
   
+  var musiqwikTextWithSpace: String {
+    "=\(self.musiqwikText)="
+  }
+  
   var localizedDescription: String {
     switch self {
     case .treble:

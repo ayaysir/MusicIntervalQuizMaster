@@ -249,3 +249,10 @@
 "info_shrinked" = "縮小";
 
 "info_ok" = "わかりました！";
+
+"loc.shrink_settings" = "クイズ出題範囲の設定";
+"loc.close" = "閉じる";
+"loc.quiz_settings_changed" = "クイズ設定が変更されました";
+"loc.continue_current_session" = "現在のセッションを続ける";
+"loc.start_new_session" = "新しいセッションを開始する";
+"loc.quiz_setting_change_warning" = "クイズ中に出題範囲の設定が変更されたため、再開する必要があります。現在のセッションを続けた場合、変更内容は反映されません。";

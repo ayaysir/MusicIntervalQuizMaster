@@ -1,5 +1,5 @@
 //
-//  SettingView.swift
+//  QuizSettingView.swift
 //  MusicIntervalQuizMaster
 //
 //  Created by 윤범태 on 11/19/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingView: View {
+struct QuizSettingView: View {
   @AppStorage(.cfgNotesAscending) var cfgNotesAscending = true
   @AppStorage(.cfgNotesDescending) var cfgNotesDescending = true
   @AppStorage(.cfgNotesSimultaneously) var cfgNotesSimultaneously = true
@@ -128,7 +128,7 @@ fileprivate enum SettingGroup {
   case directions, clefs
 }
 
-extension SettingView {
+extension QuizSettingView {
   private var toggleStatesOfDirections: [Bool] {
     [cfgNotesAscending, cfgNotesDescending, cfgNotesSimultaneously]
   }
@@ -154,5 +154,5 @@ extension SettingView {
 }
 
 #Preview {
-  SettingView()
+  QuizSettingView()
 }

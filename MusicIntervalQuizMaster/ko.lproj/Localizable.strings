@@ -249,3 +249,10 @@
 "info_shrinked" = "축소";
 
 "info_ok" = "알겠습니다!";
+
+"loc.shrink_settings" = "퀴즈 출제 범위 설정";
+"loc.close" = "닫기";
+"loc.quiz_settings_changed" = "퀴즈 설정 변경됨";
+"loc.continue_current_session" = "현재 세션 계속하기";
+"loc.start_new_session" = "새로운 세션 시작하기";
+"loc.quiz_setting_change_warning" = "퀴즈 중에 출제 범위 설정을 변경하였기 때문에 다시 시작해야 합니다. 현재 세션을 계속할 경우 변경된 퀴즈 설정이 반영되지 않습니다.";

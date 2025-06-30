@@ -249,3 +249,10 @@
 "info_shrinked" = "shrinked";
 
 "info_ok" = "OK, Got it!";
+
+"loc.shrink_settings" = "Quiz Scope Settings";
+"loc.close" = "Close";
+"loc.quiz_settings_changed" = "Quiz Settings Changed";
+"loc.continue_current_session" = "Continue Current Session";
+"loc.start_new_session" = "Start New Session";
+"loc.quiz_setting_change_warning" = "The quiz scope settings were changed during the session, so the quiz must be restarted. If you continue the current session, the updated settings will not be applied.";

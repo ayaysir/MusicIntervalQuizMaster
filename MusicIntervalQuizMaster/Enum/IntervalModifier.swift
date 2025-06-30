@@ -177,11 +177,19 @@ enum IntervalModifier: CustomStringConvertible, CaseIterable {
   }
   
   static func availableModifierList(of degree: Int) -> [Self] {
-    return if [1, 4, 5, 8, 11, 12].contains(degree) {
+    return switch degree {
+    case 1:
+      [.perfect, .augmented, .doublyAugmented] // 감, 겹감이 나오지 않음
+    case 4, 5, 8, 11, 12:
       [.perfect, .augmented, .diminished, .doublyAugmented, .doublyDiminished]
-    } else {
+    default:
       [.major, .minor, .augmented, .diminished, .doublyAugmented, .doublyDiminished]
     }
+    // return if [1, 4, 5, 8, 11, 12].contains(degree) {
+    //   [.perfect, .augmented, .diminished, .doublyAugmented, .doublyDiminished]
+    // } else {
+    //   [.major, .minor, .augmented, .diminished, .doublyAugmented, .doublyDiminished]
+    // }
   }
 }
 

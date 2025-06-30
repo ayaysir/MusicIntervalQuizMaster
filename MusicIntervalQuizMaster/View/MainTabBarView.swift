@@ -27,7 +27,7 @@ struct MainTabBarView: View {
           Label("tab_stats".localized, systemImage: "chart.bar.xaxis")
         }
         .tag(1)
-      SettingView()
+      AppSettingView()
         .tabItem {
           Label("tab_settings".localized, systemImage: "gearshape.fill")
         }

@@ -22,6 +22,8 @@ struct QuizView: View {
   
   @State private var isMusiqwikViewPressed = false
   @State private var showAnswerAlert = false
+  @State private var showQuizSettingSheet = false
+  @State private var showRestartSessionAlert = false
   @State private var animateAlertDismiss = false
   @State private var showNewSessionAlert = false
   @State private var showInfoModal = false
@@ -51,8 +53,11 @@ struct QuizView: View {
         Spacer()
       }
       
-      AnswerStatusArea
-      
+      HStack(spacing: 5) {
+        QuizSettingButtonArea
+        AnswerStatusArea
+      }
+     
       BottomKeyArea
     }
     .onChange(of: scenePhase) { newPhase in
@@ -109,8 +114,28 @@ struct QuizView: View {
     }
     .alert(isPresent: $showAnswerAlert, view: answerAlertView)
     .alert(isPresent: $showNewSessionAlert, view: newSessionAlertView)
+    .alert(
+      "loc.quiz_settings_changed",
+      isPresented: $showRestartSessionAlert,
+      actions: {
+        Button(role: .cancel) {} label: {
+          Text("loc.continue_current_session")
+        }
+        Button("loc.start_new_session") {
+          viewModel.preparePairData()
+        }
+      },
+      message: {
+      Text("loc.quiz_setting_change_warning")
+    })
     .sheet(isPresented: $showInfoModal) {
       IntervalInfoView(pair: viewModel.currentPair)
+    }
+    .sheet(isPresented: $showQuizSettingSheet) {
+      // on Dismiss
+      showRestartSessionAlert = true
+    } content: {
+      ShrinkedQuizSettingView()
     }
   }
 }
@@ -219,6 +244,20 @@ extension QuizView {
       .gesture(musiqwikDragGesture)
   }
   
+  private var QuizSettingButtonArea: some View {
+    Button {
+      showQuizSettingSheet.toggle()
+    } label: {
+      Image(systemName: "slider.horizontal.3")
+        .foregroundStyle(Color.label)
+        .font(.system(size: 15, weight: .bold))
+        .frame(width: 40, height: 40)
+        .background(Color.gray.opacity(0.4))
+        .clipShape(RoundedRectangle(cornerRadius: 5))
+    }
+    .padding(.leading, 10)
+  }
+  
   private var AnswerStatusArea: some View {
     // 상태창
     HStack(alignment: .center) {
@@ -233,10 +272,12 @@ extension QuizView {
             Image(systemName: "text.page.badge.magnifyingglass")
               .foregroundStyle(Color.teal)
               .font(.system(size: 13))
+              .bold()
           } else {
             Image(systemName: "doc.text.magnifyingglass")
               .foregroundStyle(Color.teal)
               .font(.system(size: 13))
+              .bold()
           }
         }
       }
@@ -244,7 +285,7 @@ extension QuizView {
     .frame(maxWidth: .infinity)
     .background(.gray.opacity(0.2))
     .clipShape(RoundedRectangle(cornerRadius: 5))
-    .padding(.horizontal, 10)
+    .padding(.trailing, 10)
     .opacity(viewModel.answerMode == .inQuiz ? 0 : 1)
     .animation(.easeInOut, value: viewModel.answerMode)
   }
@@ -288,24 +329,24 @@ extension QuizView {
         // CoreData: 세션 생성
         viewModel.preparePairData()
       }
-
+      
       Text("reset_current_record_and_start_new_session".localized)
-        .font(.caption2)
+        .font(.system(size: 12))
     } label: {
       VStack(alignment: .leading) {
-        Text("current_session".localized)
+        Text(verbatim: "\("current_session".localized) (\(viewModel.answerPercentText))")
           .font(.system(size: 12))
           .bold()
-        HStack {
-          Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)   (\(viewModel.answerPercentText))")
-        }
-        .font(.system(size: 10))
+          .lineLimit(1)
+        Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)")
+          .lineLimit(1)
+          .font(.system(size: 10))
       }
       .foregroundStyle(.foreground)
-      .padding(.horizontal, 8)
+      .padding(.horizontal, 4)
       .padding(.vertical, 4)
-      .frame(width: 120, alignment: .leading)
-      // .frame(maxWidth: .infinity)
+      .frame(width: 110, alignment: .leading)
+      .minimumScaleFactor(0.5)
       .background(.gray.opacity(0.2))
       .clipShape(RoundedRectangle(cornerRadius: 5))
     }
