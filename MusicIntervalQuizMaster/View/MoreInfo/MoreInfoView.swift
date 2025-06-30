@@ -11,12 +11,8 @@ struct MoreInfoView: View {
   @State private var isShowingMailView = false
   @State private var alertItem: AlertItem? = nil
   @State private var showAlertDeleteAll: Bool = false
-  @State private var reminderDatePickerValue: Date = .now
   @State private var isNotiPermitted: Bool = false
   
-  @AppStorage(.moreInfoRemindeIsOn) var isReminderOn: Bool = false
-  @AppStorage(.moreInfoReminderHour) var reminderHour: Int = 0
-  @AppStorage(.moreInfoReminderMinute) var reminderMinute: Int = 0
   
   var body: some View {
     NavigationStack {
@@ -24,17 +20,6 @@ struct MoreInfoView: View {
 #if DEBUG
         DEBUG_DebugArea
 #endif
-        Section("reminder_noti_title") {
-          Toggle("reminder_noti_toggle", isOn: $isReminderOn)
-          DatePicker(
-            "for_every_day",
-            selection: $reminderDatePickerValue,
-            displayedComponents: .hourAndMinute
-          )
-          .disabled(!isReminderOn)
-          .opacity(isReminderOn ? 1 : 0.2)
-        }
-        
         CSVSection
         
         Section("help_section_title") {
@@ -67,44 +52,19 @@ struct MoreInfoView: View {
         }
       }
       .navigationTitle("more_info")
-      .onAppear {
-        // isReminderOn이 켜져있으면 reminderHour, reminderMinute를 시 분이 반영된 Date 오브젝트를 reminderDatePickerValue에 할당
-        if isReminderOn {
-          let calendar = Calendar.current
-          let components = DateComponents(hour: reminderHour, minute: reminderMinute)
-          if let date = calendar.date(from: components) {
-            reminderDatePickerValue = date
-          }
-        }
-      }
-      .onChange(of: isReminderOn) { newValue in
-        Task {
-          if await LocalNotiManager.shared.requestNotificationPermission() {
-            if newValue {
-              LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
-            } else {
-              LocalNotiManager.shared.removeAllNoti()
-            }
-          } else if newValue {
-            InstantAlert.show(
-              "no_alert_permission_title".localized,
-              message: "no_alert_permission_detail".localized
-            ) { _ in
-              isReminderOn = false
-            }
-          }
-        }
-      }
-      .onChange(of: reminderDatePickerValue) { newValue in
-        let calendar = Calendar.current
-        reminderHour = calendar.component(.hour, from: newValue)
-        reminderMinute = calendar.component(.minute, from: newValue)
-        
-        if isReminderOn {
-          LocalNotiManager.shared.removeAllNoti()
-          LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
-        }
-      }
+      // .onChange(of: isReminderOn) { newValue in
+      //   
+      // }
+      // .onChange(of: reminderDatePickerValue) { newValue in
+      //   let calendar = Calendar.current
+      //   reminderHour = calendar.component(.hour, from: newValue)
+      //   reminderMinute = calendar.component(.minute, from: newValue)
+      //   
+      //   if isReminderOn {
+      //     LocalNotiManager.shared.removeAllNoti()
+      //     LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
+      //   }
+      // }
       .sheet(isPresented: $isShowingMailView) {
         MailRPView(
           recipientEmail: "yoonbumtae@gmail.com",

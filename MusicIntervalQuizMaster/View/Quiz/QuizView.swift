@@ -249,7 +249,7 @@ extension QuizView {
       showQuizSettingSheet.toggle()
     } label: {
       Image(systemName: "slider.horizontal.3")
-        .foregroundStyle(Color.label)
+        .foregroundStyle(Color.frontLabel)
         .font(.system(size: 15, weight: .bold))
         .frame(width: 40, height: 40)
         .background(Color.gray.opacity(0.4))
