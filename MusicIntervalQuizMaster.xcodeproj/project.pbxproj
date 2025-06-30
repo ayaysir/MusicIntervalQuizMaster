@@ -18,6 +18,7 @@
 		444FF1082E0D2B6C00209B22 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 444FF1072E0D2B6C00209B22 /* ComposableArchitecture */; };
 		444FF10B2E0D2C7100209B22 /* QuizSessionDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF10A2E0D2C6500209B22 /* QuizSessionDomain.swift */; };
 		444FF10D2E0D2D1400209B22 /* TimerDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF10C2E0D2D0F00209B22 /* TimerDomain.swift */; };
+		444FF1832E0D706400209B22 /* Refactor_TCA.md in Resources */ = {isa = PBXBuildFile; fileRef = 444FF1822E0D706400209B22 /* Refactor_TCA.md */; };
 		44626DA72D5F9ADC008294BC /* CSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA62D5F9AD0008294BC /* CSVView.swift */; };
 		44626DA92D5FA716008294BC /* ShareTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA82D5FA716008294BC /* ShareTextView.swift */; };
 		446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300282CFB807800C33BCB /* StatsViewModel.swift */; };
@@ -172,6 +173,7 @@
 		440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusiqwikView.swift; sourceTree = "<group>"; };
 		444FF10A2E0D2C6500209B22 /* QuizSessionDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSessionDomain.swift; sourceTree = "<group>"; };
 		444FF10C2E0D2D0F00209B22 /* TimerDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerDomain.swift; sourceTree = "<group>"; };
+		444FF1822E0D706400209B22 /* Refactor_TCA.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Refactor_TCA.md; sourceTree = "<group>"; };
 		44626DA62D5F9AD0008294BC /* CSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVView.swift; sourceTree = "<group>"; };
 		44626DA82D5FA716008294BC /* ShareTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTextView.swift; sourceTree = "<group>"; };
 		446300282CFB807800C33BCB /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
@@ -386,6 +388,14 @@
 			path = Timer;
 			sourceTree = "<group>";
 		};
+		444FF1812E0D705D00209B22 /* Document */ = {
+			isa = PBXGroup;
+			children = (
+				444FF1822E0D706400209B22 /* Refactor_TCA.md */,
+			);
+			path = Document;
+			sourceTree = "<group>";
+		};
 		4469E8CA2CEA296D00CC506C /* Enum */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +555,7 @@
 		44C4CEF12C8C47A80092C452 /* MusicIntervalQuizMaster */ = {
 			isa = PBXGroup;
 			children = (
+				444FF1812E0D705D00209B22 /* Document */,
 				444FF1092E0D2C5B00209B22 /* ViewDomain */,
 				4463002A2CFB86EE00C33BCB /* Info.plist */,
 				44D6F2D82CF60F0700B91BBA /* Module */,
@@ -857,6 +868,7 @@
 				44D6F2AF2CF245E300B91BBA /* Piano_BPM60_4B2E_71.mp3 in Resources */,
 				44D6F29E2CF245E300B91BBA /* Piano_BPM60_4B2E_64.mp3 in Resources */,
 				440BE64C2CEA285600B01C1B /* Musiqwik.ttf in Resources */,
+				444FF1832E0D706400209B22 /* Refactor_TCA.md in Resources */,
 				44D6F2CC2CF245E300B91BBA /* Piano_BPM60_4B2E_37.mp3 in Resources */,
 				44D6F2B82CF245E300B91BBA /* Piano_BPM60_4B2E_53.mp3 in Resources */,
 				44D6F2CD2CF245E300B91BBA /* Piano_BPM60_4B2E_76.mp3 in Resources */,
