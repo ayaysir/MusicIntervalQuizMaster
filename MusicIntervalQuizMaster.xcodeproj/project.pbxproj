@@ -35,7 +35,6 @@
 		4469E8D32CEA327300CC506C /* IntervalPairDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D22CEA327200CC506C /* IntervalPairDirection.swift */; };
 		4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D52CEA374800CC506C /* Tonic.Note+.swift */; };
 		4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D72CEB920600CC506C /* MainTabBarView.swift */; };
-		4469E8DA2CEB92DE00CC506C /* QuizSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4469E8D92CEB92DE00CC506C /* QuizSettingView.swift */; };
 		44753C4C2D4C979B003F82FA /* LocalNotiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */; };
 		44753C4E2D4C9DF9003F82FA /* QuizHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */; };
 		44753C532D4CC190003F82FA /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44753C522D4CC190003F82FA /* UIViewController+.swift */; };
@@ -191,7 +190,6 @@
 		4469E8D22CEA327200CC506C /* IntervalPairDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalPairDirection.swift; sourceTree = "<group>"; };
 		4469E8D52CEA374800CC506C /* Tonic.Note+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Tonic.Note+.swift"; sourceTree = "<group>"; };
 		4469E8D72CEB920600CC506C /* MainTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarView.swift; sourceTree = "<group>"; };
-		4469E8D92CEB92DE00CC506C /* QuizSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSettingView.swift; sourceTree = "<group>"; };
 		44753C4B2D4C9796003F82FA /* LocalNotiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotiManager.swift; sourceTree = "<group>"; };
 		44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizHelper.swift; sourceTree = "<group>"; };
 		44753C522D4CC190003F82FA /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -470,7 +468,6 @@
 			isa = PBXGroup;
 			children = (
 				444FF1842E12666C00209B22 /* ShrinkedQuizSettingView.swift */,
-				4469E8D92CEB92DE00CC506C /* QuizSettingView.swift */,
 				44D6F2FD2CF6EFA200B91BBA /* AppSettingView.swift */,
 				44B4B8EB2CEBA12300D344B6 /* IntervalTypeSelectSettingView.swift */,
 			);
@@ -924,7 +921,6 @@
 				446300342CFD8C3B00C33BCB /* Filter.swift in Sources */,
 				448C64EB2CF883F0006D81BD /* ChartView.swift in Sources */,
 				448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */,
-				4469E8DA2CEB92DE00CC506C /* QuizSettingView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
 				449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,

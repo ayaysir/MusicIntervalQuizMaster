@@ -27,7 +27,7 @@ struct ToggleButton: View {
           .font(.system(size: musiqwikText != nil ? 10 : textFontSize))
       }
       .frame(maxWidth: .infinity)
-      .padding(.horizontal, 12)
+      .padding(.horizontal, 4)
       .padding(.vertical, musiqwikText != nil ? 4 : 8)
       .background(isSelected ? selectedTintColor : Color.gray.opacity(0.2))
       .foregroundColor(isSelected ? selectedTextColor : .primary)

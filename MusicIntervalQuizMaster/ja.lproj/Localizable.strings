@@ -256,3 +256,5 @@
 "loc.continue_current_session" = "現在のセッションを続ける";
 "loc.start_new_session" = "新しいセッションを開始する";
 "loc.quiz_setting_change_warning" = "クイズ中に出題範囲の設定が変更されたため、再開する必要があります。現在のセッションを続けた場合、変更内容は反映されません。";
+"loc.all_intervals" = "すべての音程";
+"loc.select_all_intervals_in_degree" = "度数内のすべての音程を選択";

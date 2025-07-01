@@ -52,19 +52,6 @@ struct MoreInfoView: View {
         }
       }
       .navigationTitle("more_info")
-      // .onChange(of: isReminderOn) { newValue in
-      //   
-      // }
-      // .onChange(of: reminderDatePickerValue) { newValue in
-      //   let calendar = Calendar.current
-      //   reminderHour = calendar.component(.hour, from: newValue)
-      //   reminderMinute = calendar.component(.minute, from: newValue)
-      //   
-      //   if isReminderOn {
-      //     LocalNotiManager.shared.removeAllNoti()
-      //     LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
-      //   }
-      // }
       .sheet(isPresented: $isShowingMailView) {
         MailRPView(
           recipientEmail: "yoonbumtae@gmail.com",

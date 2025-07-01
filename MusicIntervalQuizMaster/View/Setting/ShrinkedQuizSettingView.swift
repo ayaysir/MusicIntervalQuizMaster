@@ -52,11 +52,14 @@ struct ShrinkedQuizSettingView: View {
   var body: some View {
     NavigationStack {
       Form {
-        SectionDirection
-        SectionClef
-        SectionAccidental
-        SectionAdvancedInterval
-        IntervalTypeTitleArea
+        if searchKeyword.isEmpty {
+          SectionDirection
+          SectionClef
+          SectionAccidental
+          SectionAdvancedInterval
+          SectionIntervalTypeSelectAll
+        }
+        
         IntervalTypeSectionsArea
       }
       .navigationTitle("loc.shrink_settings")
@@ -176,33 +179,59 @@ extension ShrinkedQuizSettingView {
     }
   }
   
-  private var IntervalTypeTitleArea: some View {
-    Section {} header: {
-      VStack {
-        Divider()
+  private var SectionIntervalTypeSelectAll: some View {
+    Section {
+      ScrollView(.horizontal) {
+        HStack {
+          ToggleButton(
+            title: "loc.all_intervals".localized,
+            isSelected: true,
+            selectedTintColor: .indigo) {
+              viewModel.turnOnAllStates()
+            }
+          ForEach(1...13, id: \.self) { currentDegree in
+            ToggleButton(
+              title: "\(currentDegree)\(currentDegree.oridnalWithoutNumber)",
+              isSelected: true,
+              selectedTintColor: .purple.opacity(0.8)) {
+                viewModel.turnOnStates(keySuffix: currentDegree.description)
+              }
+          }
+        }
+      }
+    } header: {
+      VStack (alignment: .leading){
         HStack {
           Text("select_interval_type")
-            .font(.title3)
             .bold()
           Text("degree_settings")
         }
-        Divider()
+        Text("loc.select_all_intervals_in_degree")
       }
+      
     }
   }
   
   private var IntervalTypeSectionsArea: some View {
     ForEach(1...13, id: \.self) { currentDegree in
-      Section {
-        LazyVGrid(columns: columns, spacing: columnsMargin) {
-          ForEach(IntervalModifier.availableModifierList(of: currentDegree), id: \.self) { modifier in
-            let degreeText = "\(modifier.localizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
-            let abbrText = "\(modifier.localizedAbbrDescription)\(currentDegree)"
-            
-            if isAvailableIntervalButton(
-              degreeText: degreeText,
-              abbrText: abbrText,
-              modifier: modifier) {
+      let filteredModifiers = IntervalModifier
+        .availableModifierList(of: currentDegree)
+        .filter { modifier in
+          let degreeText = "\(modifier.localizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
+          let abbrText = "\(modifier.localizedAbbrDescription)\(currentDegree)"
+          return isAvailableIntervalButton(
+            degreeText: degreeText,
+            abbrText: abbrText,
+            modifier: modifier
+          )
+        }
+      
+      if !filteredModifiers.isEmpty {
+        Section {
+          LazyVGrid(columns: columns, spacing: columnsMargin) {
+            ForEach(filteredModifiers, id: \.self) { modifier in
+              let degreeText = "\(modifier.localizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
+              let abbrText = "\(modifier.localizedAbbrDescription)\(currentDegree)"
               ToggleButtonForSelectInterval(
                 degreeText: degreeText,
                 abbrText: abbrText,
@@ -210,10 +239,11 @@ extension ShrinkedQuizSettingView {
               )
             }
           }
+        } header: {
+          Text("\(currentDegree)\(currentDegree.oridnalWithoutNumber)")
         }
-      } header: {
-        Text("\(currentDegree)\(currentDegree.oridnalWithoutNumber)")
       }
+      
     }
   }
 }

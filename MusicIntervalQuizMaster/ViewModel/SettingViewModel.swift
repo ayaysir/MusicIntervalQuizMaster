@@ -31,6 +31,10 @@ final class SettingViewModel: ObservableObject {
     }
   }
   
+  /// 키 이름으로 바인딩 Bool 변수 생성
+  /// ```
+  /// 키 이름: "\(modifier.abbrDescription)_\(currentDegree)"
+  /// ```
   func binding(for key: String) -> Binding<Bool> {
     Binding {
       self.boolStates[key, default: true]
@@ -38,6 +42,24 @@ final class SettingViewModel: ObservableObject {
       self.boolStates[key] = $0
       
       self.saveBoolStates()
+    }
+  }
+  
+  func turnOnAllStates() {
+    // boolStates [String: Bool] 의 모든 값을 true로
+    boolStates = boolStates.mapValues { _ in true }
+  }
+  
+  func turnOnStates(keyPrefix: String) {
+    // boolStates [String: Bool] 의 키값이 "\(keyPrefix)_" 로 시작하는 모든 키값을 true로
+    for key in boolStates.keys where key.hasPrefix("\(keyPrefix)_") {
+      boolStates[key] = true
+    }
+  }
+  
+  func turnOnStates(keySuffix: String) {
+    for key in boolStates.keys where key.hasSuffix(keySuffix) {
+      boolStates[key] = true
     }
   }
   
