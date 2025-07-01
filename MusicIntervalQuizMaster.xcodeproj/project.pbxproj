@@ -17,6 +17,8 @@
 		440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */; };
 		444FF1852E12667400209B22 /* ShrinkedQuizSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1842E12666C00209B22 /* ShrinkedQuizSettingView.swift */; };
 		444FF1872E12684B00209B22 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1862E12684B00209B22 /* ToggleButton.swift */; };
+		444FF18B2E140E5500209B22 /* InfoSubLineAndSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */; };
+		444FF18D2E142A5000209B22 /* NormalizeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18C2E142A5000209B22 /* NormalizeValue.swift */; };
 		44626DA72D5F9ADC008294BC /* CSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA62D5F9AD0008294BC /* CSVView.swift */; };
 		44626DA92D5FA716008294BC /* ShareTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA82D5FA716008294BC /* ShareTextView.swift */; };
 		446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300282CFB807800C33BCB /* StatsViewModel.swift */; };
@@ -170,6 +172,8 @@
 		440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusiqwikView.swift; sourceTree = "<group>"; };
 		444FF1842E12666C00209B22 /* ShrinkedQuizSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkedQuizSettingView.swift; sourceTree = "<group>"; };
 		444FF1862E12684B00209B22 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
+		444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSubLineAndSpaceView.swift; sourceTree = "<group>"; };
+		444FF18C2E142A5000209B22 /* NormalizeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizeValue.swift; sourceTree = "<group>"; };
 		44626DA62D5F9AD0008294BC /* CSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVView.swift; sourceTree = "<group>"; };
 		44626DA82D5FA716008294BC /* ShareTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTextView.swift; sourceTree = "<group>"; };
 		446300282CFB807800C33BCB /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
@@ -446,6 +450,7 @@
 		448C64E52CF8837E006D81BD /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */,
 				447839C02D8B2330002E9170 /* IntervalInfoView.swift */,
 				44C4CEF42C8C47A80092C452 /* QuizView.swift */,
 			);
@@ -666,6 +671,7 @@
 		44D6F2CF2CF4CB7600B91BBA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				444FF18C2E142A5000209B22 /* NormalizeValue.swift */,
 				44753C552D4CC1E2003F82FA /* InstantAlert.swift */,
 				44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */,
 				44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */,
@@ -920,6 +926,7 @@
 				440BE6452CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift in Sources */,
 				446300342CFD8C3B00C33BCB /* Filter.swift in Sources */,
 				448C64EB2CF883F0006D81BD /* ChartView.swift in Sources */,
+				444FF18B2E140E5500209B22 /* InfoSubLineAndSpaceView.swift in Sources */,
 				448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
 				449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */,
@@ -932,6 +939,7 @@
 				4463002C2CFC2C6900C33BCB /* Int+.swift in Sources */,
 				44D6F2F92CF60F1500B91BBA /* AlertKitAPI.swift in Sources */,
 				44D6F2F62CF60F1500B91BBA /* AlertViewProtocol.swift in Sources */,
+				444FF18D2E142A5000209B22 /* NormalizeValue.swift in Sources */,
 				44D6F2672CF2324F00B91BBA /* SoundManager.swift in Sources */,
 				44753C562D4CC1E6003F82FA /* InstantAlert.swift in Sources */,
 				440BE6472CE79FA900B01C1B /* ReadOnlyTextFieldRPView.swift in Sources */,

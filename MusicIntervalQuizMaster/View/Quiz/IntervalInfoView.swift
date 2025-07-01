@@ -142,6 +142,8 @@ extension IntervalInfoView {
           p("info_1_1".localizedFormat(interval.number))
           Footnote("info_1_2".localized)
           StyledImage(.init(.lineAndSpace))
+          // InfoSubLineAndSpaceView()
+          //   .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.4)
         }
         Spacer().frame(height: 20)
         
