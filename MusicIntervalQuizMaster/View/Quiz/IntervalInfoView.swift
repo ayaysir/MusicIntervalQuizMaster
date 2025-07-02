@@ -30,7 +30,7 @@ struct IntervalInfoView: View {
           BottomButtonArea
         }
       }
-      .padding()
+      .padding(10)
     }
   }
 }
@@ -132,6 +132,13 @@ extension IntervalInfoView {
       number: interval.number - (7 * octave)
     )
     
+    let defaultIntervalPair = IntervalPair(
+      startNote: lowerNote,
+      endNote: higherNote,
+      direction: .ascending,
+      clef: pair.clef
+    )
+    
     return VStack(alignment: .leading) {
       if let defaultInterval = AdvancedInterval.betweenNotes(defaultNote1, defaultNote2) {
         Subtitle("info_title".localizedFormat(interval.localizedDescription))
@@ -141,9 +148,12 @@ extension IntervalInfoView {
         VStack(alignment: .leading) {
           p("info_1_1".localizedFormat(interval.number))
           Footnote("info_1_2".localized)
-          StyledImage(.init(.lineAndSpace))
-          // InfoSubLineAndSpaceView()
-          //   .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 0.4)
+          // StyledImage(.init(.lineAndSpace))
+          InfoSubLineAndSpaceView(defaultIntervalPair: defaultIntervalPair)
+            .frame(
+              width: UIScreen.main.bounds.width - 15,
+              height: UIScreen.main.bounds.width * 0.44 - 15
+            )
         }
         Spacer().frame(height: 20)
         

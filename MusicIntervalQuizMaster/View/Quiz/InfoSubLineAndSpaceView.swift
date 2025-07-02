@@ -6,21 +6,65 @@
 //
 
 import SwiftUI
+import Tonic
 
 struct InfoSubLineAndSpaceView: View {
   let baseWidth: CGFloat = 100
+  let defaultIntervalPair: IntervalPair
   
   var body: some View {
     GeometryReader {
-      DrawCanvas
-        .frame(width: $0.size.width, height: $0.size.width * 0.4)
-        // .aspectRatio(0.4, contentMode: .fit)
+      let positions = positions()
+      
+      DrawCanvas(belowCanvasPos: positions.belowPos, aboveCanvasPos: positions.abovePos)
+        .frame(width: $0.size.width, height: $0.size.width * 0.45)
     }
-    // .aspectRatio(0.4, contentMode: .fit)
   }
 }
 
 extension InfoSubLineAndSpaceView {
+  func positions() -> (belowPos: Int, abovePos: Int) {
+    /*
+     RelativePosition
+     treble: 26 ~ 40 (A3 ~ A5)
+     bass: 14 ~ 28 (C2 ~ C4)
+     alto: 20 ~ 34 (B2 ~ B4)
+     
+     canvasPos  treble  bass  alto
+     1  40  28  34
+     2  39  27  33
+     3  38  26  32
+     4  37  25  31
+     5  36  24  30
+     6  35  23  29
+     7  34  22  28
+     8  33  21  27
+     9  32  20  26
+     10 31  19  25
+     11 30  18  24
+     12 29  17  23
+     13 28  16  22
+     14 27  15  21
+     15 26  14  20
+     */
+    let pair = defaultIntervalPair
+    let lowerNote = pair.startNote < pair.endNote ? pair.startNote : pair.endNote
+    let higherNote = pair.startNote < pair.endNote ? pair.endNote : pair.startNote
+    
+    let abovePosition = canvasPos(for: higherNote.relativeNotePosition, clef: pair.clef)
+    let belowPosition = canvasPos(for: lowerNote.relativeNotePosition, clef: pair.clef)
+    
+    return (belowPosition, abovePosition)
+  }
+  
+  func canvasPos(for relativePosition: Int, clef: Clef) -> Int {
+    switch clef {
+    case .treble: return 41 - relativePosition
+    case .bass:   return 29 - relativePosition
+    case .alto:   return 35 - relativePosition
+    }
+  }
+  
   func drawLabelOutline(
     _ context: inout GraphicsContext,
     _ size: CGSize,
@@ -54,7 +98,7 @@ extension InfoSubLineAndSpaceView {
     context.stroke(path, with: .color(strokeColor), lineWidth: lineWidth)
   }
   
-  private var DrawCanvas: some View {
+  @ViewBuilder private func DrawCanvas(belowCanvasPos: Int, aboveCanvasPos: Int) -> some View {
     Canvas { (context, size) in
       let normalizer = NormalizeValue(
         originalValue: size.width,
@@ -62,19 +106,22 @@ extension InfoSubLineAndSpaceView {
       )
       let N = normalizer.applyNormalized(to:)
       // let midX = size.width / 2
+      
+      let totalNormalizedHeight = N(45)
       let midY = N(20)
-      let totalNormalizedHeight = N(40)
       
-      context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.mint))
+      // context.fill(Path(CGRect(origin: .zero, size: size)), with: .color(.mint))
       
-      let subLineWidth = N(0.24)
+      let subLineWidth = N(0.27)
       let blackLinePadding = N(25)
       let subLinePadding = N(13.6)
       let fontSize = N(3.43)
       let betweenLines = N(5)
-      let hiddenLineWidth = N(0.05)
+      let hiddenLineWidth = N(0.08)
       let sheetLineWidth = N(0.7)
       let numberLabelBackgroundWidth = N(5)
+      let noteWidth = N(4.2)
+      let noteHeight = N(4)
       
       // 텍스트 추가 (선 끝에)
       let linesLabel = Text("lines")
@@ -109,23 +156,20 @@ extension InfoSubLineAndSpaceView {
       )
       
       // 오선
-      drawLine(
-        &context,
-        size,
-        start: .init(x: blackLinePadding, y: betweenLines),
-        end: .init(x: size.width - blackLinePadding, y: betweenLines),
-        strokeColor: .gray.opacity(0.5),
-        lineWidth: hiddenLineWidth
-      )
-      drawLine(
-        &context,
-        size,
-        start: .init(x: blackLinePadding, y: betweenLines * 7),
-        end: .init(x: size.width - blackLinePadding, y: betweenLines * 7),
-        strokeColor: .gray.opacity(0.5),
-        lineWidth: hiddenLineWidth
-      )
       
+      // 영역 외 (회색)
+      for y in [betweenLines, betweenLines * 7, betweenLines * 8] {
+        drawLine(
+          &context,
+          size,
+          start: .init(x: blackLinePadding, y: y),
+          end: .init(x: size.width - blackLinePadding, y: y),
+          strokeColor: .bwGray.opacity(0.7),
+          lineWidth: hiddenLineWidth
+        )
+      }
+      
+      // 영역 내 오선
       for i in 1...5 {
         let y = N(5) + N(5) * CGFloat(i)
         
@@ -147,14 +191,18 @@ extension InfoSubLineAndSpaceView {
           lineWidth: subLineWidth
         )
         
-        drawLine(
-          &context,
-          size,
-          start: .init(x: size.width - subLinePadding, y: midY),
-          end: .init(x: size.width - blackLinePadding, y: y),
-          strokeColor: .teal,
-          lineWidth: subLineWidth
-        )
+        if i != 1 {
+          drawLine(
+            &context,
+            size,
+            start: .init(x: size.width - subLinePadding, y: midY),
+            end: .init(x: size.width - blackLinePadding - N(1.5), y: y - betweenLines / 2),
+            strokeColor: .teal,
+            lineWidth: subLineWidth
+          )
+        }
+        
+       
       }
       
       // 숫자 라벨 배경
@@ -167,33 +215,38 @@ extension InfoSubLineAndSpaceView {
       let path = Path(rect)
       
       // 반투명 흰색 (블러 느낌)
-      context.fill(path, with: .color(Color.white.opacity(0.8)))
+      context.fill(path, with: .color(Color.bwBackground.opacity(0.8)))
       
       // 외곽선
-      context.stroke(path, with: .color(.white.opacity(0.5)), lineWidth: 1)
+      context.stroke(path, with: .color(.bwBackground.opacity(0.5)), lineWidth: 1)
       
       // 숫자 라벨
-      for i in 1...14 {
-        let text = Text("\(i)")
+      var labelNum = 1 + belowCanvasPos - aboveCanvasPos
+      for i in 1...15 where (aboveCanvasPos...belowCanvasPos) ~= i {
+        // let x = (lowerCanvasPos...higherCanvasPos) ~= i
+        
+        let text = Text(labelNum.description)
           .font(.system(size: N(2.4), design: .monospaced))
-        let y = (betweenLines / 2) * CGFloat(i)
-        context.draw(text, at: CGPoint(x: N(60), y: y))
+          .foregroundColor(.primary)
+        labelNum -= 1
+        let labelY = (betweenLines / 2) + (betweenLines / 2) * CGFloat(i)
+        context.draw(text, at: CGPoint(x: N(60), y: labelY))
       }
       
-      // 음표(?)
-      for i in 1...7 {
-        let y = N(CGFloat(5 * i)) - N(2)
+      // 음표
+      for i in 1...15 where i == belowCanvasPos || i == aboveCanvasPos {
+        let noteY = N(0.5) + (betweenLines / 2) * CGFloat(i)
         // 온음표 머리 (타원)
         var headPath = Path()
         let noteRect = CGRect(
           x: N(50),
-          y: y,
-          width: N(5),
-          height: N(4)
+          y: noteY,
+          width: noteWidth,
+          height: noteHeight
         )
         headPath.addEllipse(in: noteRect)
         
-        context.stroke(headPath, with: .color(.black), lineWidth: 1.5)
+        context.stroke(headPath, with: .color(.frontLabel), lineWidth: 1.5)
         // 1또는 7일 경우 검은색 가운데 줄 그리기
       }
     }
@@ -201,5 +254,16 @@ extension InfoSubLineAndSpaceView {
 }
 
 #Preview {
-  InfoSubLineAndSpaceView()
+  let defaultNote1: Note = .init(.B, accidental: .sharp, octave: 2)
+  let defaultNote2: Note = .init(.C, accidental: .natural, octave: 4)
+  let defaultPair = IntervalPair(
+    startNote: defaultNote1,
+    endNote: defaultNote2,
+    direction: .ascending,
+    clef: .alto
+  )
+  
+  InfoSubLineAndSpaceView(defaultIntervalPair: defaultPair)
+    .frame(width: 300)
+  
 }
