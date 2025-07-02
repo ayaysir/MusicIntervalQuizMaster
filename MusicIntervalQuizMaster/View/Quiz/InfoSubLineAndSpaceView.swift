@@ -16,14 +16,14 @@ struct InfoSubLineAndSpaceView: View {
     GeometryReader {
       let positions = positions()
       
-      DrawCanvas(belowCanvasPos: positions.belowPos, aboveCanvasPos: positions.abovePos)
+      DrawCanvas(minCanvasPos: positions.minPos, maxCanvasPos: positions.maxPos)
         .frame(width: $0.size.width, height: $0.size.width * 0.45)
     }
   }
 }
 
 extension InfoSubLineAndSpaceView {
-  func positions() -> (belowPos: Int, abovePos: Int) {
+  func positions() -> (minPos: Int, maxPos: Int) {
     /*
      RelativePosition
      treble: 26 ~ 40 (A3 ~ A5)
@@ -48,13 +48,11 @@ extension InfoSubLineAndSpaceView {
      15 26  14  20
      */
     let pair = defaultIntervalPair
-    let lowerNote = pair.startNote < pair.endNote ? pair.startNote : pair.endNote
-    let higherNote = pair.startNote < pair.endNote ? pair.endNote : pair.startNote
     
-    let abovePosition = canvasPos(for: higherNote.relativeNotePosition, clef: pair.clef)
-    let belowPosition = canvasPos(for: lowerNote.relativeNotePosition, clef: pair.clef)
+    let p1 = canvasPos(for: defaultIntervalPair.startNote.relativeNotePosition, clef: pair.clef)
+    let p2 = canvasPos(for: defaultIntervalPair.endNote.relativeNotePosition, clef: pair.clef)
     
-    return (belowPosition, abovePosition)
+    return (min(p1, p2), max(p1, p2))
   }
   
   func canvasPos(for relativePosition: Int, clef: Clef) -> Int {
@@ -98,7 +96,7 @@ extension InfoSubLineAndSpaceView {
     context.stroke(path, with: .color(strokeColor), lineWidth: lineWidth)
   }
   
-  @ViewBuilder private func DrawCanvas(belowCanvasPos: Int, aboveCanvasPos: Int) -> some View {
+  @ViewBuilder private func DrawCanvas(minCanvasPos: Int, maxCanvasPos: Int) -> some View {
     Canvas { (context, size) in
       let normalizer = NormalizeValue(
         originalValue: size.width,
@@ -221,8 +219,8 @@ extension InfoSubLineAndSpaceView {
       context.stroke(path, with: .color(.bwBackground.opacity(0.5)), lineWidth: 1)
       
       // 숫자 라벨
-      var labelNum = 1 + belowCanvasPos - aboveCanvasPos
-      for i in 1...15 where (aboveCanvasPos...belowCanvasPos) ~= i {
+      var labelNum = 1 + maxCanvasPos - minCanvasPos
+      for i in 1...15 where (minCanvasPos...maxCanvasPos) ~= i {
         // let x = (lowerCanvasPos...higherCanvasPos) ~= i
         
         let text = Text(labelNum.description)
@@ -234,7 +232,7 @@ extension InfoSubLineAndSpaceView {
       }
       
       // 음표
-      for i in 1...15 where i == belowCanvasPos || i == aboveCanvasPos {
+      for i in 1...15 where i == minCanvasPos || i == maxCanvasPos {
         let noteY = N(0.5) + (betweenLines / 2) * CGFloat(i)
         // 온음표 머리 (타원)
         var headPath = Path()

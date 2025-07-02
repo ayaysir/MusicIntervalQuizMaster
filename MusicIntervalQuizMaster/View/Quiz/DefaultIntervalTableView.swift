@@ -107,21 +107,36 @@ struct DefaultIntervalTableView: View {
     }
   }
   
-  let basicTable = [
-    ["음정/반음수", "0개", "1개", "2개"],
-    ["1도", "완전", "", ""],
-    ["2도/3도", "장", "단", ""],
-    ["4도/5도", "증", "완전", "감"],
-    ["6도/7도", "", "장", "단"],
-    ["8도", "", "", "완전"],
-  ]
+  let basicTable = {
+    let P = IntervalModifier.perfect.shortLocalizedDescription
+    let M = IntervalModifier.major.shortLocalizedDescription
+    let m = IntervalModifier.minor.shortLocalizedDescription
+    let A = IntervalModifier.augmented.shortLocalizedDescription
+    let d = IntervalModifier.diminished.shortLocalizedDescription
+    
+    return [
+      ["loc.degree_semitone".localized, "0", "1", "2"],
+      ["1", P, "", ""],
+      ["2/3", M, m, ""],
+      ["4/5", A, P, d],
+      ["6/7", "", M, m],
+      ["8", "", "", P],
+    ]
+  }()
   
-  let compoundTable = [
-    ["음정/반음수", "2개", "3개", "4개"],
-    ["9도/10도", "장", "단", ""],
-    ["11도/12도", "증", "완전", "감"],
-    ["13도", "", "장", "단"],
-  ]
+  let compoundTable = {
+    let P = IntervalModifier.perfect.shortLocalizedDescription
+    let M = IntervalModifier.major.shortLocalizedDescription
+    let m = IntervalModifier.minor.shortLocalizedDescription
+    let A = IntervalModifier.augmented.shortLocalizedDescription
+    let d = IntervalModifier.diminished.shortLocalizedDescription
+    return [
+      ["loc.degree_semitone".localized, "2", "3", "4"],
+      ["9/10", M, m, ""],
+      ["11/12", A, P, d],
+      ["13", "", M, m],
+    ]
+  }()
 }
 
 #Preview {

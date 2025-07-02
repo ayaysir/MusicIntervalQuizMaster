@@ -258,3 +258,5 @@
 "loc.quiz_setting_change_warning" = "퀴즈 중에 출제 범위 설정을 변경하였기 때문에 다시 시작해야 합니다. 현재 세션을 계속할 경우 변경된 퀴즈 설정이 반영되지 않습니다.";
 "loc.all_intervals" = "모든 음정";
 "loc.select_all_intervals_in_degree" = "도수 내 모든 음정 선택";
+
+"loc.degree_semitone" = "도수/반음수";

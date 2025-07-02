@@ -258,3 +258,5 @@
 "loc.quiz_setting_change_warning" = "The quiz scope settings were changed during the session, so the quiz must be restarted. If you continue the current session, the updated settings will not be applied.";
 "loc.all_intervals" = "All Intervals";
 "loc.select_all_intervals_in_degree" = "Select All Intervals in Degree";
+
+"loc.degree_semitone" = "Deg./Sem.";
