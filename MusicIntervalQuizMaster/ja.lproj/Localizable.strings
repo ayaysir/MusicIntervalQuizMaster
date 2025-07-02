@@ -262,3 +262,12 @@
 "loc.degree_semitone" = "度数/半音数";
 "loc.interval_shrink" = "間隔が狭くなるほど\n←←←←←";
 "loc.interval_exapnd" = "間隔が広くなるほど\n→→→→→";
+
+"loc.v130.quiz_range_ui_update_title" = "「クイズ出題範囲の設定」ボタンの移動とUI改善";
+c = "これからはクイズ画面の中央左にあるボタンから、出題範囲の設定ができるようになります。また、選択しやすいように一部のセクションをボタン形式に変更しました。";
+
+"loc.v130.explanation_update_title" = "「音程導出の解説」がより詳しく";
+"loc.v130.explanation_update_body" = "音程がどのように導き出されたのか分かりやすくするために、解説ページを改善しました。クイズの正解後に表示されるドキュメントの虫眼鏡アイコンをタップすると、詳しい解説が確認できます。";
+
+"loc.version_changes_title" = "Ver %@ の変更点";
+"loc.version_changes_body" = "バージョン%@にアップデートされました。\n今回のバージョンでは以下の変更が行われました。";

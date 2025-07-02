@@ -217,7 +217,7 @@ extension ShrinkedQuizSettingView {
       let filteredModifiers = IntervalModifier
         .availableModifierList(of: currentDegree)
         .filter { modifier in
-          let degreeText = "\(modifier.localizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
+          let degreeText = "\(modifier.mediumLocalizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
           let abbrText = "\(modifier.localizedAbbrDescription)\(currentDegree)"
           return isAvailableIntervalButton(
             degreeText: degreeText,
@@ -230,7 +230,7 @@ extension ShrinkedQuizSettingView {
         Section {
           LazyVGrid(columns: columns, spacing: columnsMargin) {
             ForEach(filteredModifiers, id: \.self) { modifier in
-              let degreeText = "\(modifier.localizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
+              let degreeText = "\(modifier.mediumLocalizedDescription) \(currentDegree)\(currentDegree.oridnalWithoutNumber)"
               let abbrText = "\(modifier.localizedAbbrDescription)\(currentDegree)"
               ToggleButtonForSelectInterval(
                 degreeText: degreeText,
@@ -287,6 +287,9 @@ extension ShrinkedQuizSettingView {
       .lowercased()
       .contains(searchKeyword.lowercased())
     || modifier.description
+      .lowercased()
+      .contains(searchKeyword.lowercased())
+    || modifier.localizedDescription
       .lowercased()
       .contains(searchKeyword.lowercased())
   }

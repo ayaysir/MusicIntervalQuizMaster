@@ -17,7 +17,15 @@ struct MusicIntervalQuizMasterApp: App {
     checkAppFirstrunOrUpdateStatus {
       
     } updated: {
-      
+      // Whats New: latest v 1.3.0
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+        InstantSheet.show(
+          hostingView: WhatsNewView(
+            marketingVersion: "1.3.0",
+            features: WhatsNewArchive.shared("1.3.0") ?? []
+          )
+        )
+      }
     } nothingChanged: {
       if !store.bool(forKey: .checkInitConfigCompleted) {
         Self.initConfigValues()
@@ -69,7 +77,7 @@ struct MusicIntervalQuizMasterApp: App {
 func checkAppFirstrunOrUpdateStatus(firstrun: () -> (), updated: () -> (), nothingChanged: () -> ()) {
   let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
   let versionOfLastRun = store.object(forKey: "VersionOfLastRun") as? String
-  // print(#function, currentVersion ?? "", versionOfLastRun ?? "")
+  print(#function, currentVersion ?? "", versionOfLastRun ?? "")
   
   if versionOfLastRun == nil {
     // First start after installing the app

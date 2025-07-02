@@ -262,3 +262,12 @@
 "loc.degree_semitone" = "도수/반음수";
 "loc.interval_shrink" = "간격이 좁아질수록\n←←←←←";
 "loc.interval_exapnd" = "간격이 넓어질수록\n→→→→→";
+
+"loc.v130.quiz_range_ui_update_title" = "'퀴즈 출제 범위 설정' 버튼의 이동 및 UI 개선";
+"loc.v130.quiz_range_ui_update_body" = "앞으로 퀴즈 출제 범위에 대한 설정 기능은 퀴즈 화면의 중단 왼쪽의 버튼을 눌러 설정할 수 있습니다. 또한 출제 범위에 대한 선택이 보다 편해지도록 일부 섹션을 버튼 형식으로 변경하였습니다.";
+
+"loc.v130.explanation_update_title" = "'음정 도출 과정 해설'이 더 자세하게 설명";
+"loc.v130.explanation_update_body" = "음정이 어떻게 도출되었는지 이해하기 쉽도록 음정 도출 과정 해설 페이지를 개선했어요. 퀴즈 문제를 맞췄을 때 나오는 문서 돋보기 아이콘을 클릭하면 자세한 해설을 볼 수 있습니다.";
+
+"loc.version_changes_title" = "Ver %@ 변경사항";
+"loc.version_changes_body" = "새로운 버전 %@으로 업데이트 되었습니다.\n이번 버전에서는 다음과 같은 변경사항이 있습니다.";

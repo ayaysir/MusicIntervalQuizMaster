@@ -69,7 +69,8 @@ extension String {
   static let moreInfoReminderMinute = "MoreInfo_Reminder_Minute"
 }
 
-// MARK: Tutorial Image Bundle
+// MARK: - Tutorial Image Bundle
+
 let TUTORIAL_IMAGES: [String : [UIImage]] =  [
   "ja": [.ja1QuizCorrectAlert, .ja2QuizCorrectView, .ja3QuizWrongAlert, .ja4QuizWrongView, .ja5Stats, .ja6Setting1, .ja7Setting2],
   "en": [.en1QuizCorrectAlert, .en2QuizCorrectView, .en3QuizWrongAlert, .en4QuizWrongView, .en5Stats, .en6Setting1, .en7Setting2],
@@ -152,3 +153,6 @@ let INTERVAL_TYPE_STATE_FIRST = [
   "AA_13": true,
   "dd_13": true,
 ]
+
+// MARK: - Global funcs
+

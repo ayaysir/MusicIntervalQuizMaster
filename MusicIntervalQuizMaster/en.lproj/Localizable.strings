@@ -155,7 +155,7 @@
 "modifier_dsc_2xdiminished" = "doubly diminished";  // doubly dim.
 "modifier_dsc_2xaugmented" = "Doubly Augmented";  // Doubly Aug.
 
-"degree_settings" = "Specific Settings by Degree or Quality";
+"degree_settings" = "Specific Settings by";
 "select_interval_type" = "Select Interval Type";
 "search_prompt" = "Enter the interval name, degree, abbreviation.";
 
@@ -259,6 +259,15 @@
 "loc.all_intervals" = "All Intervals";
 "loc.select_all_intervals_in_degree" = "Select All Intervals in Degree";
 
-"loc.degree_semitone" = "Deg./Sem.";
+"loc.degree_semitone" = "Deg./Half";
 "loc.interval_shrink" = "As the interval\ngets smaller ←←←";
 "loc.interval_exapnd" = "As the interval\n→→→ gets larger";
+
+"loc.v130.quiz_range_ui_update_title" = "Relocated 'Quiz Range Settings' Button and UI Improvements";
+"loc.v130.quiz_range_ui_update_body" = "You can now configure the quiz range by tapping the button on the middle-left of the quiz screen. Some sections have also been redesigned as buttons to make selection easier.";
+
+"loc.v130.explanation_update_title" = "More Detailed Explanation of Interval Derivation";
+"loc.v130.explanation_update_body" = "We've improved the explanation page so it's easier to understand how intervals are derived. Tap the document magnifier icon after answering a quiz question correctly to see the details.";
+
+"loc.version_changes_title" = "What's New in Ver %@";
+"loc.version_changes_body" = "You’ve updated to version %@.\nHere are the changes in this version:";

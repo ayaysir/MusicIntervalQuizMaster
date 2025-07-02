@@ -20,6 +20,8 @@
 		444FF18B2E140E5500209B22 /* InfoSubLineAndSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */; };
 		444FF18D2E142A5000209B22 /* NormalizeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18C2E142A5000209B22 /* NormalizeValue.swift */; };
 		444FF18F2E150D7A00209B22 /* DefaultIntervalTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18E2E150D7A00209B22 /* DefaultIntervalTableView.swift */; };
+		444FF1912E15791C00209B22 /* WhatsNewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1902E15791B00209B22 /* WhatsNewView.swift */; };
+		444FF1932E158CD600209B22 /* InstantSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1922E158CD000209B22 /* InstantSheet.swift */; };
 		44626DA72D5F9ADC008294BC /* CSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA62D5F9AD0008294BC /* CSVView.swift */; };
 		44626DA92D5FA716008294BC /* ShareTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA82D5FA716008294BC /* ShareTextView.swift */; };
 		446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300282CFB807800C33BCB /* StatsViewModel.swift */; };
@@ -176,6 +178,8 @@
 		444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSubLineAndSpaceView.swift; sourceTree = "<group>"; };
 		444FF18C2E142A5000209B22 /* NormalizeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizeValue.swift; sourceTree = "<group>"; };
 		444FF18E2E150D7A00209B22 /* DefaultIntervalTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultIntervalTableView.swift; sourceTree = "<group>"; };
+		444FF1902E15791B00209B22 /* WhatsNewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatsNewView.swift; sourceTree = "<group>"; };
+		444FF1922E158CD000209B22 /* InstantSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstantSheet.swift; sourceTree = "<group>"; };
 		44626DA62D5F9AD0008294BC /* CSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVView.swift; sourceTree = "<group>"; };
 		44626DA82D5FA716008294BC /* ShareTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTextView.swift; sourceTree = "<group>"; };
 		446300282CFB807800C33BCB /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
@@ -463,6 +467,7 @@
 		448C64E62CF8839A006D81BD /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				444FF1902E15791B00209B22 /* WhatsNewView.swift */,
 				444FF1862E12684B00209B22 /* ToggleButton.swift */,
 				44D6F3022CF7388E00B91BBA /* TimerView.swift */,
 				440BE63E2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift */,
@@ -676,6 +681,7 @@
 			children = (
 				444FF18C2E142A5000209B22 /* NormalizeValue.swift */,
 				44753C552D4CC1E2003F82FA /* InstantAlert.swift */,
+				444FF1922E158CD000209B22 /* InstantSheet.swift */,
 				44753C4D2D4C9DF6003F82FA /* QuizHelper.swift */,
 				44D6F2D02CF4CB8100B91BBA /* IntervalHelper.swift */,
 				447839C22D8B2E53002E9170 /* AdvancedInterval.swift */,
@@ -932,6 +938,7 @@
 				444FF18B2E140E5500209B22 /* InfoSubLineAndSpaceView.swift in Sources */,
 				448C64E42CF874EA006D81BD /* LicenseView.swift in Sources */,
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
+				444FF1932E158CD600209B22 /* InstantSheet.swift in Sources */,
 				449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
 				444FF18F2E150D7A00209B22 /* DefaultIntervalTableView.swift in Sources */,
@@ -963,6 +970,7 @@
 				44D6F2EE2CF60F1500B91BBA /* UILabelExtension.swift in Sources */,
 				440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */,
 				44D6F2D52CF4FD4700B91BBA /* Tonic.Accidental+.swift in Sources */,
+				444FF1912E15791C00209B22 /* WhatsNewView.swift in Sources */,
 				4463003F2CFE12FC00C33BCB /* String+Localized.swift in Sources */,
 				44D6F1EE2CECB34D00B91BBA /* SettingViewModel.swift in Sources */,
 				448A3D572CFADC9B00D0D758 /* ColorScheme+.swift in Sources */,
