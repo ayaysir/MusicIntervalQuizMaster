@@ -260,3 +260,5 @@
 "loc.select_all_intervals_in_degree" = "度数内のすべての音程を選択";
 
 "loc.degree_semitone" = "度数/半音数";
+"loc.interval_shrink" = "間隔が狭くなるほど\n←←←←←";
+"loc.interval_exapnd" = "間隔が広くなるほど\n→→→→→";

@@ -226,7 +226,21 @@ extension IntervalInfoView {
         
         // MARK: - Section 3
         
-        StyledImage(.init(.intervalMovement))
+        ZStack(alignment: .top) {
+          StyledImage(.init(.intervalMovement))
+          HStack {
+            Text("loc.interval_shrink")
+              .font(.caption)
+              .bold()
+              .multilineTextAlignment(.leading)
+            Spacer()
+            Text("loc.interval_exapnd")
+              .font(.caption)
+              .bold()
+              .multilineTextAlignment(.trailing)
+          }
+        }
+        
         
         // if 양쪽 모두 높이 변화가 없는 경우
         if isSameAccidental {

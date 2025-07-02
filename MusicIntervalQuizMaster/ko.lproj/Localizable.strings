@@ -260,3 +260,5 @@
 "loc.select_all_intervals_in_degree" = "도수 내 모든 음정 선택";
 
 "loc.degree_semitone" = "도수/반음수";
+"loc.interval_shrink" = "간격이 좁아질수록\n←←←←←";
+"loc.interval_exapnd" = "간격이 넓어질수록\n→→→→→";
