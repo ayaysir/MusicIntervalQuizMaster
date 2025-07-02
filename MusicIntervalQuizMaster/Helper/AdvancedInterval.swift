@@ -25,6 +25,47 @@ extension AdvancedInterval: CustomStringConvertible {
   var localizedDescription: String {
     "\(modifier.textFieldLocalizedDescription) \(number)\(number.oridnalWithoutNumber)"
   }
+  
+  var semitone: Int? {
+    let normalizedDegree = ((number - 1) % 7) + 1
+    let basicSemitone: Int? = switch normalizedDegree {
+    case 1: 0
+    case 2: 2
+    case 3: 4
+    case 4: 5
+    case 5: 7
+    case 6: 9
+    case 7: 11
+    default:
+      nil
+    }
+    
+    guard let basicSemitone else {
+      return nil
+    }
+    
+    let octave: Int = ((number - 1) / 7)
+    let basicSemitoneWithOctave = basicSemitone + (octave * 12)
+    
+    let isPerfectType = [1, 4, 5].contains(normalizedDegree)
+    
+    let adjustment = switch modifier {
+    case .perfect, .major:
+      0
+    case .minor:
+      isPerfectType ? 0 : -1
+    case .augmented:
+      1
+    case .doublyAugmented:
+      2
+    case .diminished:
+      isPerfectType ? -1 : -2
+    case .doublyDiminished:
+      isPerfectType ? -2 : -3
+    }
+    
+    return basicSemitoneWithOctave + adjustment
+  }
 }
 
 extension AdvancedInterval {

@@ -145,6 +145,8 @@ extension IntervalInfoView {
         
         Divider()
         
+        // MARK: - Section 1
+        
         VStack(alignment: .leading) {
           p("info_1_1".localizedFormat(interval.number))
           Footnote("info_1_2".localized)
@@ -172,6 +174,8 @@ extension IntervalInfoView {
         
         Divider()
         
+        // MARK: - Section 2
+        
         p(
           "info_2_1".localizedFormat(
             interval.number,
@@ -180,7 +184,47 @@ extension IntervalInfoView {
           )
         )
         
+        // 기본 음정 테이블 그리기
+        
+        let mode: DefaultIntervalTableView.Mode = interval.number > 8 ? .compound : .basic
+        var highlightPosJ: Int? {
+          if interval.number > 8 {
+            return switch defaultHalfStepCount {
+            case 2: 1
+            case 3: 2
+            case 4: 3
+            default: nil
+            }
+          }
+          
+          return switch defaultHalfStepCount {
+          case 0: 1
+          case 1: 2
+          case 2: 3
+          default: nil
+          }
+        }
+        var highlightPosI: Int? {
+          return switch interval.number {
+          case 1, 9, 10: 1
+          case 2, 3, 11, 12: 2
+          case 4, 5, 13: 3
+          case 6, 7: 4
+          case 8: 5
+          default: nil
+          }
+        }
+        let highlightPos: (Int, Int)? = if let highlightPosI, let highlightPosJ {
+          (highlightPosI, highlightPosJ)
+        } else {
+          nil
+        }
+        
+        DefaultIntervalTableView(mode: mode, highlight: highlightPos)
+        
         Divider()
+        
+        // MARK: - Section 3
         
         StyledImage(.init(.intervalMovement))
         

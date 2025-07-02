@@ -19,6 +19,7 @@
 		444FF1872E12684B00209B22 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1862E12684B00209B22 /* ToggleButton.swift */; };
 		444FF18B2E140E5500209B22 /* InfoSubLineAndSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */; };
 		444FF18D2E142A5000209B22 /* NormalizeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18C2E142A5000209B22 /* NormalizeValue.swift */; };
+		444FF18F2E150D7A00209B22 /* DefaultIntervalTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18E2E150D7A00209B22 /* DefaultIntervalTableView.swift */; };
 		44626DA72D5F9ADC008294BC /* CSVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA62D5F9AD0008294BC /* CSVView.swift */; };
 		44626DA92D5FA716008294BC /* ShareTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44626DA82D5FA716008294BC /* ShareTextView.swift */; };
 		446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446300282CFB807800C33BCB /* StatsViewModel.swift */; };
@@ -174,6 +175,7 @@
 		444FF1862E12684B00209B22 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSubLineAndSpaceView.swift; sourceTree = "<group>"; };
 		444FF18C2E142A5000209B22 /* NormalizeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalizeValue.swift; sourceTree = "<group>"; };
+		444FF18E2E150D7A00209B22 /* DefaultIntervalTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultIntervalTableView.swift; sourceTree = "<group>"; };
 		44626DA62D5F9AD0008294BC /* CSVView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CSVView.swift; sourceTree = "<group>"; };
 		44626DA82D5FA716008294BC /* ShareTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTextView.swift; sourceTree = "<group>"; };
 		446300282CFB807800C33BCB /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 		448C64E52CF8837E006D81BD /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				444FF18E2E150D7A00209B22 /* DefaultIntervalTableView.swift */,
 				444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */,
 				447839C02D8B2330002E9170 /* IntervalInfoView.swift */,
 				44C4CEF42C8C47A80092C452 /* QuizView.swift */,
@@ -931,6 +934,7 @@
 				44C4CEF32C8C47A80092C452 /* MusicIntervalQuizMasterApp.swift in Sources */,
 				449FE4862CFF550C00A8D840 /* ImageSlideView.swift in Sources */,
 				440BE63F2CE7998E00B01C1B /* IntervalTouchKeyboardView.swift in Sources */,
+				444FF18F2E150D7A00209B22 /* DefaultIntervalTableView.swift in Sources */,
 				44D6F2D72CF5E4CF00B91BBA /* HapticManager.swift in Sources */,
 				44626DA92D5FA716008294BC /* ShareTextView.swift in Sources */,
 				448C64ED2CF88623006D81BD /* StatsView.swift in Sources */,
