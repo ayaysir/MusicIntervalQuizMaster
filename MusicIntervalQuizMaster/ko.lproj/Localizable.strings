@@ -164,7 +164,7 @@
 "tutorial_guide" = "튜토리얼 가이드";
 "view_open_source_licenses" = "오픈 소스 라이센스 보기";
 "open_source_licenses" = "오픈 소스 라이센스";
-"send_email_to_developer" = "개발자에게 이메일 보내기";
+"send_email_to_developer" = "개발자에게 이메일 보내기\n(피드백, 요청, 건의사항 등)";
 "view_my_other_apps" = "내 다른 유용한 앱 보기";
 "feedback_and_more_header" = "피드백 & 더 보기";
 "app_version" = "앱 버전:";
@@ -271,3 +271,5 @@
 
 "loc.version_changes_title" = "Ver %@ 변경사항";
 "loc.version_changes_body" = "새로운 버전 %@으로 업데이트 되었습니다.\n이번 버전에서는 다음과 같은 변경사항이 있습니다.";
+
+"loc.request_app_review" = "앱이 마음에 드셨다면 리뷰를 남겨주세요";

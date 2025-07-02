@@ -164,7 +164,7 @@
 "tutorial_guide" = "Tutorial Guide";
 "view_open_source_licenses" = "View Open Source Licenses";
 "open_source_licenses" = "Open Source Licenses";
-"send_email_to_developer" = "Send Email to Developer";
+"send_email_to_developer" = "Send Email to Developer\n(Feedback, request, etc.)";
 "view_my_other_apps" = "View My Other Useful Apps";
 "feedback_and_more_header" = "Feedback & More";
 "app_version" = "APP VERSION:";
@@ -271,3 +271,5 @@
 
 "loc.version_changes_title" = "What's New in Ver %@";
 "loc.version_changes_body" = "You’ve updated to version %@.\nHere are the changes in this version:";
+
+"loc.request_app_review" = "If you enjoy using the app,\nplease leave a review";

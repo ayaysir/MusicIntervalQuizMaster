@@ -19,6 +19,11 @@ let ALERT_PRESENT_TIME = 1
 let MAX_QUESTION_COUNT = 1000
 let CHART_VERTICAL_SIZE: CGFloat = 270
 
+// MARK: - Devloper Constants
+
+let APP_ID = "6738980588"
+let DEVELOPER_ID = "1578285460"
+
 // MARK: - Typealiases
 
 typealias StringBoolDict = [String : Bool]

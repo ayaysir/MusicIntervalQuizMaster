@@ -28,6 +28,8 @@ struct MoreInfoView: View {
           }
         }
         
+        SectionWhatsNewArchive
+        
         Section("copyright_section_title") {
           NavigationLink("view_open_source_licenses") {
             LicenseView()
@@ -42,8 +44,11 @@ struct MoreInfoView: View {
               alertItem = AlertItem(message: "unable_to_send_email".localized)
             }
           }
+          Button("loc.request_app_review") {
+            openExternalLink(urlString: "https://apps.apple.com/app/id\(APP_ID)?action=write-review")
+          }
           Button("view_my_other_apps") {
-            openAppStoreLink()
+            openExternalLink(urlString: "https://apps.apple.com/developer/id\(DEVELOPER_ID)")
           }
         } header: {
           Text("feedback_and_more_header")
@@ -99,6 +104,17 @@ extension MoreInfoView {
       }
   }
   
+  private var SectionWhatsNewArchive: some View {
+    let keys = Array(WhatsNewArchive.shared.archive.keys)
+    return Section("loc.whats_new_archive") {
+      ForEach(keys, id: \.self) { key in
+        NavigationLink("Version \(key)") {
+          WhatsNewView(marketingVersion: key, features: WhatsNewArchive.shared(key) ?? [])
+        }
+      }
+    }
+  }
+  
   private var DEBUG_DebugArea: some View {
     Group {
       NavigationLink {
@@ -111,8 +127,10 @@ extension MoreInfoView {
 }
 
 extension MoreInfoView {
-  private func openAppStoreLink() {
-    if let url = URL(string: "https://apps.apple.com/developer/id1578285460"), // 앱스토어 링크
+  private func openExternalLink(urlString: String) {
+    // "https://apps.apple.com/developer/id1578285460"
+    // "https://apps.apple.com/app/id<YOUR_APP_ID>?action=write-review"
+    if let url = URL(string: urlString),
        UIApplication.shared.canOpenURL(url) {
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }

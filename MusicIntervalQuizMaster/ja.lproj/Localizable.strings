@@ -271,3 +271,5 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 
 "loc.version_changes_title" = "Ver %@ の変更点";
 "loc.version_changes_body" = "バージョン%@にアップデートされました。\n今回のバージョンでは以下の変更が行われました。";
+
+"loc.request_app_review" = "アプリを気に入っていただけたら、\nレビューをご記入ください";
