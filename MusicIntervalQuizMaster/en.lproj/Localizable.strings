@@ -273,3 +273,4 @@
 "loc.version_changes_body" = "You’ve updated to version %@.\nHere are the changes in this version:";
 
 "loc.request_app_review" = "If you enjoy using the app,\nplease leave a review";
+"loc.whats_new_archive" = "New Feature Guide";
