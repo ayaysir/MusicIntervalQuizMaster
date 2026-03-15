@@ -50,6 +50,8 @@ struct DefaultIntervalTableView: View {
       GridRow {
         ForEach(rows[0].indices, id: \.self) { j in
           Text(rows[0][j])
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
             .frame(maxWidth: .infinity)
             .background(cellBackground(i: 0, j: j))
             .bold()

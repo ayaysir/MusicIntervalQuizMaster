@@ -259,7 +259,7 @@
 "loc.all_intervals" = "All Intervals";
 "loc.select_all_intervals_in_degree" = "Select All Intervals in Degree";
 
-"loc.degree_semitone" = "Deg./Half";
+"loc.degree_semitone" = "Deg.＼Half";
 "loc.interval_shrink" = "As the interval\ngets smaller ←←←";
 "loc.interval_exapnd" = "As the interval\n→→→ gets larger";
 

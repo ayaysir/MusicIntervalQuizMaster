@@ -57,6 +57,7 @@ struct QuizView: View {
         QuizSettingButtonArea
         AnswerStatusArea
       }
+      .frame(height: 40)
      
       BottomKeyArea
     }
@@ -252,7 +253,7 @@ extension QuizView {
         .foregroundStyle(Color.frontLabel)
         .font(.system(size: 15, weight: .bold))
         .frame(width: 40, height: 40)
-        .background(Color.gray.opacity(0.4))
+        .background(Color.gray.opacity(0.34))
         .clipShape(RoundedRectangle(cornerRadius: 5))
     }
     .padding(.leading, 10)
