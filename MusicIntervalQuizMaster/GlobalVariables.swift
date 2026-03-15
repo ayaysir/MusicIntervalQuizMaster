@@ -11,6 +11,10 @@ import UIKit
 
 let store = UserDefaults.standard
 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+var appVersionString: String {
+  "\(appVersion, default: "unknown") (\(buildNumber, default: "unknown"))"
+}
 let osVersion = UIDevice.current.systemVersion
 
 // MARK: - Global Constants
@@ -23,6 +27,7 @@ let CHART_VERTICAL_SIZE: CGFloat = 270
 
 let APP_ID = "6738980588"
 let DEVELOPER_ID = "1578285460"
+let DEV_MAIL = "yoonbumtae@gmail.com"
 
 // MARK: - Typealiases
 

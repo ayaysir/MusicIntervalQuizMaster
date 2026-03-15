@@ -165,7 +165,7 @@
 "view_open_source_licenses" = "オープンソースライセンスの表示";
 "open_source_licenses" = "オープンソースライセンス";
 "send_email_to_developer" = "開発者にメールを送る";
-"view_my_other_apps" = "他の有用なアプリを表示";
+"view_my_other_apps" = "開発者の他の有用なアプリを表示";
 "feedback_and_more_header" = "フィードバック & もっと";
 "app_version" = "アプリバージョン：";
 "unable_to_send_email" = "メールを送信できません。メールアカウントを設定してください。";
