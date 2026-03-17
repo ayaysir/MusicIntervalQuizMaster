@@ -136,7 +136,7 @@
 "timer_limit_description" = "5秒から60秒以内でタイマーを設定できます。0に設定すると制限時間はありません。";
 
 "auto_move_to_next_problem_toggle" = "次の問題へ自動で移動";
-"auto_move_to_next_problem" = "正解した場合、次の問題に自動的に移動";
+"auto_move_to_next_problem" = "正解した場合は、次の問題に自動的に移動します。";
 "haptic_when_key_pressed" = "音程キーボードを押したとき";
 "haptic_when_correct" = "正解したとき";
 "haptic_when_wrong" = "不正解のとき";
@@ -159,7 +159,7 @@
 "select_interval_type" = "音程の種類を選択";
 "search_prompt" = "音程名、度数、略語、英語の音程名（例：perfect）を入力してください。";
 
-"help_section_title" = "ヘルプ";
+"help_section_title" = "ヘルプと情報";
 "copyright_section_title" = "著作権情報";
 "tutorial_guide" = "チュートリアルガイド";
 "view_open_source_licenses" = "オープンソースライセンスの表示";
@@ -199,7 +199,7 @@
 "script_7_title" = "アプリの設定をカスタマイズして、学習環境を最適化。";
 "script_7_body" = "タイマー、自動スキップ、ハプティック、テーマを調整して没入感を高めましょう。";
 
-"reminder_noti_title" = "リマインダーアラーム設定";
+"reminder_noti_title" = "学習のためのリマインダーアラーム設定。アラームを設定すると、ミニクイズを受け取ることができます。";
 "reminder_noti_toggle" = "リマインダーアラームをオンにする";
 "for_every_day" = "毎日：";
 

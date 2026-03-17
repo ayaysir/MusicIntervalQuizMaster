@@ -271,16 +271,20 @@ extension QuizView {
         } label: {
           if #available(iOS 18.0, *) {
             Image(systemName: "text.page.badge.magnifyingglass")
-              .foregroundStyle(Color.teal)
+              .foregroundStyle(Color.white)
               .font(.system(size: 13))
               .bold()
           } else {
             Image(systemName: "doc.text.magnifyingglass")
-              .foregroundStyle(Color.teal)
+              .foregroundStyle(Color.white)
               .font(.system(size: 13))
               .bold()
           }
         }
+        .padding(4)
+        .background(Color.indigo)
+        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+        .accessibilityLabel("설명 보기")
       }
     }
     .frame(maxWidth: .infinity)

@@ -65,9 +65,12 @@ struct ShrinkedQuizSettingView: View {
       .navigationTitle("loc.shrink_settings")
       .toolbar {
         ToolbarItem(placement: .topBarTrailing) {
-          Button("loc.close") {
+          Button {
             dismiss()
+          } label: {
+            Image(systemName: "xmark")
           }
+          .accessibilityLabel("loc.close")
         }
       }
       .searchable(text: $searchKeyword, prompt: "search_prompt")

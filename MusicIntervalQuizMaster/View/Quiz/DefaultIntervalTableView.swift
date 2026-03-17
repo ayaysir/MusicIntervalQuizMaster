@@ -119,9 +119,9 @@ struct DefaultIntervalTableView: View {
     return [
       ["loc.degree_semitone".localized, "0", "1", "2"],
       ["1", P, "", ""],
-      ["2/3", M, m, ""],
-      ["4/5", A, P, d],
-      ["6/7", "", M, m],
+      ["2, 3", M, m, ""],
+      ["4, 5", A, P, d],
+      ["6, 7", "", M, m],
       ["8", "", "", P],
     ]
   }()
@@ -134,8 +134,8 @@ struct DefaultIntervalTableView: View {
     let d = IntervalModifier.diminished.shortLocalizedDescription
     return [
       ["loc.degree_semitone".localized, "2", "3", "4"],
-      ["9/10", M, m, ""],
-      ["11/12", A, P, d],
+      ["9, 10", M, m, ""],
+      ["11, 12", A, P, d],
       ["13", "", M, m],
     ]
   }()

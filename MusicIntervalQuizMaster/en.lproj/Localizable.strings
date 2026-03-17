@@ -136,7 +136,7 @@
 "timer_limit_description" = "You can set the timer within 5 to 60 seconds. Setting it to 0 removes the time limit.";
 
 "auto_move_to_next_problem_toggle" = "Automatically move to next";
-"auto_move_to_next_problem" = "Move to the next question automatically when correct";
+"auto_move_to_next_problem" = "Move to the next question automatically when correct.";
 "haptic_when_key_pressed" = "When pressing the interval keyboard";
 "haptic_when_correct" = "When correct";
 "haptic_when_wrong" = "When wrong";
@@ -159,7 +159,7 @@
 "select_interval_type" = "Select Interval Type";
 "search_prompt" = "Enter the interval name, degree, abbreviation.";
 
-"help_section_title" = "Help";
+"help_section_title" = "Help and Information";
 "copyright_section_title" = "Copyright Information";
 "tutorial_guide" = "Tutorial Guide";
 "view_open_source_licenses" = "View Open Source Licenses";
@@ -199,7 +199,7 @@
 "script_7_title" = "Customize the app settings to optimize your learning.";
 "script_7_body" = "Adjust timers, auto-skip, haptic feedback, and themes to enhance immersion.";
 
-"reminder_noti_title" = "Reminder Notification Settings";
+"reminder_noti_title" = "This is a reminder alarm setting for studying. If you set the alarm, you can receive a mini-quiz.";
 "reminder_noti_toggle" = "Enable Reminder Alarm";
 "for_every_day" = "Every day:";
 

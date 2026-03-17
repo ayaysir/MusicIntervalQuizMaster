@@ -55,8 +55,6 @@ extension AppSettingView {
           StepperLabel
         }
       }
-    } header: {
-      Text("timer_problem_solving_within_limit")
     } footer: {
       Text("timer_limit_description")
     }
@@ -74,7 +72,7 @@ extension AppSettingView {
   private var SectionAutoMoveNext: some View {
     Section {
       Toggle("auto_move_to_next_problem_toggle", isOn: $cfgAppAutoNextMove)
-    } header: {
+    } footer: {
       Text("auto_move_to_next_problem")
     }
   }
@@ -114,7 +112,7 @@ extension AppSettingView {
   }
   
   private var SectionReminder: some View {
-    Section("reminder_noti_title") {
+    Section {
       Toggle("reminder_noti_toggle", isOn: $isReminderOn)
       DatePicker(
         "for_every_day",
@@ -124,6 +122,8 @@ extension AppSettingView {
       .frame(height: 30)
       .disabled(!isReminderOn)
       .opacity(isReminderOn ? 1 : 0.2)
+    } footer: {
+      Text("reminder_noti_title")
     }
   }
 }

@@ -18,6 +18,7 @@ struct LocalNotiManager {
     let content = UNMutableNotificationContent()
     
     content.title = "noti_promo_title".localized
+    content.sound = .default
     
     let now = Date()
     var components = Calendar.current.dateComponents([.year, .month, .day], from: now)

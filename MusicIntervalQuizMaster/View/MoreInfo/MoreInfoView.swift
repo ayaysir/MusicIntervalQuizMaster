@@ -18,7 +18,7 @@ struct MoreInfoView: View {
     NavigationStack {
       Form {
 #if DEBUG
-        DEBUG_DebugArea
+        // DEBUG_DebugArea
 #endif
         CSVSection
         
@@ -26,12 +26,8 @@ struct MoreInfoView: View {
           NavigationLink("tutorial_guide") {
             TutorialGuideView()
           }
-        }
-        
-        SectionWhatsNewArchive
-        
-        Section("copyright_section_title") {
-          NavigationLink("view_open_source_licenses") {
+          AreaWhatsNewArchive
+          NavigationLink("copyright_section_title") {
             LicenseView()
           }
         }
@@ -81,13 +77,11 @@ extension MoreInfoView {
       }
   }
   
-  private var SectionWhatsNewArchive: some View {
+  @ViewBuilder private var AreaWhatsNewArchive: some View {
     let keys = Array(WhatsNewArchive.shared.archive.keys)
-    return Section("loc.whats_new_archive") {
-      ForEach(keys, id: \.self) { key in
-        NavigationLink("Version \(key)") {
-          WhatsNewView(marketingVersion: key, features: WhatsNewArchive.shared(key) ?? [])
-        }
+    ForEach(keys, id: \.self) { key in
+      NavigationLink("[ver \(key)] \("loc.whats_new_archive".localized)") {
+        WhatsNewView(marketingVersion: key, features: WhatsNewArchive.shared(key) ?? [])
       }
     }
   }

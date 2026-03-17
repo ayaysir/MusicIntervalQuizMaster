@@ -136,7 +136,7 @@
 "timer_limit_description" = "5초 - 60초 이내에 타이머 설정을 할 수 있습니다. 0으로 설정하면 시간 제한이 없어집니다.";
 
 "auto_move_to_next_problem_toggle" = "바로 다음문제로";
-"auto_move_to_next_problem" = "정답인 경우 다음 문제로 자동으로 이동";
+"auto_move_to_next_problem" = "정답인 경우 다음 문제로 자동으로 이동합니다.";
 "haptic_when_key_pressed" = "음정 키보드를 누를 때";
 "haptic_when_correct" = "정답일 때";
 "haptic_when_wrong" = "오답일 때";
@@ -159,9 +159,9 @@
 "select_interval_type" = "음정 종류 선택";
 "search_prompt" = "음정 이름, 도수, 약어, 영문 음정(예: perfect) 이름을 입력하세요.";
 
-"help_section_title" = "도움말";
+"help_section_title" = "도움말 및 정보";
 "copyright_section_title" = "저작권 정보";
-"tutorial_guide" = "튜토리얼 가이드";
+"tutorial_guide" = "앱 사용 설명서";
 "view_open_source_licenses" = "오픈 소스 라이센스 보기";
 "open_source_licenses" = "오픈 소스 라이센스";
 "send_email_to_developer" = "개발자에게 이메일 보내기\n(피드백, 요청, 건의사항 등)";
@@ -199,7 +199,7 @@
 "script_7_title" = "앱 설정으로 학습 환경을 조정해보세요.";
 "script_7_body" = "타이머, 자동넘김, 햅틱, 테마를 설정해 몰입감을 높이세요.";
 
-"reminder_noti_title" = "리마인더 알람 설정";
+"reminder_noti_title" = "학습을 위한 리마인더 알람 설정입니다. 알람을 설정하면 미니 퀴즈를 받아 볼 수 있습니다.";
 "reminder_noti_toggle" = "리마인더 알람 켜기";
 "for_every_day" = "매일:";
 
