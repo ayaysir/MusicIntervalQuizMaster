@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct MainTabBarView: View {
+  // @Environment(\.scenePhase) var scenePhase
   @State private var selectedIndex = 0
   @StateObject var statsViewModel = StatsViewModel()
   
   @AppStorage(.moreInfoRemindeIsOn) var isReminderOn: Bool = false
   @AppStorage(.moreInfoReminderHour) var reminderHour: Int = 0
   @AppStorage(.moreInfoReminderMinute) var reminderMinute: Int = 0
+
+  // @State private var showInfoFromNoti = false
+  @State private var pair: IntervalPair?
   
   var body: some View {
     TabView(selection: $selectedIndex) {
@@ -45,12 +49,54 @@ struct MainTabBarView: View {
           LocalNotiManager.shared.scheduleNoti(hour: reminderHour, minute: reminderMinute)
         }
       }
+      
+      NotificationDelegate.shared.onReceive = { userInfo in
+        print("received notification!")
+        handleUserInfo(userInfo: userInfo)
+      }
+      
+      // cold start 대응
+      if let pending = NotificationDelegate.shared.pendingUserInfo {
+        handleUserInfo(userInfo: pending)
+        NotificationDelegate.shared.pendingUserInfo = nil
+      }
     }
     .onChange(of: selectedIndex) { newValue in
       // Stat 탭을 누를때마다 데이터를 새로 불러옴 (재방문하면 onAppear가 다시 동작 안함)
       if newValue == 1 {
         statsViewModel.fetchStats()
         print("StatsViewModel refreshed!")
+      }
+    }
+  
+  }
+  
+  func handleUserInfo(userInfo: [AnyHashable : Any]) {
+    guard let data = userInfo[String.keyUserInfoIntervalPair] as? Data,
+          let pair = try? JSONDecoder().decode(IntervalPair.self, from: data) else {
+      return
+    }
+    print("received IntervalPair from notification: \(data)")
+    print(" - pair: ", pair)
+    
+    self.pair = pair
+    
+    DispatchQueue.main.async {
+      tryPresent()
+    }
+  }
+  
+  func tryPresent() {
+    if let scene = UIApplication.shared.connectedScenes
+      .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
+       scene.windows.first(where: { $0.isKeyWindow }) != nil {
+
+      if let pair {
+        InstantSheet.show(hostingView: IntervalInfoView(pair: pair))
+      }
+    } else {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        tryPresent()
       }
     }
   }

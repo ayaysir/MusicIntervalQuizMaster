@@ -68,7 +68,11 @@ struct ShrinkedQuizSettingView: View {
           Button {
             dismiss()
           } label: {
-            Image(systemName: "xmark")
+            if #available(iOS 26.0, *) {
+              Image(systemName: "xmark")
+            } else {
+              Label("loc.close", systemImage: "xmark")
+            }
           }
           .accessibilityLabel("loc.close")
         }

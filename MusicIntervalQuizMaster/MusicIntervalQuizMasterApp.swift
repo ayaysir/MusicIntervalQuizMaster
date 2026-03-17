@@ -13,10 +13,9 @@ struct MusicIntervalQuizMasterApp: App {
   
   init() {
     FontManager.registerFonts()
+    UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
     
-    checkAppFirstrunOrUpdateStatus {
-      
-    } updated: {
+    checkAppFirstrunOrUpdateStatus {} updated: {
       // Whats New: latest v 1.3.0
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
         InstantSheet.show(

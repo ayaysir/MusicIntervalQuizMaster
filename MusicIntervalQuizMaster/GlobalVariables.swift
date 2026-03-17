@@ -77,6 +77,8 @@ extension String {
   static let moreInfoReminderHour = "MoreInfo_Reminder_Hour"
   /// 리마인더 노티 시각 (0~59분)
   static let moreInfoReminderMinute = "MoreInfo_Reminder_Minute"
+  /// 리마인더 User Info 키
+  static let keyUserInfoIntervalPair = "interval_pair"
 }
 
 // MARK: - Tutorial Image Bundle

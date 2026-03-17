@@ -46,7 +46,7 @@ struct IntervalTouchKeyboardView: View {
       vibrate()
       keyboardViewModel.setIntervalNumber(inputNumber)
     }) {
-      let buttonText = inputNumber == 0 ? "0 / CLR" : "\(inputNumber)"
+      let buttonText = inputNumber == 0 ? "0 / ⌫" : "\(inputNumber)"
       internalButtonText(buttonText, color: .red)
     }
     .buttonStyle(EmbossedButtonStyle(pressedBorderColor: .cyan))

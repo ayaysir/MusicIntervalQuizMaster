@@ -7,7 +7,7 @@
 
 import Tonic
 
-enum IntervalModifier: CustomStringConvertible, CaseIterable {
+enum IntervalModifier: Codable, CustomStringConvertible, CaseIterable {
   case major, minor, perfect, diminished, augmented, doublyDiminished, doublyAugmented
   
   var description: String {

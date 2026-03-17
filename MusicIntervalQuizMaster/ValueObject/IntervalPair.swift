@@ -7,7 +7,7 @@
 
 import Tonic
 
-struct IntervalPair: CustomStringConvertible, Equatable, Hashable {
+struct IntervalPair: Codable, CustomStringConvertible, Equatable, Hashable {
   let startNote: Note
   let endNote: Note
   let direction: IntervalPairDirection

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IntervalPairDirection {
+enum IntervalPairDirection: Codable {
   case ascending, descending, simultaneously
   
   var localizedDescription: String {

@@ -8,7 +8,7 @@
 import Foundation
 import Tonic
 
-enum Clef: HasMusiqwikText, CaseIterable {
+enum Clef: HasMusiqwikText, CaseIterable, Codable {
   case treble, bass, alto
   
   // dataDescription 값을 기반으로 enum으로 초기화

@@ -8,7 +8,7 @@
 import Foundation
 import Tonic
 
-struct AdvancedInterval: Equatable, Hashable {
+struct AdvancedInterval: Codable, Equatable, Hashable {
   let modifier: IntervalModifier
   let number: Int
 }

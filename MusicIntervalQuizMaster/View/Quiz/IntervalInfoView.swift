@@ -19,18 +19,35 @@ struct IntervalInfoView: View {
   @Environment(\.dismiss) var dismiss
   
   var body: some View {
-    ScrollView {
-      VStack(spacing: 20) {
-        if let interval = pair.advancedInterval {
-          TitleArea(interval: interval)
-          MusicSheetArea
-          ContentArea(interval: interval)
-          Spacer()
-            .frame(height: 10)
-          BottomButtonArea
+    NavigationStack {
+      ScrollView {
+        VStack(spacing: 20) {
+          if let interval = pair.advancedInterval {
+            // TitleArea(interval: interval)
+            MusicSheetArea
+            ContentArea(interval: interval)
+            Spacer()
+              .frame(height: 10)
+            BottomButtonArea
+          }
+        }
+        .padding(10)
+      }
+      .navigationTitle(pair.advancedInterval?.localizedDescription ?? "-")
+      .toolbar {
+        ToolbarItem(placement: .topBarTrailing) {
+          Button {
+            dismiss()
+          } label: {
+            if #available(iOS 26.0, *) {
+              Image(systemName: "xmark")
+            } else {
+              Label("loc.close", systemImage: "xmark")
+            }
+          }
+          .accessibilityLabel("loc.close")
         }
       }
-      .padding(10)
     }
   }
 }
@@ -44,6 +61,7 @@ extension IntervalInfoView {
       CloseButtonArea
     }
   }
+  
   private func Title(_ text: String) -> Text {
     Text(verbatim: text)
       .font(.largeTitle)

@@ -52,13 +52,20 @@ struct LocalNotiManager {
       let pair = QuizHelper.shared.generateRandomIntervalPair()
       guard let startNote = pair?.startNote,
             let endNote = pair?.endNote,
-            let intervalLocalDesc = pair?.advancedInterval?.localizedDescription else { continue }
+            let intervalLocalDesc = pair?.advancedInterval?.localizedDescription else {
+        continue
+      }
+      
       content.body = """
       \("local_noti_body_1".localized) 
       \("local_noti_body_2".localizedFormat(startNote.description, endNote.description))
       \("local_noti_body_3".localizedFormat(intervalLocalDesc))
       \("local_noti_body_4".localized)
       """
+      
+      if let pair, let data = try? JSONEncoder().encode(pair) {
+        content.userInfo = [String.keyUserInfoIntervalPair: data]
+      }
       
       let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
       let uniqueIdentifier = "Noti_AppOpenPromotion_\(year)_\(month)_\(day)_\(hour)_\(minute)"
@@ -103,5 +110,40 @@ struct LocalNotiManager {
         continuation.resume(returning: granted)
       }
     }
+  }
+}
+
+final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
+  
+  static let shared = NotificationDelegate()
+
+  var onReceive: (([AnyHashable: Any]) -> Void)?
+  var pendingUserInfo: [AnyHashable: Any]?
+
+  // 앱 실행 중 (foreground)
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+    completionHandler([.banner,])
+  }
+
+  // 알림 클릭
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
+
+    let userInfo = response.notification.request.content.userInfo
+
+    if let onReceive {
+      onReceive(userInfo)
+    } else {
+      pendingUserInfo = userInfo
+    }
+
+    completionHandler()
   }
 }
