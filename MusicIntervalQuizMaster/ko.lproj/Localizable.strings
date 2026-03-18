@@ -107,7 +107,7 @@
 "modifier_short_major" = "장";
 "modifier_short_minor" = "단";
 "modifier_short_perfect" = "완전";
-"modifier_short_diminished" = "단";
+"modifier_short_diminished" = "감";
 "modifier_short_augmented" = "증";
 "modifier_short_doublyDiminished" = "겹감";
 "modifier_short_doublyAugmented" = "겹증";
