@@ -8,15 +8,13 @@
 import SwiftUI
 
 struct MainTabBarView: View {
-  // @Environment(\.scenePhase) var scenePhase
   @State private var selectedIndex = 0
   @StateObject var statsViewModel = StatsViewModel()
   
   @AppStorage(.moreInfoRemindeIsOn) var isReminderOn: Bool = false
   @AppStorage(.moreInfoReminderHour) var reminderHour: Int = 0
   @AppStorage(.moreInfoReminderMinute) var reminderMinute: Int = 0
-
-  // @State private var showInfoFromNoti = false
+  
   @State private var pair: IntervalPair?
   
   var body: some View {
@@ -52,12 +50,12 @@ struct MainTabBarView: View {
       
       NotificationDelegate.shared.onReceive = { userInfo in
         print("received notification!")
-        handleUserInfo(userInfo: userInfo)
+        handleLocalNotiUserInfo(userInfo: userInfo)
       }
       
       // cold start 대응
       if let pending = NotificationDelegate.shared.pendingUserInfo {
-        handleUserInfo(userInfo: pending)
+        handleLocalNotiUserInfo(userInfo: pending)
         NotificationDelegate.shared.pendingUserInfo = nil
       }
     }
@@ -68,25 +66,25 @@ struct MainTabBarView: View {
         print("StatsViewModel refreshed!")
       }
     }
-  
   }
   
-  func handleUserInfo(userInfo: [AnyHashable : Any]) {
+  private func handleLocalNotiUserInfo(userInfo: [AnyHashable : Any]) {
     guard let data = userInfo[String.keyUserInfoIntervalPair] as? Data,
           let pair = try? JSONDecoder().decode(IntervalPair.self, from: data) else {
       return
     }
+    
     print("received IntervalPair from notification: \(data)")
     print(" - pair: ", pair)
     
     self.pair = pair
     
     DispatchQueue.main.async {
-      tryPresent()
+      presentIntervalInfoWhenReady()
     }
   }
   
-  func tryPresent() {
+  private func presentIntervalInfoWhenReady() {
     if let scene = UIApplication.shared.connectedScenes
       .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
        scene.windows.first(where: { $0.isKeyWindow }) != nil {
@@ -96,7 +94,7 @@ struct MainTabBarView: View {
       }
     } else {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        tryPresent()
+        presentIntervalInfoWhenReady()
       }
     }
   }

@@ -72,7 +72,9 @@ struct QuizView: View {
         print("newPhase: isActive")
         if isEnteredBackground {
           if viewModel.answerMode == .inQuiz {
-            viewModel.preparePairData()
+            // viewModel.preparePairData()
+            // 앱이 백그라운드에서 복귀한 경우
+            checkAnswer(forceWrong: true)
           }
           
           isEnteredBackground = false
@@ -197,27 +199,7 @@ extension QuizView {
       .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
       .offset(x: offsetX)
       .onAppear {
-        if cfgQuizSoundAutoplay {
-          playSounds()
-        }
-        
-        if viewModel.answerMode == .inQuiz {
-          invalidateTimer()
-          startCountdown()
-        }
-        
-        if isEnteredBackground {
-          if viewModel.answerMode == .inQuiz {
-            viewModel.preparePairData()
-          }
-          
-          isEnteredBackground = false
-        }
-        
-        print(viewModel.sessionCreated)
-        if viewModel.sessionCreated <= 1 && viewModel.answerMode == .inQuiz {
-          showNewSessionAlert = true
-        }
+        initQuizTimer()
       }
       .onDisappear {
         if viewModel.answerMode == .inQuiz {
@@ -463,6 +445,31 @@ extension QuizView {
 
 extension QuizView {
   // MARK: - Other funcs
+  private func initQuizTimer() {
+    if cfgQuizSoundAutoplay {
+      playSounds()
+    }
+    
+    if viewModel.answerMode == .inQuiz {
+      invalidateTimer()
+      startCountdown()
+    }
+    
+    if isEnteredBackground {
+      print("onAppear: isEnteredBackground true")
+      if viewModel.answerMode == .inQuiz {
+        // viewModel.preparePairData()
+        // onDisappear가 발동된 경우
+        checkAnswer(forceWrong: true)
+      }
+      
+      isEnteredBackground = false
+    }
+    
+    if viewModel.sessionCreated <= 1 && viewModel.answerMode == .inQuiz {
+      showNewSessionAlert = true
+    }
+  }
   
   private func stopSounds() {
     SoundManager.shared.stopAllSounds()
@@ -566,12 +573,14 @@ extension QuizView {
     }
   }
   
-  private func startCountdown() {
+  private func startCountdown(isResume: Bool = false) {
     guard cfgTimerSeconds > 0 else {
       return
     }
     
-    remainingTime = Double(cfgTimerSeconds)
+    if !isResume {
+      remainingTime = Double(cfgTimerSeconds)
+    }
     
     timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
       if remainingTime > 0 {

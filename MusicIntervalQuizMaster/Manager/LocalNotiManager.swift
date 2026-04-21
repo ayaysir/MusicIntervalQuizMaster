@@ -139,8 +139,10 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     let userInfo = response.notification.request.content.userInfo
 
     if let onReceive {
+      // 앱 실행 중(또는 백그라운드에서 복귀시)인 경우
       onReceive(userInfo)
     } else {
+      // 콜드 스타트인 경우
       pendingUserInfo = userInfo
     }
 
