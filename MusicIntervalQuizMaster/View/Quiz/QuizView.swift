@@ -24,6 +24,7 @@ struct QuizView: View {
   @State private var showAnswerAlert = false
   @State private var showQuizSettingSheet = false
   @State private var showRestartSessionAlert = false
+  @State private var showWithdrawalAlert = false
   @State private var animateAlertDismiss = false
   @State private var showNewSessionAlert = false
   @State private var showInfoModal = false
@@ -74,7 +75,7 @@ struct QuizView: View {
           if viewModel.answerMode == .inQuiz {
             // viewModel.preparePairData()
             // 앱이 백그라운드에서 복귀한 경우
-            checkAnswer(forceWrong: true)
+            checkAnswer(forceWrong: true, quizAnswerAlert: .small)
           }
           
           isEnteredBackground = false
@@ -117,6 +118,7 @@ struct QuizView: View {
     }
     .alert(isPresent: $showAnswerAlert, view: answerAlertView)
     .alert(isPresent: $showNewSessionAlert, view: newSessionAlertView)
+    .alert(isPresent: $showWithdrawalAlert, view: withdrawalAlertView)
     .alert(
       "loc.quiz_settings_changed",
       isPresented: $showRestartSessionAlert,
@@ -374,6 +376,14 @@ extension QuizView {
     )
   }
   
+  private var withdrawalAlertView: BottomAlertView {
+    return BottomAlertView(
+      title: "loc.quiz.withdrawal".localized,
+      subtitle: nil,
+      icon: .error
+    )
+  }
+  
   // MARK: - Drag Gestures
   
   private var musiqwikDragGesture: some Gesture {
@@ -460,7 +470,7 @@ extension QuizView {
       if viewModel.answerMode == .inQuiz {
         // viewModel.preparePairData()
         // onDisappear가 발동된 경우
-        checkAnswer(forceWrong: true)
+        checkAnswer(forceWrong: true, quizAnswerAlert: .small)
       }
       
       isEnteredBackground = false
@@ -508,14 +518,21 @@ extension QuizView {
     }
   }
   
-  private func checkAnswer(forceWrong: Bool = false) {
+  private func checkAnswer(forceWrong: Bool = false, quizAnswerAlert: QuizAnswerAlert = .normal) {
     guard keyboardViewModel.intervalNumber != 0 || forceWrong  else {
       HapticManager.warning.vibrate()
       return
     }
     
     invalidateTimer()
-    showAnswerAlert = true
+    switch quizAnswerAlert {
+    case .normal:
+      showAnswerAlert = true
+    case .small:
+      showWithdrawalAlert = true
+    case .none:
+      break
+    }
     
     let isCorrect = viewModel.checkAnswer(keyboardViewModel.intervalModifier, keyboardViewModel.intervalNumber)
     
@@ -528,6 +545,14 @@ extension QuizView {
       
       if store.bool(forKey: .cfgAppAutoNextMove) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1301)) {
+          switch quizAnswerAlert {
+          case .normal:
+            showAnswerAlert = false
+          case .small:
+            showWithdrawalAlert = false
+          case .none:
+            break
+          }
           showAnswerAlert = false
           goNextQuestion()
         }
@@ -606,6 +631,14 @@ extension QuizView {
     // print("카운트다운 완료, 작업 실행!")
     // playSounds()
     checkAnswer(forceWrong: true)
+  }
+}
+
+extension QuizView {
+  enum QuizAnswerAlert {
+    case normal
+    case small
+    case none
   }
 }
 

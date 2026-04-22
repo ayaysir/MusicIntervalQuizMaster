@@ -274,3 +274,5 @@
 
 "loc.request_app_review" = "앱이 마음에 드셨다면 리뷰를 남겨주세요";
 "loc.whats_new_archive" = "새로운 기능 안내";
+
+"loc.quiz.withdrawal" = "퀴즈 도중 다른 곳으로 이동했기 때문에 오답으로 처리되었습니다.";

@@ -274,3 +274,5 @@
 
 "loc.request_app_review" = "If you enjoy using the app,\nplease leave a review";
 "loc.whats_new_archive" = "New Feature Guide";
+
+"loc.quiz.withdrawal" = "This was marked incorrect because you left the quiz.";
