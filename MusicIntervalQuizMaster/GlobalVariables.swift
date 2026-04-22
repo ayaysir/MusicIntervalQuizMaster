@@ -168,3 +168,9 @@ let INTERVAL_TYPE_STATE_FIRST = [
 
 // MARK: - Global funcs
 
+// MARK: - Notification Names
+
+extension Notification.Name {
+  static let startFromLocalNoti = Notification.Name("StartFromLocalNoti")
+  static let endLocalNotiSheet = Notification.Name("EndLocalNotiSheet")
+}

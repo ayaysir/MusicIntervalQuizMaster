@@ -144,6 +144,9 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     } else {
       // 콜드 스타트인 경우
       pendingUserInfo = userInfo
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        NotificationCenter.default.post(name: .startFromLocalNoti, object: nil)
+      }
     }
 
     completionHandler()

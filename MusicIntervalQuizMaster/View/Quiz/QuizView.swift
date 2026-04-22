@@ -19,6 +19,9 @@ struct QuizView: View {
   @AppStorage(.cfgQuizSoundAutoplay) var cfgQuizSoundAutoplay = true
   @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   @AppStorage(.cfgQuizSheetPosition) var cfgQuizSheetPosition = 0
+  @AppStorage(.cfgHapticWrong) var cfgHapticWrong = true
+  @AppStorage(.cfgHapticAnswer) var cfgHapticAnswer = true
+  @AppStorage(.cfgHapticPressedIntervalKeyboard) var cfgHapticPressedIntervalKeyboard = true
   
   @State private var isMusiqwikViewPressed = false
   @State private var showAnswerAlert = false
@@ -30,10 +33,14 @@ struct QuizView: View {
   @State private var showInfoModal = false
   @State private var offsetX: CGFloat = 0
   
-  @State private var workItem: DispatchWorkItem?
+  @State private var soundWorkItem: DispatchWorkItem?
   @State private var remainingTime: Double = 5
   @State private var timerActive: Bool = true
   @State private var timer: Timer?
+  
+  @State private var isPendingTimer = false
+  @State private var startObserver: NSObjectProtocol?
+  @State private var endObserver: NSObjectProtocol?
   
   var body: some View {
     VStack {
@@ -202,6 +209,20 @@ extension QuizView {
       .offset(x: offsetX)
       .onAppear {
         initQuizTimer()
+        
+        startObserver = NotificationCenter.default.addObserver(forName: .startFromLocalNoti, object: nil, queue: .main) { _ in
+          deinitQuizTimer()
+          isPendingTimer = true
+        }
+        
+        endObserver = NotificationCenter.default.addObserver(forName: .endLocalNotiSheet, object: nil, queue: .main) { _ in
+          if viewModel.answerMode == .inQuiz && isPendingTimer {
+            initQuizTimer()
+          }
+          
+          // 알람에서 열은 것은 한번만이므로 이 부분은 무조건 실행되어야 함
+          isPendingTimer = false
+        }
       }
       .onDisappear {
         if viewModel.answerMode == .inQuiz {
@@ -212,9 +233,17 @@ extension QuizView {
         }
         
         stopSounds()
+        
+        if let startObserver {
+          NotificationCenter.default.removeObserver(startObserver)
+        }
+        
+        if let endObserver {
+          NotificationCenter.default.removeObserver(endObserver)
+        }
       }
       .onTapGesture {
-        if store.bool(forKey: .cfgHapticPressedIntervalKeyboard) {
+        if cfgHapticPressedIntervalKeyboard {
           HapticManager.rigid.vibrate()
         }
         HapticManager.soft.vibrate()
@@ -377,11 +406,13 @@ extension QuizView {
   }
   
   private var withdrawalAlertView: BottomAlertView {
-    return BottomAlertView(
+    let bottomAlertView = BottomAlertView(
       title: "loc.quiz.withdrawal".localized,
       subtitle: nil,
-      icon: .error
+      icon: .error,
     )
+    bottomAlertView.haptic = AlertHaptic.none
+    return bottomAlertView
   }
   
   // MARK: - Drag Gestures
@@ -481,18 +512,23 @@ extension QuizView {
     }
   }
   
+  private func deinitQuizTimer() {
+    stopSounds()
+    invalidateTimer()
+  }
+  
   private func stopSounds() {
     SoundManager.shared.stopAllSounds()
     
-    if let workItem {
-      workItem.cancel()
+    if let soundWorkItem {
+      soundWorkItem.cancel()
     }
   }
   
   private func playSounds() {
     stopSounds()
     
-    workItem = .init {
+    soundWorkItem = .init {
       viewModel.currentPair.endNote.playSound()
     }
     
@@ -504,10 +540,10 @@ extension QuizView {
         viewModel.currentPair.startNote.playSound()
       }
       
-      if let workItem {
+      if let soundWorkItem {
         DispatchQueue.global(qos: qos).asyncAfter(
           deadline: .now() + .milliseconds(1200),
-          execute: workItem
+          execute: soundWorkItem
         )
       }
     case .simultaneously:
@@ -539,7 +575,7 @@ extension QuizView {
     // 정답 처리는 viewModel.checkAnswer() 가 함
     
     if isCorrect {
-      if store.bool(forKey: .cfgHapticAnswer) {
+      if cfgHapticAnswer {
         HapticManager.success.vibrate()
       }
       
@@ -568,13 +604,13 @@ extension QuizView {
   private func setWrong() {
     keyboardViewModel.answerMode = viewModel.answerMode
     
-    if store.bool(forKey: .cfgHapticWrong) {
+    if cfgHapticWrong {
       HapticManager.warning.vibrate()
     }
   }
   
   private func goNextQuestion() {
-    if store.bool(forKey: .cfgHapticPressedIntervalKeyboard) {
+    if cfgHapticPressedIntervalKeyboard {
       HapticManager.rigid.vibrate()
     }
     

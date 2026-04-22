@@ -23,7 +23,6 @@ struct IntervalInfoView: View {
       ScrollView {
         VStack(spacing: 20) {
           if let interval = pair.advancedInterval {
-            // TitleArea(interval: interval)
             MusicSheetArea
             ContentArea(interval: interval)
             Spacer()
@@ -36,9 +35,7 @@ struct IntervalInfoView: View {
       .navigationTitle(pair.advancedInterval?.localizedDescription ?? "-")
       .toolbar {
         ToolbarItem(placement: .topBarTrailing) {
-          Button {
-            dismiss()
-          } label: {
+          Button(action: dismiss.callAsFunction){
             if #available(iOS 26.0, *) {
               Image(systemName: "xmark")
             } else {
@@ -48,20 +45,15 @@ struct IntervalInfoView: View {
           .accessibilityLabel("loc.close")
         }
       }
+      .onDisappear {
+        NotificationCenter.default.post(name: .endLocalNotiSheet, object: nil)
+      }
     }
   }
 }
 
 extension IntervalInfoView {
   // MARK: - View segments
-  
-  private func TitleArea(interval: AdvancedInterval) -> some View {
-    ZStack {
-      Title(interval.localizedDescription)
-      CloseButtonArea
-    }
-  }
-  
   private func Title(_ text: String) -> Text {
     Text(verbatim: text)
       .font(.largeTitle)
@@ -110,9 +102,7 @@ extension IntervalInfoView {
   }
   
   private var BottomButtonArea: some View {
-    Button {
-      dismiss()
-    } label: {
+    Button(action: dismiss.callAsFunction) {
       Text("info_ok")
     }
     .buttonStyle(.borderedProminent)
@@ -353,20 +343,6 @@ extension IntervalInfoView {
         Divider()
       } else {
         Text("Error")
-      }
-    }
-  }
-  
-  private var CloseButtonArea: some View {
-    HStack {
-      Spacer()
-      Button(action: dismiss.callAsFunction) {
-        Image(systemName: "xmark")
-          .font(.system(size: 10, weight: .bold)) // 아이콘 크기 조절
-          .foregroundColor(.white) // 아이콘 색상
-          .frame(width: 20, height: 20) // 버튼 크기 조절
-          .background(Color.gray.opacity(0.6)) // 회색 배경
-          .clipShape(Circle()) // 원형 버튼
       }
     }
   }

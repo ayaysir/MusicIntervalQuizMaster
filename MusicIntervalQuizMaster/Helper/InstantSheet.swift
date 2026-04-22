@@ -29,7 +29,6 @@ struct InstantSheet {
       // SwiftUI 뷰를 UIKit에 얹기
       let hostingController = UIHostingController(rootView: hostingView)
       hostingController.modalPresentationStyle = .pageSheet // 또는 .formSheet, .automatic 등
-
       topVC.present(hostingController, animated: true, completion: nil)
     }
   }
