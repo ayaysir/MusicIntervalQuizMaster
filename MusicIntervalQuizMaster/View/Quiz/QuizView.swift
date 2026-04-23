@@ -39,8 +39,6 @@ struct QuizView: View {
   @State private var timer: Timer?
   
   @State private var isPendingTimer = false
-  @State private var startObserver: NSObjectProtocol?
-  @State private var endObserver: NSObjectProtocol?
   
   var body: some View {
     VStack {
@@ -68,6 +66,31 @@ struct QuizView: View {
       .frame(height: 40)
      
       BottomKeyArea
+    }
+    .onAppear {
+      initQuizTimer()
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .startFromLocalNoti)) { output in
+      deinitQuizTimer()
+      isPendingTimer = true
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .endLocalNotiSheet)) { output in
+      if viewModel.answerMode == .inQuiz && isPendingTimer {
+        initQuizTimer()
+      }
+      
+      // 알람에서 열은 것은 한번만이므로 이 부분은 무조건 실행되어야 함
+      isPendingTimer = false
+    }
+    .onDisappear {
+      if viewModel.answerMode == .inQuiz {
+        invalidateTimer()
+        
+        // 새로운 세션 시작 (퀴즈중이라면)
+        isEnteredBackground = true
+      }
+      
+      stopSounds()
     }
     .onChange(of: scenePhase) { newPhase in
       switch newPhase {
@@ -207,41 +230,6 @@ extension QuizView {
       .scaleEffect(isMusiqwikViewPressed ? 0.965 : 1.0) // 눌렀을 때 살짝 작아짐
       .animation(.spring(response: 0.2, dampingFraction: 0.5), value: isMusiqwikViewPressed) // 부드러운 애니메이션
       .offset(x: offsetX)
-      .onAppear {
-        initQuizTimer()
-        
-        startObserver = NotificationCenter.default.addObserver(forName: .startFromLocalNoti, object: nil, queue: .main) { _ in
-          deinitQuizTimer()
-          isPendingTimer = true
-        }
-        
-        endObserver = NotificationCenter.default.addObserver(forName: .endLocalNotiSheet, object: nil, queue: .main) { _ in
-          if viewModel.answerMode == .inQuiz && isPendingTimer {
-            initQuizTimer()
-          }
-          
-          // 알람에서 열은 것은 한번만이므로 이 부분은 무조건 실행되어야 함
-          isPendingTimer = false
-        }
-      }
-      .onDisappear {
-        if viewModel.answerMode == .inQuiz {
-          invalidateTimer()
-          
-          // 새로운 세션 시작 (퀴즈중이라면)
-          isEnteredBackground = true
-        }
-        
-        stopSounds()
-        
-        if let startObserver {
-          NotificationCenter.default.removeObserver(startObserver)
-        }
-        
-        if let endObserver {
-          NotificationCenter.default.removeObserver(endObserver)
-        }
-      }
       .onTapGesture {
         if cfgHapticPressedIntervalKeyboard {
           HapticManager.rigid.vibrate()
