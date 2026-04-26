@@ -48,6 +48,7 @@ final class SettingViewModel: ObservableObject {
   func turnOnAllStates() {
     // boolStates [String: Bool] 의 모든 값을 true로
     boolStates = boolStates.mapValues { _ in true }
+    saveBoolStates()
   }
   
   func turnOnStates(keyPrefix: String) {
@@ -55,12 +56,24 @@ final class SettingViewModel: ObservableObject {
     for key in boolStates.keys where key.hasPrefix("\(keyPrefix)_") {
       boolStates[key] = true
     }
+    
+    saveBoolStates()
   }
   
   func turnOnStates(keySuffix: String) {
     for key in boolStates.keys where key.hasSuffix(keySuffix) {
       boolStates[key] = true
     }
+    
+    saveBoolStates()
+  }
+  
+  func toggleStatesForCoreList() {
+    for key in boolStates.keys {
+      boolStates[key] = CORE_INTERVALS.contains(key)
+    }
+    
+    saveBoolStates()
   }
   
   private func saveBoolStates() {

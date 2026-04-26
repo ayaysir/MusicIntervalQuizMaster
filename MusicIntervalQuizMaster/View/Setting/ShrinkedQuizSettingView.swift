@@ -54,8 +54,9 @@ struct ShrinkedQuizSettingView: View {
       Form {
         if searchKeyword.isEmpty {
           SectionDirection
-          SectionClef
-          SectionAccidental
+          SectionClefAccidental
+          // SectionClef
+          // SectionAccidental
           SectionAdvancedInterval
           SectionIntervalTypeSelectAll
         }
@@ -99,15 +100,18 @@ extension ShrinkedQuizSettingView {
       HStack {
         ToggleButton(
           title: IntervalPairDirection.ascending.localizedDescription,
-          isSelected: cfgNotesAscending
+          isSelected: cfgNotesAscending,
+          selectedTintColor: .green
         ) { cfgNotesAscending.toggle() }
         ToggleButton(
           title: IntervalPairDirection.descending.localizedDescription,
-          isSelected: cfgNotesDescending
+          isSelected: cfgNotesDescending,
+          selectedTintColor: .green
         ) { cfgNotesDescending.toggle() }
         ToggleButton(
           title: IntervalPairDirection.simultaneously.localizedDescription,
-          isSelected: cfgNotesSimultaneously
+          isSelected: cfgNotesSimultaneously,
+          selectedTintColor: .green
         ) { cfgNotesSimultaneously.toggle() }
       }
     } header: {
@@ -115,63 +119,70 @@ extension ShrinkedQuizSettingView {
     }
   }
   
-  private var SectionClef: some View {
+  private var SectionClefAccidental: some View {
     Section {
-      HStack {
-        ToggleButton(
-          title: Clef.treble.localizedDescription,
-          musiqwikText: Clef.treble.musiqwikTextWithSpace,
-          isSelected: cfgClefTreble) {
-            cfgClefTreble.toggle()
-          }
-        ToggleButton(
-          title: Clef.bass.localizedDescription,
-          musiqwikText: Clef.bass.musiqwikTextWithSpace,
-          isSelected: cfgClefBass) {
-            cfgClefBass.toggle()
-          }
-        ToggleButton(
-          title: Clef.alto.localizedDescription,
-          musiqwikText: Clef.alto.musiqwikTextWithSpace,
-          isSelected: cfgClefAlto) {
-            cfgClefAlto.toggle()
-          }
+      VStack {
+        AreaClef
+        AreaAccidental
       }
     } header: {
-      Text("clef_for_question")
+      Text("loc.title.clef_accidental")
     }
   }
   
-  private var SectionAccidental: some View {
-    Section {
-      HStack {
-        ToggleButton(
-          title: "♯",
-          textFontSize: 18,
-          isSelected: cfgAccidentalSharp) {
-            cfgAccidentalSharp.toggle()
-          }
-        ToggleButton(
-          title: "♭",
-          textFontSize: 18,
-          isSelected: cfgAccidentalFlat) {
-            cfgAccidentalFlat.toggle()
-          }
-        ToggleButton(
-          title: "♯♯",
-          textFontSize: 18,
-          isSelected: cfgAccidentalDoubleSharp) {
-            cfgAccidentalDoubleSharp.toggle()
-          }
-        ToggleButton(
-          title: "♭♭",
-          textFontSize: 18,
-          isSelected: cfgAccidentalDoubleFlat) {
-            cfgAccidentalDoubleFlat.toggle()
-          }
-      }
-    } header: {
-      Text("accidental_for_question")
+  private var AreaClef: some View {
+    HStack {
+      ToggleButton(
+        title: Clef.treble.localizedDescription,
+        musiqwikText: Clef.treble.musiqwikTextWithSpace,
+        isSelected: cfgClefTreble) {
+          cfgClefTreble.toggle()
+        }
+      ToggleButton(
+        title: Clef.bass.localizedDescription,
+        musiqwikText: Clef.bass.musiqwikTextWithSpace,
+        isSelected: cfgClefBass) {
+          cfgClefBass.toggle()
+        }
+      ToggleButton(
+        title: Clef.alto.localizedDescription,
+        musiqwikText: Clef.alto.musiqwikTextWithSpace,
+        isSelected: cfgClefAlto) {
+          cfgClefAlto.toggle()
+        }
+    }
+  }
+  
+  private var AreaAccidental: some View {
+    HStack {
+      ToggleButton(
+        title: "♯",
+        textFontSize: 18,
+        isSelected: cfgAccidentalSharp,
+        selectedTintColor: .mint) {
+          cfgAccidentalSharp.toggle()
+        }
+      ToggleButton(
+        title: "♭",
+        textFontSize: 18,
+        isSelected: cfgAccidentalFlat,
+        selectedTintColor: .mint) {
+          cfgAccidentalFlat.toggle()
+        }
+      ToggleButton(
+        title: "♯♯ (𝄪)",
+        textFontSize: 18,
+        isSelected: cfgAccidentalDoubleSharp,
+        selectedTintColor: .mint) {
+          cfgAccidentalDoubleSharp.toggle()
+        }
+      ToggleButton(
+        title: "♭♭",
+        textFontSize: 18,
+        isSelected: cfgAccidentalDoubleFlat,
+        selectedTintColor: .mint) {
+          cfgAccidentalDoubleFlat.toggle()
+        }
     }
   }
   
@@ -188,32 +199,61 @@ extension ShrinkedQuizSettingView {
   
   private var SectionIntervalTypeSelectAll: some View {
     Section {
-      ScrollView(.horizontal) {
-        HStack {
-          ToggleButton(
-            title: "loc.all_intervals".localized,
-            isSelected: true,
-            selectedTintColor: .indigo) {
-              viewModel.turnOnAllStates()
-            }
-          ForEach(1...13, id: \.self) { currentDegree in
+      VStack {
+        Text("loc.select_all_intervals_in_degree")
+          .foregroundStyle(.secondary)
+          .font(.caption2)
+          .frame(maxWidth: .infinity, alignment: .leading)
+        ScrollView(.horizontal) {
+          HStack {
             ToggleButton(
-              title: "\(currentDegree)\(currentDegree.oridnalWithoutNumber)",
+              title: "loc.all_intervals".localized,
               isSelected: true,
-              selectedTintColor: .purple.opacity(0.8)) {
-                viewModel.turnOnStates(keySuffix: currentDegree.description)
+              selectedTintColor: .indigo) {
+                viewModel.turnOnAllStates()
               }
+            ForEach(1...13, id: \.self) { currentDegree in
+              ToggleButton(
+                title: "\(currentDegree)\(currentDegree.oridnalWithoutNumber)",
+                isSelected: true,
+                selectedTintColor: .purple.opacity(0.8)) {
+                  viewModel.turnOnStates(keySuffix: currentDegree.description)
+                }
+            }
           }
-        }
       }
+      }
+      HStack {
+        Button(action: {
+          viewModel.toggleStatesForCoreList()
+        }) {
+          Text("핵심 음정 18개만 선택")
+        }
+        Spacer()
+        Button(
+          action: {
+            let abbrListText = CORE_INTERVALS
+              .map { $0.replacingOccurrences(of: "_", with: "") }
+              .joined(separator: ", ")
+            InstantAlert.show(
+              "loc.core_interval.title".localized,
+              message: "loc.core_interval.message".localizedFormat(abbrListText)
+            )
+        }) {
+          Image(systemName: "info.circle")
+            .foregroundStyle(.secondary)
+        }
+        .buttonStyle(.borderless) // List 안에서 충돌 방지
+      }
+      .tint(.primary)
     } header: {
       VStack (alignment: .leading){
         HStack {
           Text("select_interval_type")
             .bold()
+          Text("|")
           Text("degree_settings")
         }
-        Text("loc.select_all_intervals_in_degree")
       }
       
     }

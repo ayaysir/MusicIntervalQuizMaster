@@ -166,6 +166,11 @@ let INTERVAL_TYPE_STATE_FIRST = [
   "dd_13": true,
 ]
 
+let CORE_INTERVALS = [
+  "M_2", "m_2", "M_3", "m_3", "P_4", "A_4", "P_5", "d_5", "M_6", "m_6",
+  "M_7", "m_7", "M_9", "m_9", "P_11", "A_11", "M_13", "m_13"
+]
+
 // MARK: - Global funcs
 
 // MARK: - Notification Names
