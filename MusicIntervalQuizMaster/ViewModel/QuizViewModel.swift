@@ -80,9 +80,13 @@ final class QuizViewModel: ObservableObject {
   }
   
   var answerPercentText: String {
+    let totalCount = answerMode == .inQuiz ? max(session.records.count - 1, 0) : session.records.count
+    
+    guard totalCount > 0 else {
+      return "0%"
+    }
     // Thread 1: Fatal error: Double value cannot be converted to Int because it is either infinite or NaN
-    let percentText = "\(Int(Double(answerCount) / Double(session.records.count) * 100))%"
-    return answerMode == .inQuiz ? "📝" : percentText
+    return "\(Int(Double(answerCount) / Double(totalCount) * 100))%"
   }
   
   var currentPairIsNotSolved: Bool {
@@ -98,9 +102,10 @@ final class QuizViewModel: ObservableObject {
     case .inQuiz:
       ""
     case .correct:
-      "✅ \("correct_message".localized) \(currentPair.advancedInterval?.localizedDescription ?? "") [\(currentPair.startNote) - \(currentPair.endNote)]"
+      // 이모지 제거
+      "\("correct_message".localized) \(currentPair.advancedInterval?.localizedDescription ?? "") [\(currentPair.startNote) - \(currentPair.endNote)]"
     case .wrong:
-      "❌ " + "incorrect_message_try_again".localized
+      "incorrect_message_try_again".localized
     }
   }
   

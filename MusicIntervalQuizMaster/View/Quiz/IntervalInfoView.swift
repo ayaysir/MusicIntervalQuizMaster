@@ -24,6 +24,8 @@ struct IntervalInfoView: View {
         VStack(spacing: 20) {
           if let interval = pair.advancedInterval {
             MusicSheetArea
+            Spacer()
+              .frame(height: 2)
             ContentArea(interval: interval)
             Spacer()
               .frame(height: 10)
@@ -92,11 +94,10 @@ extension IntervalInfoView {
         Button {
           playSounds()
         } label: {
-          Label(
-            "",
-            systemImage: "speaker.wave.3.fill"
-          )
+          Label("loc.info.listen", systemImage: "speaker.wave.3.fill")
         }
+        .tint(.mint)
+        .buttonStyle(.borderedProminent)
       }
     }
   }
@@ -105,6 +106,7 @@ extension IntervalInfoView {
     Button(action: dismiss.callAsFunction) {
       Text("info_ok")
     }
+    .tint(.mint)
     .buttonStyle(.borderedProminent)
   }
   

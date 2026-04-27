@@ -287,3 +287,5 @@
 "loc.quiz.start_prompt" = "Tap the button below to start the quiz!";
 "loc.quiz.skip_auto_start_info" = "This screen appears because 'Don't auto-start quiz on launch' is enabled. To disable it, go to App Settings > 'Don't auto-start quiz on launch'.";
 "loc.quiz.start_button" = "Start Quiz";
+"loc.quiz.explain" = "Explain";
+"loc.info.listen" = "Listen";

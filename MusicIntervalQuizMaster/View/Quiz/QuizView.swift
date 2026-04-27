@@ -275,7 +275,7 @@ extension QuizView {
               .frame(width: 15)
             Text("Auto")
           }
-          .foregroundStyle(cfgQuizSoundAutoplay ? .blue : .gray)
+          .foregroundStyle(cfgQuizSoundAutoplay ? .soundOnTint : .gray)
           .font(.system(size: 13))
           .frame(width: 60, height: 20)
         }
@@ -325,36 +325,65 @@ extension QuizView {
     .padding(.leading, 10)
   }
   
-  private var AnswerStatusArea: some View {
+  @ViewBuilder private var AnswerStatusArea: some View {
+    let magnifyGlassName = if #available(iOS 18.0, *) {
+      "text.page.badge.magnifyingglass"
+    } else {
+      "doc.text.magnifyingglass"
+    }
+    
+    let statusBackgroundColor: Color = switch viewModel.answerMode {
+    case .inQuiz:
+        .gray.opacity(0.2)
+    case .correct:
+        .green.opacity(0.3)
+    case .wrong:
+        .pink.opacity(0.3)
+    }
+    
     // 상태창
     HStack(alignment: .center) {
+      switch viewModel.answerMode {
+      case .inQuiz:
+        EmptyView()
+      case .correct:
+        Image(systemName: "checkmark.square.fill")
+          .symbolRenderingMode(.palette)
+          .foregroundStyle(.white, .green)
+      case .wrong:
+        Image(systemName: "xmark.square.fill")
+          .symbolRenderingMode(.palette)
+          .foregroundStyle(.white, .red)
+      }
       Text("\(viewModel.answerText)")
-        .font(.subheadline).bold()
+        .font(.subheadline)
+        .bold()
         .frame(height: 40)
+      
       if viewModel.answerMode == .correct {
         Button {
           showInfoModal = true
         } label: {
-          if #available(iOS 18.0, *) {
-            Image(systemName: "text.page.badge.magnifyingglass")
-              .foregroundStyle(Color.white)
-              .font(.system(size: 13))
-              .bold()
-          } else {
-            Image(systemName: "doc.text.magnifyingglass")
-              .foregroundStyle(Color.white)
-              .font(.system(size: 13))
-              .bold()
+          HStack(spacing: 4) {
+            Image(systemName: magnifyGlassName)
+            Text("loc.quiz.explain")
           }
+          .foregroundStyle(Color.white)
+          .font(.system(size: 12))
+          .bold()
+          .lineLimit(1)
+          .minimumScaleFactor(0.5)
+            
         }
+        .frame(maxWidth: 50)
         .padding(4)
-        .background(Color.indigo)
+        .background(Color.teal)
         .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
         .accessibilityLabel("설명 보기")
       }
     }
     .frame(maxWidth: .infinity)
-    .background(.gray.opacity(0.2))
+    .background(statusBackgroundColor)
     .clipShape(RoundedRectangle(cornerRadius: 5))
     .padding(.trailing, 10)
     .opacity(viewModel.answerMode == .inQuiz ? 0 : 1)
@@ -405,13 +434,32 @@ extension QuizView {
         .font(.system(size: 12))
     } label: {
       VStack(alignment: .leading) {
-        Text(verbatim: "\("current_session".localized) (\(viewModel.answerPercentText))")
+        Text(verbatim: "\("current_session".localized) \(viewModel.answerPercentText)")
           .font(.system(size: 12))
           .bold()
           .lineLimit(1)
-        Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)")
-          .lineLimit(1)
-          .font(.system(size: 10))
+          .minimumScaleFactor(0.5)
+        
+        HStack(spacing: 2) {
+          Image(systemName: "checkmark.square.fill")
+            .symbolRenderingMode(.palette)
+            .foregroundStyle(.white, .green)
+          Text(verbatim: "\(viewModel.answerCount)")
+          // Text(verbatim: "9999")
+            .frame(width: 25, alignment: .leading)
+          Image(systemName: "xmark.square.fill")
+            .symbolRenderingMode(.palette)
+            .foregroundStyle(.white, .red)
+          Text(verbatim: "\(viewModel.wrongCount)")
+          // Text(verbatim: "9999")
+            .frame(width: 25, alignment: .leading)
+        }
+        .lineLimit(1)
+        .font(.system(size: 10))
+        
+        // Text("✅ \(viewModel.answerCount)   ❌ \(viewModel.wrongCount)")
+        //   .lineLimit(1)
+        //   .font(.system(size: 10))
       }
       .foregroundStyle(.foreground)
       .padding(.horizontal, 4)
