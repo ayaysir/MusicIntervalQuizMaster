@@ -7,6 +7,7 @@
 
 import Foundation
 import Tonic
+import SwiftUI
 
 final class QuizViewModel: ObservableObject {
   private(set) var pairs: [IntervalPair] = []
@@ -15,6 +16,8 @@ final class QuizViewModel: ObservableObject {
   @Published private(set) var currentPairIndex = 0
   @Published var answerMode: QuizAnswerMode = .inQuiz
   @Published var sessionCreated = 0
+  
+  @AppStorage(.cfgSkipAutoQuizStart) var cfgSkipAutoQuizStart = false
   
   private var manager = QuizSessionManager(context: PersistenceController.shared.container.viewContext)
   
@@ -38,7 +41,7 @@ final class QuizViewModel: ObservableObject {
     
     let availableIntervalList = QuizHelper.shared.availableIntervalList()
     
-    print(availableIntervalList)
+    // print(availableIntervalList)
     
     while pairs.count <= MAX_QUESTION_COUNT {
       if let pair = QuizHelper.shared.generateRandomIntervalPair(),
@@ -77,6 +80,7 @@ final class QuizViewModel: ObservableObject {
   }
   
   var answerPercentText: String {
+    // Thread 1: Fatal error: Double value cannot be converted to Int because it is either infinite or NaN
     let percentText = "\(Int(Double(answerCount) / Double(session.records.count) * 100))%"
     return answerMode == .inQuiz ? "📝" : percentText
   }

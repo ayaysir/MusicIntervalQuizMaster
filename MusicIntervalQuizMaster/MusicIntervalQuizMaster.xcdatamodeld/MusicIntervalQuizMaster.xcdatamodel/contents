@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22758" systemVersion="23G93" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="24512" systemVersion="24G419" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="FavoriteIntervalEntity" representedClassName="FavoriteIntervalEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="clef" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="direction" optional="YES" attributeType="String"/>
+        <attribute name="endNoteAccidental" optional="YES" attributeType="String"/>
+        <attribute name="endNoteLetter" optional="YES" attributeType="String"/>
+        <attribute name="endNoteOctave" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="intervalModifier" optional="YES" attributeType="String"/>
+        <attribute name="intervalNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="modifiedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="startNoteAccidental" optional="YES" attributeType="String"/>
+        <attribute name="startNoteLetter" optional="YES" attributeType="String"/>
+        <attribute name="startNoteOctave" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="QuestionRecordEntity" representedClassName="QuestionRecordEntity" syncable="YES" codeGenerationType="class">
         <attribute name="clef" optional="YES" attributeType="String"/>
         <attribute name="direction" optional="YES" attributeType="String"/>

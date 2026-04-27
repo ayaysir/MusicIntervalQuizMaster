@@ -22,6 +22,8 @@ struct AppSettingView: View {
   @AppStorage(.cfgTimerSeconds) var cfgTimerSeconds = 0
   @AppStorage(.cfgAppAppearance) var cfgAppAppearance = 0
   
+  @AppStorage(.cfgSkipAutoQuizStart) var cfgSkipAutoQuizStart = false
+  
   var body: some View {
     NavigationStack {
       Form {
@@ -30,6 +32,7 @@ struct AppSettingView: View {
         SectionAutoMoveNext
         SectionHaptic
         SectionAppearance
+        SectionAdvanced
       }
       .navigationTitle("app_settings")
       .onAppear {
@@ -124,6 +127,29 @@ extension AppSettingView {
       .opacity(isReminderOn ? 1 : 0.2)
     } footer: {
       Text("reminder_noti_title")
+    }
+  }
+  
+  @ViewBuilder private var SectionAdvanced: some View {
+    Section {
+      Toggle(isOn: $cfgSkipAutoQuizStart) {
+        HStack {
+          Text("loc.setting.advanced.skip_auto_start")
+          Spacer()
+          Button(
+            action: {
+              InstantAlert.show(
+                "loc.setting.advanced.skip_auto_start".localized,
+                message: "loc.setting.advanced.skip_auto_start.message".localized
+              )
+          }) {
+            Image(systemName: "info.circle")
+          }
+          .buttonStyle(.borderless)
+        }
+      }
+    } header: {
+      Text("loc.setting.advanced.title")
     }
   }
 }

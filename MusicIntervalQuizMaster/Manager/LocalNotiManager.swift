@@ -119,6 +119,7 @@ final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
 
   var onReceive: (([AnyHashable: Any]) -> Void)?
   var pendingUserInfo: [AnyHashable: Any]?
+  var isUnskippedQuiz = false
 
   // 앱 실행 중 (foreground)
   func userNotificationCenter(

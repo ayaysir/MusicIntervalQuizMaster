@@ -279,3 +279,11 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 "loc.title.clef_accidental" = "出題対象の音部記号および臨時記号";
 "loc.core_interval.title" = "コア音程18種とは？";
 "loc.core_interval.message" = "ユニゾン、重複する音程、および理論上のみ存在する音程を除き、音楽学習において必須となる18の音程を選定しました。音程の聴こえ方を重視する場合や、簡単かつ迅速に学習したい場合にのみ使用してください。\n\n一覧: %@";
+
+"loc.setting.advanced.title" = "詳細設定";
+"loc.setting.advanced.skip_auto_start" = "起動時にクイズを自動開始しない";
+"loc.setting.advanced.skip_auto_start.message" = "このオプションをオンにすると、アプリ起動時にクイズが自動的に開始されません。デフォルトはオフ（起動時に自動開始）です。";
+
+"loc.quiz.start_prompt" = "下のボタンをタップしてクイズを開始してください！";
+"loc.quiz.skip_auto_start_info" = "この画面は「起動時にクイズを自動開始しない」がオンになっているため表示されています。解除するには、アプリ設定 > 「起動時にクイズを自動開始しない」で設定してください。";
+"loc.quiz.start_button" = "クイズを開始";

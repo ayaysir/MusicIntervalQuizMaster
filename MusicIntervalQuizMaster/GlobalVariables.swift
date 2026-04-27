@@ -79,6 +79,9 @@ extension String {
   static let moreInfoReminderMinute = "MoreInfo_Reminder_Minute"
   /// 리마인더 User Info 키
   static let keyUserInfoIntervalPair = "interval_pair"
+  
+  /// 퀴즈 바로 시작하지 않기
+  static let cfgSkipAutoQuizStart = "Config_SkipAutoQuizStart"
 }
 
 // MARK: - Tutorial Image Bundle

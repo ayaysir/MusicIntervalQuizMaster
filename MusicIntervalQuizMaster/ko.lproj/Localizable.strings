@@ -280,3 +280,13 @@
 
 "loc.core_interval.title" = "핵심 음정 18개란?";
 "loc.core_interval.message" = "유니즌, 중복되는 음정 및 이론상으로만 존재하는 음정들을 제외하고, 음악 학습에 있어 필수적인 음정 18개를 선정했습니다. 음정의 들리는 방법을 중요시하거나 간편하고 빠른 학습을 원하시는 경우에만 사용하세요. \n\n목록: %@";
+
+"loc.setting.advanced.title" = "고급 설정";
+"loc.setting.advanced.skip_auto_start" = "앱 시작시 퀴즈를 자동으로 시작하지 않기";
+"loc.setting.advanced.skip_auto_start.message" = "이 옵션 토글을 켬으로 설정한 경우 앱을 실행한 뒤 퀴즈를 자동으로 시작하지 않습니다. 기본값은 끔(앱 실행시 자동으로 퀴즈 시작) 입니다.";
+
+"loc.quiz.start_prompt" = "아래 버튼을 눌러 퀴즈를 시작해보세요!";
+"loc.quiz.skip_auto_start_info" = "이 화면은 '앱 시작 시 퀴즈를 자동으로 시작하지 않기' 옵션을 켬으로 설정하였기 때문에 나타납니다. 해제하려면 앱 설정 > '앱 시작 시 퀴즈를 자동으로 시작하지 않기'에서 설정해주세요.";
+"loc.quiz.start_button" = "퀴즈 시작하기";
+
+

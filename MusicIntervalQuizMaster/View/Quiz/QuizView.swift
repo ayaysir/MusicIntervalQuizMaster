@@ -22,6 +22,7 @@ struct QuizView: View {
   @AppStorage(.cfgHapticWrong) var cfgHapticWrong = true
   @AppStorage(.cfgHapticAnswer) var cfgHapticAnswer = true
   @AppStorage(.cfgHapticPressedIntervalKeyboard) var cfgHapticPressedIntervalKeyboard = true
+  @AppStorage(.cfgSkipAutoQuizStart) var cfgSkipAutoQuizStart = false
   
   @State private var isMusiqwikViewPressed = false
   @State private var showAnswerAlert = false
@@ -42,21 +43,11 @@ struct QuizView: View {
   
   var body: some View {
     VStack {
-      /*
-       2 above: x o
-       0 mid: o o
-       1 below: o x
-       */
-      if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 1 {
-        Spacer()
-      }
-      
-      HeaderArea
-      
-      MusiqwikViewArea
-      
-      if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 2 {
-        Spacer()
+      ZStack {
+        AreaHeaderAndMusiqwik
+        if cfgSkipAutoQuizStart && !NotificationDelegate.shared.isUnskippedQuiz {
+          AreaOverlayAutoQuizSkip
+        }
       }
       
       HStack(spacing: 5) {
@@ -68,6 +59,10 @@ struct QuizView: View {
       BottomKeyArea
     }
     .onAppear {
+      if cfgSkipAutoQuizStart && !NotificationDelegate.shared.isUnskippedQuiz {
+        return
+      }
+      
       initQuizTimer()
     }
     .onReceive(NotificationCenter.default.publisher(for: .startFromLocalNoti)) { output in
@@ -75,6 +70,10 @@ struct QuizView: View {
       isPendingTimer = true
     }
     .onReceive(NotificationCenter.default.publisher(for: .endLocalNotiSheet)) { output in
+      if cfgQuizSoundAutoplay && !NotificationDelegate.shared.isUnskippedQuiz {
+        return
+      }
+      
       if viewModel.answerMode == .inQuiz && isPendingTimer {
         initQuizTimer()
       }
@@ -100,16 +99,9 @@ struct QuizView: View {
       case .inactive:
         print("newPhase: inactive")
       case .active:
-        print("newPhase: isActive")
-        if isEnteredBackground {
-          if viewModel.answerMode == .inQuiz {
-            // viewModel.preparePairData()
-            // 앱이 백그라운드에서 복귀한 경우
-            checkAnswer(forceWrong: true, quizAnswerAlert: .small)
-          }
-          
-          isEnteredBackground = false
-        }
+        print("newPhase: isActive, \(isEnteredBackground), \(viewModel.answerMode)")
+        forceWrongAnswerWhenReturnFromBackground()
+        isEnteredBackground = false
       @unknown default:
         print("newPhase: unknown default")
       }
@@ -177,6 +169,79 @@ struct QuizView: View {
 
 extension QuizView {
   // MARK: - View segments
+  
+  @ViewBuilder private var AreaOverlayAutoQuizSkip: some View {
+    VStack {
+      ClearRectangleHeight20
+      Rectangle()
+        .fill(.ultraThinMaterial)
+        .overlay {
+          OverlayAutoQuizSkip
+        }
+      ClearRectangleHeight20
+    }
+  }
+  
+  @ViewBuilder private var OverlayAutoQuizSkip: some View {
+    VStack(spacing: 0) {
+      Text(verbatim: "Music Interval Quiz Master")
+        .font(.title)
+        .bold()
+      Spacer()
+        .frame(height: 2)
+      Text("loc.quiz.start_prompt")
+      Spacer()
+        .frame(height: 20)
+      Text("loc.quiz.skip_auto_start_info")
+        .foregroundStyle(.secondary)
+        .font(.caption)
+        .frame(maxWidth: .infinity, alignment: .center)
+      Spacer()
+        .frame(height: 30)
+      
+      if #available(iOS 26.0, *) {
+        Button(action: startQuizFromSkippedMode) {
+          Text("loc.quiz.start_button")
+        }
+        .tint(.pink)
+        .buttonStyle(.glassProminent)
+      } else {
+        Button(action: startQuizFromSkippedMode) {
+          Text("loc.quiz.start_button")
+        }
+        .tint(.pink)
+        .buttonStyle(.borderedProminent)
+      }
+    }
+    .padding()
+  }
+  
+  @ViewBuilder private var ClearRectangleHeight20: some View {
+    Rectangle()
+      .fill(.clear)
+      .frame(height: 20)
+  }
+  
+  @ViewBuilder private var AreaHeaderAndMusiqwik: some View {
+    /*
+     2 above: x o
+     0 mid: o o
+     1 below: o x
+     */
+    VStack {
+      if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 1 {
+        Spacer()
+      }
+      
+      HeaderArea
+      
+      MusiqwikViewArea
+      
+      if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 2 {
+        Spacer()
+      }
+    }
+  }
   
   private var HeaderArea: some View {
     HStack(spacing: 0) {
@@ -484,16 +549,7 @@ extension QuizView {
       startCountdown()
     }
     
-    if isEnteredBackground {
-      print("onAppear: isEnteredBackground true")
-      if viewModel.answerMode == .inQuiz {
-        // viewModel.preparePairData()
-        // onDisappear가 발동된 경우
-        checkAnswer(forceWrong: true, quizAnswerAlert: .small)
-      }
-      
-      isEnteredBackground = false
-    }
+    forceWrongAnswerWhenReturnFromBackground()
     
     if viewModel.sessionCreated <= 1 && viewModel.answerMode == .inQuiz {
       showNewSessionAlert = true
@@ -655,6 +711,30 @@ extension QuizView {
     // print("카운트다운 완료, 작업 실행!")
     // playSounds()
     checkAnswer(forceWrong: true)
+  }
+  
+  private func forceWrongAnswerWhenReturnFromBackground() {
+    if cfgSkipAutoQuizStart && !NotificationDelegate.shared.isUnskippedQuiz {
+      print(#function, "cfgSkipAutoQuizStart true, NotificationDelegate.shared.isUnskippedQuiz false")
+      return
+    }
+    
+    if isEnteredBackground {
+      print("onAppear: isEnteredBackground true")
+      if viewModel.answerMode == .inQuiz {
+        // viewModel.preparePairData()
+        // onDisappear가 발동된 경우
+        checkAnswer(forceWrong: true, quizAnswerAlert: .small)
+      }
+      
+      isEnteredBackground = false
+    }
+  }
+  
+  func startQuizFromSkippedMode() {
+    initQuizTimer()
+    NotificationDelegate.shared.isUnskippedQuiz = true
+    isPendingTimer = false
   }
 }
 
