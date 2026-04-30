@@ -17,6 +17,8 @@ struct MainTabBarView: View {
   
   @State private var pair: IntervalPair?
   
+  private let STATS_TAG = 1
+  
   var body: some View {
     TabView(selection: $selectedIndex) {
       QuizView()
@@ -24,11 +26,16 @@ struct MainTabBarView: View {
           Label("tab_drill".localized, systemImage: "greetingcard")
         }
         .tag(0)
+      LearnStudyMainView()
+        .tabItem {
+          Label("tab_learn".localized, systemImage: "graduationcap.fill")
+        }
+        .tag(4)
       StatsView(viewModel: statsViewModel)
         .tabItem {
           Label("tab_stats".localized, systemImage: "chart.bar.xaxis")
         }
-        .tag(1)
+        .tag(STATS_TAG)
       AppSettingView()
         .tabItem {
           Label("tab_settings".localized, systemImage: "gearshape.fill")
@@ -61,7 +68,7 @@ struct MainTabBarView: View {
     }
     .onChange(of: selectedIndex) { newValue in
       // Stat 탭을 누를때마다 데이터를 새로 불러옴 (재방문하면 onAppear가 다시 동작 안함)
-      if newValue == 1 {
+      if newValue == STATS_TAG {
         statsViewModel.fetchStats()
         print("StatsViewModel refreshed!")
       }

@@ -289,3 +289,12 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 "loc.quiz.start_button" = "クイズを開始";
 "loc.quiz.explain" = "解說";
 "loc.info.listen" = "聞く";
+
+"tab_learn" = "Learn";
+
+"loc.bookmarks_title" = "ブックマーク";
+"loc.learn_description" = "ブックマークした音程の一覧を見ることができます。また、音程や音楽理論の学習に役立つ解説、チュートリアル、ミニゲームなどを追加予定です。";
+
+/* Localizable.strings (Japanese) */
+"loc.bookmark.empty.title" = "空です";
+"loc.bookmark.empty.description" = "ブックマーク一覧は空です。クイズでブックマークアイコンをタップすると音程を追加して閲覧できます。";

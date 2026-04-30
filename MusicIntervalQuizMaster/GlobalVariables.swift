@@ -82,6 +82,9 @@ extension String {
   
   /// 퀴즈 바로 시작하지 않기
   static let cfgSkipAutoQuizStart = "Config_SkipAutoQuizStart"
+  
+  /// 북마크 뷰에서 목록 종류(테이블 = 0, 컬렉션 = 1)
+  static let cfgShowBookmarksAs = "Config_ShowBookmarksAs"
 }
 
 // MARK: - Tutorial Image Bundle

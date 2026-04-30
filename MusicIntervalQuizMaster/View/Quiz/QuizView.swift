@@ -113,6 +113,9 @@ struct QuizView: View {
       
       invalidateTimer()
       startCountdown()
+      
+      // bookmark 검사
+      viewModel.checkBookmarkIsDuplicated()
     }
     .onChange(of: viewModel.sessionCreated) { _ in
       showNewSessionAlert = true
@@ -233,9 +236,27 @@ extension QuizView {
         Spacer()
       }
       
-      HeaderArea
-      
-      MusiqwikViewArea
+      ZStack(alignment: .bottomLeading){
+        VStack {
+          HeaderArea
+          MusiqwikViewArea
+        }
+        Button(action: {
+          if !viewModel.isCurrentPairBookmarked {
+            viewModel.addBookmark()
+          } else {
+            viewModel.removeBookmark()
+          }
+        }) {
+          let isBookmarked = viewModel.isCurrentPairBookmarked
+          Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
+            .foregroundStyle(isBookmarked ? .orange : .gray)
+            .font(.system(size: 20, weight: .semibold))
+            .scaleEffect(x: 1.16, y: 1) // 가로만 늘림
+            .padding(.leading, 5)
+        }
+        .disabled(showAnswerAlert)
+      }
       
       if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 2 {
         Spacer()

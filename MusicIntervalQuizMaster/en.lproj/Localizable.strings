@@ -289,3 +289,12 @@
 "loc.quiz.start_button" = "Start Quiz";
 "loc.quiz.explain" = "Explain";
 "loc.info.listen" = "Listen";
+
+"tab_learn" = "Learn";
+
+"loc.bookmarks_title" = "Bookmarks";
+"loc.learn_description" = "You can view your bookmarked intervals. Guides, tutorials, mini-games, and other resources to help you learn intervals and music theory will be added.";
+
+/* Localizable.strings (English) */
+"loc.bookmark.empty.title" = "Empty";
+"loc.bookmark.empty.description" = "Your bookmark list is empty. You can add intervals by tapping the bookmark icon in the quiz.";

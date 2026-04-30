@@ -15,6 +15,11 @@
 		440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE6482CEA282F00B01C1B /* FontManager.swift */; };
 		440BE64C2CEA285600B01C1B /* Musiqwik.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 440BE64B2CEA285600B01C1B /* Musiqwik.ttf */; };
 		440BE64E2CEA28F100B01C1B /* MusiqwikView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */; };
+		44337C602FA3419500982B6F /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C5F2FA3418D00982B6F /* BookmarkManager.swift */; };
+		44337C632FA34CB500982B6F /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C622FA34CB200982B6F /* BookmarksView.swift */; };
+		44337C652FA34E9E00982B6F /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C642FA34E9C00982B6F /* BookmarkViewModel.swift */; };
+		44337C672FA35CC800982B6F /* ViewModelDisplayText.md in Resources */ = {isa = PBXBuildFile; fileRef = 44337C662FA35CBC00982B6F /* ViewModelDisplayText.md */; };
+		44337C692FA370C200982B6F /* LearnStudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C682FA370BA00982B6F /* LearnStudyMainView.swift */; };
 		444FF1852E12667400209B22 /* ShrinkedQuizSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1842E12666C00209B22 /* ShrinkedQuizSettingView.swift */; };
 		444FF1872E12684B00209B22 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1862E12684B00209B22 /* ToggleButton.swift */; };
 		444FF18B2E140E5500209B22 /* InfoSubLineAndSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */; };
@@ -173,6 +178,11 @@
 		440BE6482CEA282F00B01C1B /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		440BE64B2CEA285600B01C1B /* Musiqwik.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Musiqwik.ttf; sourceTree = "<group>"; };
 		440BE64D2CEA28F100B01C1B /* MusiqwikView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusiqwikView.swift; sourceTree = "<group>"; };
+		44337C5F2FA3418D00982B6F /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
+		44337C622FA34CB200982B6F /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		44337C642FA34E9C00982B6F /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
+		44337C662FA35CBC00982B6F /* ViewModelDisplayText.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ViewModelDisplayText.md; sourceTree = "<group>"; };
+		44337C682FA370BA00982B6F /* LearnStudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnStudyMainView.swift; sourceTree = "<group>"; };
 		444FF1842E12666C00209B22 /* ShrinkedQuizSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkedQuizSettingView.swift; sourceTree = "<group>"; };
 		444FF1862E12684B00209B22 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSubLineAndSpaceView.swift; sourceTree = "<group>"; };
@@ -361,6 +371,7 @@
 		440BE64F2CEA28F800B01C1B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				44337C612FA34C9A00982B6F /* LearnStudy */,
 				448C64E92CF883D7006D81BD /* Stats */,
 				448C64E82CF883BE006D81BD /* MoreInfo */,
 				448C64E72CF883B2006D81BD /* Setting */,
@@ -372,6 +383,15 @@
 				4469E8D72CEB920600CC506C /* MainTabBarView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		44337C612FA34C9A00982B6F /* LearnStudy */ = {
+			isa = PBXGroup;
+			children = (
+				44337C682FA370BA00982B6F /* LearnStudyMainView.swift */,
+				44337C622FA34CB200982B6F /* BookmarksView.swift */,
+			);
+			path = LearnStudy;
 			sourceTree = "<group>";
 		};
 		4469E8CA2CEA296D00CC506C /* Enum */ = {
@@ -431,6 +451,7 @@
 			children = (
 				448A3D412CF8B0CC00D0D758 /* Persistence.swift */,
 				448A3D5A2CFB637D00D0D758 /* QuizSessionManager.swift */,
+				44337C5F2FA3418D00982B6F /* BookmarkManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -574,7 +595,9 @@
 		44C4CF012C8C5C0A0092C452 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				44337C662FA35CBC00982B6F /* ViewModelDisplayText.md */,
 				440BE63C2CE7994000B01C1B /* QuizViewModel.swift */,
+				44337C642FA34E9C00982B6F /* BookmarkViewModel.swift */,
 				440BE6442CE799DB00B01C1B /* IntervalTouchKeyboardViewModel.swift */,
 				44D6F1ED2CECB34D00B91BBA /* SettingViewModel.swift */,
 				446300282CFB807800C33BCB /* StatsViewModel.swift */,
@@ -872,6 +895,7 @@
 				44D6F2C92CF245E300B91BBA /* Piano_BPM60_4B2E_82.mp3 in Resources */,
 				44D6F2AC2CF245E300B91BBA /* Piano_BPM60_4B2E_46.mp3 in Resources */,
 				44D6F2AD2CF245E300B91BBA /* Piano_BPM60_4B2E_48.mp3 in Resources */,
+				44337C672FA35CC800982B6F /* ViewModelDisplayText.md in Resources */,
 				44D6F2C62CF245E300B91BBA /* Piano_BPM60_4B2E_83.mp3 in Resources */,
 				44D6F2C52CF245E300B91BBA /* Piano_BPM60_4B2E_55.mp3 in Resources */,
 				44D6F2B52CF245E300B91BBA /* Piano_BPM60_4B2E_66.mp3 in Resources */,
@@ -923,6 +947,7 @@
 				446300302CFC336C00C33BCB /* UIDevice+.swift in Sources */,
 				44753C4E2D4C9DF9003F82FA /* QuizHelper.swift in Sources */,
 				44D6F2F22CF60F1500B91BBA /* AlertSpinnerView.swift in Sources */,
+				44337C692FA370C200982B6F /* LearnStudyMainView.swift in Sources */,
 				447839BD2D8983DA002E9170 /* Starling.swift in Sources */,
 				4469E8CC2CEA298100CC506C /* IntervalModifier.swift in Sources */,
 				448A3D592CFAE2C400D0D758 /* ForMacStepper.swift in Sources */,
@@ -981,6 +1006,7 @@
 				44A739EB2D0002210042A620 /* AppStoreScreenshotsView.swift in Sources */,
 				44626DA72D5F9ADC008294BC /* CSVView.swift in Sources */,
 				44D6F2FA2CF60F1500B91BBA /* AlertViewStyle.swift in Sources */,
+				44337C652FA34E9E00982B6F /* BookmarkViewModel.swift in Sources */,
 				446300362CFD8C5F00C33BCB /* SolvingStatus.swift in Sources */,
 				448A3D422CF8B0CC00D0D758 /* Persistence.swift in Sources */,
 				447839C12D8B2330002E9170 /* IntervalInfoView.swift in Sources */,
@@ -988,12 +1014,14 @@
 				448A3D4D2CF9D91100D0D758 /* QuestionRecord.swift in Sources */,
 				44B4B8EE2CEBA39400D344B6 /* GlobalVariables.swift in Sources */,
 				44753C4C2D4C979B003F82FA /* LocalNotiManager.swift in Sources */,
+				44337C602FA3419500982B6F /* BookmarkManager.swift in Sources */,
 				4469E8D82CEB920600CC506C /* MainTabBarView.swift in Sources */,
 				44D6F2F72CF60F1500B91BBA /* AlertHaptic.swift in Sources */,
 				440BE6492CEA282F00B01C1B /* FontManager.swift in Sources */,
 				44D6F2F02CF60F1500B91BBA /* AlertIconErrorView.swift in Sources */,
 				4469E8D62CEA374800CC506C /* Tonic.Note+.swift in Sources */,
 				44D6F2FC2CF611CC00B91BBA /* CenterAlertView.swift in Sources */,
+				44337C632FA34CB500982B6F /* BookmarksView.swift in Sources */,
 				44D6F3002CF729F700B91BBA /* CircularProgressBar.swift in Sources */,
 				44D6F2F32CF60F1500B91BBA /* AlertAppleMusic16View.swift in Sources */,
 				44D6F2EF2CF60F1500B91BBA /* AlertIconDoneView.swift in Sources */,

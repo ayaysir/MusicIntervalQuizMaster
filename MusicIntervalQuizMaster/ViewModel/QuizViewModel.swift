@@ -16,18 +16,20 @@ final class QuizViewModel: ObservableObject {
   @Published private(set) var currentPairIndex = 0
   @Published var answerMode: QuizAnswerMode = .inQuiz
   @Published var sessionCreated = 0
+  @Published var isCurrentPairBookmarked = false
   
   @AppStorage(.cfgSkipAutoQuizStart) var cfgSkipAutoQuizStart = false
   
-  private var manager = QuizSessionManager(context: PersistenceController.shared.container.viewContext)
+  private var qsManager = QuizSessionManager(context: PersistenceController.shared.container.viewContext)
+  private var bookmarkManager = BookmarkManager(context: PersistenceController.shared.container.viewContext)
   
-  init(cdManager: QuizSessionManager? = nil) {
+  init(qsManager: QuizSessionManager? = nil) {
     if !store.bool(forKey: .checkInitConfigCompleted) {
       MusicIntervalQuizMasterApp.initConfigValues()
     }
     
-    if let cdManager {
-      self.manager = cdManager
+    if let qsManager {
+      self.qsManager = qsManager
     }
     
     preparePairData()
@@ -56,7 +58,7 @@ final class QuizViewModel: ObservableObject {
     
     // 세션 생성 및 CD에 등록, uuid는 session 내부에 저장되어있음
     session = QuizSession(uuid: uuid, createTime: createTime)
-    _ = manager.createSession(uuid: uuid, createTime: createTime)
+    _ = qsManager.createSession(uuid: uuid, createTime: createTime)
     print("created session ID:", uuid, createTime)
     
     // 첫 번째 Record 생성
@@ -135,7 +137,7 @@ final class QuizViewModel: ObservableObject {
       let currentRecord = session.records[currentPairIndex]
       session.records[currentPairIndex].isCorrectAtFirstTry = currentRecord.tryCount == 1
       
-      let cdAppendResult = manager.addQuestionRecord(toSessionWithID: session.uuid, record: session.records[currentPairIndex])
+      let cdAppendResult = qsManager.addQuestionRecord(toSessionWithID: session.uuid, record: session.records[currentPairIndex])
       print(cdAppendResult ? "CD에 record append 성공: \(currentRecord.seq)" : "CD에 record append 실패")
     }
     
@@ -179,6 +181,20 @@ final class QuizViewModel: ObservableObject {
     
     answerMode = .inQuiz
     currentPairIndex -= 1
+  }
+  
+  // MARK: - Bookmark 함수
+  
+  func addBookmark() {
+    isCurrentPairBookmarked = bookmarkManager.addBookmark(pair: currentPair)
+  }
+  
+  func checkBookmarkIsDuplicated() {
+    isCurrentPairBookmarked = bookmarkManager.isDuplicate(pair: currentPair)
+  }
+  
+  func removeBookmark() {
+    isCurrentPairBookmarked = !bookmarkManager.delete(pair: currentPair)
   }
 }
 

@@ -8,60 +8,90 @@
 import SwiftUI
 
 extension IntervalPair {
-  var musiqwikSheetArea: some View {
+  var minimumScaleFactor: CGFloat { 0.1 }
+  
+  func musiqwikVerbatimTextForCase1(isSameNotePosition: Bool, isSameAndSimultaneous: Bool, isFullLength: Bool = true) -> String {
+    let startNoteText = startNote.musiqwikText(
+      clef: clef,
+      leftAccidental: startNote.accidental,
+      rightAccidental: endNote.accidental
+    )
+    let endNoteText = endNote.musiqwikText(
+      clef: clef,
+      leftAccidental: startNote.accidental,
+      rightAccidental: endNote.accidental,
+      isSameNotePosition: isSameNotePosition
+    )
+    
+    let spacer = isFullLength ? "===" : ""
+    
+    return "'\(clef.musiqwikText)\(spacer)\(startNoteText)\(isSameAndSimultaneous ? "" : spacer)\(endNoteText)\(spacer)\""
+  }
+  
+  func musiqwikVerbatimTextForCase2(isSameNotePosition: Bool, isFullLength: Bool = true) -> (area1: String, area2: String) {
+    let spacer = isFullLength ? "=====" : ""
+    let left = "'\(clef.musiqwikText)\(spacer)"
+    let right = "\(spacer)\""
+    
+    let degree = abs(endNote.relativeNotePosition - startNote.relativeNotePosition)
+    
+    let isNeedSeparateNotes = degree <= 1
+    let isNeedSeparateAccidentals = degree <= 2
+    
+    let startNoteText = startNote.musiqwikText(
+      clef: clef,
+      leftAccidental: startNote.accidental,
+      rightAccidental: endNote.accidental,
+      isForSimultaneousNotes: true,
+      isNeedSeparateNotes: isNeedSeparateNotes,
+      isNeedSeparateAccidentals: isNeedSeparateAccidentals
+    )
+    let endNoteText = endNote.musiqwikText(
+      clef: clef,
+      leftAccidental: startNote.accidental,
+      rightAccidental: endNote.accidental,
+      isForSimultaneousNotes: true,
+      isRightNote: true,
+      isSameNotePosition: isSameNotePosition,
+      isNeedSeparateNotes: isNeedSeparateNotes,
+      isNeedSeparateAccidentals: isNeedSeparateAccidentals
+    )
+    
+    return ("\(left)\(startNoteText)\(right)", "\(left)\(endNoteText)\(right)")
+  }
+  
+  func musiqwikSheetSwiftUIViewArea(isFullLength: Bool = true) -> some View {
     ZStack {
       let isSameNotePosition = startNote.octave == endNote.octave && startNote.letter == endNote.letter
       let isSameAndSimultaneous = isSameNotePosition && direction == .simultaneously
       
       if direction != .simultaneously || isSameAndSimultaneous {
-        let startNoteText = startNote.musiqwikText(
-          clef: clef,
-          leftAccidental: startNote.accidental,
-          rightAccidental: endNote.accidental
+        Text(
+          verbatim: musiqwikVerbatimTextForCase1(
+            isSameNotePosition: isSameNotePosition,
+            isSameAndSimultaneous: isSameAndSimultaneous,
+            isFullLength: isFullLength
+          )
         )
-        let endNoteText = endNote.musiqwikText(
-          clef: clef,
-          leftAccidental: startNote.accidental,
-          rightAccidental: endNote.accidental,
-          isSameNotePosition: isSameNotePosition
-        )
-
-        Text("'\(clef.musiqwikText)===\(startNoteText)\(isSameAndSimultaneous ? "" : "===")\(endNoteText)===\"")
-          .font(.custom("Musiqwik", size: 50))
+        .font(.custom("Musiqwik", size: 50))
+        .minimumScaleFactor(minimumScaleFactor)
       } else {
-        let left = "'\(clef.musiqwikText)====="
-        let right = "=====\""
-        
-        let degree = abs(endNote.relativeNotePosition - startNote.relativeNotePosition)
-        
-        let isNeedSeparateNotes = degree <= 1
-        let isNeedSeparateAccidentals = degree <= 2
-        
-        let startNoteText = startNote.musiqwikText(
-          clef: clef,
-          leftAccidental: startNote.accidental,
-          rightAccidental: endNote.accidental,
-          isForSimultaneousNotes: true,
-          isNeedSeparateNotes: isNeedSeparateNotes,
-          isNeedSeparateAccidentals: isNeedSeparateAccidentals
-        )
-        let endNoteText = endNote.musiqwikText(
-          clef: clef,
-          leftAccidental: startNote.accidental,
-          rightAccidental: endNote.accidental,
-          isForSimultaneousNotes: true, 
-          isRightNote: true,
+        let (area1, area2) = musiqwikVerbatimTextForCase2(
           isSameNotePosition: isSameNotePosition,
-          isNeedSeparateNotes: isNeedSeparateNotes,
-          isNeedSeparateAccidentals: isNeedSeparateAccidentals
+          isFullLength: isFullLength
         )
-        // Text("\(degree)").offset(x: 100, y: -35)
-        Text("\(left)\(startNoteText)\(right)")
-          .font(.custom("Musiqwik", size: 50))
-        Text("\(left)\(endNoteText)\(right)")
-          .font(.custom("Musiqwik", size: 50))
+        Group {
+          Text(verbatim: area1)
+          Text(verbatim: area2)
+        }
+        .font(.custom("Musiqwik", size: 50))
+        .minimumScaleFactor(minimumScaleFactor)
       }
     }
+  }
+  
+  var musiqwikSheetArea: some View {
+    musiqwikSheetSwiftUIViewArea(isFullLength: true)
   }
 }
 
@@ -70,6 +100,14 @@ struct MusiqwikView: View {
   
   var body: some View {
     pair.musiqwikSheetArea
+  }
+}
+
+struct MiniMusiqwikView: View {
+  let pair: IntervalPair
+  
+  var body: some View {
+    pair.musiqwikSheetSwiftUIViewArea(isFullLength: false)
   }
 }
 

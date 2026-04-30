@@ -115,6 +115,7 @@ extension Note {
 }
 
 extension Note {
+  /// 스트링으로 Note 오브젝트 생성
   static func from(letterString: String, accidentalString: String, octave: Int) -> Note? {
     // Convert letterString to Letter
     guard let letter = Letter.allCases.first(where: { "\($0)" == letterString.uppercased() }) else {
