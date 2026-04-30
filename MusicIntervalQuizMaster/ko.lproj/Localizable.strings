@@ -299,3 +299,5 @@
 /* Localizable.strings (Korean) */
 "loc.bookmark.empty.title" = "비어 있음";
 "loc.bookmark.empty.description" = "북마크 목록이 비어 있습니다. 퀴즈에서 특정 음정을 북마크 아이콘을 눌러 추가하면 열람할 수 있습니다.";
+"loc.cancel" = "취소";
+"loc.cancel.message" = "삭제하시겠습니까? 이 작업은 취소할 수 없습니다.";

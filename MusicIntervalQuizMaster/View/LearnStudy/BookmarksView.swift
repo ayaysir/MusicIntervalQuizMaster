@@ -15,9 +15,13 @@ struct BookmarksView: View {
   }
   
   @State private var layoutMode: LayoutMode = .list
-  @State private var viewModel = BookmarkViewModel()
-  
+  @StateObject private var viewModel = BookmarkViewModel()
+  @State private var selectedPair: IntervalPair?
+  @State private var removeTargetPair: IntervalPair?
+  @State private var showDeleteAlert = false
+
   @AppStorage(.cfgShowBookmarksAs) private var cfgShowBookmarksAs: Int = 0
+  @State private var workItem: DispatchWorkItem?
   
   private let columns = [
     GridItem(.flexible()),
@@ -29,19 +33,9 @@ struct BookmarksView: View {
       Group {
         switch layoutMode {
         case .list:
-          List(viewModel.displayItems) { item in
-            RowView(item: item)
-          }
-          
+          AreaList
         case .grid:
-          ScrollView {
-            LazyVGrid(columns: columns, spacing: 16) {
-              ForEach(viewModel.displayItems) { item in
-                GridCellView(item: item)
-              }
-            }
-            .padding()
-          }
+          AreaGridScrollView
         }
       }
       .navigationTitle("loc.bookmarks_title")
@@ -73,6 +67,24 @@ struct BookmarksView: View {
           OverlayContentUnavailable
         }
       }
+      .sheet(item: $selectedPair) { item in
+        IntervalInfoView(pair: item)
+      }
+      .alert("btn_del", isPresented: $showDeleteAlert) {
+        Button(role: .cancel) { } label: {
+          Text("loc.cancel")
+        }
+        Button(role: .destructive) {
+          if let pair = removeTargetPair {
+            viewModel.removeBookmark(pair: pair)
+          }
+        } label: {
+          Text("btn_del")
+        }
+      } message: {
+        Text("loc.cancel.message")
+      }
+
     }
   }
   
@@ -94,10 +106,102 @@ struct BookmarksView: View {
   }
 }
 
+extension BookmarksView {
+  @ViewBuilder private var AreaList: some View {
+    List(viewModel.displayItems) { item in
+      RowView(item: item) {
+        playSounds(pair: item.pair)
+      }
+      .onTapGesture {
+        selectedPair = item.pair
+      }
+      .swipeActions {
+        Button(role: .destructive) {
+          viewModel.removeBookmark(pair: item.pair)
+        } label: {
+          Label("Delete", systemImage: "trash")
+        }
+      }
+    }
+    // .refreshable {
+    //   viewModel.fetchAllBookmarks()
+    // }
+  }
+  
+  @ViewBuilder private var AreaGridScrollView: some View {
+    ScrollView {
+      LazyVGrid(columns: columns, spacing: 16) {
+        ForEach(viewModel.displayItems) { item in
+          GridCellView(item: item) {
+            playSounds(pair: item.pair)
+          }
+          .onTapGesture {
+            selectedPair = item.pair
+          }
+          .onLongPressGesture {
+            removeTargetPair = item.pair
+            showDeleteAlert.toggle()
+          }
+        }
+      }
+    }
+    // .refreshable {
+    //   viewModel.fetchAllBookmarks()
+    // }
+    .padding()
+  }
+}
+
+extension BookmarksView {
+  // MARK: - Sound related funcs
+  
+  private func stopSounds() {
+    SoundManager.shared.stopAllSounds()
+    
+    if let workItem {
+      workItem.cancel()
+    }
+  }
+  
+  private func playSounds(pair: IntervalPair?) {
+    stopSounds()
+    
+    guard let pair else {
+      return
+    }
+    
+    workItem = .init {
+      pair.endNote.playSound()
+    }
+    
+    let qos = DispatchQoS.QoSClass.userInitiated
+    
+    switch pair.direction {
+    case .ascending, .descending:
+      DispatchQueue.global(qos: qos).async {
+        pair.startNote.playSound()
+      }
+      
+      if let workItem {
+        DispatchQueue.global(qos: qos).asyncAfter(
+          deadline: .now() + .milliseconds(800),
+          execute: workItem
+        )
+      }
+    case .simultaneously:
+      DispatchQueue.global(qos: qos).async {
+        pair.startNote.playSound()
+        pair.endNote.playSound()
+      }
+    }
+  }
+}
+
 // MARK: - List Row
 struct RowView: View {
   let item: BookmarkIntervalDisplayItem
   let squareMusiqiwkThumbSize: CGFloat = 60
+  var soundHandler: (() -> Void)? = nil
   
   var body: some View {
     HStack {
@@ -111,13 +215,23 @@ struct RowView: View {
           // .offset(x: -0, y: 0)
         }
       VStack(alignment: .leading) {
-        
         Text(verbatim: item.title)
           .font(.headline)
         Text(verbatim: item.subtitle)
           .font(.subheadline)
           .foregroundStyle(.gray)
       }
+      Spacer()
+      Button(action: {
+        soundHandler?()
+      }) {
+        Image(systemName: "speaker.wave.2.fill")
+          .symbolRenderingMode(.hierarchical)
+          .tint(.soundOnTint)
+      }
+      .buttonStyle(.borderless)
+      .controlSize(.mini)
+      .symbolRenderingMode(.hierarchical)
     }
     .padding(.vertical, 4)
   }
@@ -126,6 +240,7 @@ struct RowView: View {
 // MARK: - Grid Cell
 struct GridCellView: View {
   let item: BookmarkIntervalDisplayItem
+  var soundHandler: (() -> Void)? = nil
   
   var body: some View {
     VStack(spacing: 8) {
@@ -140,12 +255,25 @@ struct GridCellView: View {
       
       Text(verbatim: item.title)
         .font(.headline)
-      
-      Text(verbatim: item.subtitle)
-        .font(.caption)
-        .foregroundStyle(.gray)
-        .lineLimit(2)
-        .minimumScaleFactor(0.5)
+        
+      HStack {
+        Text(verbatim: item.subtitle)
+          .font(.caption)
+          .foregroundStyle(.gray)
+          .lineLimit(2)
+          .minimumScaleFactor(0.5)
+        Button(action: {
+          soundHandler?()
+        }) {
+          Image(systemName: "speaker.wave.2.fill")
+            .symbolRenderingMode(.hierarchical)
+            .tint(.soundOnTint)
+            .font(.system(size: 14))
+        }
+        .buttonStyle(.borderless)
+        .controlSize(.mini)
+        .symbolRenderingMode(.hierarchical)
+      }
     }
     .padding()
     .background(

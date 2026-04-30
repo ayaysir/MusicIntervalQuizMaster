@@ -7,7 +7,7 @@
 
 import Tonic
 
-struct IntervalPair: Codable, CustomStringConvertible, Equatable, Hashable {
+struct IntervalPair: Codable, CustomStringConvertible, Equatable, Hashable, Identifiable {
   let startNote: Note
   let endNote: Note
   let direction: IntervalPairDirection
@@ -23,6 +23,12 @@ struct IntervalPair: Codable, CustomStringConvertible, Equatable, Hashable {
     startNote: \(startNote.description) (\(startNote.noteNumber)) (\(startNote.orthodoxPitch))
     endNote: \(endNote.description) (\(endNote.noteNumber)) (\(endNote.orthodoxPitch))
     AdvancedInterval: \(advancedInterval?.description ?? "error")
+    """
+  }
+  
+  var id: String {
+    """
+    \(direction.dataDescription)_\(startNote.description)_\(endNote.description)_\(clef.dataDescription)
     """
   }
 }

@@ -25,6 +25,7 @@ struct BookmarkIntervalDisplayItem: Identifiable {
 final class BookmarkViewModel: ObservableObject {
   private var bookmarkManager = BookmarkManager(context: PersistenceController.shared.container.viewContext)
   @Published private(set) var bookmarks: [BookmarkIntervalEntity] = []
+  @Published private(set) var displayItems: [BookmarkIntervalDisplayItem] = []
   
   init() {
     fetchAllBookmarks()
@@ -32,10 +33,8 @@ final class BookmarkViewModel: ObservableObject {
   
   func fetchAllBookmarks() {
     bookmarks = bookmarkManager.readAll()
-  }
-  
-  var displayItems: [BookmarkIntervalDisplayItem] {
-    bookmarks.compactMap { entity -> BookmarkIntervalDisplayItem? in
+    // set display items
+    displayItems = bookmarks.compactMap { entity -> BookmarkIntervalDisplayItem? in
       guard let startNoteAccidental = entity.startNoteAccidental,
             let startNoteLetter = entity.startNoteLetter,
             let endNoteAccidental = entity.endNoteAccidental,
@@ -72,6 +71,17 @@ final class BookmarkViewModel: ObservableObject {
       )
     }
   }
+  
+  func removeBookmark(pair: IntervalPair) {
+    let result = bookmarkManager.delete(pair: pair)
+    if result {
+      fetchAllBookmarks()
+    }
+  }
+  
+  // var displayItems: [BookmarkIntervalDisplayItem] {
+  //   
+  // }
   
   // func makeSpecificTextOfSomeElement() {
   //   // 어떻게? 예를 들어

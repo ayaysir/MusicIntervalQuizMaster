@@ -38,7 +38,7 @@ struct LearnStudyMainView: View {
           } label: {
             Image(systemName: "bookmark.fill")
               .foregroundStyle(.secondary)
-            Text("Bookmarks")
+            Text("loc.bookmarks_title")
           }
         }
       }

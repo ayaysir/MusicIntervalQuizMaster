@@ -298,3 +298,5 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 /* Localizable.strings (Japanese) */
 "loc.bookmark.empty.title" = "空です";
 "loc.bookmark.empty.description" = "ブックマーク一覧は空です。クイズでブックマークアイコンをタップすると音程を追加して閲覧できます。";
+"loc.cancel" = "キャンセル";
+"loc.cancel.message" = "削除してもよろしいですか？この操作は元に戻せません。";

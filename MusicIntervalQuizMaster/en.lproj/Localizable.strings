@@ -298,3 +298,5 @@
 /* Localizable.strings (English) */
 "loc.bookmark.empty.title" = "Empty";
 "loc.bookmark.empty.description" = "Your bookmark list is empty. You can add intervals by tapping the bookmark icon in the quiz.";
+"loc.cancel" = "Cancel";
+"loc.cancel.message" = "Are you sure you want to delete this? This action cannot be undone.";
