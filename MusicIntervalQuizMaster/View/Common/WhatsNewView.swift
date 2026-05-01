@@ -19,6 +19,23 @@ struct WhatsNewArchive {
   static let shared = WhatsNewArchive()
   
   let archive: [String : [WhatsNewFeature]] = [
+    "1.4.0": [
+      .init(
+        title: "loc.v140.bookmark_title".localized,
+        subtitle: "loc.v140.bookmark_body".localized,
+        imageName: "v140_1"
+      ),
+      .init(
+        title: "loc.v140.calculator_title".localized,
+        subtitle: "loc.v140.calculator_body".localized,
+        imageName: "v140_2"
+      ),
+      .init(
+        title: "loc.v140.core_interval_title".localized,
+        subtitle: "loc.v140.core_interval_body".localized,
+        imageName: "v140_3"
+      )
+    ],
     "1.3.0": [
       .init(
         title: "loc.v130.quiz_range_ui_update_title".localized,
@@ -59,9 +76,13 @@ struct WhatsNewView: View {
       TabView {
         ForEach(features, id: \.self) { feature in
           VStack(alignment: .leading) {
-            Image(feature.imageName)
-              .resizable()
-              .scaledToFit()
+            HStack {
+              Spacer()
+              Image(feature.imageName)
+                .resizable()
+                .scaledToFit()
+              Spacer()
+            }
             Spacer(minLength: 20)
             Text(verbatim: feature.title)
               .font(.title2)
@@ -114,7 +135,7 @@ extension WhatsNewView {
 
 #Preview {
   WhatsNewView(
-    marketingVersion: "1.3.0",
-    features: WhatsNewArchive.shared("1.3.0") ?? []
+    marketingVersion: "1.4.0",
+    features: WhatsNewArchive.shared("1.4.0") ?? []
   )
 }

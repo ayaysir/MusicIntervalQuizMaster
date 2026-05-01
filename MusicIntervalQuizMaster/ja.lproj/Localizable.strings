@@ -277,6 +277,8 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 
 "loc.quiz.withdrawal" = "クイズ中に離れたため、不正解として処理されました。";
 "loc.title.clef_accidental" = "出題対象の音部記号および臨時記号";
+
+"loc_core_interval.button" = "コア音程18個のみ選択";
 "loc.core_interval.title" = "コア音程18種とは？";
 "loc.core_interval.message" = "ユニゾン、重複する音程、および理論上のみ存在する音程を除き、音楽学習において必須となる18の音程を選定しました。音程の聴こえ方を重視する場合や、簡単かつ迅速に学習したい場合にのみ使用してください。\n\n一覧: %@";
 
@@ -290,7 +292,7 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 "loc.quiz.explain" = "解說";
 "loc.info.listen" = "聞く";
 
-"tab_learn" = "Learn";
+"tab_learn" = "学習";
 
 "loc.bookmarks_title" = "ブックマーク";
 "loc.learn_description" = "ブックマークした音程の一覧を見ることができます。また、音程や音楽理論の学習に役立つ解説、チュートリアル、ミニゲームなどを追加予定です。";
@@ -318,3 +320,13 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 "loc.calc.end_note" = "終了音";
 
 "loc.calc.unsupported_interval" = "この音程はサポートされていないか、理論上存在しません。";
+
+/* Japanese */
+"loc.v140.bookmark_title" = "ブックマーク機能を追加";
+"loc.v140.bookmark_body" = "クイズで復習したい音程をブックマークできます。ブックマークしたクイズは一覧から確認できます。";
+
+"loc.v140.calculator_title" = "音程計算機を追加";
+"loc.v140.calculator_body" = "2つの音を選択すると音程を表示する音程計算機が追加されました。音の再生や詳細な説明も確認できます。";
+
+"loc.v140.core_interval_title" = "主要音程選択機能を追加";
+"loc.v140.core_interval_body" = "主要な音程だけを素早く練習したい場合は、クイズ範囲設定で「主要音程18個のみ選択」をタップしてください。";

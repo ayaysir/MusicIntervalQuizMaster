@@ -193,6 +193,8 @@ extension QuizView {
       Spacer()
         .frame(height: 2)
       Text("loc.quiz.start_prompt")
+        .lineLimit(1)
+        .minimumScaleFactor(0.5)
       Spacer()
         .frame(height: 20)
       Text("loc.quiz.skip_auto_start_info")

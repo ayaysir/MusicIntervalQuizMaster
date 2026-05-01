@@ -16,12 +16,12 @@ struct MusicIntervalQuizMasterApp: App {
     UNUserNotificationCenter.current().delegate = NotificationDelegate.shared
     
     checkAppFirstrunOrUpdateStatus {} updated: {
-      // Whats New: latest v 1.3.0
+      // Whats New: latest v 1.4.0
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
         InstantSheet.show(
           hostingView: WhatsNewView(
-            marketingVersion: "1.3.0",
-            features: WhatsNewArchive.shared("1.3.0") ?? []
+            marketingVersion: "1.4.0",
+            features: WhatsNewArchive.shared("1.4.0") ?? []
           )
         )
       }

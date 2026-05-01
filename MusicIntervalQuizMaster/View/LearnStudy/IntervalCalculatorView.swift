@@ -230,6 +230,8 @@ extension IntervalCalculatorView {
         HStack {
           Spacer()
           Text(actualOrderStringKey)
+            .lineLimit(1)
+            .minimumScaleFactor(0.25)
             .font(.subheadline)
             .foregroundStyle(.secondary)
         }
@@ -237,6 +239,8 @@ extension IntervalCalculatorView {
         HStack {
           Spacer()
           Text("loc.calc.halfstep_count")
+            .lineLimit(1)
+            .minimumScaleFactor(0.25)
             .font(.subheadline)
             .foregroundStyle(.secondary)
 
@@ -254,7 +258,7 @@ extension IntervalCalculatorView {
             Image(systemName: "text.page.badge.magnifyingglass")
             Text("loc.quiz.explain")
               .lineLimit(1)
-              .minimumScaleFactor(0.5)
+              .minimumScaleFactor(0.25)
           }
         }
         .padding(4)
@@ -263,7 +267,7 @@ extension IntervalCalculatorView {
         .clipShape(RoundedRectangle(cornerRadius: 10))
       }
     }
-    .padding(.leading, 32)
+    .padding(.leading, 24)
     .padding(.trailing, 16)
     .padding(.vertical, 16)
     .background(

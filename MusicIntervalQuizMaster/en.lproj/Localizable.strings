@@ -277,6 +277,8 @@
 
 "loc.quiz.withdrawal" = "This was marked incorrect because you left the quiz.";
 "loc.title.clef_accidental" = "Clefs & accidentals";
+
+"loc_core_interval.button" = "Select the 18 core intervals";
 "loc.core_interval.title" = "What are the 18 core intervals?";
 "loc.core_interval.message" = "Excluding unisons, duplicate intervals, and intervals that exist only in theory, 18 essential intervals for music learning have been selected. Use this only if you prioritize how intervals sound or want a simple and fast learning approach.\n\nList: %@";
 
@@ -302,9 +304,9 @@
 "loc.cancel.message" = "Are you sure you want to delete this? This action cannot be undone.";
 
 /* English */
-"loc.calc.left_lower" = "The left note is lower.";
-"loc.calc.right_lower" = "The right note is lower.";
-"loc.calc.same_note" = "They are the same note.";
+"loc.calc.left_lower" = "The left note is lower";
+"loc.calc.right_lower" = "The right note is lower";
+"loc.calc.same_note" = "They are the same note";
 
 "loc.calc.title" = "Interval Calculator";
 "loc.calc.letter" = "Letter";
@@ -312,9 +314,19 @@
 "loc.calc.octave" = "Octave";
 
 "loc.calc.clef" = "Clef";
-"loc.calc.halfstep_count" = "Number of half steps";
+"loc.calc.halfstep_count" = "Num. of half steps";
 
 "loc.calc.start_note" = "Start Note";
 "loc.calc.end_note" = "End Note";
 
 "loc.calc.unsupported_interval" = "This interval is not supported or does not exist in theory.";
+
+/* English */
+"loc.v140.bookmark_title" = "Bookmark Feature Added";
+"loc.v140.bookmark_body" = "You can bookmark intervals you want to review during quizzes. Bookmarked quizzes can be checked in the bookmark list.";
+
+"loc.v140.calculator_title" = "Interval Calculator Added";
+"loc.v140.calculator_body" = "An interval calculator has been added that shows the interval between two selected notes. You can also listen to the sound and view detailed explanations.";
+
+"loc.v140.core_interval_title" = "Core Interval Selection Added";
+"loc.v140.core_interval_body" = "If you want to quickly practice only core intervals, tap 'Select the 18 Core Intervals' in the quiz range settings.";

@@ -227,7 +227,7 @@ extension ShrinkedQuizSettingView {
         Button(action: {
           viewModel.toggleStatesForCoreList()
         }) {
-          Text("핵심 음정 18개만 선택")
+          Text("loc_core_interval.button")
         }
         Spacer()
         Button(
