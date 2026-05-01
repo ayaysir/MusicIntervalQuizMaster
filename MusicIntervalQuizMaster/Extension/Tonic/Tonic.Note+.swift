@@ -105,6 +105,20 @@ extension Note {
     SoundManager.shared.playSound(midiNumber: orthodoxPitch)
   }
   
+  /// 두 개의 `Note`를 비교하여 정렬 순서를 결정합니다.
+  ///
+  /// 정렬 기준:
+  /// 1. `relativeNotePosition` (음의 상대적 위치, 옥타브 포함)를 우선 비교합니다.
+  /// 2. 위치가 동일한 경우 `accidental` 값을 기준으로 비교합니다.
+  ///
+  /// 즉, 음의 높낮이를 기준으로 먼저 정렬하고, 같은 위치의 음일 경우 임시표(♭, ♯ 등)의 우선순위로 정렬합니다.
+  ///
+  /// - Parameters:
+  ///   - lhs: 비교 대상 왼쪽 음
+  ///   - rhs: 비교 대상 오른쪽 음
+  ///
+  /// - Returns:
+  ///   `lhs`가 `rhs`보다 앞에 와야 하면 `true`, 그렇지 않으면 `false`
   static func sortNotes(_ lhs: Note, _ rhs: Note) -> Bool {
     if lhs.relativeNotePosition != rhs.relativeNotePosition {
       lhs.relativeNotePosition < rhs.relativeNotePosition

@@ -20,6 +20,8 @@
 		44337C652FA34E9E00982B6F /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C642FA34E9C00982B6F /* BookmarkViewModel.swift */; };
 		44337C672FA35CC800982B6F /* ViewModelDisplayText.md in Resources */ = {isa = PBXBuildFile; fileRef = 44337C662FA35CBC00982B6F /* ViewModelDisplayText.md */; };
 		44337C692FA370C200982B6F /* LearnStudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C682FA370BA00982B6F /* LearnStudyMainView.swift */; };
+		44337C6B2FA49E5700982B6F /* IntervalCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C6A2FA49E5000982B6F /* IntervalCalculatorView.swift */; };
+		44337C6D2FA4C27D00982B6F /* IntervalSoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44337C6C2FA4C27000982B6F /* IntervalSoundPlayer.swift */; };
 		444FF1852E12667400209B22 /* ShrinkedQuizSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1842E12666C00209B22 /* ShrinkedQuizSettingView.swift */; };
 		444FF1872E12684B00209B22 /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF1862E12684B00209B22 /* ToggleButton.swift */; };
 		444FF18B2E140E5500209B22 /* InfoSubLineAndSpaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */; };
@@ -183,6 +185,8 @@
 		44337C642FA34E9C00982B6F /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		44337C662FA35CBC00982B6F /* ViewModelDisplayText.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ViewModelDisplayText.md; sourceTree = "<group>"; };
 		44337C682FA370BA00982B6F /* LearnStudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnStudyMainView.swift; sourceTree = "<group>"; };
+		44337C6A2FA49E5000982B6F /* IntervalCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalCalculatorView.swift; sourceTree = "<group>"; };
+		44337C6C2FA4C27000982B6F /* IntervalSoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntervalSoundPlayer.swift; sourceTree = "<group>"; };
 		444FF1842E12666C00209B22 /* ShrinkedQuizSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShrinkedQuizSettingView.swift; sourceTree = "<group>"; };
 		444FF1862E12684B00209B22 /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleButton.swift; sourceTree = "<group>"; };
 		444FF18A2E140E5300209B22 /* InfoSubLineAndSpaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoSubLineAndSpaceView.swift; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 		44337C612FA34C9A00982B6F /* LearnStudy */ = {
 			isa = PBXGroup;
 			children = (
+				44337C6A2FA49E5000982B6F /* IntervalCalculatorView.swift */,
 				44337C682FA370BA00982B6F /* LearnStudyMainView.swift */,
 				44337C622FA34CB200982B6F /* BookmarksView.swift */,
 			);
@@ -702,6 +707,7 @@
 		44D6F2CF2CF4CB7600B91BBA /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				44337C6C2FA4C27000982B6F /* IntervalSoundPlayer.swift */,
 				444FF18C2E142A5000209B22 /* NormalizeValue.swift */,
 				44753C552D4CC1E2003F82FA /* InstantAlert.swift */,
 				444FF1922E158CD000209B22 /* InstantSheet.swift */,
@@ -973,6 +979,8 @@
 				44D6F2ED2CF60F1500B91BBA /* UIFontExtension.swift in Sources */,
 				446300292CFB807800C33BCB /* StatsViewModel.swift in Sources */,
 				4463002C2CFC2C6900C33BCB /* Int+.swift in Sources */,
+				44337C6D2FA4C27D00982B6F /* IntervalSoundPlayer.swift in Sources */,
+				44337C6B2FA49E5700982B6F /* IntervalCalculatorView.swift in Sources */,
 				44D6F2F92CF60F1500B91BBA /* AlertKitAPI.swift in Sources */,
 				44D6F2F62CF60F1500B91BBA /* AlertViewProtocol.swift in Sources */,
 				444FF18D2E142A5000209B22 /* NormalizeValue.swift in Sources */,

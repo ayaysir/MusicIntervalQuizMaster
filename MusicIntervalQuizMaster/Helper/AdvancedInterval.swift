@@ -70,6 +70,7 @@ extension AdvancedInterval: CustomStringConvertible {
 
 extension AdvancedInterval {
   
+  
   static func betweenNotes(_ note1: Note, _ note2: Note) -> AdvancedInterval? {
     let sortedNotes = [note1, note2].sorted(by: Note.sortNotes(_:_:))
     let (n1, n2) = (sortedNotes[0], sortedNotes[1])

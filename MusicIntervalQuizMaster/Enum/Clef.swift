@@ -8,7 +8,9 @@
 import Foundation
 import Tonic
 
-enum Clef: HasMusiqwikText, CaseIterable, Codable {
+enum Clef: HasMusiqwikText, CaseIterable, Codable, Identifiable {
+  var id: String { self.dataDescription }
+  
   case treble, bass, alto
   
   // dataDescription 값을 기반으로 enum으로 초기화
@@ -90,30 +92,61 @@ enum Clef: HasMusiqwikText, CaseIterable, Codable {
   }
   
   func randomAvailableOctave(_ letter: Letter) -> Int {
+    Int.random(in: availableOctaveRange(of: letter))
+    
+    // switch self {
+    // case .treble:
+    //   // A3 ~ A5: A3 B3 C4 ...A4 B4 C5 ... A5
+    //   if letter == .A {
+    //     Int.random(in: 3...5)
+    //   } else if letter == .B {
+    //     Int.random(in: 3...4)
+    //   } else {
+    //     Int.random(in: 4...5)
+    //   }
+    // case .bass:
+    //   // C2 ~ C4: C2 D2 E2 ...A2 B2 C3 D3 E3... A3 B3 C4
+    //   if letter == .C {
+    //     Int.random(in: 2...4)
+    //   } else {
+    //     Int.random(in: 2...3)
+    //   }
+    // case .alto:
+    //   // B2 ~ B4: B2 C3 D3 ... A3 B3 C4 D4 ... A4 B4
+    //   if letter == .B {
+    //     Int.random(in: 2...4)
+    //   } else {
+    //     Int.random(in: 3...4)
+    //   }
+    // }
+  }
+  
+  func availableOctaveRange(of letter: Letter) -> ClosedRange<Int> {
     switch self {
     case .treble:
       // A3 ~ A5: A3 B3 C4 ...A4 B4 C5 ... A5
       if letter == .A {
-        Int.random(in: 3...5)
+        3...5
       } else if letter == .B {
-        Int.random(in: 3...4)
+        3...4
       } else {
-        Int.random(in: 4...5)
+        4...5
       }
     case .bass:
       // C2 ~ C4: C2 D2 E2 ...A2 B2 C3 D3 E3... A3 B3 C4
       if letter == .C {
-        Int.random(in: 2...4)
+        2...4
       } else {
-        Int.random(in: 2...3)
+        2...3
       }
     case .alto:
       // B2 ~ B4: B2 C3 D3 ... A3 B3 C4 D4 ... A4 B4
       if letter == .B {
-        Int.random(in: 2...4)
+        2...4
       } else {
-        Int.random(in: 3...4)
+        3...4
       }
     }
   }
+  
 }

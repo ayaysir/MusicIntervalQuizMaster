@@ -38,7 +38,20 @@ struct LearnStudyMainView: View {
           } label: {
             Image(systemName: "bookmark.fill")
               .foregroundStyle(.secondary)
+              .frame(width: 20)
             Text("loc.bookmarks_title")
+          }
+        }
+        
+        Section {
+          NavigationLink {
+            IntervalCalculatorView()
+          } label: {
+            Image(systemName: "square.grid.3x3.bottomright.filled")
+              .frame(width: 20)
+              .symbolRenderingMode(.palette)
+              .foregroundStyle(.green, .secondary, .green)
+            Text("loc.calc.title")
           }
         }
       }

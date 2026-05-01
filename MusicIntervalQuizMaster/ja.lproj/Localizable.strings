@@ -300,3 +300,21 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 "loc.bookmark.empty.description" = "ブックマーク一覧は空です。クイズでブックマークアイコンをタップすると音程を追加して閲覧できます。";
 "loc.cancel" = "キャンセル";
 "loc.cancel.message" = "削除してもよろしいですか？この操作は元に戻せません。";
+
+/* Japanese */
+"loc.calc.left_lower" = "左の音の方が低いです。";
+"loc.calc.right_lower" = "右の音の方が低いです。";
+"loc.calc.same_note" = "同じ音です。";
+
+"loc.calc.title" = "インターバル計算機";
+"loc.calc.letter" = "音名";
+"loc.calc.accidental" = "臨時記号";
+"loc.calc.octave" = "オクターブ";
+
+"loc.calc.clef" = "音部記号";
+"loc.calc.halfstep_count" = "半音の数";
+
+"loc.calc.start_note" = "開始音";
+"loc.calc.end_note" = "終了音";
+
+"loc.calc.unsupported_interval" = "この音程はサポートされていないか、理論上存在しません。";

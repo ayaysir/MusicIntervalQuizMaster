@@ -300,3 +300,21 @@
 "loc.bookmark.empty.description" = "Your bookmark list is empty. You can add intervals by tapping the bookmark icon in the quiz.";
 "loc.cancel" = "Cancel";
 "loc.cancel.message" = "Are you sure you want to delete this? This action cannot be undone.";
+
+/* English */
+"loc.calc.left_lower" = "The left note is lower.";
+"loc.calc.right_lower" = "The right note is lower.";
+"loc.calc.same_note" = "They are the same note.";
+
+"loc.calc.title" = "Interval Calculator";
+"loc.calc.letter" = "Letter";
+"loc.calc.accidental" = "Accidental";
+"loc.calc.octave" = "Octave";
+
+"loc.calc.clef" = "Clef";
+"loc.calc.halfstep_count" = "Number of half steps";
+
+"loc.calc.start_note" = "Start Note";
+"loc.calc.end_note" = "End Note";
+
+"loc.calc.unsupported_interval" = "This interval is not supported or does not exist in theory.";
