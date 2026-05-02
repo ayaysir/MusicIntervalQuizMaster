@@ -20,7 +20,8 @@ struct BannerViewContainer: UIViewRepresentable {
   
   func makeUIView(context: Context) -> BannerView {
     let banner = BannerView(adSize: adSize)
-    banner.adUnitID = "ca-app-pub-3940256099942544/2435281174"
+    // banner.adUnitID = "ca-app-pub-3940256099942544/2435281174" // TEST
+    banner.adUnitID = "ca-app-pub-6364767349592629/2664182196"
     banner.load(Request())
     banner.delegate = context.coordinator
     return banner

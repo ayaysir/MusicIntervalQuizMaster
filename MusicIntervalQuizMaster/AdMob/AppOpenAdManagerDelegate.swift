@@ -54,7 +54,8 @@ class AppOpenAdManager: NSObject {
 
     do {
       appOpenAd = try await AppOpenAd.load(
-        with: "ca-app-pub-3940256099942544/5575463023", request: Request())
+        // with: "ca-app-pub-3940256099942544/5575463023", request: Request()) // TEST
+        with: "ca-app-pub-6364767349592629/4127549518", request: Request())
       appOpenAd?.fullScreenContentDelegate = self
       loadTime = Date()
     } catch {

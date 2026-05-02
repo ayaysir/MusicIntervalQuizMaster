@@ -14,7 +14,8 @@ class InterstitialViewModel: NSObject, FullScreenContentDelegate {
   func loadAd() async {
     do {
       interstitialAd = try await InterstitialAd.load(
-        with: "ca-app-pub-3940256099942544/4411468910", request: Request())
+        // with: "ca-app-pub-3940256099942544/4411468910", request: Request())
+        with: "ca-app-pub-6364767349592629/8697349914", request: Request())
       interstitialAd?.fullScreenContentDelegate = self
     } catch {
       print("Failed to load interstitial ad with error: \(error.localizedDescription)")
