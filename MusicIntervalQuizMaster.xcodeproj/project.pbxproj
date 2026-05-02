@@ -1489,7 +1489,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0.LITE;
+				MARKETING_VERSION = 1.4.129205000;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster.Lite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1525,7 +1525,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0.LITE;
+				MARKETING_VERSION = 1.4.129205000;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster.Lite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1681,7 +1681,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0.LITE;
+				MARKETING_VERSION = 1.4.129205000;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster.Lite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1841,7 +1841,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0.LITE;
+				MARKETING_VERSION = 1.4.129205000;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bgsmm.IntervalQuizMaster.Lite;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
