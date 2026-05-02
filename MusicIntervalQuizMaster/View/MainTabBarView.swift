@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MainTabBarView: View {
+  @StateObject var statsViewModel: StatsViewModel
+  
   @State private var selectedIndex = 0
-  @StateObject var statsViewModel = StatsViewModel()
   
   @AppStorage(.moreInfoRemindeIsOn) var isReminderOn: Bool = false
   @AppStorage(.moreInfoReminderHour) var reminderHour: Int = 0
@@ -17,7 +18,18 @@ struct MainTabBarView: View {
   
   @State private var pair: IntervalPair?
   
+#if LITE_VERSION
+  private var appOpenAdManager = AppOpenAdManager()
+  @Environment(\.scenePhase) var scenePhase
+  @State private var isFirstRun = true
+  @State private var lastAdShownDate: Date? = nil
+#endif
+  
   private let STATS_TAG = 1
+  
+  init(statsViewModel: StatsViewModel = StatsViewModel()) {
+    _statsViewModel = StateObject(wrappedValue: statsViewModel)
+  }
   
   var body: some View {
     TabView(selection: $selectedIndex) {
@@ -65,6 +77,10 @@ struct MainTabBarView: View {
         handleLocalNotiUserInfo(userInfo: pending)
         NotificationDelegate.shared.pendingUserInfo = nil
       }
+      
+#if LITE_VERSION
+      isFirstRun = false
+#endif
     }
     .onChange(of: selectedIndex) { newValue in
       // Stat 탭을 누를때마다 데이터를 새로 불러옴 (재방문하면 onAppear가 다시 동작 안함)
@@ -73,6 +89,30 @@ struct MainTabBarView: View {
         print("StatsViewModel refreshed!")
       }
     }
+#if LITE_VERSION
+    .task {
+      await appOpenAdManager.loadAd()
+    }
+    .onChange(of: scenePhase) { _ in
+      switch scenePhase {
+      case .active:
+        if !isFirstRun {
+          let now = Date()
+          if let last = lastAdShownDate {
+            if now.timeIntervalSince(last) >= 30 {
+              appOpenAdManager.showAdIfAvailable()
+              lastAdShownDate = now
+            }
+          } else {
+            appOpenAdManager.showAdIfAvailable()
+            lastAdShownDate = now
+          }
+        }
+      default:
+        break
+      }
+    }
+#endif
   }
   
   private func handleLocalNotiUserInfo(userInfo: [AnyHashable : Any]) {
@@ -95,7 +135,7 @@ struct MainTabBarView: View {
     if let scene = UIApplication.shared.connectedScenes
       .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene,
        scene.windows.first(where: { $0.isKeyWindow }) != nil {
-
+      
       if let pair {
         InstantSheet.show(hostingView: IntervalInfoView(pair: pair))
       }

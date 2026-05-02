@@ -330,3 +330,6 @@
 
 "loc.v140.core_interval_title" = "핵심 음정 선택 기능 추가";
 "loc.v140.core_interval_body" = "빠르게 핵심 음정만 퀴즈로 풀고싶다면 퀴즈 선택 범위 설정에서 '핵심 음정 18개만 선택'을 클릭하세요.";
+
+"loc.lite.purchase_full_version" = "광고 없는 정식 버전 구입하기";
+"loc.lite.purchase_full_version_desc" = "여기를 탭하면 정식 버전의 App Store 페이지로 이동합니다. 더 나은 앱과 서비스를 제공할 수 있도록 응원해 주시면 감사하겠습니다.";

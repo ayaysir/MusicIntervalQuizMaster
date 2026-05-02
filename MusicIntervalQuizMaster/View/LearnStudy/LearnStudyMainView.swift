@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 // MARK: - Main
 struct LearnStudyMainView: View {
   var body: some View {
@@ -29,8 +33,17 @@ struct LearnStudyMainView: View {
             .font(.callout)
             .foregroundStyle(.secondary)
             // .background(.red)
+          
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        
+#if LITE_VERSION
+        Section {
+          let adSize = largeAnchoredAdaptiveBanner(width: 345)
+          BannerViewContainer(adSize)
+            .frame(width: adSize.size.width, height: adSize.size.height)
+        }
+#endif
         
         Section {
           NavigationLink {
@@ -42,6 +55,8 @@ struct LearnStudyMainView: View {
             Text("loc.bookmarks_title")
           }
         }
+        
+
         
         Section {
           NavigationLink {

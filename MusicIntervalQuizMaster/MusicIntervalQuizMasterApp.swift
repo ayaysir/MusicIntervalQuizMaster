@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 @main
 struct MusicIntervalQuizMasterApp: App {
   @AppStorage(.cfgAppAppearance) private var cfgAppAppearance = 0
@@ -30,6 +34,10 @@ struct MusicIntervalQuizMasterApp: App {
         Self.initConfigValues()
       }
     }
+    
+#if LITE_VERSION
+    MobileAds.shared.start()
+#endif
   }
   
   var body: some Scene {

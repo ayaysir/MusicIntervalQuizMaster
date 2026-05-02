@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 struct AppSettingView: View {
   // MARK: - View main
   
@@ -26,6 +30,11 @@ struct AppSettingView: View {
   
   var body: some View {
     NavigationStack {
+#if LITE_VERSION
+      let adSize = largeAnchoredAdaptiveBanner(width: 345)
+      BannerViewContainer(adSize)
+        .frame(width: adSize.size.width, height: adSize.size.height)
+#endif
       Form {
         SectionReminder
         SectionTimer
@@ -35,6 +44,11 @@ struct AppSettingView: View {
         SectionAdvanced
       }
       .navigationTitle("app_settings")
+#if LITE_VERSION
+      .navigationBarTitleDisplayMode(.inline)
+#else
+      .navigationBarTitleDisplayMode(.automatic)
+#endif
       .onAppear {
         onAppearSetReminder()
       }
@@ -142,10 +156,10 @@ extension AppSettingView {
                 "loc.setting.advanced.skip_auto_start".localized,
                 message: "loc.setting.advanced.skip_auto_start.message".localized
               )
-          }) {
-            Image(systemName: "info.circle")
-          }
-          .buttonStyle(.borderless)
+            }) {
+              Image(systemName: "info.circle")
+            }
+            .buttonStyle(.borderless)
         }
       }
     } header: {

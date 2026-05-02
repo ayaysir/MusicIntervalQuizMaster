@@ -28,6 +28,9 @@ let CHART_VERTICAL_SIZE: CGFloat = 270
 let APP_ID = "6738980588"
 let DEVELOPER_ID = "1578285460"
 let DEV_MAIL = "yoonbumtae@gmail.com"
+var APP_URL: String {
+  "https://apps.apple.com/app/id\(APP_ID)"
+}
 
 // MARK: - Typealiases
 

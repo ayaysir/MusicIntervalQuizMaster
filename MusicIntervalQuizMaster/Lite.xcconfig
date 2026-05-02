@@ -1,0 +1,11 @@
+//
+//  Lite.xcconfig
+//  MusicIntervalQuizMaster
+//
+//  Created by 윤범태 on 5/2/26.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://developer.apple.com/documentation/xcode/adding-a-build-configuration-file-to-your-project
+
+LITE_VERSION = 1

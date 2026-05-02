@@ -8,6 +8,10 @@
 import SwiftUI
 import Tonic
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 // TODO: - 하드코딩 없이 WebView등으로 분리, 내용 export 가능하게
 
 struct IntervalInfoView: View {
@@ -22,6 +26,11 @@ struct IntervalInfoView: View {
     NavigationStack {
       ScrollView {
         VStack(spacing: 20) {
+#if LITE_VERSION
+          let adSize = largeAnchoredAdaptiveBanner(width: 375)
+          BannerViewContainer(adSize)
+            .frame(width: adSize.size.width, height: adSize.size.height)
+#endif
           if let interval = pair.advancedInterval {
             MusicSheetArea
             Spacer()

@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 // MARK: - View
 struct BookmarksView: View {
   enum LayoutMode {
@@ -29,62 +33,71 @@ struct BookmarksView: View {
   ]
   
   var body: some View {
-    NavigationView {
-      Group {
-        switch layoutMode {
-        case .list:
-          AreaList
-        case .grid:
-          AreaGridScrollView
-        }
+    VStack {
+#if LITE_VERSION
+      let adSize = largeAnchoredAdaptiveBanner(width: 375)
+      BannerViewContainer(adSize)
+        .frame(width: adSize.size.width, height: adSize.size.height)
+#endif
+      switch layoutMode {
+      case .list:
+        AreaList
+      case .grid:
+        AreaGridScrollView
       }
-      .navigationTitle("loc.bookmarks_title")
-      .toolbar {
-        ToolbarItem(placement: .topBarTrailing) {
-          Button {
-            withAnimation {
-              layoutMode = layoutMode == .list ? .grid : .list
-            }
-          } label: {
-            Image(systemName: layoutMode == .list ? "square.grid.2x2" : "list.bullet")
+    }
+    .navigationTitle("loc.bookmarks_title")
+#if LITE_VERSION
+    .navigationBarTitleDisplayMode(.inline)
+#else
+    .navigationBarTitleDisplayMode(.automatic)
+#endif
+    .toolbar {
+      ToolbarItem(placement: .topBarTrailing) {
+        Button {
+          withAnimation {
+            layoutMode = layoutMode == .list ? .grid : .list
           }
+        } label: {
+          Image(systemName: layoutMode == .list ? "square.grid.2x2" : "list.bullet")
         }
       }
-      .onAppear {
-        layoutMode = cfgShowBookmarksAs == 1 ? .grid : .list
-        viewModel.fetchAllBookmarks()
+    }
+    .onAppear {
+      layoutMode = cfgShowBookmarksAs == 1 ? .grid : .list
+      viewModel.fetchAllBookmarks()
+    }
+    .onChange(of: layoutMode) { _ in
+      switch layoutMode {
+      case .list:
+        cfgShowBookmarksAs = 0
+      case .grid:
+        cfgShowBookmarksAs = 1
       }
-      .onChange(of: layoutMode) { _ in
-        switch layoutMode {
-        case .list:
-          cfgShowBookmarksAs = 0
-        case .grid:
-          cfgShowBookmarksAs = 1
-        }
-      }
-      .overlay {
+    }
+    .overlay {
+      ZStack(alignment: .bottom) {
         if viewModel.bookmarks.isEmpty {
           OverlayContentUnavailable
         }
       }
-      .sheet(item: $selectedPair) { item in
-        IntervalInfoView(pair: item)
+    }
+    .sheet(item: $selectedPair) { item in
+      IntervalInfoView(pair: item)
+    }
+    .alert("btn_del", isPresented: $showDeleteAlert) {
+      Button(role: .cancel) { } label: {
+        Text("loc.cancel")
       }
-      .alert("btn_del", isPresented: $showDeleteAlert) {
-        Button(role: .cancel) { } label: {
-          Text("loc.cancel")
+      Button(role: .destructive) {
+        if let pair = removeTargetPair {
+          viewModel.removeBookmark(pair: pair)
         }
-        Button(role: .destructive) {
-          if let pair = removeTargetPair {
-            viewModel.removeBookmark(pair: pair)
-          }
-        } label: {
-          Text("btn_del")
-        }
-      } message: {
-        Text("loc.cancel.message")
+      } label: {
+        Text("btn_del")
       }
-
+    } message: {
+      Text("loc.cancel.message")
     }
   }
   

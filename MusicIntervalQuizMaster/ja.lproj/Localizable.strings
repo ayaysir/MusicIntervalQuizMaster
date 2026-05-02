@@ -330,3 +330,6 @@ c = "これからはクイズ画面の中央左にあるボタンから、出題
 
 "loc.v140.core_interval_title" = "主要音程選択機能を追加";
 "loc.v140.core_interval_body" = "主要な音程だけを素早く練習したい場合は、クイズ範囲設定で「主要音程18個のみ選択」をタップしてください。";
+
+"loc.lite.purchase_full_version" = "広告なしの正式版を購入する";
+"loc.lite.purchase_full_version_desc" = "ここをタップすると正式版のApp Storeページに移動します。より良いアプリとサービスを提供できるよう、ご支援いただけると幸いです。";

@@ -330,3 +330,6 @@
 
 "loc.v140.core_interval_title" = "Core Interval Selection Added";
 "loc.v140.core_interval_body" = "If you want to quickly practice only core intervals, tap 'Select the 18 Core Intervals' in the quiz range settings.";
+
+"loc.lite.purchase_full_version" = "Buy the full version without ads";
+"loc.lite.purchase_full_version_desc" = "Tap here to go to the App Store page for the full version. Your support helps us provide a better app and service.";

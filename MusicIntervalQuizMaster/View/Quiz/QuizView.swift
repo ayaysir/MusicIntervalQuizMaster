@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 struct QuizView: View {
   // MARK: - View Main
   
@@ -41,13 +45,20 @@ struct QuizView: View {
   
   @State private var isPendingTimer = false
   
+#if LITE_VERSION
+  private var interstitialViewModel = InterstitialViewModel()
+  @State private var intersitialPopped = false
+#endif
+  
   var body: some View {
     VStack {
       ZStack {
         AreaHeaderAndMusiqwik
+#if !LITE_VERSION
         if cfgSkipAutoQuizStart && !NotificationDelegate.shared.isUnskippedQuiz {
           AreaOverlayAutoQuizSkip
         }
+#endif
       }
       
       HStack(spacing: 5) {
@@ -55,7 +66,7 @@ struct QuizView: View {
         AnswerStatusArea
       }
       .frame(height: 40)
-     
+      
       BottomKeyArea
     }
     .onAppear {
@@ -65,6 +76,11 @@ struct QuizView: View {
       
       initQuizTimer()
     }
+#if LITE_VERSION
+    .task {
+      await interstitialViewModel.loadAd()
+    }
+#endif
     .onReceive(NotificationCenter.default.publisher(for: .startFromLocalNoti)) { output in
       deinitQuizTimer()
       isPendingTimer = true
@@ -156,8 +172,8 @@ struct QuizView: View {
         }
       },
       message: {
-      Text("loc.quiz_setting_change_warning")
-    })
+        Text("loc.quiz_setting_change_warning")
+      })
     .sheet(isPresented: $showInfoModal) {
       IntervalInfoView(pair: viewModel.currentPair)
     }
@@ -175,13 +191,19 @@ extension QuizView {
   
   @ViewBuilder private var AreaOverlayAutoQuizSkip: some View {
     VStack {
+#if !LITE_VERSION
       ClearRectangleHeight20
+#endif
+      
       Rectangle()
         .fill(.ultraThinMaterial)
         .overlay {
           OverlayAutoQuizSkip
         }
+      
+#if !LITE_VERSION
       ClearRectangleHeight20
+#endif
     }
   }
   
@@ -198,6 +220,7 @@ extension QuizView {
       Spacer()
         .frame(height: 20)
       Text("loc.quiz.skip_auto_start_info")
+        .minimumScaleFactor(0.5)
         .foregroundStyle(.secondary)
         .font(.caption)
         .frame(maxWidth: .infinity, alignment: .center)
@@ -234,10 +257,15 @@ extension QuizView {
      1 below: o x
      */
     VStack {
+#if LITE_VERSION
+      let adSize = largeAnchoredAdaptiveBanner(width: 375)
+      BannerViewContainer(adSize)
+        .frame(width: adSize.size.width, height: adSize.size.height)
+#else
       if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 1 {
         Spacer()
       }
-      
+#endif
       ZStack(alignment: .bottomLeading){
         VStack {
           HeaderArea
@@ -258,11 +286,34 @@ extension QuizView {
             .padding(.leading, 5)
         }
         .disabled(showAnswerAlert)
+#if LITE_VERSION
+        if cfgSkipAutoQuizStart && !NotificationDelegate.shared.isUnskippedQuiz {
+          AreaOverlayAutoQuizSkip
+        }
+#endif
       }
-      
+#if LITE_VERSION
+      Rectangle()
+        .fill(Color.yellow.opacity(0.4))
+        .overlay {
+          VStack {
+            Text("loc.lite.purchase_full_version")
+              .font(.title3).bold()
+              .minimumScaleFactor(0.5)
+            Text("loc.lite.purchase_full_version_desc")
+              .font(.caption)
+              .minimumScaleFactor(0.5)
+          }
+          .padding(4)
+        }
+        .onTapGesture {
+          openExternalLink(urlString: APP_URL)
+        }
+#else
       if cfgQuizSheetPosition == 0 || cfgQuizSheetPosition == 2 {
         Spacer()
       }
+#endif
     }
   }
   
@@ -277,6 +328,7 @@ extension QuizView {
       Spacer()
       
       HStack(spacing: 5) {
+#if !LITE_VERSION
         Button {
           cfgQuizSheetPosition = cfgQuizSheetPosition >= 2 ? 0 : cfgQuizSheetPosition + 1
         } label: {
@@ -289,6 +341,7 @@ extension QuizView {
         .padding(5)
         .background(.gray.opacity(0.4))
         .clipShape(RoundedRectangle(cornerRadius: 5))
+#endif
         
         Button {
           cfgQuizSoundAutoplay.toggle()
@@ -396,7 +449,6 @@ extension QuizView {
           .bold()
           .lineLimit(1)
           .minimumScaleFactor(0.5)
-            
         }
         .frame(maxWidth: 50)
         .padding(4)
@@ -685,6 +737,15 @@ extension QuizView {
       break
     }
     
+#if LITE_VERSION
+    if (viewModel.currentPairIndex + 1) % 5 == 0 && !intersitialPopped {
+      DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1400)) {
+        interstitialViewModel.showAd()
+        intersitialPopped = true
+      }
+    }
+#endif
+    
     let isCorrect = viewModel.checkAnswer(keyboardViewModel.intervalModifier, keyboardViewModel.intervalNumber)
     
     // 정답 처리는 viewModel.checkAnswer() 가 함
@@ -735,6 +796,9 @@ extension QuizView {
     keyboardViewModel.intervalNumber = 0
     keyboardViewModel.answerMode = viewModel.answerMode
     
+#if LITE_VERSION
+    intersitialPopped = false
+#endif
   }
   
   private func pressEnterButton() {
@@ -776,7 +840,7 @@ extension QuizView {
       timerActive = false
     }
   }
-
+  
   private func performActionAfterCountdown() {
     // 5초 후 실행할 작업
     // print("카운트다운 완료, 작업 실행!")

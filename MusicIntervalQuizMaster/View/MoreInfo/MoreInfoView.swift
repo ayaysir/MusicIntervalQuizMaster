@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 struct MoreInfoView: View {
   @State private var isShowingMailView = false
   @State private var alertItem: AlertItem? = nil
@@ -18,7 +22,35 @@ struct MoreInfoView: View {
     NavigationStack {
       Form {
 #if DEBUG
-        // DEBUG_DebugArea
+        DEBUG_DebugArea
+#endif
+        
+#if LITE_VERSION
+        Section {
+          Button(action: {
+            openExternalLink(urlString: APP_URL)
+          }) {
+            HStack {
+              Image(.appLogo)
+                .resizable()
+                .frame(width: 80, height: 80)
+                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .shimmer()
+              VStack(alignment: .leading) {
+                Text("loc.lite.purchase_full_version")
+                  .bold()
+                  .tint(.frontLabel)
+                Divider()
+                Text("loc.lite.purchase_full_version_desc")
+                  .font(.caption)
+                  .minimumScaleFactor(0.5)
+                  .tint(.secondary)
+              }
+            }
+            .buttonStyle(.borderless)
+          }
+        }
+        
 #endif
         CSVSection
         
@@ -31,7 +63,6 @@ struct MoreInfoView: View {
             LicenseView()
           }
         }
-        
         SectionFeedback
       }
       .navigationTitle("more_info")
@@ -169,11 +200,11 @@ extension MoreInfoView {
       UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
   }
-
+  
   private func sendEmailExternally() {
     let encodedSubject = mailTitle.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? mailTitle
     let encodedBody = mailBody.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? mailBody
-
+    
     let urlString = "mailto:\(DEV_MAIL)?subject=\(encodedSubject)&body=\(encodedBody)"
     openExternalLink(urlString: urlString)
   }

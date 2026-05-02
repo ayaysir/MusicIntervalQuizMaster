@@ -8,6 +8,10 @@
 import SwiftUI
 import Tonic
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 // MARK: - Main
 struct IntervalCalculatorView: View {
   @State private var clef: Clef = .treble
@@ -53,6 +57,13 @@ struct IntervalCalculatorView: View {
   
   var body: some View {
     VStack {
+      
+      
+#if LITE_VERSION
+      let adSize = largeAnchoredAdaptiveBanner(width: 375)
+      BannerViewContainer(adSize)
+        .frame(width: adSize.size.width, height: adSize.size.height)
+#endif
       AreaClefPicker
       AreaMusiqiwkViewWithPlayButton
       AreaInfo
@@ -62,7 +73,11 @@ struct IntervalCalculatorView: View {
     }
     .padding(10)
     .navigationTitle("loc.calc.title")
+#if LITE_VERSION
+    .navigationBarTitleDisplayMode(.inline)
+#else
     .navigationBarTitleDisplayMode(.large)
+#endif
     .onAppear {
       initBothOctaveRanges()
     }

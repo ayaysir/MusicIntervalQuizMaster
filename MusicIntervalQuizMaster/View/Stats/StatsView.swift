@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+#if canImport(GoogleMobileAds)
+import GoogleMobileAds
+#endif
+
 struct StatsView: View {
   @StateObject var viewModel = StatsViewModel()
   
@@ -28,6 +32,11 @@ struct StatsView: View {
   var body: some View {
     NavigationStack {
       VStack {
+#if LITE_VERSION
+        let adSize = largeAnchoredAdaptiveBanner(width: 375)
+        BannerViewContainer(adSize)
+          .frame(width: adSize.size.width, height: adSize.size.height)
+#endif
         Picker("select_y_axis", selection: $viewModel.selectedYSegment) {
           Text("select_by_accuracy").tag(0)
           Text("select_by_time").tag(1)
